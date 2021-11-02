@@ -1,0 +1,6 @@
+group\_deformations
+===================
+
+.. currentmodule:: atomate2.vasp.builders.elastic
+
+.. autofunction:: group_deformations

@@ -1,0 +1,6 @@
+find\_vasp\_files
+=================
+
+.. currentmodule:: atomate2.vasp.schemas.task
+
+.. autofunction:: find_vasp_files

@@ -1,0 +1,40 @@
+atomate2.vasp.builders.elastic
+==============================
+
+.. automodule:: atomate2.vasp.builders.elastic
+
+   
+
+
+
+   
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      get_elastic_document
+      group_deformations
+
+
+
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      ElasticBuilder
+
+
+
+   
+   
+   
+
+
+

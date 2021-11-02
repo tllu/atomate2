@@ -1,0 +1,23 @@
+﻿atomate2.settings
+=================
+
+.. automodule:: atomate2.settings
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+   
+   
+
+
+

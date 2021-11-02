@@ -1,0 +1,941 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>atomate2.vasp.schemas.calc_types.enums &#8212; atomate2</title>
+    
+  <link href="../../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../../../index.html">
+<p class="title">atomate2</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../reference/index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../dev/index.html">
+  Developer Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference external nav-link" href="https://matsci.org/c/atomate">
+  Support
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for atomate2.vasp.schemas.calc_types.enums</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Autogenerated Enums for VASP RunType, TaskType, and CalcType.</span>
+
+<span class="sd">Do not edit this by hand. Edit generate.py or run_types.yaml instead</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">jobflow.utils</span> <span class="kn">import</span> <span class="n">ValueEnum</span>
+
+
+<div class="viewcode-block" id="RunType"><a class="viewcode-back" href="../../../../../reference/atomate2.vasp.schemas.calc_types.enums.RunType.html#atomate2.vasp.schemas.calc_types.enums.RunType">[docs]</a><span class="k">class</span> <span class="nc">RunType</span><span class="p">(</span><span class="n">ValueEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Vasp calculation run types.&quot;&quot;&quot;</span>
+
+    <span class="n">AM05</span> <span class="o">=</span> <span class="s2">&quot;AM05&quot;</span>
+    <span class="n">GGA</span> <span class="o">=</span> <span class="s2">&quot;GGA&quot;</span>
+    <span class="n">PBE</span> <span class="o">=</span> <span class="s2">&quot;PBE&quot;</span>
+    <span class="n">PBESol</span> <span class="o">=</span> <span class="s2">&quot;PBESol&quot;</span>
+    <span class="n">RevPBE_PADE</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE&quot;</span>
+    <span class="n">optB86b</span> <span class="o">=</span> <span class="s2">&quot;optB86b&quot;</span>
+    <span class="n">optB88</span> <span class="o">=</span> <span class="s2">&quot;optB88&quot;</span>
+    <span class="n">optPBE</span> <span class="o">=</span> <span class="s2">&quot;optPBE&quot;</span>
+    <span class="n">revPBE</span> <span class="o">=</span> <span class="s2">&quot;revPBE&quot;</span>
+    <span class="n">B3LYP</span> <span class="o">=</span> <span class="s2">&quot;B3LYP&quot;</span>
+    <span class="n">HF</span> <span class="o">=</span> <span class="s2">&quot;HF&quot;</span>
+    <span class="n">HSE03</span> <span class="o">=</span> <span class="s2">&quot;HSE03&quot;</span>
+    <span class="n">HSE06</span> <span class="o">=</span> <span class="s2">&quot;HSE06&quot;</span>
+    <span class="n">PB0</span> <span class="o">=</span> <span class="s2">&quot;PB0&quot;</span>
+    <span class="n">M06L</span> <span class="o">=</span> <span class="s2">&quot;M06L&quot;</span>
+    <span class="n">MBJL</span> <span class="o">=</span> <span class="s2">&quot;MBJL&quot;</span>
+    <span class="n">MS0</span> <span class="o">=</span> <span class="s2">&quot;MS0&quot;</span>
+    <span class="n">MS1</span> <span class="o">=</span> <span class="s2">&quot;MS1&quot;</span>
+    <span class="n">MS2</span> <span class="o">=</span> <span class="s2">&quot;MS2&quot;</span>
+    <span class="n">RTPSS</span> <span class="o">=</span> <span class="s2">&quot;RTPSS&quot;</span>
+    <span class="n">SCAN</span> <span class="o">=</span> <span class="s2">&quot;SCAN&quot;</span>
+    <span class="n">TPSS</span> <span class="o">=</span> <span class="s2">&quot;TPSS&quot;</span>
+    <span class="n">SCAN_rVV10</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10&quot;</span>
+    <span class="n">optB86b_vdW</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW&quot;</span>
+    <span class="n">optB88_vdW</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW&quot;</span>
+    <span class="n">optPBE_vdW</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW&quot;</span>
+    <span class="n">rev_vdW_DF2</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2&quot;</span>
+    <span class="n">revPBE_vdW</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW&quot;</span>
+    <span class="n">vdW_DF2</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2&quot;</span>
+    <span class="n">AM05_U</span> <span class="o">=</span> <span class="s2">&quot;AM05+U&quot;</span>
+    <span class="n">GGA_U</span> <span class="o">=</span> <span class="s2">&quot;GGA+U&quot;</span>
+    <span class="n">PBE_U</span> <span class="o">=</span> <span class="s2">&quot;PBE+U&quot;</span>
+    <span class="n">PBESol_U</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U&quot;</span>
+    <span class="n">RevPBE_PADE_U</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U&quot;</span>
+    <span class="n">optB86b_U</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U&quot;</span>
+    <span class="n">optB88_U</span> <span class="o">=</span> <span class="s2">&quot;optB88+U&quot;</span>
+    <span class="n">optPBE_U</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U&quot;</span>
+    <span class="n">revPBE_U</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U&quot;</span>
+    <span class="n">B3LYP_U</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U&quot;</span>
+    <span class="n">HF_U</span> <span class="o">=</span> <span class="s2">&quot;HF+U&quot;</span>
+    <span class="n">HSE03_U</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U&quot;</span>
+    <span class="n">HSE06_U</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U&quot;</span>
+    <span class="n">PB0_U</span> <span class="o">=</span> <span class="s2">&quot;PB0+U&quot;</span>
+    <span class="n">M06L_U</span> <span class="o">=</span> <span class="s2">&quot;M06L+U&quot;</span>
+    <span class="n">MBJL_U</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U&quot;</span>
+    <span class="n">MS0_U</span> <span class="o">=</span> <span class="s2">&quot;MS0+U&quot;</span>
+    <span class="n">MS1_U</span> <span class="o">=</span> <span class="s2">&quot;MS1+U&quot;</span>
+    <span class="n">MS2_U</span> <span class="o">=</span> <span class="s2">&quot;MS2+U&quot;</span>
+    <span class="n">RTPSS_U</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U&quot;</span>
+    <span class="n">SCAN_U</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U&quot;</span>
+    <span class="n">TPSS_U</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U&quot;</span>
+    <span class="n">SCAN_rVV10_U</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U&quot;</span>
+    <span class="n">optB86b_vdW_U</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U&quot;</span>
+    <span class="n">optB88_vdW_U</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U&quot;</span>
+    <span class="n">optPBE_vdW_U</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U&quot;</span>
+    <span class="n">rev_vdW_DF2_U</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U&quot;</span>
+    <span class="n">revPBE_vdW_U</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U&quot;</span>
+    <span class="n">vdW_DF2_U</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U&quot;</span>
+    <span class="n">LDA</span> <span class="o">=</span> <span class="s2">&quot;LDA&quot;</span>
+    <span class="n">LDA_U</span> <span class="o">=</span> <span class="s2">&quot;LDA+U&quot;</span></div>
+
+
+<div class="viewcode-block" id="TaskType"><a class="viewcode-back" href="../../../../../reference/atomate2.vasp.schemas.calc_types.enums.TaskType.html#atomate2.vasp.schemas.calc_types.enums.TaskType">[docs]</a><span class="k">class</span> <span class="nc">TaskType</span><span class="p">(</span><span class="n">ValueEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Vasp calculation task types.&quot;&quot;&quot;</span>
+
+    <span class="n">NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;NSCF Line&quot;</span>
+    <span class="n">NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;NSCF Uniform&quot;</span>
+    <span class="n">Dielectric</span> <span class="o">=</span> <span class="s2">&quot;Dielectric&quot;</span>
+    <span class="n">DFPT</span> <span class="o">=</span> <span class="s2">&quot;DFPT&quot;</span>
+    <span class="n">DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;DFPT Dielectric&quot;</span>
+    <span class="n">NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;NMR Nuclear Shielding&quot;</span>
+    <span class="n">NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;NMR Electric Field Gradient&quot;</span>
+    <span class="n">Static</span> <span class="o">=</span> <span class="s2">&quot;Static&quot;</span>
+    <span class="n">Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;Structure Optimization&quot;</span>
+    <span class="n">Deformation</span> <span class="o">=</span> <span class="s2">&quot;Deformation&quot;</span>
+    <span class="n">Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;Unrecognized&quot;</span></div>
+
+
+<div class="viewcode-block" id="CalcType"><a class="viewcode-back" href="../../../../../reference/atomate2.vasp.schemas.calc_types.enums.CalcType.html#atomate2.vasp.schemas.calc_types.enums.CalcType">[docs]</a><span class="k">class</span> <span class="nc">CalcType</span><span class="p">(</span><span class="n">ValueEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Vasp calculation types.&quot;&quot;&quot;</span>
+
+    <span class="n">AM05_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;AM05 NSCF Line&quot;</span>
+    <span class="n">AM05_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;AM05 NSCF Uniform&quot;</span>
+    <span class="n">AM05_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;AM05 Dielectric&quot;</span>
+    <span class="n">AM05_DFPT</span> <span class="o">=</span> <span class="s2">&quot;AM05 DFPT&quot;</span>
+    <span class="n">AM05_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;AM05 DFPT Dielectric&quot;</span>
+    <span class="n">AM05_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;AM05 NMR Nuclear Shielding&quot;</span>
+    <span class="n">AM05_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;AM05 NMR Electric Field Gradient&quot;</span>
+    <span class="n">AM05_Static</span> <span class="o">=</span> <span class="s2">&quot;AM05 Static&quot;</span>
+    <span class="n">AM05_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;AM05 Structure Optimization&quot;</span>
+    <span class="n">AM05_Deformation</span> <span class="o">=</span> <span class="s2">&quot;AM05 Deformation&quot;</span>
+    <span class="n">AM05_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;AM05 Unrecognized&quot;</span>
+    <span class="n">GGA_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;GGA NSCF Line&quot;</span>
+    <span class="n">GGA_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;GGA NSCF Uniform&quot;</span>
+    <span class="n">GGA_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;GGA Dielectric&quot;</span>
+    <span class="n">GGA_DFPT</span> <span class="o">=</span> <span class="s2">&quot;GGA DFPT&quot;</span>
+    <span class="n">GGA_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;GGA DFPT Dielectric&quot;</span>
+    <span class="n">GGA_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;GGA NMR Nuclear Shielding&quot;</span>
+    <span class="n">GGA_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;GGA NMR Electric Field Gradient&quot;</span>
+    <span class="n">GGA_Static</span> <span class="o">=</span> <span class="s2">&quot;GGA Static&quot;</span>
+    <span class="n">GGA_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;GGA Structure Optimization&quot;</span>
+    <span class="n">GGA_Deformation</span> <span class="o">=</span> <span class="s2">&quot;GGA Deformation&quot;</span>
+    <span class="n">GGA_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;GGA Unrecognized&quot;</span>
+    <span class="n">PBE_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;PBE NSCF Line&quot;</span>
+    <span class="n">PBE_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;PBE NSCF Uniform&quot;</span>
+    <span class="n">PBE_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBE Dielectric&quot;</span>
+    <span class="n">PBE_DFPT</span> <span class="o">=</span> <span class="s2">&quot;PBE DFPT&quot;</span>
+    <span class="n">PBE_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBE DFPT Dielectric&quot;</span>
+    <span class="n">PBE_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;PBE NMR Nuclear Shielding&quot;</span>
+    <span class="n">PBE_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;PBE NMR Electric Field Gradient&quot;</span>
+    <span class="n">PBE_Static</span> <span class="o">=</span> <span class="s2">&quot;PBE Static&quot;</span>
+    <span class="n">PBE_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;PBE Structure Optimization&quot;</span>
+    <span class="n">PBE_Deformation</span> <span class="o">=</span> <span class="s2">&quot;PBE Deformation&quot;</span>
+    <span class="n">PBE_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;PBE Unrecognized&quot;</span>
+    <span class="n">PBESol_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;PBESol NSCF Line&quot;</span>
+    <span class="n">PBESol_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;PBESol NSCF Uniform&quot;</span>
+    <span class="n">PBESol_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBESol Dielectric&quot;</span>
+    <span class="n">PBESol_DFPT</span> <span class="o">=</span> <span class="s2">&quot;PBESol DFPT&quot;</span>
+    <span class="n">PBESol_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBESol DFPT Dielectric&quot;</span>
+    <span class="n">PBESol_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;PBESol NMR Nuclear Shielding&quot;</span>
+    <span class="n">PBESol_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;PBESol NMR Electric Field Gradient&quot;</span>
+    <span class="n">PBESol_Static</span> <span class="o">=</span> <span class="s2">&quot;PBESol Static&quot;</span>
+    <span class="n">PBESol_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;PBESol Structure Optimization&quot;</span>
+    <span class="n">PBESol_Deformation</span> <span class="o">=</span> <span class="s2">&quot;PBESol Deformation&quot;</span>
+    <span class="n">PBESol_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;PBESol Unrecognized&quot;</span>
+    <span class="n">RevPBE_PADE_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE NSCF Line&quot;</span>
+    <span class="n">RevPBE_PADE_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE NSCF Uniform&quot;</span>
+    <span class="n">RevPBE_PADE_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE Dielectric&quot;</span>
+    <span class="n">RevPBE_PADE_DFPT</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE DFPT&quot;</span>
+    <span class="n">RevPBE_PADE_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE DFPT Dielectric&quot;</span>
+    <span class="n">RevPBE_PADE_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE NMR Nuclear Shielding&quot;</span>
+    <span class="n">RevPBE_PADE_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE NMR Electric Field Gradient&quot;</span>
+    <span class="n">RevPBE_PADE_Static</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE Static&quot;</span>
+    <span class="n">RevPBE_PADE_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE Structure Optimization&quot;</span>
+    <span class="n">RevPBE_PADE_Deformation</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE Deformation&quot;</span>
+    <span class="n">RevPBE_PADE_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE Unrecognized&quot;</span>
+    <span class="n">optB86b_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB86b NSCF Line&quot;</span>
+    <span class="n">optB86b_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB86b NSCF Uniform&quot;</span>
+    <span class="n">optB86b_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b Dielectric&quot;</span>
+    <span class="n">optB86b_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB86b DFPT&quot;</span>
+    <span class="n">optB86b_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b DFPT Dielectric&quot;</span>
+    <span class="n">optB86b_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB86b NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB86b_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB86b NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB86b_Static</span> <span class="o">=</span> <span class="s2">&quot;optB86b Static&quot;</span>
+    <span class="n">optB86b_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB86b Structure Optimization&quot;</span>
+    <span class="n">optB86b_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB86b Deformation&quot;</span>
+    <span class="n">optB86b_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB86b Unrecognized&quot;</span>
+    <span class="n">optB88_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB88 NSCF Line&quot;</span>
+    <span class="n">optB88_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB88 NSCF Uniform&quot;</span>
+    <span class="n">optB88_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88 Dielectric&quot;</span>
+    <span class="n">optB88_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB88 DFPT&quot;</span>
+    <span class="n">optB88_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88 DFPT Dielectric&quot;</span>
+    <span class="n">optB88_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB88 NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB88_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB88 NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB88_Static</span> <span class="o">=</span> <span class="s2">&quot;optB88 Static&quot;</span>
+    <span class="n">optB88_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB88 Structure Optimization&quot;</span>
+    <span class="n">optB88_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB88 Deformation&quot;</span>
+    <span class="n">optB88_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB88 Unrecognized&quot;</span>
+    <span class="n">optPBE_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optPBE NSCF Line&quot;</span>
+    <span class="n">optPBE_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optPBE NSCF Uniform&quot;</span>
+    <span class="n">optPBE_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE Dielectric&quot;</span>
+    <span class="n">optPBE_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optPBE DFPT&quot;</span>
+    <span class="n">optPBE_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE DFPT Dielectric&quot;</span>
+    <span class="n">optPBE_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optPBE NMR Nuclear Shielding&quot;</span>
+    <span class="n">optPBE_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optPBE NMR Electric Field Gradient&quot;</span>
+    <span class="n">optPBE_Static</span> <span class="o">=</span> <span class="s2">&quot;optPBE Static&quot;</span>
+    <span class="n">optPBE_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optPBE Structure Optimization&quot;</span>
+    <span class="n">optPBE_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optPBE Deformation&quot;</span>
+    <span class="n">optPBE_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optPBE Unrecognized&quot;</span>
+    <span class="n">revPBE_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;revPBE NSCF Line&quot;</span>
+    <span class="n">revPBE_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;revPBE NSCF Uniform&quot;</span>
+    <span class="n">revPBE_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE Dielectric&quot;</span>
+    <span class="n">revPBE_DFPT</span> <span class="o">=</span> <span class="s2">&quot;revPBE DFPT&quot;</span>
+    <span class="n">revPBE_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE DFPT Dielectric&quot;</span>
+    <span class="n">revPBE_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;revPBE NMR Nuclear Shielding&quot;</span>
+    <span class="n">revPBE_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;revPBE NMR Electric Field Gradient&quot;</span>
+    <span class="n">revPBE_Static</span> <span class="o">=</span> <span class="s2">&quot;revPBE Static&quot;</span>
+    <span class="n">revPBE_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;revPBE Structure Optimization&quot;</span>
+    <span class="n">revPBE_Deformation</span> <span class="o">=</span> <span class="s2">&quot;revPBE Deformation&quot;</span>
+    <span class="n">revPBE_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;revPBE Unrecognized&quot;</span>
+    <span class="n">B3LYP_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;B3LYP NSCF Line&quot;</span>
+    <span class="n">B3LYP_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;B3LYP NSCF Uniform&quot;</span>
+    <span class="n">B3LYP_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;B3LYP Dielectric&quot;</span>
+    <span class="n">B3LYP_DFPT</span> <span class="o">=</span> <span class="s2">&quot;B3LYP DFPT&quot;</span>
+    <span class="n">B3LYP_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;B3LYP DFPT Dielectric&quot;</span>
+    <span class="n">B3LYP_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;B3LYP NMR Nuclear Shielding&quot;</span>
+    <span class="n">B3LYP_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;B3LYP NMR Electric Field Gradient&quot;</span>
+    <span class="n">B3LYP_Static</span> <span class="o">=</span> <span class="s2">&quot;B3LYP Static&quot;</span>
+    <span class="n">B3LYP_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;B3LYP Structure Optimization&quot;</span>
+    <span class="n">B3LYP_Deformation</span> <span class="o">=</span> <span class="s2">&quot;B3LYP Deformation&quot;</span>
+    <span class="n">B3LYP_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;B3LYP Unrecognized&quot;</span>
+    <span class="n">HF_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;HF NSCF Line&quot;</span>
+    <span class="n">HF_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;HF NSCF Uniform&quot;</span>
+    <span class="n">HF_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HF Dielectric&quot;</span>
+    <span class="n">HF_DFPT</span> <span class="o">=</span> <span class="s2">&quot;HF DFPT&quot;</span>
+    <span class="n">HF_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HF DFPT Dielectric&quot;</span>
+    <span class="n">HF_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;HF NMR Nuclear Shielding&quot;</span>
+    <span class="n">HF_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;HF NMR Electric Field Gradient&quot;</span>
+    <span class="n">HF_Static</span> <span class="o">=</span> <span class="s2">&quot;HF Static&quot;</span>
+    <span class="n">HF_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;HF Structure Optimization&quot;</span>
+    <span class="n">HF_Deformation</span> <span class="o">=</span> <span class="s2">&quot;HF Deformation&quot;</span>
+    <span class="n">HF_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;HF Unrecognized&quot;</span>
+    <span class="n">HSE03_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;HSE03 NSCF Line&quot;</span>
+    <span class="n">HSE03_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;HSE03 NSCF Uniform&quot;</span>
+    <span class="n">HSE03_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE03 Dielectric&quot;</span>
+    <span class="n">HSE03_DFPT</span> <span class="o">=</span> <span class="s2">&quot;HSE03 DFPT&quot;</span>
+    <span class="n">HSE03_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE03 DFPT Dielectric&quot;</span>
+    <span class="n">HSE03_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;HSE03 NMR Nuclear Shielding&quot;</span>
+    <span class="n">HSE03_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;HSE03 NMR Electric Field Gradient&quot;</span>
+    <span class="n">HSE03_Static</span> <span class="o">=</span> <span class="s2">&quot;HSE03 Static&quot;</span>
+    <span class="n">HSE03_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;HSE03 Structure Optimization&quot;</span>
+    <span class="n">HSE03_Deformation</span> <span class="o">=</span> <span class="s2">&quot;HSE03 Deformation&quot;</span>
+    <span class="n">HSE03_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;HSE03 Unrecognized&quot;</span>
+    <span class="n">HSE06_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;HSE06 NSCF Line&quot;</span>
+    <span class="n">HSE06_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;HSE06 NSCF Uniform&quot;</span>
+    <span class="n">HSE06_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE06 Dielectric&quot;</span>
+    <span class="n">HSE06_DFPT</span> <span class="o">=</span> <span class="s2">&quot;HSE06 DFPT&quot;</span>
+    <span class="n">HSE06_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE06 DFPT Dielectric&quot;</span>
+    <span class="n">HSE06_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;HSE06 NMR Nuclear Shielding&quot;</span>
+    <span class="n">HSE06_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;HSE06 NMR Electric Field Gradient&quot;</span>
+    <span class="n">HSE06_Static</span> <span class="o">=</span> <span class="s2">&quot;HSE06 Static&quot;</span>
+    <span class="n">HSE06_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;HSE06 Structure Optimization&quot;</span>
+    <span class="n">HSE06_Deformation</span> <span class="o">=</span> <span class="s2">&quot;HSE06 Deformation&quot;</span>
+    <span class="n">HSE06_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;HSE06 Unrecognized&quot;</span>
+    <span class="n">PB0_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;PB0 NSCF Line&quot;</span>
+    <span class="n">PB0_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;PB0 NSCF Uniform&quot;</span>
+    <span class="n">PB0_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PB0 Dielectric&quot;</span>
+    <span class="n">PB0_DFPT</span> <span class="o">=</span> <span class="s2">&quot;PB0 DFPT&quot;</span>
+    <span class="n">PB0_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PB0 DFPT Dielectric&quot;</span>
+    <span class="n">PB0_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;PB0 NMR Nuclear Shielding&quot;</span>
+    <span class="n">PB0_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;PB0 NMR Electric Field Gradient&quot;</span>
+    <span class="n">PB0_Static</span> <span class="o">=</span> <span class="s2">&quot;PB0 Static&quot;</span>
+    <span class="n">PB0_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;PB0 Structure Optimization&quot;</span>
+    <span class="n">PB0_Deformation</span> <span class="o">=</span> <span class="s2">&quot;PB0 Deformation&quot;</span>
+    <span class="n">PB0_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;PB0 Unrecognized&quot;</span>
+    <span class="n">M06L_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;M06L NSCF Line&quot;</span>
+    <span class="n">M06L_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;M06L NSCF Uniform&quot;</span>
+    <span class="n">M06L_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;M06L Dielectric&quot;</span>
+    <span class="n">M06L_DFPT</span> <span class="o">=</span> <span class="s2">&quot;M06L DFPT&quot;</span>
+    <span class="n">M06L_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;M06L DFPT Dielectric&quot;</span>
+    <span class="n">M06L_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;M06L NMR Nuclear Shielding&quot;</span>
+    <span class="n">M06L_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;M06L NMR Electric Field Gradient&quot;</span>
+    <span class="n">M06L_Static</span> <span class="o">=</span> <span class="s2">&quot;M06L Static&quot;</span>
+    <span class="n">M06L_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;M06L Structure Optimization&quot;</span>
+    <span class="n">M06L_Deformation</span> <span class="o">=</span> <span class="s2">&quot;M06L Deformation&quot;</span>
+    <span class="n">M06L_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;M06L Unrecognized&quot;</span>
+    <span class="n">MBJL_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MBJL NSCF Line&quot;</span>
+    <span class="n">MBJL_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MBJL NSCF Uniform&quot;</span>
+    <span class="n">MBJL_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MBJL Dielectric&quot;</span>
+    <span class="n">MBJL_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MBJL DFPT&quot;</span>
+    <span class="n">MBJL_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MBJL DFPT Dielectric&quot;</span>
+    <span class="n">MBJL_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MBJL NMR Nuclear Shielding&quot;</span>
+    <span class="n">MBJL_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MBJL NMR Electric Field Gradient&quot;</span>
+    <span class="n">MBJL_Static</span> <span class="o">=</span> <span class="s2">&quot;MBJL Static&quot;</span>
+    <span class="n">MBJL_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MBJL Structure Optimization&quot;</span>
+    <span class="n">MBJL_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MBJL Deformation&quot;</span>
+    <span class="n">MBJL_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MBJL Unrecognized&quot;</span>
+    <span class="n">MS0_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MS0 NSCF Line&quot;</span>
+    <span class="n">MS0_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MS0 NSCF Uniform&quot;</span>
+    <span class="n">MS0_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS0 Dielectric&quot;</span>
+    <span class="n">MS0_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MS0 DFPT&quot;</span>
+    <span class="n">MS0_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS0 DFPT Dielectric&quot;</span>
+    <span class="n">MS0_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MS0 NMR Nuclear Shielding&quot;</span>
+    <span class="n">MS0_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MS0 NMR Electric Field Gradient&quot;</span>
+    <span class="n">MS0_Static</span> <span class="o">=</span> <span class="s2">&quot;MS0 Static&quot;</span>
+    <span class="n">MS0_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MS0 Structure Optimization&quot;</span>
+    <span class="n">MS0_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MS0 Deformation&quot;</span>
+    <span class="n">MS0_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MS0 Unrecognized&quot;</span>
+    <span class="n">MS1_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MS1 NSCF Line&quot;</span>
+    <span class="n">MS1_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MS1 NSCF Uniform&quot;</span>
+    <span class="n">MS1_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS1 Dielectric&quot;</span>
+    <span class="n">MS1_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MS1 DFPT&quot;</span>
+    <span class="n">MS1_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS1 DFPT Dielectric&quot;</span>
+    <span class="n">MS1_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MS1 NMR Nuclear Shielding&quot;</span>
+    <span class="n">MS1_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MS1 NMR Electric Field Gradient&quot;</span>
+    <span class="n">MS1_Static</span> <span class="o">=</span> <span class="s2">&quot;MS1 Static&quot;</span>
+    <span class="n">MS1_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MS1 Structure Optimization&quot;</span>
+    <span class="n">MS1_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MS1 Deformation&quot;</span>
+    <span class="n">MS1_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MS1 Unrecognized&quot;</span>
+    <span class="n">MS2_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MS2 NSCF Line&quot;</span>
+    <span class="n">MS2_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MS2 NSCF Uniform&quot;</span>
+    <span class="n">MS2_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS2 Dielectric&quot;</span>
+    <span class="n">MS2_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MS2 DFPT&quot;</span>
+    <span class="n">MS2_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS2 DFPT Dielectric&quot;</span>
+    <span class="n">MS2_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MS2 NMR Nuclear Shielding&quot;</span>
+    <span class="n">MS2_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MS2 NMR Electric Field Gradient&quot;</span>
+    <span class="n">MS2_Static</span> <span class="o">=</span> <span class="s2">&quot;MS2 Static&quot;</span>
+    <span class="n">MS2_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MS2 Structure Optimization&quot;</span>
+    <span class="n">MS2_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MS2 Deformation&quot;</span>
+    <span class="n">MS2_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MS2 Unrecognized&quot;</span>
+    <span class="n">RTPSS_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;RTPSS NSCF Line&quot;</span>
+    <span class="n">RTPSS_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;RTPSS NSCF Uniform&quot;</span>
+    <span class="n">RTPSS_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RTPSS Dielectric&quot;</span>
+    <span class="n">RTPSS_DFPT</span> <span class="o">=</span> <span class="s2">&quot;RTPSS DFPT&quot;</span>
+    <span class="n">RTPSS_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RTPSS DFPT Dielectric&quot;</span>
+    <span class="n">RTPSS_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;RTPSS NMR Nuclear Shielding&quot;</span>
+    <span class="n">RTPSS_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;RTPSS NMR Electric Field Gradient&quot;</span>
+    <span class="n">RTPSS_Static</span> <span class="o">=</span> <span class="s2">&quot;RTPSS Static&quot;</span>
+    <span class="n">RTPSS_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;RTPSS Structure Optimization&quot;</span>
+    <span class="n">RTPSS_Deformation</span> <span class="o">=</span> <span class="s2">&quot;RTPSS Deformation&quot;</span>
+    <span class="n">RTPSS_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;RTPSS Unrecognized&quot;</span>
+    <span class="n">SCAN_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;SCAN NSCF Line&quot;</span>
+    <span class="n">SCAN_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;SCAN NSCF Uniform&quot;</span>
+    <span class="n">SCAN_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN Dielectric&quot;</span>
+    <span class="n">SCAN_DFPT</span> <span class="o">=</span> <span class="s2">&quot;SCAN DFPT&quot;</span>
+    <span class="n">SCAN_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN DFPT Dielectric&quot;</span>
+    <span class="n">SCAN_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;SCAN NMR Nuclear Shielding&quot;</span>
+    <span class="n">SCAN_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;SCAN NMR Electric Field Gradient&quot;</span>
+    <span class="n">SCAN_Static</span> <span class="o">=</span> <span class="s2">&quot;SCAN Static&quot;</span>
+    <span class="n">SCAN_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;SCAN Structure Optimization&quot;</span>
+    <span class="n">SCAN_Deformation</span> <span class="o">=</span> <span class="s2">&quot;SCAN Deformation&quot;</span>
+    <span class="n">SCAN_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;SCAN Unrecognized&quot;</span>
+    <span class="n">TPSS_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;TPSS NSCF Line&quot;</span>
+    <span class="n">TPSS_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;TPSS NSCF Uniform&quot;</span>
+    <span class="n">TPSS_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;TPSS Dielectric&quot;</span>
+    <span class="n">TPSS_DFPT</span> <span class="o">=</span> <span class="s2">&quot;TPSS DFPT&quot;</span>
+    <span class="n">TPSS_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;TPSS DFPT Dielectric&quot;</span>
+    <span class="n">TPSS_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;TPSS NMR Nuclear Shielding&quot;</span>
+    <span class="n">TPSS_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;TPSS NMR Electric Field Gradient&quot;</span>
+    <span class="n">TPSS_Static</span> <span class="o">=</span> <span class="s2">&quot;TPSS Static&quot;</span>
+    <span class="n">TPSS_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;TPSS Structure Optimization&quot;</span>
+    <span class="n">TPSS_Deformation</span> <span class="o">=</span> <span class="s2">&quot;TPSS Deformation&quot;</span>
+    <span class="n">TPSS_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;TPSS Unrecognized&quot;</span>
+    <span class="n">SCAN_rVV10_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 NSCF Line&quot;</span>
+    <span class="n">SCAN_rVV10_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 NSCF Uniform&quot;</span>
+    <span class="n">SCAN_rVV10_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 Dielectric&quot;</span>
+    <span class="n">SCAN_rVV10_DFPT</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 DFPT&quot;</span>
+    <span class="n">SCAN_rVV10_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 DFPT Dielectric&quot;</span>
+    <span class="n">SCAN_rVV10_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 NMR Nuclear Shielding&quot;</span>
+    <span class="n">SCAN_rVV10_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 NMR Electric Field Gradient&quot;</span>
+    <span class="n">SCAN_rVV10_Static</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 Static&quot;</span>
+    <span class="n">SCAN_rVV10_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 Structure Optimization&quot;</span>
+    <span class="n">SCAN_rVV10_Deformation</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 Deformation&quot;</span>
+    <span class="n">SCAN_rVV10_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10 Unrecognized&quot;</span>
+    <span class="n">optB86b_vdW_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW NSCF Line&quot;</span>
+    <span class="n">optB86b_vdW_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW NSCF Uniform&quot;</span>
+    <span class="n">optB86b_vdW_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW Dielectric&quot;</span>
+    <span class="n">optB86b_vdW_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW DFPT&quot;</span>
+    <span class="n">optB86b_vdW_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW DFPT Dielectric&quot;</span>
+    <span class="n">optB86b_vdW_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB86b_vdW_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB86b_vdW_Static</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW Static&quot;</span>
+    <span class="n">optB86b_vdW_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW Structure Optimization&quot;</span>
+    <span class="n">optB86b_vdW_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW Deformation&quot;</span>
+    <span class="n">optB86b_vdW_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW Unrecognized&quot;</span>
+    <span class="n">optB88_vdW_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW NSCF Line&quot;</span>
+    <span class="n">optB88_vdW_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW NSCF Uniform&quot;</span>
+    <span class="n">optB88_vdW_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW Dielectric&quot;</span>
+    <span class="n">optB88_vdW_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW DFPT&quot;</span>
+    <span class="n">optB88_vdW_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW DFPT Dielectric&quot;</span>
+    <span class="n">optB88_vdW_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB88_vdW_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB88_vdW_Static</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW Static&quot;</span>
+    <span class="n">optB88_vdW_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW Structure Optimization&quot;</span>
+    <span class="n">optB88_vdW_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW Deformation&quot;</span>
+    <span class="n">optB88_vdW_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW Unrecognized&quot;</span>
+    <span class="n">optPBE_vdW_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW NSCF Line&quot;</span>
+    <span class="n">optPBE_vdW_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW NSCF Uniform&quot;</span>
+    <span class="n">optPBE_vdW_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW Dielectric&quot;</span>
+    <span class="n">optPBE_vdW_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW DFPT&quot;</span>
+    <span class="n">optPBE_vdW_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW DFPT Dielectric&quot;</span>
+    <span class="n">optPBE_vdW_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW NMR Nuclear Shielding&quot;</span>
+    <span class="n">optPBE_vdW_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW NMR Electric Field Gradient&quot;</span>
+    <span class="n">optPBE_vdW_Static</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW Static&quot;</span>
+    <span class="n">optPBE_vdW_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW Structure Optimization&quot;</span>
+    <span class="n">optPBE_vdW_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW Deformation&quot;</span>
+    <span class="n">optPBE_vdW_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW Unrecognized&quot;</span>
+    <span class="n">rev_vdW_DF2_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 NSCF Line&quot;</span>
+    <span class="n">rev_vdW_DF2_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 NSCF Uniform&quot;</span>
+    <span class="n">rev_vdW_DF2_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 Dielectric&quot;</span>
+    <span class="n">rev_vdW_DF2_DFPT</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 DFPT&quot;</span>
+    <span class="n">rev_vdW_DF2_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 DFPT Dielectric&quot;</span>
+    <span class="n">rev_vdW_DF2_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 NMR Nuclear Shielding&quot;</span>
+    <span class="n">rev_vdW_DF2_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 NMR Electric Field Gradient&quot;</span>
+    <span class="n">rev_vdW_DF2_Static</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 Static&quot;</span>
+    <span class="n">rev_vdW_DF2_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 Structure Optimization&quot;</span>
+    <span class="n">rev_vdW_DF2_Deformation</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 Deformation&quot;</span>
+    <span class="n">rev_vdW_DF2_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2 Unrecognized&quot;</span>
+    <span class="n">revPBE_vdW_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW NSCF Line&quot;</span>
+    <span class="n">revPBE_vdW_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW NSCF Uniform&quot;</span>
+    <span class="n">revPBE_vdW_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW Dielectric&quot;</span>
+    <span class="n">revPBE_vdW_DFPT</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW DFPT&quot;</span>
+    <span class="n">revPBE_vdW_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW DFPT Dielectric&quot;</span>
+    <span class="n">revPBE_vdW_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW NMR Nuclear Shielding&quot;</span>
+    <span class="n">revPBE_vdW_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW NMR Electric Field Gradient&quot;</span>
+    <span class="n">revPBE_vdW_Static</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW Static&quot;</span>
+    <span class="n">revPBE_vdW_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW Structure Optimization&quot;</span>
+    <span class="n">revPBE_vdW_Deformation</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW Deformation&quot;</span>
+    <span class="n">revPBE_vdW_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW Unrecognized&quot;</span>
+    <span class="n">vdW_DF2_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 NSCF Line&quot;</span>
+    <span class="n">vdW_DF2_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 NSCF Uniform&quot;</span>
+    <span class="n">vdW_DF2_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 Dielectric&quot;</span>
+    <span class="n">vdW_DF2_DFPT</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 DFPT&quot;</span>
+    <span class="n">vdW_DF2_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 DFPT Dielectric&quot;</span>
+    <span class="n">vdW_DF2_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 NMR Nuclear Shielding&quot;</span>
+    <span class="n">vdW_DF2_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 NMR Electric Field Gradient&quot;</span>
+    <span class="n">vdW_DF2_Static</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 Static&quot;</span>
+    <span class="n">vdW_DF2_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 Structure Optimization&quot;</span>
+    <span class="n">vdW_DF2_Deformation</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 Deformation&quot;</span>
+    <span class="n">vdW_DF2_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2 Unrecognized&quot;</span>
+    <span class="n">AM05_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;AM05+U NSCF Line&quot;</span>
+    <span class="n">AM05_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;AM05+U NSCF Uniform&quot;</span>
+    <span class="n">AM05_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;AM05+U Dielectric&quot;</span>
+    <span class="n">AM05_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;AM05+U DFPT&quot;</span>
+    <span class="n">AM05_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;AM05+U DFPT Dielectric&quot;</span>
+    <span class="n">AM05_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;AM05+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">AM05_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;AM05+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">AM05_U_Static</span> <span class="o">=</span> <span class="s2">&quot;AM05+U Static&quot;</span>
+    <span class="n">AM05_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;AM05+U Structure Optimization&quot;</span>
+    <span class="n">AM05_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;AM05+U Deformation&quot;</span>
+    <span class="n">AM05_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;AM05+U Unrecognized&quot;</span>
+    <span class="n">GGA_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;GGA+U NSCF Line&quot;</span>
+    <span class="n">GGA_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;GGA+U NSCF Uniform&quot;</span>
+    <span class="n">GGA_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;GGA+U Dielectric&quot;</span>
+    <span class="n">GGA_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;GGA+U DFPT&quot;</span>
+    <span class="n">GGA_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;GGA+U DFPT Dielectric&quot;</span>
+    <span class="n">GGA_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;GGA+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">GGA_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;GGA+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">GGA_U_Static</span> <span class="o">=</span> <span class="s2">&quot;GGA+U Static&quot;</span>
+    <span class="n">GGA_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;GGA+U Structure Optimization&quot;</span>
+    <span class="n">GGA_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;GGA+U Deformation&quot;</span>
+    <span class="n">GGA_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;GGA+U Unrecognized&quot;</span>
+    <span class="n">PBE_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;PBE+U NSCF Line&quot;</span>
+    <span class="n">PBE_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;PBE+U NSCF Uniform&quot;</span>
+    <span class="n">PBE_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBE+U Dielectric&quot;</span>
+    <span class="n">PBE_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;PBE+U DFPT&quot;</span>
+    <span class="n">PBE_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBE+U DFPT Dielectric&quot;</span>
+    <span class="n">PBE_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;PBE+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">PBE_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;PBE+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">PBE_U_Static</span> <span class="o">=</span> <span class="s2">&quot;PBE+U Static&quot;</span>
+    <span class="n">PBE_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;PBE+U Structure Optimization&quot;</span>
+    <span class="n">PBE_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;PBE+U Deformation&quot;</span>
+    <span class="n">PBE_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;PBE+U Unrecognized&quot;</span>
+    <span class="n">PBESol_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U NSCF Line&quot;</span>
+    <span class="n">PBESol_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U NSCF Uniform&quot;</span>
+    <span class="n">PBESol_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U Dielectric&quot;</span>
+    <span class="n">PBESol_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U DFPT&quot;</span>
+    <span class="n">PBESol_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U DFPT Dielectric&quot;</span>
+    <span class="n">PBESol_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">PBESol_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">PBESol_U_Static</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U Static&quot;</span>
+    <span class="n">PBESol_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U Structure Optimization&quot;</span>
+    <span class="n">PBESol_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U Deformation&quot;</span>
+    <span class="n">PBESol_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;PBESol+U Unrecognized&quot;</span>
+    <span class="n">RevPBE_PADE_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U NSCF Line&quot;</span>
+    <span class="n">RevPBE_PADE_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U NSCF Uniform&quot;</span>
+    <span class="n">RevPBE_PADE_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U Dielectric&quot;</span>
+    <span class="n">RevPBE_PADE_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U DFPT&quot;</span>
+    <span class="n">RevPBE_PADE_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U DFPT Dielectric&quot;</span>
+    <span class="n">RevPBE_PADE_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">RevPBE_PADE_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">RevPBE_PADE_U_Static</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U Static&quot;</span>
+    <span class="n">RevPBE_PADE_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U Structure Optimization&quot;</span>
+    <span class="n">RevPBE_PADE_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U Deformation&quot;</span>
+    <span class="n">RevPBE_PADE_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;RevPBE+PADE+U Unrecognized&quot;</span>
+    <span class="n">optB86b_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U NSCF Line&quot;</span>
+    <span class="n">optB86b_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U NSCF Uniform&quot;</span>
+    <span class="n">optB86b_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U Dielectric&quot;</span>
+    <span class="n">optB86b_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U DFPT&quot;</span>
+    <span class="n">optB86b_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U DFPT Dielectric&quot;</span>
+    <span class="n">optB86b_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB86b_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB86b_U_Static</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U Static&quot;</span>
+    <span class="n">optB86b_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U Structure Optimization&quot;</span>
+    <span class="n">optB86b_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U Deformation&quot;</span>
+    <span class="n">optB86b_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB86b+U Unrecognized&quot;</span>
+    <span class="n">optB88_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB88+U NSCF Line&quot;</span>
+    <span class="n">optB88_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB88+U NSCF Uniform&quot;</span>
+    <span class="n">optB88_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88+U Dielectric&quot;</span>
+    <span class="n">optB88_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB88+U DFPT&quot;</span>
+    <span class="n">optB88_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88+U DFPT Dielectric&quot;</span>
+    <span class="n">optB88_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB88+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB88_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB88+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB88_U_Static</span> <span class="o">=</span> <span class="s2">&quot;optB88+U Static&quot;</span>
+    <span class="n">optB88_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB88+U Structure Optimization&quot;</span>
+    <span class="n">optB88_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB88+U Deformation&quot;</span>
+    <span class="n">optB88_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB88+U Unrecognized&quot;</span>
+    <span class="n">optPBE_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U NSCF Line&quot;</span>
+    <span class="n">optPBE_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U NSCF Uniform&quot;</span>
+    <span class="n">optPBE_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U Dielectric&quot;</span>
+    <span class="n">optPBE_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U DFPT&quot;</span>
+    <span class="n">optPBE_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U DFPT Dielectric&quot;</span>
+    <span class="n">optPBE_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">optPBE_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">optPBE_U_Static</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U Static&quot;</span>
+    <span class="n">optPBE_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U Structure Optimization&quot;</span>
+    <span class="n">optPBE_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U Deformation&quot;</span>
+    <span class="n">optPBE_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optPBE+U Unrecognized&quot;</span>
+    <span class="n">revPBE_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U NSCF Line&quot;</span>
+    <span class="n">revPBE_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U NSCF Uniform&quot;</span>
+    <span class="n">revPBE_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U Dielectric&quot;</span>
+    <span class="n">revPBE_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U DFPT&quot;</span>
+    <span class="n">revPBE_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U DFPT Dielectric&quot;</span>
+    <span class="n">revPBE_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">revPBE_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">revPBE_U_Static</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U Static&quot;</span>
+    <span class="n">revPBE_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U Structure Optimization&quot;</span>
+    <span class="n">revPBE_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U Deformation&quot;</span>
+    <span class="n">revPBE_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;revPBE+U Unrecognized&quot;</span>
+    <span class="n">B3LYP_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U NSCF Line&quot;</span>
+    <span class="n">B3LYP_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U NSCF Uniform&quot;</span>
+    <span class="n">B3LYP_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U Dielectric&quot;</span>
+    <span class="n">B3LYP_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U DFPT&quot;</span>
+    <span class="n">B3LYP_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U DFPT Dielectric&quot;</span>
+    <span class="n">B3LYP_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">B3LYP_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">B3LYP_U_Static</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U Static&quot;</span>
+    <span class="n">B3LYP_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U Structure Optimization&quot;</span>
+    <span class="n">B3LYP_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U Deformation&quot;</span>
+    <span class="n">B3LYP_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;B3LYP+U Unrecognized&quot;</span>
+    <span class="n">HF_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;HF+U NSCF Line&quot;</span>
+    <span class="n">HF_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;HF+U NSCF Uniform&quot;</span>
+    <span class="n">HF_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HF+U Dielectric&quot;</span>
+    <span class="n">HF_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;HF+U DFPT&quot;</span>
+    <span class="n">HF_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HF+U DFPT Dielectric&quot;</span>
+    <span class="n">HF_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;HF+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">HF_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;HF+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">HF_U_Static</span> <span class="o">=</span> <span class="s2">&quot;HF+U Static&quot;</span>
+    <span class="n">HF_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;HF+U Structure Optimization&quot;</span>
+    <span class="n">HF_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;HF+U Deformation&quot;</span>
+    <span class="n">HF_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;HF+U Unrecognized&quot;</span>
+    <span class="n">HSE03_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U NSCF Line&quot;</span>
+    <span class="n">HSE03_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U NSCF Uniform&quot;</span>
+    <span class="n">HSE03_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U Dielectric&quot;</span>
+    <span class="n">HSE03_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U DFPT&quot;</span>
+    <span class="n">HSE03_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U DFPT Dielectric&quot;</span>
+    <span class="n">HSE03_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">HSE03_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">HSE03_U_Static</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U Static&quot;</span>
+    <span class="n">HSE03_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U Structure Optimization&quot;</span>
+    <span class="n">HSE03_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U Deformation&quot;</span>
+    <span class="n">HSE03_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;HSE03+U Unrecognized&quot;</span>
+    <span class="n">HSE06_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U NSCF Line&quot;</span>
+    <span class="n">HSE06_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U NSCF Uniform&quot;</span>
+    <span class="n">HSE06_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U Dielectric&quot;</span>
+    <span class="n">HSE06_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U DFPT&quot;</span>
+    <span class="n">HSE06_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U DFPT Dielectric&quot;</span>
+    <span class="n">HSE06_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">HSE06_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">HSE06_U_Static</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U Static&quot;</span>
+    <span class="n">HSE06_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U Structure Optimization&quot;</span>
+    <span class="n">HSE06_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U Deformation&quot;</span>
+    <span class="n">HSE06_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;HSE06+U Unrecognized&quot;</span>
+    <span class="n">PB0_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;PB0+U NSCF Line&quot;</span>
+    <span class="n">PB0_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;PB0+U NSCF Uniform&quot;</span>
+    <span class="n">PB0_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PB0+U Dielectric&quot;</span>
+    <span class="n">PB0_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;PB0+U DFPT&quot;</span>
+    <span class="n">PB0_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;PB0+U DFPT Dielectric&quot;</span>
+    <span class="n">PB0_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;PB0+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">PB0_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;PB0+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">PB0_U_Static</span> <span class="o">=</span> <span class="s2">&quot;PB0+U Static&quot;</span>
+    <span class="n">PB0_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;PB0+U Structure Optimization&quot;</span>
+    <span class="n">PB0_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;PB0+U Deformation&quot;</span>
+    <span class="n">PB0_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;PB0+U Unrecognized&quot;</span>
+    <span class="n">M06L_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;M06L+U NSCF Line&quot;</span>
+    <span class="n">M06L_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;M06L+U NSCF Uniform&quot;</span>
+    <span class="n">M06L_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;M06L+U Dielectric&quot;</span>
+    <span class="n">M06L_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;M06L+U DFPT&quot;</span>
+    <span class="n">M06L_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;M06L+U DFPT Dielectric&quot;</span>
+    <span class="n">M06L_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;M06L+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">M06L_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;M06L+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">M06L_U_Static</span> <span class="o">=</span> <span class="s2">&quot;M06L+U Static&quot;</span>
+    <span class="n">M06L_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;M06L+U Structure Optimization&quot;</span>
+    <span class="n">M06L_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;M06L+U Deformation&quot;</span>
+    <span class="n">M06L_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;M06L+U Unrecognized&quot;</span>
+    <span class="n">MBJL_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U NSCF Line&quot;</span>
+    <span class="n">MBJL_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U NSCF Uniform&quot;</span>
+    <span class="n">MBJL_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U Dielectric&quot;</span>
+    <span class="n">MBJL_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U DFPT&quot;</span>
+    <span class="n">MBJL_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U DFPT Dielectric&quot;</span>
+    <span class="n">MBJL_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">MBJL_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">MBJL_U_Static</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U Static&quot;</span>
+    <span class="n">MBJL_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U Structure Optimization&quot;</span>
+    <span class="n">MBJL_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U Deformation&quot;</span>
+    <span class="n">MBJL_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MBJL+U Unrecognized&quot;</span>
+    <span class="n">MS0_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MS0+U NSCF Line&quot;</span>
+    <span class="n">MS0_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MS0+U NSCF Uniform&quot;</span>
+    <span class="n">MS0_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS0+U Dielectric&quot;</span>
+    <span class="n">MS0_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MS0+U DFPT&quot;</span>
+    <span class="n">MS0_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS0+U DFPT Dielectric&quot;</span>
+    <span class="n">MS0_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MS0+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">MS0_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MS0+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">MS0_U_Static</span> <span class="o">=</span> <span class="s2">&quot;MS0+U Static&quot;</span>
+    <span class="n">MS0_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MS0+U Structure Optimization&quot;</span>
+    <span class="n">MS0_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MS0+U Deformation&quot;</span>
+    <span class="n">MS0_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MS0+U Unrecognized&quot;</span>
+    <span class="n">MS1_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MS1+U NSCF Line&quot;</span>
+    <span class="n">MS1_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MS1+U NSCF Uniform&quot;</span>
+    <span class="n">MS1_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS1+U Dielectric&quot;</span>
+    <span class="n">MS1_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MS1+U DFPT&quot;</span>
+    <span class="n">MS1_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS1+U DFPT Dielectric&quot;</span>
+    <span class="n">MS1_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MS1+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">MS1_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MS1+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">MS1_U_Static</span> <span class="o">=</span> <span class="s2">&quot;MS1+U Static&quot;</span>
+    <span class="n">MS1_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MS1+U Structure Optimization&quot;</span>
+    <span class="n">MS1_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MS1+U Deformation&quot;</span>
+    <span class="n">MS1_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MS1+U Unrecognized&quot;</span>
+    <span class="n">MS2_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;MS2+U NSCF Line&quot;</span>
+    <span class="n">MS2_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;MS2+U NSCF Uniform&quot;</span>
+    <span class="n">MS2_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS2+U Dielectric&quot;</span>
+    <span class="n">MS2_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;MS2+U DFPT&quot;</span>
+    <span class="n">MS2_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;MS2+U DFPT Dielectric&quot;</span>
+    <span class="n">MS2_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;MS2+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">MS2_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;MS2+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">MS2_U_Static</span> <span class="o">=</span> <span class="s2">&quot;MS2+U Static&quot;</span>
+    <span class="n">MS2_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;MS2+U Structure Optimization&quot;</span>
+    <span class="n">MS2_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;MS2+U Deformation&quot;</span>
+    <span class="n">MS2_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;MS2+U Unrecognized&quot;</span>
+    <span class="n">RTPSS_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U NSCF Line&quot;</span>
+    <span class="n">RTPSS_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U NSCF Uniform&quot;</span>
+    <span class="n">RTPSS_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U Dielectric&quot;</span>
+    <span class="n">RTPSS_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U DFPT&quot;</span>
+    <span class="n">RTPSS_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U DFPT Dielectric&quot;</span>
+    <span class="n">RTPSS_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">RTPSS_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">RTPSS_U_Static</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U Static&quot;</span>
+    <span class="n">RTPSS_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U Structure Optimization&quot;</span>
+    <span class="n">RTPSS_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U Deformation&quot;</span>
+    <span class="n">RTPSS_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;RTPSS+U Unrecognized&quot;</span>
+    <span class="n">SCAN_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U NSCF Line&quot;</span>
+    <span class="n">SCAN_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U NSCF Uniform&quot;</span>
+    <span class="n">SCAN_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U Dielectric&quot;</span>
+    <span class="n">SCAN_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U DFPT&quot;</span>
+    <span class="n">SCAN_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U DFPT Dielectric&quot;</span>
+    <span class="n">SCAN_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">SCAN_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">SCAN_U_Static</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U Static&quot;</span>
+    <span class="n">SCAN_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U Structure Optimization&quot;</span>
+    <span class="n">SCAN_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U Deformation&quot;</span>
+    <span class="n">SCAN_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;SCAN+U Unrecognized&quot;</span>
+    <span class="n">TPSS_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U NSCF Line&quot;</span>
+    <span class="n">TPSS_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U NSCF Uniform&quot;</span>
+    <span class="n">TPSS_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U Dielectric&quot;</span>
+    <span class="n">TPSS_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U DFPT&quot;</span>
+    <span class="n">TPSS_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U DFPT Dielectric&quot;</span>
+    <span class="n">TPSS_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">TPSS_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">TPSS_U_Static</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U Static&quot;</span>
+    <span class="n">TPSS_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U Structure Optimization&quot;</span>
+    <span class="n">TPSS_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U Deformation&quot;</span>
+    <span class="n">TPSS_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;TPSS+U Unrecognized&quot;</span>
+    <span class="n">SCAN_rVV10_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U NSCF Line&quot;</span>
+    <span class="n">SCAN_rVV10_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U NSCF Uniform&quot;</span>
+    <span class="n">SCAN_rVV10_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U Dielectric&quot;</span>
+    <span class="n">SCAN_rVV10_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U DFPT&quot;</span>
+    <span class="n">SCAN_rVV10_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U DFPT Dielectric&quot;</span>
+    <span class="n">SCAN_rVV10_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">SCAN_rVV10_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">SCAN_rVV10_U_Static</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U Static&quot;</span>
+    <span class="n">SCAN_rVV10_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U Structure Optimization&quot;</span>
+    <span class="n">SCAN_rVV10_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U Deformation&quot;</span>
+    <span class="n">SCAN_rVV10_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;SCAN-rVV10+U Unrecognized&quot;</span>
+    <span class="n">optB86b_vdW_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U NSCF Line&quot;</span>
+    <span class="n">optB86b_vdW_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U NSCF Uniform&quot;</span>
+    <span class="n">optB86b_vdW_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U Dielectric&quot;</span>
+    <span class="n">optB86b_vdW_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U DFPT&quot;</span>
+    <span class="n">optB86b_vdW_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U DFPT Dielectric&quot;</span>
+    <span class="n">optB86b_vdW_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB86b_vdW_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB86b_vdW_U_Static</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U Static&quot;</span>
+    <span class="n">optB86b_vdW_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U Structure Optimization&quot;</span>
+    <span class="n">optB86b_vdW_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U Deformation&quot;</span>
+    <span class="n">optB86b_vdW_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB86b-vdW+U Unrecognized&quot;</span>
+    <span class="n">optB88_vdW_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U NSCF Line&quot;</span>
+    <span class="n">optB88_vdW_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U NSCF Uniform&quot;</span>
+    <span class="n">optB88_vdW_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U Dielectric&quot;</span>
+    <span class="n">optB88_vdW_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U DFPT&quot;</span>
+    <span class="n">optB88_vdW_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U DFPT Dielectric&quot;</span>
+    <span class="n">optB88_vdW_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">optB88_vdW_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">optB88_vdW_U_Static</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U Static&quot;</span>
+    <span class="n">optB88_vdW_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U Structure Optimization&quot;</span>
+    <span class="n">optB88_vdW_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U Deformation&quot;</span>
+    <span class="n">optB88_vdW_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optB88-vdW+U Unrecognized&quot;</span>
+    <span class="n">optPBE_vdW_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U NSCF Line&quot;</span>
+    <span class="n">optPBE_vdW_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U NSCF Uniform&quot;</span>
+    <span class="n">optPBE_vdW_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U Dielectric&quot;</span>
+    <span class="n">optPBE_vdW_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U DFPT&quot;</span>
+    <span class="n">optPBE_vdW_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U DFPT Dielectric&quot;</span>
+    <span class="n">optPBE_vdW_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">optPBE_vdW_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">optPBE_vdW_U_Static</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U Static&quot;</span>
+    <span class="n">optPBE_vdW_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U Structure Optimization&quot;</span>
+    <span class="n">optPBE_vdW_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U Deformation&quot;</span>
+    <span class="n">optPBE_vdW_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;optPBE-vdW+U Unrecognized&quot;</span>
+    <span class="n">rev_vdW_DF2_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U NSCF Line&quot;</span>
+    <span class="n">rev_vdW_DF2_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U NSCF Uniform&quot;</span>
+    <span class="n">rev_vdW_DF2_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U Dielectric&quot;</span>
+    <span class="n">rev_vdW_DF2_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U DFPT&quot;</span>
+    <span class="n">rev_vdW_DF2_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U DFPT Dielectric&quot;</span>
+    <span class="n">rev_vdW_DF2_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">rev_vdW_DF2_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">rev_vdW_DF2_U_Static</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U Static&quot;</span>
+    <span class="n">rev_vdW_DF2_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U Structure Optimization&quot;</span>
+    <span class="n">rev_vdW_DF2_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U Deformation&quot;</span>
+    <span class="n">rev_vdW_DF2_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;rev-vdW-DF2+U Unrecognized&quot;</span>
+    <span class="n">revPBE_vdW_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U NSCF Line&quot;</span>
+    <span class="n">revPBE_vdW_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U NSCF Uniform&quot;</span>
+    <span class="n">revPBE_vdW_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U Dielectric&quot;</span>
+    <span class="n">revPBE_vdW_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U DFPT&quot;</span>
+    <span class="n">revPBE_vdW_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U DFPT Dielectric&quot;</span>
+    <span class="n">revPBE_vdW_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">revPBE_vdW_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">revPBE_vdW_U_Static</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U Static&quot;</span>
+    <span class="n">revPBE_vdW_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U Structure Optimization&quot;</span>
+    <span class="n">revPBE_vdW_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U Deformation&quot;</span>
+    <span class="n">revPBE_vdW_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;revPBE-vdW+U Unrecognized&quot;</span>
+    <span class="n">vdW_DF2_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U NSCF Line&quot;</span>
+    <span class="n">vdW_DF2_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U NSCF Uniform&quot;</span>
+    <span class="n">vdW_DF2_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U Dielectric&quot;</span>
+    <span class="n">vdW_DF2_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U DFPT&quot;</span>
+    <span class="n">vdW_DF2_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U DFPT Dielectric&quot;</span>
+    <span class="n">vdW_DF2_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">vdW_DF2_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">vdW_DF2_U_Static</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U Static&quot;</span>
+    <span class="n">vdW_DF2_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U Structure Optimization&quot;</span>
+    <span class="n">vdW_DF2_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U Deformation&quot;</span>
+    <span class="n">vdW_DF2_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;vdW-DF2+U Unrecognized&quot;</span>
+    <span class="n">LDA_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;LDA NSCF Line&quot;</span>
+    <span class="n">LDA_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;LDA NSCF Uniform&quot;</span>
+    <span class="n">LDA_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;LDA Dielectric&quot;</span>
+    <span class="n">LDA_DFPT</span> <span class="o">=</span> <span class="s2">&quot;LDA DFPT&quot;</span>
+    <span class="n">LDA_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;LDA DFPT Dielectric&quot;</span>
+    <span class="n">LDA_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;LDA NMR Nuclear Shielding&quot;</span>
+    <span class="n">LDA_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;LDA NMR Electric Field Gradient&quot;</span>
+    <span class="n">LDA_Static</span> <span class="o">=</span> <span class="s2">&quot;LDA Static&quot;</span>
+    <span class="n">LDA_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;LDA Structure Optimization&quot;</span>
+    <span class="n">LDA_Deformation</span> <span class="o">=</span> <span class="s2">&quot;LDA Deformation&quot;</span>
+    <span class="n">LDA_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;LDA Unrecognized&quot;</span>
+    <span class="n">LDA_U_NSCF_Line</span> <span class="o">=</span> <span class="s2">&quot;LDA+U NSCF Line&quot;</span>
+    <span class="n">LDA_U_NSCF_Uniform</span> <span class="o">=</span> <span class="s2">&quot;LDA+U NSCF Uniform&quot;</span>
+    <span class="n">LDA_U_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;LDA+U Dielectric&quot;</span>
+    <span class="n">LDA_U_DFPT</span> <span class="o">=</span> <span class="s2">&quot;LDA+U DFPT&quot;</span>
+    <span class="n">LDA_U_DFPT_Dielectric</span> <span class="o">=</span> <span class="s2">&quot;LDA+U DFPT Dielectric&quot;</span>
+    <span class="n">LDA_U_NMR_Nuclear_Shielding</span> <span class="o">=</span> <span class="s2">&quot;LDA+U NMR Nuclear Shielding&quot;</span>
+    <span class="n">LDA_U_NMR_Electric_Field_Gradient</span> <span class="o">=</span> <span class="s2">&quot;LDA+U NMR Electric Field Gradient&quot;</span>
+    <span class="n">LDA_U_Static</span> <span class="o">=</span> <span class="s2">&quot;LDA+U Static&quot;</span>
+    <span class="n">LDA_U_Structure_Optimization</span> <span class="o">=</span> <span class="s2">&quot;LDA+U Structure Optimization&quot;</span>
+    <span class="n">LDA_U_Deformation</span> <span class="o">=</span> <span class="s2">&quot;LDA+U Deformation&quot;</span>
+    <span class="n">LDA_U_Unrecognized</span> <span class="o">=</span> <span class="s2">&quot;LDA+U Unrecognized&quot;</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, MaterialsProject.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

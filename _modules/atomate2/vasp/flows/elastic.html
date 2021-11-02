@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>atomate2.vasp.flows.elastic &#8212; atomate2</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../../../index.html">
+<p class="title">atomate2</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../reference/index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../dev/index.html">
+  Developer Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference external nav-link" href="https://matsci.org/c/atomate">
+  Support
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for atomate2.vasp.flows.elastic</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Flows for calculating elastic constants.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Maker</span><span class="p">,</span> <span class="n">OnMissing</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Structure</span>
+
+<span class="kn">from</span> <span class="nn">atomate2.common.schemas.math</span> <span class="kn">import</span> <span class="n">Matrix3D</span>
+<span class="kn">from</span> <span class="nn">atomate2.settings</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">BaseVaspMaker</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.elastic</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ElasticRelaxMaker</span><span class="p">,</span>
+    <span class="n">fit_elastic_tensor</span><span class="p">,</span>
+    <span class="n">generate_elastic_deformations</span><span class="p">,</span>
+    <span class="n">run_elastic_deformations</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ElasticMaker&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ElasticMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.elastic.ElasticMaker.html#atomate2.vasp.flows.elastic.ElasticMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ElasticMaker</span><span class="p">(</span><span class="n">Maker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to calculate elastic constants.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    order</span>
+<span class="sd">        Order of the tensor expansion to be determined. Can be either 2 or 3.</span>
+<span class="sd">    sym_reduce</span>
+<span class="sd">        Whether to reduce the number of deformations using symmetry.</span>
+<span class="sd">    symprec</span>
+<span class="sd">        Symmetry precision to use in the reduction of symmetry.</span>
+<span class="sd">    elastic_relax_maker</span>
+<span class="sd">        Maker used to generate elastic relaxations.</span>
+<span class="sd">    generate_elastic_deformations_kwargs</span>
+<span class="sd">        Keyword arguments passed to :obj:`generate_elastic_deformations`.</span>
+<span class="sd">    fit_elastic_tensor_kwargs</span>
+<span class="sd">        Keyword arguments passed to :obj:`fit_elastic_tensor`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;elastic&quot;</span>
+    <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">sym_reduce</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">SYMPREC</span>
+    <span class="n">elastic_relax_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ElasticRelaxMaker</span><span class="p">)</span>
+    <span class="n">generate_elastic_deformations_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">fit_elastic_tensor_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ElasticMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.elastic.ElasticMaker.html#atomate2.vasp.flows.elastic.ElasticMaker.make">[docs]</a>    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
+        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">equilibrium_stress</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make flow to calculate the elastic constant.</span>
+
+<span class="sd">        .. Note::</span>
+<span class="sd">            It is heavily recommended to symmetrize the structure before passing it to</span>
+<span class="sd">            this flow. Otherwise, the symmetry reduction routines will not be as</span>
+<span class="sd">            effective at reducing the total number of deformations needed.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure</span>
+<span class="sd">            A pymatgen structure.</span>
+<span class="sd">        prev_vasp_dir</span>
+<span class="sd">            A previous vasp calculation directory to use for copying outputs.</span>
+<span class="sd">        equilibrium_stress</span>
+<span class="sd">            The equilibrium stress of the (relaxed) structure, if known.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">deformations</span> <span class="o">=</span> <span class="n">generate_elastic_deformations</span><span class="p">(</span>
+            <span class="n">structure</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">sym_reduce</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sym_reduce</span><span class="p">,</span>
+            <span class="n">symprec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symprec</span><span class="p">,</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">generate_elastic_deformations_kwargs</span>
+        <span class="p">)</span>
+        <span class="n">vasp_deformation_calcs</span> <span class="o">=</span> <span class="n">run_elastic_deformations</span><span class="p">(</span>
+            <span class="n">structure</span><span class="p">,</span>
+            <span class="n">deformations</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+            <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span><span class="p">,</span>
+            <span class="n">elastic_relax_maker</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">elastic_relax_maker</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fit_tensor</span> <span class="o">=</span> <span class="n">fit_elastic_tensor</span><span class="p">(</span>
+            <span class="n">structure</span><span class="p">,</span>
+            <span class="n">vasp_deformation_calcs</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+            <span class="n">equilibrium_stress</span><span class="o">=</span><span class="n">equilibrium_stress</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+            <span class="n">symprec</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">symprec</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sym_reduce</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_elastic_tensor_kwargs</span>
+        <span class="p">)</span>
+
+        <span class="c1"># allow some of the deformations to fail</span>
+        <span class="n">fit_tensor</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">on_missing_references</span> <span class="o">=</span> <span class="n">OnMissing</span><span class="o">.</span><span class="n">NONE</span>
+
+        <span class="n">flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">(</span>
+            <span class="n">jobs</span><span class="o">=</span><span class="p">[</span><span class="n">deformations</span><span class="p">,</span> <span class="n">vasp_deformation_calcs</span><span class="p">,</span> <span class="n">fit_tensor</span><span class="p">],</span>
+            <span class="n">output</span><span class="o">=</span><span class="n">fit_tensor</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">flow</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, MaterialsProject.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

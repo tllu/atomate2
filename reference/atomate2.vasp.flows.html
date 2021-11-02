@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>atomate2.vasp.flows &#8212; atomate2</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="atomate2.vasp.flows.core" href="atomate2.vasp.flows.core.html" />
+    <link rel="prev" title="write_vasp_input_set" href="atomate2.vasp.files.write_vasp_input_set.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">atomate2</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../dev/index.html">
+  Developer Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference external nav-link" href="https://matsci.org/c/atomate">
+  Support
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="atomate2.vasp.html">
+   atomate2.vasp
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.builders.html">
+     atomate2.vasp.builders
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.builders.elastic.html">
+       atomate2.vasp.builders.elastic
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.builders.elastic.get_elastic_document.html">
+         get_elastic_document
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.builders.elastic.group_deformations.html">
+         group_deformations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.builders.elastic.ElasticBuilder.html">
+         ElasticBuilder
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.drones.html">
+     atomate2.vasp.drones
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.drones.VaspDrone.html">
+       VaspDrone
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.files.html">
+     atomate2.vasp.files
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.files.copy_vasp_outputs.html">
+       copy_vasp_outputs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.files.get_largest_relax_extension.html">
+       get_largest_relax_extension
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.files.write_vasp_input_set.html">
+       write_vasp_input_set
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="current reference internal" href="#">
+     atomate2.vasp.flows
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+    <label for="toctree-checkbox-6">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.flows.core.html">
+       atomate2.vasp.flows.core
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+      <label for="toctree-checkbox-7">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.flows.core.BandStructureMaker.html">
+         BandStructureMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.flows.core.DoubleRelaxMaker.html">
+         DoubleRelaxMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.flows.core.HSEBandStructureMaker.html">
+         HSEBandStructureMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.flows.elastic.html">
+       atomate2.vasp.flows.elastic
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+      <label for="toctree-checkbox-8">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.flows.elastic.ElasticMaker.html">
+         ElasticMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.jobs.html">
+     atomate2.vasp.jobs
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+    <label for="toctree-checkbox-9">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.jobs.base.html">
+       atomate2.vasp.jobs.base
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.base.BaseVaspMaker.html">
+         BaseVaspMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.jobs.core.html">
+       atomate2.vasp.jobs.core
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.DielectricMaker.html">
+         DielectricMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.HSEBSMaker.html">
+         HSEBSMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.HSERelaxMaker.html">
+         HSERelaxMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.HSEStaticMaker.html">
+         HSEStaticMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.NonSCFMaker.html">
+         NonSCFMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.RelaxMaker.html">
+         RelaxMaker
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.core.StaticMaker.html">
+         StaticMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.jobs.elastic.html">
+       atomate2.vasp.jobs.elastic
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.elastic.fit_elastic_tensor.html">
+         fit_elastic_tensor
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.elastic.generate_elastic_deformations.html">
+         generate_elastic_deformations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.elastic.run_elastic_deformations.html">
+         run_elastic_deformations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.jobs.elastic.ElasticRelaxMaker.html">
+         ElasticRelaxMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.powerups.html">
+     atomate2.vasp.powerups
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.powerups.update_user_incar_settings.html">
+       update_user_incar_settings
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.powerups.update_user_kpoints_settings.html">
+       update_user_kpoints_settings
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.powerups.update_user_potcar_settings.html">
+       update_user_potcar_settings
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.run.html">
+     atomate2.vasp.run
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.run.run_vasp.html">
+       run_vasp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.run.should_stop_children.html">
+       should_stop_children
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.vasp.run.JobType.html">
+       JobType
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.schemas.html">
+     atomate2.vasp.schemas
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+    <label for="toctree-checkbox-15">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.schemas.calc_types.html">
+       atomate2.vasp.schemas.calc_types
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.schemas.calc_types.enums.html">
+         atomate2.vasp.schemas.calc_types.enums
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.schemas.calc_types.generate.html">
+         atomate2.vasp.schemas.calc_types.generate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.schemas.calc_types.utils.html">
+         atomate2.vasp.schemas.calc_types.utils
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.schemas.calculation.html">
+       atomate2.vasp.schemas.calculation
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.schemas.calculation.Status.html">
+         Status
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.schemas.calculation.VaspObject.html">
+         VaspObject
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.schemas.task.html">
+       atomate2.vasp.schemas.task
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.schemas.task.find_vasp_files.html">
+         find_vasp_files
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.vasp.sets.html">
+     atomate2.vasp.sets
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.sets.base.html">
+       atomate2.vasp.sets.base
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.base.VaspInputSet.html">
+         VaspInputSet
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.base.VaspInputSetGenerator.html">
+         VaspInputSetGenerator
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.vasp.sets.core.html">
+       atomate2.vasp.sets.core
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.HSEBSSetGenerator.html">
+         HSEBSSetGenerator
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.HSERelaxSetGenerator.html">
+         HSERelaxSetGenerator
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.HSEStaticSetGenerator.html">
+         HSEStaticSetGenerator
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.NonSCFSetGenerator.html">
+         NonSCFSetGenerator
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.RelaxSetGenerator.html">
+         RelaxSetGenerator
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.StaticSetGenerator.html">
+         StaticSetGenerator
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.vasp.sets.core.TightRelaxSetGenerator.html">
+         TightRelaxSetGenerator
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="atomate2.amset.html">
+   atomate2.amset
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+  <label for="toctree-checkbox-22">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.amset.files.html">
+     atomate2.amset.files
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+    <label for="toctree-checkbox-23">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.amset.files.copy_amset_files.html">
+       copy_amset_files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.amset.files.write_amset_settings.html">
+       write_amset_settings
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="atomate2.amset.schemas.html">
+     atomate2.amset.schemas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="atomate2.utils.html">
+   atomate2.utils
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+  <label for="toctree-checkbox-24">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.utils.datetime.html">
+     atomate2.utils.datetime
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+    <label for="toctree-checkbox-25">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.datetime.datetime_str.html">
+       datetime_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.utils.file_client.html">
+     atomate2.utils.file_client
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+    <label for="toctree-checkbox-26">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.file_client.auto_fileclient.html">
+       auto_fileclient
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.file_client.get_ssh_connection.html">
+       get_ssh_connection
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.file_client.FileClient.html">
+       FileClient
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.utils.log.html">
+     atomate2.utils.log
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+    <label for="toctree-checkbox-27">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.log.initialize_logger.html">
+       initialize_logger
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.utils.path.html">
+     atomate2.utils.path
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+    <label for="toctree-checkbox-28">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.path.get_uri.html">
+       get_uri
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.utils.path.strip_hostname.html">
+       strip_hostname
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="atomate2.common.html">
+   atomate2.common
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+  <label for="toctree-checkbox-29">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.common.analysis.html">
+     atomate2.common.analysis
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/>
+    <label for="toctree-checkbox-30">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.common.analysis.elastic.html">
+       atomate2.common.analysis.elastic
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+      <label for="toctree-checkbox-31">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.common.analysis.elastic.get_default_strain_states.html">
+         get_default_strain_states
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.common.files.html">
+     atomate2.common.files
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
+    <label for="toctree-checkbox-32">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.copy_files.html">
+       copy_files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.delete_files.html">
+       delete_files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.find_and_filter_files.html">
+       find_and_filter_files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.get_zfile.html">
+       get_zfile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.gunzip_files.html">
+       gunzip_files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.gzip_files.html">
+       gzip_files
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.files.rename_files.html">
+       rename_files
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.common.schemas.html">
+     atomate2.common.schemas
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/>
+    <label for="toctree-checkbox-33">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.schemas.elastic.html">
+       atomate2.common.schemas.elastic
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.schemas.math.html">
+       atomate2.common.schemas.math
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.schemas.structure.html">
+       atomate2.common.schemas.structure
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="atomate2.common.schemas.symmetry.html">
+       atomate2.common.schemas.symmetry
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/>
+      <label for="toctree-checkbox-34">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="atomate2.common.schemas.symmetry.CrystalSystem.html">
+         CrystalSystem
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="atomate2.common.sets.html">
+     atomate2.common.sets
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/>
+    <label for="toctree-checkbox-35">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.sets.InputSet.html">
+       InputSet
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="atomate2.common.sets.InputSetGenerator.html">
+       InputSetGenerator
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="atomate2.settings.html">
+   atomate2.settings
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="module-atomate2.vasp.flows">
+<span id="atomate2-vasp-flows"></span><h1>atomate2.vasp.flows<a class="headerlink" href="#module-atomate2.vasp.flows" title="Permalink to this headline">¶</a></h1>
+<p>Flows for running VASP calculations.</p>
+<p class="rubric">Modules</p>
+<table class="longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="atomate2.vasp.flows.core.html#module-atomate2.vasp.flows.core" title="atomate2.vasp.flows.core"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atomate2.vasp.flows.core</span></code></a></p></td>
+<td><p>Core VASP flows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="atomate2.vasp.flows.elastic.html#module-atomate2.vasp.flows.elastic" title="atomate2.vasp.flows.elastic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">atomate2.vasp.flows.elastic</span></code></a></p></td>
+<td><p>Flows for calculating elastic constants.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="atomate2.vasp.files.write_vasp_input_set.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">write_vasp_input_set</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="atomate2.vasp.flows.core.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">atomate2.vasp.flows.core</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, MaterialsProject.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

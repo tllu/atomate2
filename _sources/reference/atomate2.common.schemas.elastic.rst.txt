@@ -1,0 +1,23 @@
+atomate2.common.schemas.elastic
+===============================
+
+.. automodule:: atomate2.common.schemas.elastic
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+   
+   
+
+
+
