@@ -13,6 +13,22 @@ atomate2.common.sets
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -21,6 +37,7 @@ atomate2.common.sets
    
       InputSet
       InputSetGenerator
+
 
 
 

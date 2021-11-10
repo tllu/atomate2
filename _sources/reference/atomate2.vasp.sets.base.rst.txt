@@ -13,6 +13,32 @@ atomate2.vasp.sets.base
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -21,6 +47,7 @@ atomate2.vasp.sets.base
    
       VaspInputSet
       VaspInputSetGenerator
+
 
 
 

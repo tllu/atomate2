@@ -13,6 +13,20 @@ atomate2.vasp.drones
 
    
 
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -20,6 +34,7 @@ atomate2.vasp.drones
       :nosignatures:
    
       VaspDrone
+
 
 
 

@@ -18,6 +18,17 @@ atomate2.vasp.schemas.calc\_types
    
    
    
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
 
 
 
@@ -28,6 +39,5 @@ atomate2.vasp.schemas.calc\_types
    :recursive:
 
    atomate2.vasp.schemas.calc_types.enums
-   atomate2.vasp.schemas.calc_types.generate
    atomate2.vasp.schemas.calc_types.utils
 

@@ -13,6 +13,43 @@ atomate2.vasp.sets.core
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -22,10 +59,12 @@ atomate2.vasp.sets.core
       HSEBSSetGenerator
       HSERelaxSetGenerator
       HSEStaticSetGenerator
+      HSETightRelaxSetGenerator
       NonSCFSetGenerator
       RelaxSetGenerator
       StaticSetGenerator
       TightRelaxSetGenerator
+
 
 
 

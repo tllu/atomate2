@@ -234,9 +234,7 @@
             <span class="n">kpt_labels</span> <span class="o">=</span> <span class="n">kpts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;labels&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]</span>
             <span class="n">num_kpt_labels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="o">.</span><span class="fm">__ne__</span><span class="p">,</span> <span class="n">kpt_labels</span><span class="p">)))</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
-                <span class="s2">&quot;Couldn&#39;t identify total number of kpt labels: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Couldn&#39;t identify total number of kpt labels: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">num_kpt_labels</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">acalc_type</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NSCF Line&quot;</span><span class="p">)</span>

@@ -22,6 +22,22 @@ atomate2.utils.file\_client
 
    
 
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -29,6 +45,7 @@ atomate2.utils.file\_client
       :nosignatures:
    
       FileClient
+
 
 
 

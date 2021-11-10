@@ -13,6 +13,20 @@ atomate2.vasp.flows.elastic
 
    
 
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -20,6 +34,7 @@ atomate2.vasp.flows.elastic
       :nosignatures:
    
       ElasticMaker
+
 
 
 

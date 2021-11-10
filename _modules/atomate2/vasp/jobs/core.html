@@ -159,21 +159,20 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
-<span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">job</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Structure</span>
 
-<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">BaseVaspMaker</span>
-<span class="kn">from</span> <span class="nn">atomate2.vasp.schemas.task</span> <span class="kn">import</span> <span class="n">TaskDocument</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">BaseVaspMaker</span><span class="p">,</span> <span class="n">vasp_job</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.sets.base</span> <span class="kn">import</span> <span class="n">VaspInputSetGenerator</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.sets.core</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">HSEBSSetGenerator</span><span class="p">,</span>
     <span class="n">HSERelaxSetGenerator</span><span class="p">,</span>
     <span class="n">HSEStaticSetGenerator</span><span class="p">,</span>
+    <span class="n">HSETightRelaxSetGenerator</span><span class="p">,</span>
     <span class="n">NonSCFSetGenerator</span><span class="p">,</span>
     <span class="n">RelaxSetGenerator</span><span class="p">,</span>
     <span class="n">StaticSetGenerator</span><span class="p">,</span>
+    <span class="n">TightRelaxSetGenerator</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -186,6 +185,8 @@
     <span class="s2">&quot;HSEBSMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSERelaxMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSEStaticMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TightRelaxMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HSETightRelaxMaker&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -196,19 +197,21 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    name</span>
+<span class="sd">    name : str</span>
 <span class="sd">        The job name.</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -226,19 +229,21 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    name</span>
+<span class="sd">    name : str</span>
 <span class="sd">        The job name.</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -249,6 +254,38 @@
     <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="TightRelaxMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.TightRelaxMaker.html#atomate2.vasp.jobs.core.TightRelaxMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TightRelaxMaker</span><span class="p">(</span><span class="n">BaseVaspMaker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to create tight VASP relaxation jobs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
+<span class="sd">        A generator used to make the input set.</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
+<span class="sd">    task_document_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
+<span class="sd">    stop_children_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
+<span class="sd">    write_additional_data : dict</span>
+<span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
+<span class="sd">        {filename: data}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tight relax&quot;</span>
+    <span class="n">input_set_generator</span><span class="p">:</span> <span class="n">VaspInputSetGenerator</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">TightRelaxSetGenerator</span>
+    <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="NonSCFMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.NonSCFMaker.html#atomate2.vasp.jobs.core.NonSCFMaker">[docs]</a><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">NonSCFMaker</span><span class="p">(</span><span class="n">BaseVaspMaker</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -256,19 +293,21 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    copy_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -278,11 +317,11 @@
         <span class="n">default_factory</span><span class="o">=</span><span class="n">NonSCFSetGenerator</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="NonSCFMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.NonSCFMaker.html#atomate2.vasp.jobs.core.NonSCFMaker.make">[docs]</a>    <span class="nd">@job</span><span class="p">(</span><span class="n">output_schema</span><span class="o">=</span><span class="n">TaskDocument</span><span class="p">)</span>
+<div class="viewcode-block" id="NonSCFMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.NonSCFMaker.html#atomate2.vasp.jobs.core.NonSCFMaker.make">[docs]</a>    <span class="nd">@vasp_job</span>
     <span class="k">def</span> <span class="nf">make</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
-        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -290,11 +329,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        structure</span>
+<span class="sd">        structure : .Structure</span>
 <span class="sd">            A pymatgen structure object.</span>
-<span class="sd">        prev_vasp_dir</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
 <span class="sd">            A previous VASP calculation directory to copy output files from.</span>
-<span class="sd">        mode</span>
+<span class="sd">        mode : str</span>
 <span class="sd">            Type of band structure calculation. Options are:</span>
 <span class="sd">            - &quot;line&quot;: Full band structure along symmetry lines.</span>
 <span class="sd">            - &quot;uniform&quot;: Uniform mesh band structure.</span>
@@ -322,12 +361,44 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
+<span class="sd">        A generator used to make the input set.</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
+<span class="sd">    task_document_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
+<span class="sd">    stop_children_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
+<span class="sd">    write_additional_data : dict</span>
+<span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
+<span class="sd">        {filename: data}.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse relax&quot;</span>
+    <span class="n">input_set_generator</span><span class="p">:</span> <span class="n">VaspInputSetGenerator</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">HSERelaxSetGenerator</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HSETightRelaxMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.HSETightRelaxMaker.html#atomate2.vasp.jobs.core.HSETightRelaxMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSETightRelaxMaker</span><span class="p">(</span><span class="n">BaseVaspMaker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to create tight VASP relaxation jobs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
 <span class="sd">    input_set_generator</span>
 <span class="sd">        A generator used to make the input set.</span>
 <span class="sd">    write_input_set_kwargs</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    copy_vasp_kwargs</span>
-<span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
 <span class="sd">    run_vasp_kwargs</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
 <span class="sd">    task_document_kwargs</span>
@@ -339,9 +410,9 @@
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse relax&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse tight relax&quot;</span>
     <span class="n">input_set_generator</span><span class="p">:</span> <span class="n">VaspInputSetGenerator</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default_factory</span><span class="o">=</span><span class="n">HSERelaxSetGenerator</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">HSETightRelaxSetGenerator</span>
     <span class="p">)</span></div>
 
 
@@ -352,19 +423,21 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    copy_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -382,19 +455,21 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    copy_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -404,11 +479,11 @@
         <span class="n">default_factory</span><span class="o">=</span><span class="n">HSEBSSetGenerator</span>
     <span class="p">)</span>
 
-<div class="viewcode-block" id="HSEBSMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.HSEBSMaker.html#atomate2.vasp.jobs.core.HSEBSMaker.make">[docs]</a>    <span class="nd">@job</span><span class="p">(</span><span class="n">output_schema</span><span class="o">=</span><span class="n">TaskDocument</span><span class="p">)</span>
+<div class="viewcode-block" id="HSEBSMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.HSEBSMaker.html#atomate2.vasp.jobs.core.HSEBSMaker.make">[docs]</a>    <span class="nd">@vasp_job</span>
     <span class="k">def</span> <span class="nf">make</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
-        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -416,11 +491,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        structure</span>
+<span class="sd">        structure : .Structure</span>
 <span class="sd">            A pymatgen structure object.</span>
-<span class="sd">        prev_vasp_dir</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
 <span class="sd">            A previous VASP calculation directory to copy output files from.</span>
-<span class="sd">        mode</span>
+<span class="sd">        mode : str</span>
 <span class="sd">            Type of band structure calculation. Options are:</span>
 <span class="sd">            - &quot;line&quot;: Full band structure along symmetry lines.</span>
 <span class="sd">            - &quot;uniform&quot;: Uniform mesh band structure.</span>
@@ -459,21 +534,27 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Maker to create dielectric calculation VASP jobs.</span>
 
+<span class="sd">    .. Note::</span>
+<span class="sd">        The input structure should be well relaxed to avoid imaginary modes. For</span>
+<span class="sd">        example, using :obj:`TightRelaxMaker`.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .StaticSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    copy_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>

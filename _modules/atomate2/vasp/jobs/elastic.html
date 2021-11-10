@@ -159,7 +159,6 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">job</span>
@@ -172,10 +171,10 @@
     <span class="n">DeformStructureTransformation</span><span class="p">,</span>
 <span class="p">)</span>
 
+<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.analysis.elastic</span> <span class="kn">import</span> <span class="n">get_default_strain_states</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.elastic</span> <span class="kn">import</span> <span class="n">ElasticDocument</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.math</span> <span class="kn">import</span> <span class="n">Matrix3D</span>
-<span class="kn">from</span> <span class="nn">atomate2.settings</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">BaseVaspMaker</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.sets.base</span> <span class="kn">import</span> <span class="n">VaspInputSetGenerator</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.sets.core</span> <span class="kn">import</span> <span class="n">StaticSetGenerator</span>
@@ -201,19 +200,21 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    input_set_generator</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    input_set_generator : .VaspInputSetGenerator</span>
 <span class="sd">        A generator used to make the input set.</span>
-<span class="sd">    write_input_set_kwargs</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
-<span class="sd">    copy_vasp_kwargs</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
-<span class="sd">    run_vasp_kwargs</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
-<span class="sd">    task_document_kwargs</span>
+<span class="sd">    task_document_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
-<span class="sd">    stop_children_kwargs</span>
+<span class="sd">    stop_children_kwargs : dict</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
 <span class="sd">        {filename: data}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -242,10 +243,10 @@
 <span class="k">def</span> <span class="nf">generate_elastic_deformations</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
     <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">strain_states</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">strain_magnitudes</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">strain_states</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">strain_magnitudes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">conventional</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">SYMPREC</span><span class="p">,</span>
+    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">SYMPREC</span><span class="p">,</span>
     <span class="n">sym_reduce</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -253,22 +254,22 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    structure</span>
+<span class="sd">    structure : Structure</span>
 <span class="sd">        A pymatgen structure object.</span>
-<span class="sd">    order</span>
+<span class="sd">    order : int</span>
 <span class="sd">        Order of the tensor expansion to be determined. Can be either 2 or 3.</span>
-<span class="sd">    strain_states</span>
+<span class="sd">    strain_states : None or list of tuple of int</span>
 <span class="sd">        List of Voigt-notation strains, e.g. ``[(1, 0, 0, 0, 0, 0), (0, 1, 0, 0, 0, 0),</span>
 <span class="sd">        etc]``.</span>
-<span class="sd">    strain_magnitudes</span>
+<span class="sd">    strain_magnitudes : None or list of float or list of list of float</span>
 <span class="sd">        A list of strain magnitudes to multiply by for each strain state, e.g. ``[-0.01,</span>
 <span class="sd">        -0.005, 0.005, 0.01]``. Alternatively, a list of lists can be specified, where</span>
 <span class="sd">        each inner list corresponds to a specific strain state.</span>
-<span class="sd">    conventional</span>
+<span class="sd">    conventional : bool</span>
 <span class="sd">        Whether to transform the structure into the conventional cell.</span>
-<span class="sd">    symprec</span>
+<span class="sd">    symprec : float</span>
 <span class="sd">        Symmetry precision.</span>
-<span class="sd">    sym_reduce</span>
+<span class="sd">    sym_reduce : bool</span>
 <span class="sd">        Whether to reduce the number of deformations using symmetry.</span>
 
 <span class="sd">    Returns</span>
@@ -316,8 +317,8 @@
 <div class="viewcode-block" id="run_elastic_deformations"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.elastic.run_elastic_deformations.html#atomate2.vasp.jobs.elastic.run_elastic_deformations">[docs]</a><span class="nd">@job</span>
 <span class="k">def</span> <span class="nf">run_elastic_deformations</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
-    <span class="n">deformations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Deformation</span><span class="p">],</span>
-    <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">deformations</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Deformation</span><span class="p">],</span>
+    <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">elastic_relax_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -328,13 +329,13 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    structure</span>
+<span class="sd">    structure : Structure</span>
 <span class="sd">        A pymatgen structure.</span>
-<span class="sd">    deformations</span>
+<span class="sd">    deformations : list of Deformation</span>
 <span class="sd">        The deformations to apply.</span>
-<span class="sd">    prev_vasp_dir</span>
+<span class="sd">    prev_vasp_dir : str or Path or None</span>
 <span class="sd">        A previous VASP directory to use for copying VASP outputs.</span>
-<span class="sd">    elastic_relax_maker</span>
+<span class="sd">    elastic_relax_maker : .BaseVaspMaker</span>
 <span class="sd">        A VaspMaker to use to generate the elastic relaxation jobs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">elastic_relax_maker</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -377,33 +378,33 @@
 <div class="viewcode-block" id="fit_elastic_tensor"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.elastic.fit_elastic_tensor.html#atomate2.vasp.jobs.elastic.fit_elastic_tensor">[docs]</a><span class="nd">@job</span><span class="p">(</span><span class="n">output_schema</span><span class="o">=</span><span class="n">ElasticDocument</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">fit_elastic_tensor</span><span class="p">(</span>
     <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
-    <span class="n">deformation_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
-    <span class="n">equilibrium_stress</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Matrix3D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">deformation_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">equilibrium_stress</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="n">fitting_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">ELASTIC_FITTING_METHOD</span><span class="p">,</span>
-    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">SYMPREC</span><span class="p">,</span>
+    <span class="n">fitting_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">ELASTIC_FITTING_METHOD</span><span class="p">,</span>
+    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">SYMPREC</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Analyze stress/strain data to fit the elastic tensor and related properties.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    structure</span>
+<span class="sd">    structure : ~pymatgen.core.structure.Structure</span>
 <span class="sd">        A pymatgen structure.</span>
-<span class="sd">    deformation_data</span>
+<span class="sd">    deformation_data : list of dict</span>
 <span class="sd">        The deformation data, as a list of dictionaries, each containing the keys</span>
 <span class="sd">        &quot;stress&quot;, &quot;deformation&quot;.</span>
-<span class="sd">    equilibrium_stress</span>
+<span class="sd">    equilibrium_stress : None or tuple of tuple of float</span>
 <span class="sd">        The equilibrium stress of the (relaxed) structure, if known.</span>
-<span class="sd">    order</span>
+<span class="sd">    order : int</span>
 <span class="sd">        Order of the tensor expansion to be fitted. Can be either 2 or 3.</span>
-<span class="sd">    fitting_method</span>
+<span class="sd">    fitting_method : str</span>
 <span class="sd">        The method used to fit the elastic tensor. See pymatgen for more details on the</span>
 <span class="sd">        methods themselves. The options are:</span>
 <span class="sd">        - &quot;finite_difference&quot; (note this is required if fitting a 3rd order tensor)</span>
 <span class="sd">        - &quot;independent&quot;</span>
 <span class="sd">        - &quot;pseudoinverse&quot;</span>
-<span class="sd">    symprec</span>
+<span class="sd">    symprec : float</span>
 <span class="sd">        Symmetry precision for deriving symmetry equivalent deformations. If</span>
 <span class="sd">        ``symprec=None``, then no symmetry operations will be applied.</span>
 <span class="sd">    &quot;&quot;&quot;</span>

@@ -158,7 +158,6 @@
 
 <span class="kn">from</span> <span class="nn">fnmatch</span> <span class="kn">import</span> <span class="n">fnmatch</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">atomate2.utils.file_client</span> <span class="kn">import</span> <span class="n">FileClient</span><span class="p">,</span> <span class="n">auto_fileclient</span>
 
@@ -174,41 +173,41 @@
 
 <div class="viewcode-block" id="copy_files"><a class="viewcode-back" href="../../../reference/atomate2.common.files.copy_files.html#atomate2.common.files.copy_files">[docs]</a><span class="nd">@auto_fileclient</span>
 <span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span>
-    <span class="n">src_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-    <span class="n">dest_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">src_host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">include_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">exclude_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">src_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">dest_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">src_host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Copy files between source and destination folders.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    src_dir</span>
+<span class="sd">    src_dir : str or Path</span>
 <span class="sd">        The source directory.</span>
-<span class="sd">    dest_dir</span>
+<span class="sd">    dest_dir : str or Path or None</span>
 <span class="sd">        The destination directory.</span>
-<span class="sd">    src_host</span>
+<span class="sd">    src_host : str or None</span>
 <span class="sd">        The source hostname used to specify a remote filesystem. Can be given as</span>
-<span class="sd">        either &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username</span>
+<span class="sd">        either &quot;usernamehost&quot; or just &quot;host&quot; in which case the username</span>
 <span class="sd">        will be inferred from the current user. If ``None``, the local filesystem will</span>
 <span class="sd">        be used as the source.</span>
-<span class="sd">    include_files</span>
-<span class="sd">        Filenames to include as a list of str or Path objects given relative to src_dir.</span>
-<span class="sd">        Glob file paths are supported, e.g. &quot;*.dat&quot;. If ``None``, all files in the</span>
-<span class="sd">        source directory will be copied.</span>
-<span class="sd">    exclude_files</span>
-<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;*.dat&quot;.</span>
-<span class="sd">    suffix</span>
+<span class="sd">    include_files : None or list of (str or .Path)</span>
+<span class="sd">        Filenames to include as a list of str or Path objects given relative to</span>
+<span class="sd">        ``src_dir``. Glob file paths are supported, e.g. &quot;\*.dat&quot;. If ``None``, all files</span>
+<span class="sd">        in the source directory will be copied.</span>
+<span class="sd">    exclude_files : None or list of (str or .Path)</span>
+<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;\*.dat&quot;.</span>
+<span class="sd">    suffix : str</span>
 <span class="sd">        A suffix to add to copied files. For example &quot;.original&quot;.</span>
-<span class="sd">    allow_missing</span>
-<span class="sd">        Whether to error if a file in &quot;include_files&quot; is not present in the source</span>
+<span class="sd">    allow_missing : bool</span>
+<span class="sd">        Whether to error if a file in ``include_files`` is not present in the source</span>
 <span class="sd">        directory.</span>
-<span class="sd">    file_client</span>
+<span class="sd">    file_client : .FileClient</span>
 <span class="sd">        A file client to use for performing file operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">src_dir</span> <span class="o">=</span> <span class="n">file_client</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">src_dir</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">src_host</span><span class="p">)</span>
@@ -231,34 +230,34 @@
 
 <div class="viewcode-block" id="delete_files"><a class="viewcode-back" href="../../../reference/atomate2.common.files.delete_files.html#atomate2.common.files.delete_files">[docs]</a><span class="nd">@auto_fileclient</span>
 <span class="k">def</span> <span class="nf">delete_files</span><span class="p">(</span>
-    <span class="n">directory</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">include_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">exclude_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Delete files in a directory.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    directory</span>
+<span class="sd">    directory : str or Path or None</span>
 <span class="sd">        Directory in which to delete files. If ``None``, the current directory will be</span>
 <span class="sd">        used (or home folder if specifying a remote host).</span>
-<span class="sd">    host</span>
+<span class="sd">    host : str or None</span>
 <span class="sd">        The hostname used to specify a remote filesystem. Can be given as either</span>
-<span class="sd">        &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username will be</span>
+<span class="sd">        &quot;username@host&quot; or just &quot;host&quot; in which case the username will be</span>
 <span class="sd">        inferred from the current user. If ``None``, the local filesystem will be used.</span>
-<span class="sd">    include_files</span>
+<span class="sd">    include_files : None or list of (str or Path)</span>
 <span class="sd">        Filenames to include as a list of str or Path objects given relative to</span>
-<span class="sd">        directory. Glob file paths are supported, e.g. &quot;*.dat&quot;. If ``None``, all files</span>
+<span class="sd">        directory. Glob file paths are supported, e.g. &quot;\*.dat&quot;. If ``None``, all files</span>
 <span class="sd">        in the directory will be deleted.</span>
-<span class="sd">    exclude_files</span>
-<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;*.dat&quot;.</span>
-<span class="sd">    allow_missing</span>
-<span class="sd">        Whether to error if a file in &quot;include_files&quot; is not present in the directory.</span>
-<span class="sd">    file_client</span>
+<span class="sd">    exclude_files : None or list of (str or Path)</span>
+<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;\*.dat&quot;.</span>
+<span class="sd">    allow_missing : bool</span>
+<span class="sd">        Whether to error if a file in ``include_files`` is not present in the directory.</span>
+<span class="sd">    file_client : .FileClient</span>
 <span class="sd">        A file client to use for performing file operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -280,30 +279,30 @@
 
 <div class="viewcode-block" id="rename_files"><a class="viewcode-back" href="../../../reference/atomate2.common.files.rename_files.html#atomate2.common.files.rename_files">[docs]</a><span class="nd">@auto_fileclient</span>
 <span class="k">def</span> <span class="nf">rename_files</span><span class="p">(</span>
-    <span class="n">filenames</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]],</span>
-    <span class="n">directory</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">filenames</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">],</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">file_client</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileClient</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Delete files in a directory.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    filenames</span>
+<span class="sd">    filenames : dict</span>
 <span class="sd">        Files to rename. Given as a dictionary of ``{old_name: new_name}``. File names</span>
 <span class="sd">        should be given relative to ``directory``. Glob matches are not supported.</span>
-<span class="sd">    directory</span>
+<span class="sd">    directory : str or Path or None</span>
 <span class="sd">        Directory in which to rename files. If ``None``, the current directory will be</span>
 <span class="sd">        used (or home folder if specifying a remote host).</span>
-<span class="sd">    host</span>
+<span class="sd">    host : str or None</span>
 <span class="sd">        The hostname used to specify a remote filesystem. Can be given as either</span>
-<span class="sd">        &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username will be</span>
+<span class="sd">        &quot;username@host&quot; or just &quot;host&quot; in which case the username will be</span>
 <span class="sd">        inferred from the current user. If ``None``, the local filesystem will be used.</span>
-<span class="sd">    allow_missing</span>
-<span class="sd">        Whether to error if a file in &quot;include_files&quot; is not present in the directory.</span>
-<span class="sd">    file_client</span>
+<span class="sd">    allow_missing : bool</span>
+<span class="sd">        Whether to error if a file in ``include_files`` is not present in the directory.</span>
+<span class="sd">    file_client : .FileClient</span>
 <span class="sd">        A file client to use for performing file operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -322,37 +321,37 @@
 
 <div class="viewcode-block" id="gzip_files"><a class="viewcode-back" href="../../../reference/atomate2.common.files.gzip_files.html#atomate2.common.files.gzip_files">[docs]</a><span class="nd">@auto_fileclient</span>
 <span class="k">def</span> <span class="nf">gzip_files</span><span class="p">(</span>
-    <span class="n">directory</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">include_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">exclude_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gzip files in a directory.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    directory</span>
+<span class="sd">    directory : str or Path or None</span>
 <span class="sd">        Directory in which to gzip files. If ``None``, the current directory will be</span>
 <span class="sd">        used (or home folder if specifying a remote host).</span>
-<span class="sd">    host</span>
+<span class="sd">    host : str or None</span>
 <span class="sd">        The hostname used to specify a remote filesystem. Can be given as either</span>
-<span class="sd">        &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username will be</span>
+<span class="sd">        &quot;username@host&quot; or just &quot;host&quot; in which case the username will be</span>
 <span class="sd">        inferred from the current user. If ``None``, the local filesystem will be used.</span>
-<span class="sd">    include_files</span>
+<span class="sd">    include_files : None or list of (str or Path)</span>
 <span class="sd">        Filenames to include as a list of str or Path objects given relative to</span>
-<span class="sd">        directory. Glob file paths are supported, e.g. &quot;*.dat&quot;. If ``None``, all files</span>
+<span class="sd">        directory. Glob file paths are supported, e.g. &quot;\*.dat&quot;. If ``None``, all files</span>
 <span class="sd">        in the directory will be gzipped.</span>
-<span class="sd">    exclude_files</span>
-<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;*.dat&quot;.</span>
-<span class="sd">    allow_missing</span>
-<span class="sd">        Whether to error if a file in &quot;include_files&quot; is not present in the directory.</span>
-<span class="sd">    force</span>
+<span class="sd">    exclude_files : None or list of (str or Path)</span>
+<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;\*.dat&quot;.</span>
+<span class="sd">    allow_missing : bool</span>
+<span class="sd">        Whether to error if a file in ``include_files`` is not present in the directory.</span>
+<span class="sd">    force : bool</span>
 <span class="sd">        Whether to overwrite files if they exist.</span>
-<span class="sd">    file_client</span>
+<span class="sd">    file_client : .FileClient</span>
 <span class="sd">        A file client to use for performing file operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -375,37 +374,37 @@
 
 <div class="viewcode-block" id="gunzip_files"><a class="viewcode-back" href="../../../reference/atomate2.common.files.gunzip_files.html#atomate2.common.files.gunzip_files">[docs]</a><span class="nd">@auto_fileclient</span>
 <span class="k">def</span> <span class="nf">gunzip_files</span><span class="p">(</span>
-    <span class="n">directory</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">include_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">exclude_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gunzip files in a directory.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    directory</span>
+<span class="sd">    directory : str or Path or None</span>
 <span class="sd">        Directory in which to gunzip files. If ``None``, the current directory will be</span>
 <span class="sd">        used (or home folder if specifying a remote host).</span>
-<span class="sd">    host</span>
+<span class="sd">    host : str or None</span>
 <span class="sd">        The hostname used to specify a remote filesystem. Can be given as either</span>
-<span class="sd">        &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username will be</span>
+<span class="sd">        &quot;username@host&quot; or just &quot;host&quot; in which case the username will be</span>
 <span class="sd">        inferred from the current user. If ``None``, the local filesystem will be used.</span>
-<span class="sd">    include_files</span>
+<span class="sd">    include_files : None or list of (str or Path)</span>
 <span class="sd">        Filenames to include as a list of str or Path objects given relative to</span>
-<span class="sd">        directory. Glob file paths are supported, e.g. &quot;*.dat&quot;. If ``None``, all gzipped</span>
+<span class="sd">        directory. Glob file paths are supported, e.g. &quot;\*.dat&quot;. If ``None``, all gzipped</span>
 <span class="sd">        files in the directory will be gunzipped.</span>
-<span class="sd">    exclude_files</span>
-<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;*.dat&quot;.</span>
-<span class="sd">    allow_missing</span>
-<span class="sd">        Whether to error if a file in &quot;include_files&quot; is not present in the directory.</span>
-<span class="sd">    force</span>
+<span class="sd">    exclude_files : None or list of (str or Path)</span>
+<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;\*.dat&quot;.</span>
+<span class="sd">    allow_missing : bool</span>
+<span class="sd">        Whether to error if a file in ``include_files`` is not present in the directory.</span>
+<span class="sd">    force : bool</span>
 <span class="sd">        Whether to overwrite files if they exist.</span>
-<span class="sd">    file_client</span>
+<span class="sd">    file_client : .FileClient</span>
 <span class="sd">        A file client to use for performing file operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -427,34 +426,34 @@
 
 <div class="viewcode-block" id="find_and_filter_files"><a class="viewcode-back" href="../../../reference/atomate2.common.files.find_and_filter_files.html#atomate2.common.files.find_and_filter_files">[docs]</a><span class="k">def</span> <span class="nf">find_and_filter_files</span><span class="p">(</span>
     <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span><span class="p">,</span>
-    <span class="n">directory</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-    <span class="n">include_files</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
-    <span class="n">exclude_files</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
-    <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">include_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude_files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find and filter files.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    file_client</span>
+<span class="sd">    file_client : .FileClient</span>
 <span class="sd">        A file client.</span>
-<span class="sd">    directory</span>
+<span class="sd">    directory : str or Path</span>
 <span class="sd">        A directory in which to find files.</span>
-<span class="sd">    include_files</span>
+<span class="sd">    include_files : None or list of (str or Path)</span>
 <span class="sd">        Filenames to include as a list of str or Path objects given relative to</span>
-<span class="sd">        directory. Glob file paths are supported, e.g. &quot;*.dat&quot;. If ``None``, all files</span>
+<span class="sd">        directory. Glob file paths are supported, e.g. &quot;\*.dat&quot;. If ``None``, all files</span>
 <span class="sd">        in the source directory will be returned.</span>
-<span class="sd">    exclude_files</span>
-<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;*.dat&quot;.</span>
-<span class="sd">    host</span>
+<span class="sd">    exclude_files : None or list of (str or Path)</span>
+<span class="sd">        Filenames to exclude. Supports glob file matching, e.g., &quot;\*.dat&quot;.</span>
+<span class="sd">    host : str or None</span>
 <span class="sd">        A hostname used to specify a remote filesystem. Can be given as either</span>
-<span class="sd">        &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username will be</span>
+<span class="sd">        &quot;username@host&quot; or just &quot;host&quot; in which case the username will be</span>
 <span class="sd">        inferred from the current user. If ``None``, the local filesystem will be used.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    list[Path]</span>
+<span class="sd">    list of Path</span>
 <span class="sd">        A list of file paths.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">directory</span> <span class="o">=</span> <span class="n">file_client</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
@@ -487,18 +486,18 @@
 
 
 <div class="viewcode-block" id="get_zfile"><a class="viewcode-back" href="../../../reference/atomate2.common.files.get_zfile.html#atomate2.common.files.get_zfile">[docs]</a><span class="k">def</span> <span class="nf">get_zfile</span><span class="p">(</span>
-    <span class="n">directory_listing</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">base_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+    <span class="n">directory_listing</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">base_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">allow_missing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find gzipped or non-gzipped versions of a file in a directory listing.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    directory_listing</span>
+<span class="sd">    directory_listing : list of Path</span>
 <span class="sd">        A list of files in a directory.</span>
-<span class="sd">    base_name</span>
+<span class="sd">    base_name : str</span>
 <span class="sd">        The base name of file file to find.</span>
-<span class="sd">    allow_missing</span>
+<span class="sd">    allow_missing : bool</span>
 <span class="sd">        Whether to error if no version of the file (gzipped or un-gzipped) can be found.</span>
 
 <span class="sd">    Returns</span>

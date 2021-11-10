@@ -13,6 +13,25 @@ atomate2.vasp.schemas.calc\_types.enums
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -22,6 +41,7 @@ atomate2.vasp.schemas.calc\_types.enums
       CalcType
       RunType
       TaskType
+
 
 
 

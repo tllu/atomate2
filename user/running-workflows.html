@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Running Workflows &#8212; atomate2</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using atomate2 with FireWorks" href="fireworks.html" />
+    <link rel="prev" title="Installation" href="install.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">atomate2</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../reference/index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../dev/index.html">
+  Developer Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference external nav-link" href="https://matsci.org/c/atomate">
+  Support
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="install.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Running workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="fireworks.html">
+   Fireworks integration
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="codes/index.html">
+   Codes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="codes/vasp.html">
+     VASP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="changelog.html">
+   Change log
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
+   Contributors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributing.html">
+   Contributing to atomate2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="license.html">
+   License
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#objectives">
+     Objectives
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prerequisites">
+     Prerequisites
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bandstructure-workflows">
+   Bandstructure Workflows
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-a-bandstructure-workflow">
+   Running a Bandstructure Workflow
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup">
+     Setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-the-workflow-in-python">
+     Create the workflow in Python
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-workflow">
+     Running the workflow
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-a-bandstructure-workflow">
+   Analyzing a Bandstructure Workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="running-workflows">
+<span id="id1"></span><h1>Running Workflows<a class="headerlink" href="#running-workflows" title="Permalink to this headline">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Once you have a working installation of atomate2, you’ll want to jump in and start
+running workflows. Atomate2 includes many workflows with reasonable settings that can
+get you started. This tutorial will quickly guide you through customizing and running a
+workflow to calculate the bandstructure of MgO.</p>
+<section id="objectives">
+<h3>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Run an atomate2 workflow using Python</p></li>
+<li><p>Analyze the results using pymatgen</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>In order for you to complete this tutorial you need</p>
+<ul class="simple">
+<li><p>A working installation of atomate2.</p></li>
+</ul>
+</section>
+</section>
+<section id="bandstructure-workflows">
+<h2>Bandstructure Workflows<a class="headerlink" href="#bandstructure-workflows" title="Permalink to this headline">¶</a></h2>
+<p>A fundamental and common use of DFT is to calculate band structures and electronic
+densities of states. Here we will use an atomate2 workflow to calculate the
+bandstructure of MgO. The workflow consists of 4 parts:</p>
+<ol class="arabic simple">
+<li><p>A structural optimisation.</p></li>
+<li><p>A self-consistent static calculation on the relaxed geometry.</p></li>
+<li><p>A non-self-consistent calculation on a uniform k-point mesh (for the density of
+states).</p></li>
+<li><p>A non-self-consistent calculation on a high symmetry k-point path (for the line mode
+band structure).</p></li>
+</ol>
+</section>
+<section id="running-a-bandstructure-workflow">
+<h2>Running a Bandstructure Workflow<a class="headerlink" href="#running-a-bandstructure-workflow" title="Permalink to this headline">¶</a></h2>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>Make sure you have completed the installation tutorial. Next, create a folder on your
+HPC resource for this tutorial. It can be located anywhere that you can submit and run
+jobs. You’ll keep all of the files for this tutorial there.</p>
+</section>
+<section id="create-the-workflow-in-python">
+<h3>Create the workflow in Python<a class="headerlink" href="#create-the-workflow-in-python" title="Permalink to this headline">¶</a></h3>
+<p>Workflows in atomate2 are composed of two objects:</p>
+<ul class="simple">
+<li><p>Jobs: A single unit of computation. Roughly speaking, each <code class="docutils literal notranslate"><span class="pre">job</span></code> corresponds to one
+VASP calculation.</p></li>
+<li><p>Flows: A collection of <code class="docutils literal notranslate"><span class="pre">jobs</span></code> connected together. The band structure workflow we are
+running is an example of a <code class="docutils literal notranslate"><span class="pre">flow</span></code>. <code class="docutils literal notranslate"><span class="pre">Flows</span></code> can be nested, for example, you could
+have multiple band structure <code class="docutils literal notranslate"><span class="pre">flows</span></code> in a single workflow.</p></li>
+</ul>
+<p>A list of all VASP workflows (which covers both jobs and flows) is given in the
+<span class="xref std std-ref">List of VASP workflows</span> section of the documentation. Workflows are created
+using <code class="docutils literal notranslate"><span class="pre">Maker</span></code> objects. These return the workflows that can be executed later.</p>
+<p>In this example, we will use the <code class="xref py py-obj docutils literal notranslate"><span class="pre">RelaxBandStructureMaker</span></code> to construct our
+workflow.</p>
+<p>Create a Python script named <code class="docutils literal notranslate"><span class="pre">mgo_bandstructure.py</span></code> with the following contents:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">atomate2.vasp.flows.core</span> <span class="kn">import</span> <span class="n">RelaxBandStructureMaker</span>
+<span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">run_locally</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
+
+<span class="c1"># construct a rock salt MgO structure</span>
+<span class="n">mgo_structure</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.13</span><span class="p">,</span> <span class="mf">2.13</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.13</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">2.13</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.13</span><span class="p">,</span> <span class="mf">2.13</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+    <span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]],</span>
+<span class="p">)</span>
+
+<span class="c1"># make a band structure flow to optimise the structure and obtain the band structure</span>
+<span class="n">bandstructure_flow</span> <span class="o">=</span> <span class="n">RelaxBandStructureMaker</span><span class="p">()</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">mgo_structure</span><span class="p">)</span>
+
+<span class="c1"># run the job</span>
+<span class="n">run_locally</span><span class="p">(</span><span class="n">bandstructure_flow</span><span class="p">,</span> <span class="n">create_folders</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="running-the-workflow">
+<span id="id2"></span><h3>Running the workflow<a class="headerlink" href="#running-the-workflow" title="Permalink to this headline">¶</a></h3>
+<p>Similar, to the installation tutorial, now create a job script to execute the workflow.
+Write your job script to the <code class="docutils literal notranslate"><span class="pre">job.sh</span></code> file. For example, on the Grid Engine queue
+system, your job script would look something like:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash -l</span>
+<span class="c1">#$ -N relax_si</span>
+<span class="c1">#$ -P my_project</span>
+<span class="c1">#$ -l h_rt=1:00:00</span>
+<span class="c1">#$ -l mem=4G</span>
+<span class="c1">#$ -pe mpi 16</span>
+<span class="c1">#$ -cwd</span>
+
+<span class="c1"># ensure you load the modules to run VASP, e.g., module load vasp</span>
+
+conda activate atomate2
+python mgo_bandstructure.py
+</pre></div>
+</div>
+<p>Finally, submit the job to the queue using the normal scheduler command. For example
+on the Grid Engine scheduler, this would be using <code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">job.sh</span></code>.</p>
+<p>Once the job is finished, you can check that the workflow completed successfully by
+checking the standard output and error files produced by the job script.</p>
+<p>Provided there weren’t any errors, the workflow has successfully finished and the
+results will be in your database.</p>
+</section>
+</section>
+<section id="analyzing-a-bandstructure-workflow">
+<h2>Analyzing a Bandstructure Workflow<a class="headerlink" href="#analyzing-a-bandstructure-workflow" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we’ll plot the results that we calculated. Simply run the following Python
+code, either as a script or on the Python prompt.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
+<span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.plotter</span> <span class="kn">import</span> <span class="n">DosPlotter</span><span class="p">,</span> <span class="n">BSPlotter</span>
+<span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.dos</span> <span class="kn">import</span> <span class="n">CompleteDos</span>
+<span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.bandstructure</span> <span class="kn">import</span> <span class="n">BandStructureSymmLine</span>
+
+<span class="n">store</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">JOB_STORE</span>
+<span class="n">store</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+
+<span class="c1"># get the uniform bandstructure from the database</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">query_one</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;output.task_label&quot;</span><span class="p">:</span> <span class="s2">&quot;non-scf uniform&quot;</span><span class="p">},</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;output.vasp_objects.dos&quot;</span><span class="p">],</span>
+    <span class="n">load</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># DOS stored in the data store, so we need to explicitly load it</span>
+<span class="p">)</span>
+<span class="n">dos</span> <span class="o">=</span> <span class="n">CompleteDos</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;vasp_objects&quot;</span><span class="p">][</span><span class="s2">&quot;dos&quot;</span><span class="p">])</span>
+
+<span class="c1"># plot the DOS</span>
+<span class="n">dos_plotter</span> <span class="o">=</span> <span class="n">DosPlotter</span><span class="p">()</span>
+<span class="n">dos_plotter</span><span class="o">.</span><span class="n">add_dos_dict</span><span class="p">(</span><span class="n">dos</span><span class="o">.</span><span class="n">get_element_dos</span><span class="p">())</span>
+<span class="n">dos_plotter</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;MgO-dos.pdf&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">img_format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+
+<span class="c1"># get the line mode bandstructure from the database</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">query_one</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;output.task_label&quot;</span><span class="p">:</span> <span class="s2">&quot;non-scf line&quot;</span><span class="p">},</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;output.vasp_objects.bandstructure&quot;</span><span class="p">],</span>
+    <span class="n">load</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># BS stored in the data store, so we need to explicitly load it</span>
+<span class="p">)</span>
+<span class="n">bandstructure</span> <span class="o">=</span> <span class="n">BandStructureSymmLine</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span>
+    <span class="n">result</span><span class="p">[</span><span class="s2">&quot;output&quot;</span><span class="p">][</span><span class="s2">&quot;vasp_objects&quot;</span><span class="p">][</span><span class="s2">&quot;bandstructure&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># plot the line mode band structure</span>
+<span class="n">bs_plotter</span> <span class="o">=</span> <span class="n">BSPlotter</span><span class="p">(</span><span class="n">bandstructure</span><span class="p">)</span>
+<span class="n">bs_plotter</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;MgO-bandstructure.pdf&quot;</span><span class="p">,</span> <span class="n">img_format</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you open the saved figures, you should see a plot of your DOS and bandstructure!</p>
+<figure class="align-default">
+<img alt="MgO density of states" src="../_images/MgO-dos.png" />
+</figure>
+<figure class="align-default">
+<img alt="MgO bandstructure" src="../_images/MgO-bandstructure.png" />
+</figure>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial you learned how run a band structure workflow and plot the outputs.</p>
+<p>To see what workflows can be run, see the <a class="reference internal" href="codes/vasp.html#vasp-workflows"><span class="std std-ref">List of VASP workflows</span></a>. They can be set up and
+run in the same way as in this tutorial.</p>
+<p>At this point, you might:</p>
+<ul class="simple">
+<li><p>Learn how to chain workflows together: <a class="reference internal" href="codes/vasp.html#connecting-vasp-jobs"><span class="std std-ref">Chaining workflows</span></a></p></li>
+<li><p>Learn how to customise VASP input settings: <a class="reference internal" href="codes/vasp.html#modifying-input-sets"><span class="std std-ref">Modifying input sets</span></a></p></li>
+<li><p>Configure atomate2 with FireWorks to manage and execute many workflows at once:
+<a class="reference internal" href="fireworks.html#atomate2-fireworks"><span class="std std-ref">Using atomate2 with FireWorks</span></a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="install.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Installation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="fireworks.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Using atomate2 with FireWorks</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, MaterialsProject.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

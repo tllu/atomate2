@@ -13,14 +13,57 @@ atomate2.vasp.schemas.calculation
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
       :toctree:
       :nosignatures:
    
+      Calculation
+      CalculationInput
+      CalculationOutput
+      PotcarSpec
+      RunStatistics
       Status
       VaspObject
+
 
 
 

@@ -166,8 +166,7 @@
 <span class="kn">import</span> <span class="nn">shlex</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">expandvars</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Sequence</span>
 
 <span class="kn">from</span> <span class="nn">custodian</span> <span class="kn">import</span> <span class="n">Custodian</span>
 <span class="kn">from</span> <span class="nn">custodian.custodian</span> <span class="kn">import</span> <span class="n">ErrorHandler</span><span class="p">,</span> <span class="n">Validator</span>
@@ -188,18 +187,16 @@
 <span class="kn">from</span> <span class="nn">custodian.vasp.validators</span> <span class="kn">import</span> <span class="n">VaspFilesValidator</span><span class="p">,</span> <span class="n">VasprunXMLValidator</span>
 <span class="kn">from</span> <span class="nn">jobflow.utils</span> <span class="kn">import</span> <span class="n">ValueEnum</span>
 
-<span class="kn">from</span> <span class="nn">atomate2.settings</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.schemas.task</span> <span class="kn">import</span> <span class="n">TaskDocument</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;JobType&quot;</span><span class="p">,</span>
     <span class="s2">&quot;run_vasp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;DEFAULT_HANDLERS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;DEFAULT_VALIDATORS&quot;</span><span class="p">,</span>
     <span class="s2">&quot;should_stop_children&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">DEFAULT_HANDLERS</span> <span class="o">=</span> <span class="p">(</span>
+<span class="n">_DEFAULT_HANDLERS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">VaspErrorHandler</span><span class="p">(),</span>
     <span class="n">MeshSymmetryErrorHandler</span><span class="p">(),</span>
     <span class="n">UnconvergedErrorHandler</span><span class="p">(),</span>
@@ -211,7 +208,7 @@
     <span class="n">LargeSigmaHandler</span><span class="p">(),</span>
     <span class="n">IncorrectSmearingHandler</span><span class="p">(),</span>
 <span class="p">)</span>
-<span class="n">DEFAULT_VALIDATORS</span> <span class="o">=</span> <span class="p">(</span><span class="n">VasprunXMLValidator</span><span class="p">(),</span> <span class="n">VaspFilesValidator</span><span class="p">())</span>
+<span class="n">_DEFAULT_VALIDATORS</span> <span class="o">=</span> <span class="p">(</span><span class="n">VasprunXMLValidator</span><span class="p">(),</span> <span class="n">VaspFilesValidator</span><span class="p">())</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -238,16 +235,16 @@
 
 
 <div class="viewcode-block" id="run_vasp"><a class="viewcode-back" href="../../../reference/atomate2.vasp.run.run_vasp.html#atomate2.vasp.run.run_vasp">[docs]</a><span class="k">def</span> <span class="nf">run_vasp</span><span class="p">(</span>
-    <span class="n">job_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">JobType</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">JobType</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">,</span>
-    <span class="n">vasp_cmd</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">VASP_CMD</span><span class="p">,</span>
-    <span class="n">vasp_gamma_cmd</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">VASP_GAMMA_CMD</span><span class="p">,</span>
-    <span class="n">max_errors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">VASP_CUSTODIAN_MAX_ERRORS</span><span class="p">,</span>
-    <span class="n">scratch_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">SCRATCH_DIR</span><span class="p">,</span>
-    <span class="n">handlers</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ErrorHandler</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_HANDLERS</span><span class="p">,</span>
-    <span class="n">validators</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Validator</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_VALIDATORS</span><span class="p">,</span>
-    <span class="n">wall_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">vasp_job_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">custodian_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">job_type</span><span class="p">:</span> <span class="n">JobType</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">JobType</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">,</span>
+    <span class="n">vasp_cmd</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_CMD</span><span class="p">,</span>
+    <span class="n">vasp_gamma_cmd</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_GAMMA_CMD</span><span class="p">,</span>
+    <span class="n">max_errors</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_CUSTODIAN_MAX_ERRORS</span><span class="p">,</span>
+    <span class="n">scratch_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">CUSTODIAN_SCRATCH_DIR</span><span class="p">,</span>
+    <span class="n">handlers</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">ErrorHandler</span><span class="p">]</span> <span class="o">=</span> <span class="n">_DEFAULT_HANDLERS</span><span class="p">,</span>
+    <span class="n">validators</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Validator</span><span class="p">]</span> <span class="o">=</span> <span class="n">_DEFAULT_VALIDATORS</span><span class="p">,</span>
+    <span class="n">wall_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">vasp_job_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">custodian_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run VASP.</span>
@@ -256,26 +253,26 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    job_type</span>
+<span class="sd">    job_type : str or .JobType</span>
 <span class="sd">        The job type.</span>
-<span class="sd">    vasp_cmd</span>
+<span class="sd">    vasp_cmd : str</span>
 <span class="sd">        The command used to run the standard version of vasp.</span>
-<span class="sd">    vasp_gamma_cmd</span>
+<span class="sd">    vasp_gamma_cmd : str</span>
 <span class="sd">        The command used to run the gamma version of vasp.</span>
-<span class="sd">    max_errors</span>
+<span class="sd">    max_errors : int</span>
 <span class="sd">        The maximum number of errors allowed by custodian.</span>
-<span class="sd">    scratch_dir</span>
+<span class="sd">    scratch_dir : str</span>
 <span class="sd">        The scratch directory used by custodian.</span>
-<span class="sd">    handlers</span>
+<span class="sd">    handlers : list of .ErrorHandler</span>
 <span class="sd">        The error handlers used by custodian.</span>
-<span class="sd">    validators</span>
+<span class="sd">    validators : list of .Validator</span>
 <span class="sd">        The validators handlers used by custodian.</span>
-<span class="sd">    wall_time</span>
+<span class="sd">    wall_time : int</span>
 <span class="sd">        The maximum wall time. If set, a WallTimeHandler will be added to the list</span>
 <span class="sd">        of handlers.</span>
-<span class="sd">    vasp_job_kwargs</span>
+<span class="sd">    vasp_job_kwargs : dict</span>
 <span class="sd">        Keyword arguments that are passed to :obj:`.VaspJob`.</span>
-<span class="sd">    custodian_kwargs</span>
+<span class="sd">    custodian_kwargs : dict</span>
 <span class="sd">        Keyword arguments that are passed to :obj:`.Custodian`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">vasp_job_kwargs</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">vasp_job_kwargs</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">vasp_job_kwargs</span>
@@ -326,16 +323,16 @@
 
 <div class="viewcode-block" id="should_stop_children"><a class="viewcode-back" href="../../../reference/atomate2.vasp.run.should_stop_children.html#atomate2.vasp.run.should_stop_children">[docs]</a><span class="k">def</span> <span class="nf">should_stop_children</span><span class="p">(</span>
     <span class="n">task_document</span><span class="p">:</span> <span class="n">TaskDocument</span><span class="p">,</span>
-    <span class="n">handle_unsuccessful</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">VASP_HANDLE_UNSUCCESSFUL</span><span class="p">,</span>
+    <span class="n">handle_unsuccessful</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_HANDLE_UNSUCCESSFUL</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parse VASP outputs and decide whether child jobs should continue.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    task_document</span>
+<span class="sd">    task_document : .TaskDocument</span>
 <span class="sd">        A VASP task document.</span>
-<span class="sd">    handle_unsuccessful</span>
+<span class="sd">    handle_unsuccessful : bool or str</span>
 <span class="sd">        This is a three-way toggle on what to do if your job looks OK, but is actually</span>
 <span class="sd">        unconverged (either electronic or ionic):</span>
 

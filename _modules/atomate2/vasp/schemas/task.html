@@ -167,10 +167,9 @@
 <span class="kn">from</span> <span class="nn">pymatgen.entries.computed_entries</span> <span class="kn">import</span> <span class="n">ComputedEntry</span>
 <span class="kn">from</span> <span class="nn">pymatgen.io.vasp</span> <span class="kn">import</span> <span class="n">Incar</span><span class="p">,</span> <span class="n">Kpoints</span><span class="p">,</span> <span class="n">Poscar</span><span class="p">,</span> <span class="n">Potcar</span>
 
-<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">SETTINGS</span><span class="p">,</span> <span class="n">__version__</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.math</span> <span class="kn">import</span> <span class="n">Matrix3D</span><span class="p">,</span> <span class="n">Vector3D</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.structure</span> <span class="kn">import</span> <span class="n">StructureMetadata</span>
-<span class="kn">from</span> <span class="nn">atomate2.settings</span> <span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span> <span class="nn">atomate2.utils.datetime</span> <span class="kn">import</span> <span class="n">datetime_str</span>
 <span class="kn">from</span> <span class="nn">atomate2.utils.path</span> <span class="kn">import</span> <span class="n">get_uri</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.schemas.calculation</span> <span class="kn">import</span> <span class="p">(</span>
@@ -190,11 +189,11 @@
 <span class="p">]</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;TaskDocument&quot;</span><span class="p">)</span>
-<span class="n">VOLUMETRIC_FILES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;CHGCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCPOT&quot;</span><span class="p">,</span> <span class="s2">&quot;AECCAR0&quot;</span><span class="p">,</span> <span class="s2">&quot;AECCAR1&quot;</span><span class="p">,</span> <span class="s2">&quot;AECCAR2&quot;</span><span class="p">)</span>
+<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_T&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;TaskDocument&quot;</span><span class="p">)</span>
+<span class="n">_VOLUMETRIC_FILES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;CHGCAR&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCPOT&quot;</span><span class="p">,</span> <span class="s2">&quot;AECCAR0&quot;</span><span class="p">,</span> <span class="s2">&quot;AECCAR1&quot;</span><span class="p">,</span> <span class="s2">&quot;AECCAR2&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">AnalysisSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="AnalysisSummary"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.AnalysisSummary.html#atomate2.vasp.schemas.task.AnalysisSummary">[docs]</a><span class="k">class</span> <span class="nc">AnalysisSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculation relaxation summary.&quot;&quot;&quot;</span>
 
     <span class="n">delta_volume</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Absolute change in volume&quot;</span><span class="p">)</span>
@@ -205,7 +204,7 @@
     <span class="n">warnings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Warnings from the VASP drone&quot;</span><span class="p">)</span>
     <span class="n">errors</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Errors from the VASP drone&quot;</span><span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="AnalysisSummary.from_vasp_calc_docs"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.AnalysisSummary.html#atomate2.vasp.schemas.task.AnalysisSummary.from_vasp_calc_docs">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_vasp_calc_docs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">calc_docs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Calculation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;AnalysisSummary&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create analysis summary from VASP calculation documents.</span>
@@ -229,9 +228,9 @@
         <span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">percent_delta_vol</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">settings</span><span class="o">.</span><span class="n">VASP_VOLUME_CHANGE_WARNING_TOL</span> <span class="o">*</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">percent_delta_vol</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_VOLUME_CHANGE_WARNING_TOL</span> <span class="o">*</span> <span class="mi">100</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Volume change &gt; </span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">VASP_VOLUME_CHANGE_WARNING_TOL</span> <span class="o">*</span> <span class="mi">100</span><span class="si">}</span><span class="s2">%&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Volume change &gt; </span><span class="si">{</span><span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_VOLUME_CHANGE_WARNING_TOL</span> <span class="o">*</span> <span class="mi">100</span><span class="si">}</span><span class="s2">%&quot;</span>
             <span class="p">)</span>
 
         <span class="n">final_calc</span> <span class="o">=</span> <span class="n">calc_docs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -250,10 +249,10 @@
             <span class="n">max_force</span><span class="o">=</span><span class="n">max_force</span><span class="p">,</span>
             <span class="n">warnings</span><span class="o">=</span><span class="n">warnings</span><span class="p">,</span>
             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">PseudoPotentialSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="PseudoPotentialSummary"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.PseudoPotentialSummary.html#atomate2.vasp.schemas.task.PseudoPotentialSummary">[docs]</a><span class="k">class</span> <span class="nc">PseudoPotentialSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A summary of pseudo-potential type and functional.&quot;&quot;&quot;</span>
 
     <span class="n">pot_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pseudo-potential type, e.g. PAW&quot;</span><span class="p">)</span>
@@ -262,10 +261,10 @@
     <span class="p">)</span>
     <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Labels of the POTCARs as distributed in VASP&quot;</span>
-    <span class="p">)</span>
+    <span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">InputSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="InputSummary"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary">[docs]</a><span class="k">class</span> <span class="nc">InputSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Summary of inputs for a VASP calculation.&quot;&quot;&quot;</span>
 
     <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The input structure object&quot;</span><span class="p">)</span>
@@ -283,7 +282,7 @@
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Exchange-correlation functional used if not the default&quot;</span>
     <span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="InputSummary.from_vasp_calc_doc"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary.from_vasp_calc_doc">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_vasp_calc_doc</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">calc_doc</span><span class="p">:</span> <span class="n">Calculation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InputSummary&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create calculation input summary from a calculation document.</span>
@@ -314,10 +313,10 @@
             <span class="n">pseudo_potentials</span><span class="o">=</span><span class="n">pps</span><span class="p">,</span>
             <span class="n">potcar_spec</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">potcar_spec</span><span class="p">,</span>
             <span class="n">xc_override</span><span class="o">=</span><span class="n">xc</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">OutputSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="OutputSummary"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary">[docs]</a><span class="k">class</span> <span class="nc">OutputSummary</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Summary of the outputs for a VASP calculation.&quot;&quot;&quot;</span>
 
     <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The output structure object&quot;</span><span class="p">)</span>
@@ -335,7 +334,7 @@
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Stress on the unit cell from the last calculation&quot;</span>
     <span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="OutputSummary.from_vasp_calc_doc"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary.from_vasp_calc_doc">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_vasp_calc_doc</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">calc_doc</span><span class="p">:</span> <span class="n">Calculation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OutputSummary&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a summary of VASP calculation outputs from a VASP calculation document.</span>
@@ -357,10 +356,10 @@
             <span class="n">bandgap</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">bandgap</span><span class="p">,</span>
             <span class="n">forces</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;forces&quot;</span><span class="p">],</span>
             <span class="n">stress</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;stress&quot;</span><span class="p">],</span>
-        <span class="p">)</span>
+        <span class="p">)</span></div></div>
 
 
-<span class="k">class</span> <span class="nc">TaskDocument</span><span class="p">(</span><span class="n">StructureMetadata</span><span class="p">):</span>
+<div class="viewcode-block" id="TaskDocument"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument">[docs]</a><span class="k">class</span> <span class="nc">TaskDocument</span><span class="p">(</span><span class="n">StructureMetadata</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Definition of VASP task document.&quot;&quot;&quot;</span>
 
     <span class="n">dir_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The directory for this VASP task&quot;</span><span class="p">)</span>
@@ -426,15 +425,15 @@
         <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;schema&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="TaskDocument.from_directory"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.from_directory">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_directory</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span>
         <span class="n">dir_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">VOLUMETRIC_FILES</span><span class="p">,</span>
-        <span class="n">store_additional_json</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">VASP_STORE_ADDITIONAL_JSON</span><span class="p">,</span>
+        <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">_VOLUMETRIC_FILES</span><span class="p">,</span>
+        <span class="n">store_additional_json</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_STORE_ADDITIONAL_JSON</span><span class="p">,</span>
         <span class="n">additional_fields</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">vasp_calculation_kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_T</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a task document from a directory containing VASP files.</span>
 
@@ -461,7 +460,7 @@
 
         <span class="n">additional_fields</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">additional_fields</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">additional_fields</span>
         <span class="n">dir_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
-        <span class="n">task_files</span> <span class="o">=</span> <span class="n">find_vasp_files</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">volumetric_files</span><span class="o">=</span><span class="n">volumetric_files</span><span class="p">)</span>
+        <span class="n">task_files</span> <span class="o">=</span> <span class="n">_find_vasp_files</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">volumetric_files</span><span class="o">=</span><span class="n">volumetric_files</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No VASP files found!&quot;</span><span class="p">)</span>
@@ -516,9 +515,9 @@
             <span class="n">included_objects</span><span class="o">=</span><span class="n">included_objects</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">doc</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="n">additional_fields</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">doc</span>
+        <span class="k">return</span> <span class="n">doc</span></div>
 
-    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="TaskDocument.get_entry"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.get_entry">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_entry</span><span class="p">(</span>
         <span class="n">calc_docs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Calculation</span><span class="p">],</span> <span class="n">job_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ComputedEntry</span><span class="p">:</span>
@@ -552,7 +551,7 @@
                 <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="n">datetime_str</span><span class="p">(),</span>
             <span class="p">},</span>
         <span class="p">}</span>
-        <span class="k">return</span> <span class="n">ComputedEntry</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">entry_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ComputedEntry</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">entry_dict</span><span class="p">)</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_parse_transformations</span><span class="p">(</span>
@@ -676,7 +675,7 @@
     <span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">calc_doc</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">drift</span> <span class="o">=</span> <span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">outcar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;drift&quot;</span><span class="p">,</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-        <span class="n">max_drift</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">drift</span><span class="p">])</span>
+        <span class="n">max_drift</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">drift</span><span class="p">)</span>
         <span class="n">ediffg</span> <span class="o">=</span> <span class="n">calc_doc</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EDIFFG&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">ediffg</span> <span class="ow">and</span> <span class="nb">float</span><span class="p">(</span><span class="n">ediffg</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">max_force</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">ediffg</span><span class="p">)</span>
@@ -726,9 +725,9 @@
     <span class="k">return</span> <span class="n">run_stats</span>
 
 
-<div class="viewcode-block" id="find_vasp_files"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.task.find_vasp_files.html#atomate2.vasp.schemas.task.find_vasp_files">[docs]</a><span class="k">def</span> <span class="nf">find_vasp_files</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">_find_vasp_files</span><span class="p">(</span>
     <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-    <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">VOLUMETRIC_FILES</span><span class="p">,</span>
+    <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">_VOLUMETRIC_FILES</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find VASP files in a directory.</span>
@@ -801,7 +800,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">standard_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">task_files</span><span class="p">[</span><span class="s2">&quot;standard&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">standard_files</span>
 
-    <span class="k">return</span> <span class="n">task_files</span></div>
+    <span class="k">return</span> <span class="n">task_files</span>
 </pre></div>
 
               </div>

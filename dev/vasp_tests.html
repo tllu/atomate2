@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Writing VASP Tests &#8212; atomate2</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Installation" href="dev_install.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../index.html">
+<p class="title">atomate2</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../user/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../reference/index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  Developer Guide
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference external nav-link" href="https://matsci.org/c/atomate">
+  Support
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dev_install.html">
+   Developer Installation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Writing VASP Tests
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#considerations">
+   Considerations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pseudopotentials">
+     Pseudopotentials
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#file-sizes">
+     File sizes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vasp-execution">
+     VASP execution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-atomate2-dev-command">
+   The atomate2 dev command
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-the-vasp-workflow-to-generate-reference-outputs">
+   1. Run the VASP workflow to generate reference outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compile-the-test-data">
+   2. Compile the test data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#copy-the-test-data-folder-into-atomate2">
+   3. Copy the test data folder into atomate2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#write-the-test">
+   4. Write the test
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="writing-vasp-tests">
+<h1>Writing VASP Tests<a class="headerlink" href="#writing-vasp-tests" title="Permalink to this headline">¶</a></h1>
+<section id="considerations">
+<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">¶</a></h2>
+<p>Atomate2 includes tools to help write tests for VASP workflows. The primary
+considerations with the atomate2 testing environment are listed below.</p>
+<section id="pseudopotentials">
+<h3>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this headline">¶</a></h3>
+<p>We cannot include any POTCAR files with atomate2 as they are copyrighted material.</p>
+<p>To overcome this, the reference test data includes POTCAR.spec files that only
+contain the pseudopotential name and not the data.</p>
+</section>
+<section id="file-sizes">
+<h3>File sizes<a class="headerlink" href="#file-sizes" title="Permalink to this headline">¶</a></h3>
+<p>The files produced by VASP are generally large and would overwhelm the size of the
+atomate2 repository if not managed carefully. For example, CHGCAR files can easily be
+ten’s of megabytes which can quickly add up.</p>
+<p>To overcome this, we only include essential VASP output files in the atomate2 test
+folder. For example, CHGCAR, LOCPOT, and other density information is not needed in most
+instances. One exception is non-self-consistent band structures where the charge density
+must be copied from a static calculation. Any other example is in the amset workflow,
+where the WAVECAR is needed to extract the wavefunction coefficients.</p>
+</section>
+<section id="vasp-execution">
+<h3>VASP execution<a class="headerlink" href="#vasp-execution" title="Permalink to this headline">¶</a></h3>
+<p>We cannot run VASP on the testing server due to the computational expense. Furthermore,
+different versions/compilations of VASP may yield slightly different total energies
+which are not important for our tests – we only test that (i) inputs are written
+correctly, (ii) outputs are parsed correctly, and (iii) jobs are connected together
+properly.</p>
+<p>This is achieved by “mocking” VASP execution. Instead of running VASP, we copy reference
+output files into the current directory and then proceed with running the workflow.</p>
+</section>
+</section>
+<section id="the-atomate2-dev-command">
+<h2>The atomate2 dev command<a class="headerlink" href="#the-atomate2-dev-command" title="Permalink to this headline">¶</a></h2>
+<p>Atomate2 provides the <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> command that automatically prepares
+VASP data for use in atomate2 tests. It does this by:</p>
+<ul class="simple">
+<li><p>Copying VASP inputs and outputs into the correct directory structure.</p></li>
+<li><p>Converting POTCAR files to POTCAR.spec files.</p></li>
+<li><p>Removing large and unnecessary VASP files.</p></li>
+<li><p>Providing a template unit test that is configured for the specific workflow.</p></li>
+</ul>
+<p>There are four stages to generating the test data:</p>
+</section>
+<section id="run-the-vasp-workflow-to-generate-reference-outputs">
+<h2>1. Run the VASP workflow to generate reference outputs<a class="headerlink" href="#run-the-vasp-workflow-to-generate-reference-outputs" title="Permalink to this headline">¶</a></h2>
+<p>Ensure that you are on a machine that can run VASP. Create a python file that contains
+the code to run your workflow. We recommend adjusting the VASP settings so that the
+files generated are not too large and can be run quickly. E.g., by reducing the k-point
+mesh density or energy cutoff.</p>
+<p>The script should also contain some additional code that will allow
+<code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> to process the reference data. Below we give an example
+used to generate the elastic constant workflow test data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding: utf-8</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.flows.elastic</span> <span class="kn">import</span> <span class="n">ElasticMaker</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.powerups</span> <span class="kn">import</span> <span class="n">update_user_kpoints_settings</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">run_locally</span><span class="p">,</span> <span class="n">JobStore</span>
+<span class="kn">from</span> <span class="nn">maggma.stores.mongolike</span> <span class="kn">import</span> <span class="n">MemoryStore</span>
+<span class="kn">from</span> <span class="nn">monty.serialization</span> <span class="kn">import</span> <span class="n">dumpfn</span>
+
+<span class="c1"># silicon structure</span>
+<span class="n">si_structure</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.73</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.73</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+    <span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">],</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]],</span>
+<span class="p">)</span>
+
+<span class="c1"># generate the flow and reduce the k-point mesh for the relaxation jobs</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="n">ElasticMaker</span><span class="p">()</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">si_structure</span><span class="p">)</span>
+<span class="n">update_user_kpoints_settings</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;grid_density&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span> <span class="n">name_filter</span><span class="o">=</span><span class="s2">&quot;relax&quot;</span><span class="p">)</span>
+
+<span class="c1"># run the the workflow using a custom store so that we can easily compile test data</span>
+<span class="n">store</span> <span class="o">=</span> <span class="n">JobStore</span><span class="p">(</span><span class="n">MemoryStore</span><span class="p">(),</span> <span class="n">additional_stores</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">MemoryStore</span><span class="p">()})</span>
+<span class="n">run_locally</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">,</span> <span class="n">create_folders</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># dump all of the job outputs to the outputs.json file in the current directory</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">store</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">load</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">dumpfn</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="s2">&quot;outputs.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should edit the part where the flow is generated but leave the rest of the code
+the same. You should now run the script in a folder and generate the outputs.json file.</p>
+</section>
+<section id="compile-the-test-data">
+<h2>2. Compile the test data<a class="headerlink" href="#compile-the-test-data" title="Permalink to this headline">¶</a></h2>
+<p>The next stage is to compile the calculation data into the correct format. For each
+VASP job in the workflow, there should be a folder with the name of the job that
+contains:</p>
+<ul class="simple">
+<li><p>A folder called “inputs” with the INCAR, POTCAR.spec, POSCAR, and KPOINTS files. Note
+that the KPOINTS file is optional and won’t be present if KSPACING is set in the INCAR.</p></li>
+<li><p>A folder called “outputs” with the vasprun.xml, OUTCAR, json log files and any other
+output files needed for the workflow to run (e.g., CHGCAR file for band structure
+workflows).</p></li>
+</ul>
+<p>To generate this folder run the following command in the folder containing the
+outputs.json file.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>atm dev vasp-test-data WF_NAME
+</pre></div>
+</div>
+<p>You should change WF_NAME to be a name for the workflow. Note, WF_NAME should not
+contain spaces or punctuation. For example, the elastic constant workflow test data was
+genenerated using <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span> <span class="pre">Si_elastic</span></code>.</p>
+<p>This will generate a folder in the current directory called “WF_NAME” that contains
+the folders in the correct format.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the script will only copy POTCAR, POSCAR, CONTCAR, KPOINTS, INCAR,
+vasprun.xml, OUTCAR and json files to the WF_NAME folder. If additional files are
+needed for specific steps of the workflow you need to copy them in manually. A
+mapping from jobflow calculation folder to job folder in WF_NAME is given at the
+to of the <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> script output. E.g., it will look something
+like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">mapping</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">original</span> <span class="n">job</span> <span class="n">folders</span> <span class="n">to</span> <span class="n">the</span> <span class="n">formatted</span> <span class="n">folders</span> <span class="ow">is</span><span class="p">:</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">24</span><span class="o">-</span><span class="mi">31</span><span class="o">-</span><span class="mi">799852</span><span class="o">-</span><span class="mi">28250</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">tight_relax_1</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="mi">14</span><span class="o">-</span><span class="mi">718901</span><span class="o">-</span><span class="mi">28808</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">tight_relax_2</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="mi">38</span><span class="o">-</span><span class="mi">237201</span><span class="o">-</span><span class="mi">15341</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">elastic_relax_6_6</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">26</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">877896</span><span class="o">-</span><span class="mi">35631</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">elastic_relax_5_6</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">26</span><span class="o">-</span><span class="mi">47</span><span class="o">-</span><span class="mi">215837</span><span class="o">-</span><span class="mi">12883</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">elastic_relax_4_6</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">27</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">602937</span><span class="o">-</span><span class="mi">71135</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">elastic_relax_3_6</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">27</span><span class="o">-</span><span class="mi">45</span><span class="o">-</span><span class="mi">722573</span><span class="o">-</span><span class="mi">61724</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">elastic_relax_2_6</span>
+  <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">alex</span><span class="o">/</span><span class="n">atomate2</span><span class="o">/</span><span class="n">job_2021</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">28</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">286137</span><span class="o">-</span><span class="mi">10861</span>  <span class="o">-&gt;</span>  <span class="n">Si_elastic</span><span class="o">/</span><span class="n">elastic_relax_1_6</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For the script to run successfully, every job in your workflow must have a unique
+name. For example, there cannot be two calculations called “relax”. Instead you
+should ensure they are named something like “relax 1” and “relax 2”.</p>
+</div>
+</section>
+<section id="copy-the-test-data-folder-into-atomate2">
+<h2>3. Copy the test data folder into atomate2<a class="headerlink" href="#copy-the-test-data-folder-into-atomate2" title="Permalink to this headline">¶</a></h2>
+<p>You can now copy the WF_NAME folder into the atomate2 test files. VASP test files live
+in <code class="docutils literal notranslate"><span class="pre">atomate2/tests/test_data/vasp</span></code>. Ensure that a workflow with that name doesn’t
+already exist in the folder.</p>
+</section>
+<section id="write-the-test">
+<h2>4. Write the test<a class="headerlink" href="#write-the-test" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> also generates an example test that is configured to
+use the test data we just generated.</p>
+<p>The most important part is the section that mocks VASP and configures which checks
+to perform on the input files. For the elastic constant workflow, it looks something like this:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># mapping from job name to directory containing test files</span>
+<span class="n">ref_paths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;elastic relax 1/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_1_6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elastic relax 2/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_2_6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elastic relax 3/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_3_6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elastic relax 4/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_4_6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elastic relax 5/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_5_6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;elastic relax 6/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_6_6&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tight relax 1&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/tight_relax_1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tight relax 2&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/tight_relax_2&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># settings passed to fake_run_vasp; adjust these to check for certain INCAR settings</span>
+<span class="n">fake_run_vasp_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;elastic relax 1/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;elastic relax 2/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;elastic relax 3/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;elastic relax 4/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;elastic relax 5/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;elastic relax 6/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;tight relax 1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;tight relax 2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+<span class="p">}</span>
+
+<span class="c1"># automatically use fake VASP and write POTCAR.spec during the test</span>
+<span class="n">mock_vasp</span><span class="p">(</span><span class="n">ref_paths</span><span class="p">,</span> <span class="n">fake_run_vasp_kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ref_paths</span></code> variable contains the mapping from job name to test folder.
+The <code class="docutils literal notranslate"><span class="pre">fake_run_vasp_kwargs</span></code> contains the settings that will get passed to the
+<code class="docutils literal notranslate"><span class="pre">fake_run_vasp</span></code> function in the <code class="docutils literal notranslate"><span class="pre">atomate2/tests/vasp/conftest.py</span></code> file. This
+variable controls which INCAR settings are checked in the reference INCAR and the INCAR
+generated by atomate2 during the test. You should update these settings to include
+the important parameters for the jobs in your workflow. I.e., if it is a relaxation
+then the value of NSW is important.</p>
+<p>Finally, the call too <code class="docutils literal notranslate"><span class="pre">mock_vasp</span></code> configures the test such that:</p>
+<ol class="arabic simple">
+<li><p>POTCAR files will be written as POTCAR.spec files.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">fake_run_vasp</span></code> function will be called instead of the <a class="reference internal" href="../reference/atomate2.vasp.run.run_vasp.html#atomate2.vasp.run.run_vasp" title="atomate2.vasp.run.run_vasp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_vasp</span></code></a>
+function. <code class="docutils literal notranslate"><span class="pre">fake_run_vasp</span></code> is responsible for checking the correct inputs are
+written (by comparing against the files in the “inputs” folder) and copying in the
+reference files from the “outputs” folder for each job.</p></li>
+</ol>
+<p>After <code class="docutils literal notranslate"><span class="pre">mock_vasp</span></code> is called, you should edit the generate and run the workflow.
+Ensure that the workflow is generated in exactly the same was as in step 1. E.g.,
+if you altered the k-point density when generating the test data, you must also alter
+the k-point density during the test.</p>
+<p>Finally, you should add <code class="docutils literal notranslate"><span class="pre">assert</span></code> statements to validate the workflow outputs. As an
+example, the full elastic workflow test is reproduced below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_elastic</span><span class="p">(</span><span class="n">mock_vasp</span><span class="p">,</span> <span class="n">clean_dir</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">run_locally</span>
+
+    <span class="kn">from</span> <span class="nn">atomate2.common.schemas.elastic</span> <span class="kn">import</span> <span class="n">ElasticDocument</span>
+    <span class="kn">from</span> <span class="nn">atomate2.vasp.flows.elastic</span> <span class="kn">import</span> <span class="n">ElasticMaker</span>
+    <span class="kn">from</span> <span class="nn">atomate2.vasp.powerups</span> <span class="kn">import</span> <span class="n">update_user_kpoints_settings</span>
+
+    <span class="c1"># mapping from job name to directory containing test files</span>
+    <span class="n">ref_paths</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;elastic relax 1/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_1_6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elastic relax 2/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_2_6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elastic relax 3/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_3_6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elastic relax 4/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_4_6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elastic relax 5/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_5_6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;elastic relax 6/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_6_6&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tight relax 1&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/tight_relax_1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tight relax 2&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/tight_relax_2&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># settings passed to fake_run_vasp; adjust these to check for certain INCAR settings</span>
+    <span class="n">fake_run_vasp_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;elastic relax 1/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;elastic relax 2/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;elastic relax 3/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;elastic relax 4/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;elastic relax 5/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;elastic relax 6/6&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;tight relax 1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+        <span class="s2">&quot;tight relax 2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;incar_settings&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="s2">&quot;ISMEAR&quot;</span><span class="p">]},</span>
+    <span class="p">}</span>
+
+    <span class="c1"># automatically use fake VASP and write POTCAR.spec during the test</span>
+    <span class="n">mock_vasp</span><span class="p">(</span><span class="n">ref_paths</span><span class="p">,</span> <span class="n">fake_run_vasp_kwargs</span><span class="p">)</span>
+
+    <span class="c1"># generate flow</span>
+    <span class="n">si_structure</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span>
+        <span class="n">lattice</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.73</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.73</span><span class="p">,</span> <span class="mf">2.73</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+        <span class="n">species</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">],</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]],</span>
+    <span class="p">)</span>
+
+    <span class="c1"># generate the flow and reduce the k-point mesh for the relaxation jobs</span>
+    <span class="n">flow</span> <span class="o">=</span> <span class="n">ElasticMaker</span><span class="p">()</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">si_structure</span><span class="p">)</span>
+    <span class="n">update_user_kpoints_settings</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;grid_density&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span> <span class="n">name_filter</span><span class="o">=</span><span class="s2">&quot;relax&quot;</span><span class="p">)</span>
+
+    <span class="c1"># run the flow and ensure that it finished running successfully</span>
+    <span class="n">responses</span> <span class="o">=</span> <span class="n">run_locally</span><span class="p">(</span><span class="n">flow</span><span class="p">,</span> <span class="n">create_folders</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ensure_success</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># validate workflow outputs</span>
+    <span class="n">elastic_output</span> <span class="o">=</span> <span class="n">responses</span><span class="p">[</span><span class="n">flow</span><span class="o">.</span><span class="n">jobs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">uuid</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">output</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elastic_output</span><span class="p">,</span> <span class="n">ElasticDocument</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+        <span class="n">elastic_output</span><span class="o">.</span><span class="n">elastic_tensor</span><span class="o">.</span><span class="n">ieee_format</span><span class="p">,</span>
+        <span class="p">[</span>
+            <span class="p">[</span><span class="mf">155.7923</span><span class="p">,</span> <span class="mf">54.8871</span><span class="p">,</span> <span class="mf">54.8871</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">54.8871</span><span class="p">,</span> <span class="mf">155.7923</span><span class="p">,</span> <span class="mf">54.8871</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">54.8871</span><span class="p">,</span> <span class="mf">54.8871</span><span class="p">,</span> <span class="mf">155.7923</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">31.5356</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">31.5356</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">31.5356</span><span class="p">],</span>
+        <span class="p">],</span>
+        <span class="n">atol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">mock_vasp</span></code> and <code class="docutils literal notranslate"><span class="pre">clean_dir</span></code> arguments to the test function are
+<a class="reference external" href="https://docs.pytest.org/en/6.2.x/fixture.html">pytest fixtures</a> and are essential
+for the test to run successfully.</p>
+</section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="dev_install.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Installation</p>
+        </div>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, MaterialsProject.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

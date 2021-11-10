@@ -13,6 +13,29 @@ atomate2.vasp.flows.core
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -22,6 +45,8 @@ atomate2.vasp.flows.core
       BandStructureMaker
       DoubleRelaxMaker
       HSEBandStructureMaker
+      RelaxBandStructureMaker
+
 
 
 

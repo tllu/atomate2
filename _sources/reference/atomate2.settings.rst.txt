@@ -16,6 +16,30 @@
 
 
    
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      Atomate2Settings
+
+
+
+
+   
    
    
 

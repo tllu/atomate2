@@ -1,6 +1,0 @@
-get\_elastic\_document
-======================
-
-.. currentmodule:: atomate2.vasp.builders.elastic
-
-.. autofunction:: get_elastic_document

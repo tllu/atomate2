@@ -13,6 +13,23 @@ atomate2.common.schemas.symmetry
 
    
 
+
+
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+
+
    .. rubric:: Classes
 
    .. autosummary::
@@ -20,6 +37,8 @@ atomate2.common.schemas.symmetry
       :nosignatures:
    
       CrystalSystem
+      SymmetryData
+
 
 
 

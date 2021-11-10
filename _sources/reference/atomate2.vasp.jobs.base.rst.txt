@@ -9,9 +9,33 @@ atomate2.vasp.jobs.base
 
    
 
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      vasp_job
+
 
 
    
+
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
 
    .. rubric:: Classes
 
@@ -20,6 +44,7 @@ atomate2.vasp.jobs.base
       :nosignatures:
    
       BaseVaspMaker
+
 
 
 

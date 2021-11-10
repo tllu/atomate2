@@ -158,14 +158,15 @@
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">Flow</span><span class="p">,</span> <span class="n">Maker</span><span class="p">,</span> <span class="n">OnMissing</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Structure</span>
 
+<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.math</span> <span class="kn">import</span> <span class="n">Matrix3D</span>
-<span class="kn">from</span> <span class="nn">atomate2.settings</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.flows.core</span> <span class="kn">import</span> <span class="n">DoubleRelaxMaker</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">BaseVaspMaker</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.core</span> <span class="kn">import</span> <span class="n">TightRelaxMaker</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.elastic</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ElasticRelaxMaker</span><span class="p">,</span>
     <span class="n">fit_elastic_tensor</span><span class="p">,</span>
@@ -181,28 +182,48 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Maker to calculate elastic constants.</span>
 
+<span class="sd">    Calculate the elastic constant of a material. Initially, a tight structural</span>
+<span class="sd">    relaxation is performed to obtain the structure in a state of approximately zero</span>
+<span class="sd">    stress. Subsequently, perturbations are applied to the lattice vectors and the</span>
+<span class="sd">    resulting stress tensor is calculated from DFT, while allowing for relaxation of the</span>
+<span class="sd">    ionic degrees of freedom. Finally, constitutive relations from linear elasticity,</span>
+<span class="sd">    relating stress and strain, are employed to fit the full 6x6 elastic tensor. From</span>
+<span class="sd">    this, aggregate properties such as Voigt and Reuss bounds on the bulk and shear</span>
+<span class="sd">    moduli are derived.</span>
+
+<span class="sd">    .. Note::</span>
+<span class="sd">        It is heavily recommended to symmetrize the structure before passing it to</span>
+<span class="sd">        this flow. Otherwise, the symmetry reduction routines will not be as</span>
+<span class="sd">        effective at reducing the total number of deformations needed.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    name</span>
+<span class="sd">    name : str</span>
 <span class="sd">        Name of the flows produced by this maker.</span>
-<span class="sd">    order</span>
+<span class="sd">    order : int</span>
 <span class="sd">        Order of the tensor expansion to be determined. Can be either 2 or 3.</span>
-<span class="sd">    sym_reduce</span>
+<span class="sd">    sym_reduce : bool</span>
 <span class="sd">        Whether to reduce the number of deformations using symmetry.</span>
-<span class="sd">    symprec</span>
+<span class="sd">    symprec : float</span>
 <span class="sd">        Symmetry precision to use in the reduction of symmetry.</span>
-<span class="sd">    elastic_relax_maker</span>
+<span class="sd">    bulk_relax_maker : .BaseVaspMaker or None</span>
+<span class="sd">        A maker to perform a tight relaxation on the bulk. Set to ``None`` to skip the</span>
+<span class="sd">        bulk relaxation.</span>
+<span class="sd">    elastic_relax_maker : .BaseVaspMaker</span>
 <span class="sd">        Maker used to generate elastic relaxations.</span>
-<span class="sd">    generate_elastic_deformations_kwargs</span>
+<span class="sd">    generate_elastic_deformations_kwargs : dict</span>
 <span class="sd">        Keyword arguments passed to :obj:`generate_elastic_deformations`.</span>
-<span class="sd">    fit_elastic_tensor_kwargs</span>
+<span class="sd">    fit_elastic_tensor_kwargs : dict</span>
 <span class="sd">        Keyword arguments passed to :obj:`fit_elastic_tensor`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;elastic&quot;</span>
     <span class="n">order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">sym_reduce</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">SYMPREC</span>
+    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">SYMPREC</span>
+    <span class="n">bulk_relax_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">DoubleRelaxMaker</span><span class="p">(</span><span class="n">relax_maker</span><span class="o">=</span><span class="n">TightRelaxMaker</span><span class="p">())</span>
+    <span class="p">)</span>
     <span class="n">elastic_relax_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">ElasticRelaxMaker</span><span class="p">)</span>
     <span class="n">generate_elastic_deformations_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
     <span class="n">fit_elastic_tensor_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
@@ -210,26 +231,32 @@
 <div class="viewcode-block" id="ElasticMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.elastic.ElasticMaker.html#atomate2.vasp.flows.elastic.ElasticMaker.make">[docs]</a>    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
-        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">equilibrium_stress</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make flow to calculate the elastic constant.</span>
 
-<span class="sd">        .. Note::</span>
-<span class="sd">            It is heavily recommended to symmetrize the structure before passing it to</span>
-<span class="sd">            this flow. Otherwise, the symmetry reduction routines will not be as</span>
-<span class="sd">            effective at reducing the total number of deformations needed.</span>
-
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        structure</span>
+<span class="sd">        structure : .Structure</span>
 <span class="sd">            A pymatgen structure.</span>
-<span class="sd">        prev_vasp_dir</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
 <span class="sd">            A previous vasp calculation directory to use for copying outputs.</span>
-<span class="sd">        equilibrium_stress</span>
+<span class="sd">        equilibrium_stress : tuple of tuple of float</span>
 <span class="sd">            The equilibrium stress of the (relaxed) structure, if known.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bulk_relax_maker</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># optionally relax the structure</span>
+            <span class="n">bulk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bulk_relax_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span><span class="p">)</span>
+            <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bulk</span><span class="p">)</span>
+            <span class="n">structure</span> <span class="o">=</span> <span class="n">bulk</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span>
+            <span class="n">prev_vasp_dir</span> <span class="o">=</span> <span class="n">bulk</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span>
+            <span class="k">if</span> <span class="n">equilibrium_stress</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">equilibrium_stress</span> <span class="o">=</span> <span class="n">bulk</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">stress</span>
+
         <span class="n">deformations</span> <span class="o">=</span> <span class="n">generate_elastic_deformations</span><span class="p">(</span>
             <span class="n">structure</span><span class="p">,</span>
             <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
@@ -255,8 +282,10 @@
         <span class="c1"># allow some of the deformations to fail</span>
         <span class="n">fit_tensor</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">on_missing_references</span> <span class="o">=</span> <span class="n">OnMissing</span><span class="o">.</span><span class="n">NONE</span>
 
+        <span class="n">jobs</span> <span class="o">+=</span> <span class="p">[</span><span class="n">deformations</span><span class="p">,</span> <span class="n">vasp_deformation_calcs</span><span class="p">,</span> <span class="n">fit_tensor</span><span class="p">]</span>
+
         <span class="n">flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">(</span>
-            <span class="n">jobs</span><span class="o">=</span><span class="p">[</span><span class="n">deformations</span><span class="p">,</span> <span class="n">vasp_deformation_calcs</span><span class="p">,</span> <span class="n">fit_tensor</span><span class="p">],</span>
+            <span class="n">jobs</span><span class="o">=</span><span class="n">jobs</span><span class="p">,</span>
             <span class="n">output</span><span class="o">=</span><span class="n">fit_tensor</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
             <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
         <span class="p">)</span>

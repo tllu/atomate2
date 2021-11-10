@@ -1,6 +1,0 @@
-get\_enum\_source
-=================
-
-.. currentmodule:: atomate2.vasp.schemas.calc_types.generate
-
-.. autofunction:: get_enum_source

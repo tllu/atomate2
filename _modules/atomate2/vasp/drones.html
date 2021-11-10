@@ -159,7 +159,6 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">pymatgen.apps.borg.hive</span> <span class="kn">import</span> <span class="n">AbstractDrone</span>
 
@@ -183,13 +182,13 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">task_document_kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">task_document_kwargs</span> <span class="o">=</span> <span class="n">task_document_kwargs</span>
 
-<div class="viewcode-block" id="VaspDrone.assimilate"><a class="viewcode-back" href="../../../reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone.assimilate">[docs]</a>    <span class="k">def</span> <span class="nf">assimilate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaskDocument</span><span class="p">:</span>
+<div class="viewcode-block" id="VaspDrone.assimilate"><a class="viewcode-back" href="../../../reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone.assimilate">[docs]</a>    <span class="k">def</span> <span class="nf">assimilate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaskDocument</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parse VASP output files and return the output document.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path or None</span>
 <span class="sd">            Path to the directory containing vasprun.xml and OUTCAR files.</span>
 
 <span class="sd">        Returns</span>
@@ -209,7 +208,7 @@
             <span class="k">raise</span>
         <span class="k">return</span> <span class="n">doc</span></div>
 
-<div class="viewcode-block" id="VaspDrone.get_valid_paths"><a class="viewcode-back" href="../../../reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone.get_valid_paths">[docs]</a>    <span class="k">def</span> <span class="nf">get_valid_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="VaspDrone.get_valid_paths"><a class="viewcode-back" href="../../../reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone.get_valid_paths">[docs]</a>    <span class="k">def</span> <span class="nf">get_valid_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get valid paths to assimilate.</span>
 
@@ -223,13 +222,13 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : tuple of (str, list of str, list of str)</span>
 <span class="sd">            Input path as a tuple generated from ``os.walk``, i.e., (parent, subdirs,</span>
 <span class="sd">            files).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        list[str]</span>
+<span class="sd">        list of str</span>
 <span class="sd">            A list of paths to assimilate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">parent</span><span class="p">,</span> <span class="n">subdirs</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">path</span>

@@ -164,7 +164,7 @@
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 <span class="kn">from</span> <span class="nn">gzip</span> <span class="kn">import</span> <span class="n">GzipFile</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
 
 <span class="kn">import</span> <span class="nn">paramiko</span>
 <span class="kn">from</span> <span class="nn">monty.io</span> <span class="kn">import</span> <span class="n">zopen</span>
@@ -187,34 +187,29 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    hosts</span>
-<span class="sd">        A list of remote host filesystems. Supports using hosts defined in the ssh</span>
-<span class="sd">        config file. Hosts can be specified as either &quot;username@remote_host&quot; or just</span>
-<span class="sd">        &quot;remote_host&quot; in which case the username will be inferred from the current</span>
-<span class="sd">        user.</span>
-<span class="sd">    key_filename</span>
+<span class="sd">    key_filename : str or Path</span>
 <span class="sd">        Path to private key file (for remote connections only).</span>
-<span class="sd">    config_filename</span>
+<span class="sd">    config_filename : str or Path</span>
 <span class="sd">        Path to OpenSSH config file defining host connection settings.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">key_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;~/.ssh/id_rsa&quot;</span><span class="p">,</span>
-        <span class="n">config_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;~/.ssh/config&quot;</span><span class="p">,</span>
+        <span class="n">key_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;~/.ssh/id_rsa&quot;</span><span class="p">,</span>
+        <span class="n">config_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">=</span> <span class="s2">&quot;~/.ssh/config&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_filename</span> <span class="o">=</span> <span class="n">key_filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config_filename</span> <span class="o">=</span> <span class="n">config_filename</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
 
-<div class="viewcode-block" id="FileClient.connect"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">):</span>
+<div class="viewcode-block" id="FileClient.connect"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.connect">[docs]</a>    <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Connect to a remote host.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str</span>
 <span class="sd">            A remote host filesystem. Supports using hosts defined in the ssh</span>
 <span class="sd">            config file. The host can be specified as either &quot;username@remote_host&quot; or</span>
 <span class="sd">            just &quot;remote_host&quot; in which case the username will be inferred from the</span>
@@ -234,13 +229,13 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">host</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ssh&quot;</span><span class="p">:</span> <span class="n">ssh</span><span class="p">,</span> <span class="s2">&quot;sftp&quot;</span><span class="p">:</span> <span class="n">ssh</span><span class="o">.</span><span class="n">open_sftp</span><span class="p">()}</span></div>
 
-<div class="viewcode-block" id="FileClient.get_ssh"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.get_ssh">[docs]</a>    <span class="k">def</span> <span class="nf">get_ssh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SSHClient</span><span class="p">:</span>
+<div class="viewcode-block" id="FileClient.get_ssh"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.get_ssh">[docs]</a>    <span class="k">def</span> <span class="nf">get_ssh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SSHClient</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get an SSH connection to a host.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str</span>
 <span class="sd">            A remote host filesystem. Supports using hosts defined in the ssh</span>
 <span class="sd">            config file. The host can be specified as either &quot;username@remote_host&quot; or</span>
 <span class="sd">            just &quot;remote_host&quot; in which case the username will be inferred from the</span>
@@ -248,20 +243,20 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        SSHClient</span>
+<span class="sd">        .SSHClient</span>
 <span class="sd">            An ssh client to the host.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">host</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">host</span><span class="p">][</span><span class="s2">&quot;ssh&quot;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="FileClient.get_sftp"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.get_sftp">[docs]</a>    <span class="k">def</span> <span class="nf">get_sftp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SFTPClient</span><span class="p">:</span>
+<div class="viewcode-block" id="FileClient.get_sftp"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.get_sftp">[docs]</a>    <span class="k">def</span> <span class="nf">get_sftp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SFTPClient</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get an SFTP connection to a host.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str</span>
 <span class="sd">            A remote host filesystem. Supports using hosts defined in the ssh</span>
 <span class="sd">            config file. The host can be specified as either &quot;username@remote_host&quot; or</span>
 <span class="sd">            just &quot;remote_host&quot; in which case the username will be inferred from the</span>
@@ -269,22 +264,22 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        SFTPClient</span>
+<span class="sd">        .SFTPClient</span>
 <span class="sd">            An sftp client to the host.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">host</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">connections</span><span class="p">[</span><span class="n">host</span><span class="p">][</span><span class="s2">&quot;sftp&quot;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="FileClient.exists"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="FileClient.exists"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.exists">[docs]</a>    <span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether a file exists.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            A path to check existence of.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 
 <span class="sd">        Returns</span>
@@ -302,15 +297,15 @@
             <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="FileClient.is_file"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.is_file">[docs]</a>    <span class="k">def</span> <span class="nf">is_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="FileClient.is_file"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.is_file">[docs]</a>    <span class="k">def</span> <span class="nf">is_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Whether a path is a file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            A path.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 
 <span class="sd">        Returns</span>
@@ -327,15 +322,15 @@
             <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="FileClient.is_dir"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.is_dir">[docs]</a>    <span class="k">def</span> <span class="nf">is_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="FileClient.is_dir"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.is_dir">[docs]</a>    <span class="k">def</span> <span class="nf">is_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Whether a path is a directory.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            A path.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 
 <span class="sd">        Returns</span>
@@ -352,20 +347,20 @@
             <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="FileClient.listdir"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.listdir">[docs]</a>    <span class="k">def</span> <span class="nf">listdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<div class="viewcode-block" id="FileClient.listdir"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.listdir">[docs]</a>    <span class="k">def</span> <span class="nf">listdir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the directory listing.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            Full path to the directory.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        list[Path]</span>
+<span class="sd">        list of Path</span>
 <span class="sd">            List of filenames and directories.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -378,23 +373,23 @@
 
 <div class="viewcode-block" id="FileClient.copy"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">src_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">dest_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">src_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">dest_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">src_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">dest_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">src_host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dest_host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Copy a file from source to destination.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        src_filename</span>
+<span class="sd">        src_filename : str or Path</span>
 <span class="sd">            Full path to source file.</span>
-<span class="sd">        dest_filename</span>
+<span class="sd">        dest_filename : str or Path</span>
 <span class="sd">            Full path to destination file.</span>
-<span class="sd">        src_host</span>
+<span class="sd">        src_host : str or None</span>
 <span class="sd">            A remote file system host for the source file.</span>
-<span class="sd">        dest_host</span>
+<span class="sd">        dest_host : str or None</span>
 <span class="sd">            A remote file system host for the destination file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">src_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">src_filename</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">src_host</span><span class="p">)</span>
@@ -422,15 +417,15 @@
                 <span class="s2">&quot;Copying between two different remote hosts is not supported.&quot;</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.remove"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="FileClient.remove"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove a file (does not work on directories).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            Path to a file.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -441,20 +436,20 @@
 
 <div class="viewcode-block" id="FileClient.rename"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.rename">[docs]</a>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">old_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">new_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">old_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">new_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rename (move) a file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        old_path</span>
+<span class="sd">        old_path : str or Path</span>
 <span class="sd">            Path to an existing file.</span>
-<span class="sd">        new_path</span>
+<span class="sd">        new_path : str or Path</span>
 <span class="sd">            Requested path to new file.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -464,15 +459,15 @@
             <span class="n">new_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">new_path</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">get_sftp</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old_path</span><span class="p">,</span> <span class="n">new_path</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FileClient.abspath"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.abspath">[docs]</a>    <span class="k">def</span> <span class="nf">abspath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<div class="viewcode-block" id="FileClient.abspath"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.abspath">[docs]</a>    <span class="k">def</span> <span class="nf">abspath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the absolute path.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            A path to a file or directory.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 
 <span class="sd">        Returns</span>
@@ -487,15 +482,15 @@
             <span class="n">_</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ssh</span><span class="o">.</span><span class="n">exec_command</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;readlink -f </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">Path</span><span class="p">([</span><span class="n">o</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">stdout</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="FileClient.glob"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.glob">[docs]</a>    <span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<div class="viewcode-block" id="FileClient.glob"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.glob">[docs]</a>    <span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Glob files and folders.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            A path to glob.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
 
 <span class="sd">        Returns</span>
@@ -514,8 +509,8 @@
 
 <div class="viewcode-block" id="FileClient.gzip"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.gzip">[docs]</a>    <span class="k">def</span> <span class="nf">gzip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">compresslevel</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
         <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
@@ -524,13 +519,13 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            Path to a file to gzip.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
-<span class="sd">        compresslevel</span>
+<span class="sd">        compresslevel : bool</span>
 <span class="sd">            Level of compression, 1-9. 9 is default for GzipFile, 6 is default for gzip.</span>
-<span class="sd">        force</span>
+<span class="sd">        force : bool</span>
 <span class="sd">            Overwrite gzipped file if it already exists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
@@ -560,8 +555,8 @@
 
 <div class="viewcode-block" id="FileClient.gunzip"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.gunzip">[docs]</a>    <span class="k">def</span> <span class="nf">gunzip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -569,11 +564,11 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        path</span>
+<span class="sd">        path : str or Path</span>
 <span class="sd">            Path to a file to gzip.</span>
-<span class="sd">        host</span>
+<span class="sd">        host : str or None</span>
 <span class="sd">            A remote file system host on which to perform file operations.</span>
-<span class="sd">        force</span>
+<span class="sd">        force : bool</span>
 <span class="sd">            Overwrite non-gzipped file if it already exists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
@@ -611,10 +606,10 @@
 
 
 <div class="viewcode-block" id="get_ssh_connection"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.get_ssh_connection.html#atomate2.utils.file_client.get_ssh_connection">[docs]</a><span class="k">def</span> <span class="nf">get_ssh_connection</span><span class="p">(</span>
-    <span class="n">username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">hostname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">key_filename</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-    <span class="n">config_filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">key_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">config_filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SSHClient</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Connect to a remote host via paramiko.</span>
@@ -623,25 +618,25 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    username</span>
+<span class="sd">    username : str or None</span>
 <span class="sd">        The username. If ``None``, the current logged in username will be used.</span>
-<span class="sd">    hostname</span>
+<span class="sd">    hostname : str</span>
 <span class="sd">        The host name. Supports host aliases defined in the ssh config file.</span>
-<span class="sd">    key_filename</span>
+<span class="sd">    key_filename : str or Path</span>
 <span class="sd">        Path to private key file.</span>
-<span class="sd">    config_filename</span>
+<span class="sd">    config_filename : str or Path or None</span>
 <span class="sd">        Path to OpenSSH config file.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    SSHClient</span>
+<span class="sd">    .SSHClient</span>
 <span class="sd">        An ssh connection to the host.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">key_filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">key_filename</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">key_filename</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot locate private key file: </span><span class="si">{</span><span class="n">key_filename</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">hostname</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
+    <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="n">hostname</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="n">username</span><span class="p">}</span>
     <span class="n">config_filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_filename</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">Path</span><span class="p">(</span><span class="n">config_filename</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="c1"># try reading ssh config file</span>
@@ -661,7 +656,7 @@
     <span class="k">return</span> <span class="n">client</span></div>
 
 
-<div class="viewcode-block" id="auto_fileclient"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.auto_fileclient.html#atomate2.utils.file_client.auto_fileclient">[docs]</a><span class="k">def</span> <span class="nf">auto_fileclient</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="auto_fileclient"><a class="viewcode-back" href="../../../reference/atomate2.utils.file_client.auto_fileclient.html#atomate2.utils.file_client.auto_fileclient">[docs]</a><span class="k">def</span> <span class="nf">auto_fileclient</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Automatically pass a FileClient to the function if not already present in kwargs.</span>
 
@@ -672,7 +667,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    method</span>
+<span class="sd">    method : callable or None</span>
 <span class="sd">        A function to wrap. This should not be specified directly and is implied</span>
 <span class="sd">        by the decorator.</span>
 <span class="sd">    &quot;&quot;&quot;</span>

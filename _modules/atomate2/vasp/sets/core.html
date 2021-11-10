@@ -172,6 +172,7 @@
     <span class="s2">&quot;HSERelaxSetGenerator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSEStaticSetGenerator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSEBSSetGenerator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HSETightRelaxSetGenerator&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -520,6 +521,56 @@
         <span class="p">}</span></div></div>
 
 
+<div class="viewcode-block" id="HSETightRelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSETightRelaxSetGenerator.html#atomate2.vasp.sets.core.HSETightRelaxSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">HSETightRelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to generate tight VASP HSE relaxation input sets.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HSETightRelaxSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSETightRelaxSetGenerator.html#atomate2.vasp.sets.core.HSETightRelaxSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
+        <span class="n">prev_incar</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bandgap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">outcar</span><span class="p">:</span> <span class="n">Outcar</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get updates to the INCAR for a HSE tight relaxation job.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure</span>
+<span class="sd">            A structure.</span>
+<span class="sd">        prev_incar</span>
+<span class="sd">            An incar from a previous calculation.</span>
+<span class="sd">        bandgap</span>
+<span class="sd">            The band gap.</span>
+<span class="sd">        vasprun</span>
+<span class="sd">            A vasprun from a previous calculation.</span>
+<span class="sd">        outcar</span>
+<span class="sd">            An outcar from a previous calculation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of updates to apply.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;ISIF&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;ENCUT&quot;</span><span class="p">:</span> <span class="mi">700</span><span class="p">,</span>
+            <span class="s2">&quot;EDIFF&quot;</span><span class="p">:</span> <span class="mf">1e-7</span><span class="p">,</span>
+            <span class="s2">&quot;LAECHG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;EDIFFG&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span>
+            <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;All&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
+            <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;GGA&quot;</span><span class="p">:</span> <span class="s2">&quot;PE&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;HFSCREEN&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+            <span class="s2">&quot;LHFCALC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;PRECFOCK&quot;</span><span class="p">:</span> <span class="s2">&quot;Fast&quot;</span><span class="p">,</span>
+        <span class="p">}</span></div></div>
+
+
 <div class="viewcode-block" id="HSEStaticSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSEStaticSetGenerator.html#atomate2.vasp.sets.core.HSEStaticSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">HSEStaticSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to generate VASP HSE06 static input sets.&quot;&quot;&quot;</span>
 
@@ -764,8 +815,8 @@
     <span class="k">if</span> <span class="n">vasprun</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">2000</span>
 
-    <span class="n">emax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">eigs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">eigs</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
-    <span class="n">emin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">eigs</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">for</span> <span class="n">eigs</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+    <span class="n">emax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">eigs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">eigs</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">emin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">eigs</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">for</span> <span class="n">eigs</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">emax</span> <span class="o">-</span> <span class="n">emin</span><span class="p">)</span> <span class="o">/</span> <span class="n">dedos</span><span class="p">)</span>
 
 

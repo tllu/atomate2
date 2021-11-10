@@ -158,12 +158,11 @@
 
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">monty.serialization</span> <span class="kn">import</span> <span class="n">dumpfn</span><span class="p">,</span> <span class="n">loadfn</span>
 
+<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.files</span> <span class="kn">import</span> <span class="n">copy_files</span><span class="p">,</span> <span class="n">get_zfile</span><span class="p">,</span> <span class="n">gunzip_files</span><span class="p">,</span> <span class="n">rename_files</span>
-<span class="kn">from</span> <span class="nn">atomate2.settings</span> <span class="kn">import</span> <span class="n">Settings</span>
 <span class="kn">from</span> <span class="nn">atomate2.utils.file_client</span> <span class="kn">import</span> <span class="n">FileClient</span><span class="p">,</span> <span class="n">auto_fileclient</span>
 <span class="kn">from</span> <span class="nn">atomate2.utils.path</span> <span class="kn">import</span> <span class="n">strip_hostname</span>
 
@@ -175,8 +174,8 @@
 
 <div class="viewcode-block" id="copy_amset_files"><a class="viewcode-back" href="../../../reference/atomate2.amset.files.copy_amset_files.html#atomate2.amset.files.copy_amset_files">[docs]</a><span class="nd">@auto_fileclient</span>
 <span class="k">def</span> <span class="nf">copy_amset_files</span><span class="p">(</span>
-    <span class="n">src_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-    <span class="n">src_host</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">src_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">src_host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">file_client</span><span class="p">:</span> <span class="n">FileClient</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -186,14 +185,14 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    src_dir</span>
+<span class="sd">    src_dir : Path or str</span>
 <span class="sd">        The source directory.</span>
-<span class="sd">    src_host</span>
+<span class="sd">    src_host : str or None</span>
 <span class="sd">        The source hostname used to specify a remote filesystem. Can be given as</span>
 <span class="sd">        either &quot;username@remote_host&quot; or just &quot;remote_host&quot; in which case the username</span>
 <span class="sd">        will be inferred from the current user. If ``None``, the local filesystem will</span>
 <span class="sd">        be used as the source.</span>
-<span class="sd">    file_client</span>
+<span class="sd">    file_client : FileClient</span>
 <span class="sd">        A file client to use for performing file operations.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">src_dir</span> <span class="o">=</span> <span class="n">strip_hostname</span><span class="p">(</span><span class="n">src_dir</span><span class="p">)</span>  <span class="c1"># TODO: Handle hostnames properly.</span>
@@ -244,18 +243,18 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finished copying inputs&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="write_amset_settings"><a class="viewcode-back" href="../../../reference/atomate2.amset.files.write_amset_settings.html#atomate2.amset.files.write_amset_settings">[docs]</a><span class="k">def</span> <span class="nf">write_amset_settings</span><span class="p">(</span><span class="n">settings_updates</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">from_prev</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="write_amset_settings"><a class="viewcode-back" href="../../../reference/atomate2.amset.files.write_amset_settings.html#atomate2.amset.files.write_amset_settings">[docs]</a><span class="k">def</span> <span class="nf">write_amset_settings</span><span class="p">(</span><span class="n">settings_updates</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">from_prev</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Write AMSET settings to file.</span>
 
 <span class="sd">    This function will also apply any settings specified in</span>
-<span class="sd">    :obj:`.Settings.AMSET_SETTINGS_UPDATE`.</span>
+<span class="sd">    :obj:`.Atomate2Settings.AMSET_SETTINGS_UPDATE`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    settings_updates</span>
+<span class="sd">    settings_updates : dict</span>
 <span class="sd">        A dictionary of settings to write.</span>
-<span class="sd">    from_prev</span>
+<span class="sd">    from_prev : bool</span>
 <span class="sd">        Whether apply the settings on top of an existing settings.yaml file in the</span>
 <span class="sd">        current directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -265,7 +264,7 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="n">settings_updates</span>
 
-    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Settings</span><span class="o">.</span><span class="n">AMSET_SETTINGS_UPDATE</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">SETTINGS</span><span class="o">.</span><span class="n">AMSET_SETTINGS_UPDATE</span><span class="p">)</span>
 
     <span class="n">dumpfn</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="s2">&quot;settings.yaml&quot;</span><span class="p">)</span></div>
 </pre></div>
