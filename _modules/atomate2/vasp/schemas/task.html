@@ -354,8 +354,8 @@
             <span class="n">energy</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span>
             <span class="n">energy_per_atom</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">energy_per_atom</span><span class="p">,</span>
             <span class="n">bandgap</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">bandgap</span><span class="p">,</span>
-            <span class="n">forces</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;forces&quot;</span><span class="p">],</span>
-            <span class="n">stress</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;stress&quot;</span><span class="p">],</span>
+            <span class="n">forces</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;forces&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">stress</span><span class="o">=</span><span class="n">calc_doc</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stress&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">)</span></div></div>
 
 
@@ -755,6 +755,7 @@
 <span class="sd">                    &quot;vasprun_file&quot;: vasprun_filename,</span>
 <span class="sd">                    &quot;outcar_file&quot;: outcar_filename,</span>
 <span class="sd">                    &quot;volumetric_files&quot;: [CHGCAR, LOCPOT, etc]</span>
+<span class="sd">                    &quot;elph_poscars&quot;: [POSCAR.T=300, POSCAR.T=400, etc]</span>
 <span class="sd">                },</span>
 <span class="sd">                ...</span>
 <span class="sd">            }</span>
@@ -767,6 +768,7 @@
     <span class="k">def</span> <span class="nf">_get_task_files</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="n">vasp_files</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">vol_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">elph_poscars</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*vasprun.xml</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">):</span>
                 <span class="n">vasp_files</span><span class="p">[</span><span class="s2">&quot;vasprun_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">file</span>
@@ -774,11 +776,16 @@
                 <span class="n">vasp_files</span><span class="p">[</span><span class="s2">&quot;outcar_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">file</span>
             <span class="k">elif</span> <span class="nb">any</span><span class="p">([</span><span class="n">file</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*</span><span class="si">{</span><span class="n">f</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">volumetric_files</span><span class="p">]):</span>
                 <span class="n">vol_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">file</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*POSCAR.T=*</span><span class="si">{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">):</span>
+                <span class="n">elph_poscars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vol_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">vasp_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c1"># only add volumetric files if some were found or other vasp files</span>
-            <span class="c1"># were found</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vol_files</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># add volumetric files if some were found or other vasp files were found</span>
             <span class="n">vasp_files</span><span class="p">[</span><span class="s2">&quot;volumetric_files&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vol_files</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">elph_poscars</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># add elph displaced poscars if they were found or other vasp files found</span>
+            <span class="n">vasp_files</span><span class="p">[</span><span class="s2">&quot;elph_poscars&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elph_poscars</span>
 
         <span class="k">return</span> <span class="n">vasp_files</span>
 
@@ -828,7 +835,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

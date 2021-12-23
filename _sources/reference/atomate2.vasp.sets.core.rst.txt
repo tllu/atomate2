@@ -40,6 +40,8 @@ atomate2.vasp.sets.core
       
    
    
+      
+   
    
    
    
@@ -56,6 +58,7 @@ atomate2.vasp.sets.core
       :toctree:
       :nosignatures:
    
+      ElectronPhononSetGenerator
       HSEBSSetGenerator
       HSERelaxSetGenerator
       HSEStaticSetGenerator

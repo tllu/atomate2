@@ -188,6 +188,8 @@
     <span class="n">Locpot</span><span class="p">,</span>
     <span class="n">Chgcar</span><span class="p">,</span>
     <span class="n">Wavecar</span><span class="p">,</span>
+    <span class="s2">&quot;force_constants&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;normalmode_eigenvecs&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -249,7 +251,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;base vasp job&quot;</span>
@@ -290,7 +295,7 @@
 
         <span class="c1"># write any additional data</span>
         <span class="k">for</span> <span class="n">filename</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_additional_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">dumpfn</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">dumpfn</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">))</span>
 
         <span class="c1"># run vasp</span>
         <span class="n">run_vasp</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">run_vasp_kwargs</span><span class="p">)</span>
@@ -337,7 +342,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

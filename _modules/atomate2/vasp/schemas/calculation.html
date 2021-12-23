@@ -166,6 +166,8 @@
 <span class="kn">from</span> <span class="nn">pymatgen.command_line.bader_caller</span> <span class="kn">import</span> <span class="n">bader_analysis_from_path</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.lattice</span> <span class="kn">import</span> <span class="n">Lattice</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.bandstructure</span> <span class="kn">import</span> <span class="n">BandStructure</span>
+<span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.dos</span> <span class="kn">import</span> <span class="n">Dos</span>
 <span class="kn">from</span> <span class="nn">pymatgen.io.vasp</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">BSVasprun</span><span class="p">,</span>
     <span class="n">Locpot</span><span class="p">,</span>
@@ -193,6 +195,7 @@
     <span class="s2">&quot;Status&quot;</span><span class="p">,</span>
     <span class="s2">&quot;VaspObject&quot;</span><span class="p">,</span>
     <span class="s2">&quot;PotcarSpec&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FrequencyDependentDielectric&quot;</span><span class="p">,</span>
     <span class="s2">&quot;CalculationInput&quot;</span><span class="p">,</span>
     <span class="s2">&quot;CalculationOutput&quot;</span><span class="p">,</span>
     <span class="s2">&quot;RunStatistics&quot;</span><span class="p">,</span>
@@ -361,7 +364,70 @@
             <span class="s2">&quot;Total CPU time used (sec)&quot;</span><span class="p">:</span> <span class="s2">&quot;total_time&quot;</span><span class="p">,</span>
             <span class="s2">&quot;cores&quot;</span><span class="p">:</span> <span class="s2">&quot;cores&quot;</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">outcar</span><span class="o">.</span><span class="n">run_stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div></div>
+        <span class="n">run_stats</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="n">outcar</span><span class="o">.</span><span class="n">run_stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">0</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">stat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="c1"># sometimes the statistics are misformatted</span>
+                <span class="n">stat</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">run_stats</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">stat</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">run_stats</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="FrequencyDependentDielectric"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.html#atomate2.vasp.schemas.calculation.FrequencyDependentDielectric">[docs]</a><span class="k">class</span> <span class="nc">FrequencyDependentDielectric</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Frequency-dependent dielectric data.&quot;&quot;&quot;</span>
+
+    <span class="n">real</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Real part of the frequency dependent dielectric constant, given at&quot;</span>
+        <span class="s2">&quot; each energy as 6 components according to XX, YY, ZZ, XY, YZ, ZX&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">imaginary</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Imaginary part of the frequency dependent dielectric constant, &quot;</span>
+        <span class="s2">&quot;given at each energy as 6 components according to XX, YY, ZZ, XY, &quot;</span>
+        <span class="s2">&quot;YZ, ZX&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">energy</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Energies at which the real and imaginary parts of the dielectric&quot;</span>
+        <span class="s2">&quot;constant are given&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="FrequencyDependentDielectric.from_vasprun"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.html#atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.from_vasprun">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_vasprun</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FrequencyDependentDielectric&quot;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a frequency-dependent dielectric calculation document from a vasprun.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        vasprun : Vasprun</span>
+<span class="sd">            A vasprun object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        FrequencyDependentDielectric</span>
+<span class="sd">            A frequency-dependent dielectric document.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">energy</span><span class="p">,</span> <span class="n">real</span><span class="p">,</span> <span class="n">imag</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">dielectric</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">real</span><span class="o">=</span><span class="n">real</span><span class="p">,</span> <span class="n">imaginary</span><span class="o">=</span><span class="n">imag</span><span class="p">,</span> <span class="n">energy</span><span class="o">=</span><span class="n">energy</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ElectronPhononDisplacedStructures"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.ElectronPhononDisplacedStructures.html#atomate2.vasp.schemas.calculation.ElectronPhononDisplacedStructures">[docs]</a><span class="k">class</span> <span class="nc">ElectronPhononDisplacedStructures</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Document defining electron phonon displaced structures.&quot;&quot;&quot;</span>
+
+    <span class="n">temperatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The temperatures at which the electron phonon displacements &quot;</span>
+        <span class="s2">&quot;were generated.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">structures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Structure</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The displaced structures corresponding to each temperature.&quot;</span>
+    <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CalculationOutput"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput">[docs]</a><span class="k">class</span> <span class="nc">CalculationOutput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -405,6 +471,11 @@
     <span class="n">epsilon_ionic</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The ionic part of the dielectric constant&quot;</span>
     <span class="p">)</span>
+    <span class="n">frequency_dependent_dielectric</span><span class="p">:</span> <span class="n">FrequencyDependentDielectric</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Frequency-dependent dielectric information from an LOPTICS &quot;</span>
+        <span class="s2">&quot;calculation&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">ionic_steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Energy, forces, and structure for each ionic step&quot;</span>
     <span class="p">)</span>
@@ -428,13 +499,22 @@
     <span class="n">normalmode_eigenvecs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Vector3D</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Normal mode eigenvectors of phonon modes at Gamma&quot;</span>
     <span class="p">)</span>
+    <span class="n">elph_displaced_structures</span><span class="p">:</span> <span class="n">ElectronPhononDisplacedStructures</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron-phonon displaced structures, generated by setting &quot;</span>
+        <span class="s2">&quot;PHON_LMC = True.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">run_stats</span><span class="p">:</span> <span class="n">RunStatistics</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Summary of runtime statistics for this calculation&quot;</span>
     <span class="p">)</span>
 
 <div class="viewcode-block" id="CalculationOutput.from_vasp_outputs"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.from_vasp_outputs">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_vasp_outputs</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">:</span> <span class="n">Outcar</span><span class="p">,</span> <span class="n">locpot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Locpot</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span><span class="p">,</span>
+        <span class="n">outcar</span><span class="p">:</span> <span class="n">Outcar</span><span class="p">,</span>
+        <span class="n">locpot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Locpot</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">elph_poscars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CalculationOutput&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a VASP output document from VASP outputs.</span>
@@ -453,7 +533,7 @@
 <span class="sd">            The VASP calculation output document.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">bandstructure</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">()</span>
+            <span class="n">bandstructure</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
             <span class="n">bandgap_info</span> <span class="o">=</span> <span class="n">bandstructure</span><span class="o">.</span><span class="n">get_band_gap</span><span class="p">()</span>
             <span class="n">electronic_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
                 <span class="n">vbm</span><span class="o">=</span><span class="n">bandstructure</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span>
@@ -469,6 +549,12 @@
             <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">incar</span><span class="p">[</span><span class="s2">&quot;IBRION&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;VASP doesn&#39;t properly output efermi for IBRION == 1&quot;</span><span class="p">)</span>
             <span class="n">electronic_output</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="n">freq_dependent_diel</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="n">FrequencyDependentDielectric</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">freq_dependent_diel</span> <span class="o">=</span> <span class="n">FrequencyDependentDielectric</span><span class="o">.</span><span class="n">from_vasprun</span><span class="p">(</span><span class="n">vasprun</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>
 
         <span class="n">locpot_avg</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">locpot</span><span class="p">:</span>
@@ -504,6 +590,14 @@
             <span class="n">magmoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;tot&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span><span class="p">]</span>
             <span class="n">structure</span><span class="o">.</span><span class="n">add_site_property</span><span class="p">(</span><span class="s2">&quot;magmom&quot;</span><span class="p">,</span> <span class="n">magmoms</span><span class="p">)</span>
 
+        <span class="n">elph_structures</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">elph_poscars</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">elph_structures</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;temperatures&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;structures&quot;</span><span class="p">:</span> <span class="p">[]})</span>
+            <span class="k">for</span> <span class="n">elph_poscar</span> <span class="ow">in</span> <span class="n">elph_poscars</span><span class="p">:</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">elph_poscar</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;POSCAR.T=&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">elph_structures</span><span class="p">[</span><span class="s2">&quot;temperatures&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+                <span class="n">elph_structures</span><span class="p">[</span><span class="s2">&quot;structures&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Structure</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">elph_poscar</span><span class="p">))</span>
+
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
             <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span>
             <span class="n">energy</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">final_energy</span><span class="p">,</span>
@@ -511,6 +605,8 @@
             <span class="n">epsilon_static</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">epsilon_static</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">epsilon_static_wolfe</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">epsilon_static_wolfe</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">epsilon_ionic</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">epsilon_ionic</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">frequency_dependent_dielectric</span><span class="o">=</span><span class="n">freq_dependent_diel</span><span class="p">,</span>
+            <span class="n">elph_displaced_structures</span><span class="o">=</span><span class="n">elph_structures</span><span class="p">,</span>
             <span class="n">ionic_steps</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">,</span>
             <span class="n">locpot</span><span class="o">=</span><span class="n">locpot_avg</span><span class="p">,</span>
             <span class="n">outcar</span><span class="o">=</span><span class="n">outcar_dict</span><span class="p">,</span>
@@ -563,11 +659,14 @@
         <span class="n">task_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">vasprun_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">outcar_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-        <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">elph_poscars</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">parse_dos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">parse_bandstructure</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">average_locpot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">run_bader</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_RUN_BADER</span> <span class="ow">and</span> <span class="n">_BADER_EXE_EXISTS</span><span class="p">,</span>
+        <span class="n">strip_bandstructure_projections</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">strip_dos_projections</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">store_volumetric_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
             <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
         <span class="p">]</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_STORE_VOLUMETRIC_DATA</span><span class="p">,</span>
@@ -588,6 +687,9 @@
 <span class="sd">            Path to the OUTCAR file, relative to dir_name.</span>
 <span class="sd">        volumetric_files</span>
 <span class="sd">            Path to volumetric files, relative to dir_name.</span>
+<span class="sd">        elph_poscars</span>
+<span class="sd">            Path to displaced electron-phonon coupling POSCAR files generated using</span>
+<span class="sd">            ``PHON_LMC = True``, given relative to dir_name.</span>
 <span class="sd">        parse_dos</span>
 <span class="sd">            Whether to parse the DOS. Can be:</span>
 
@@ -612,6 +714,12 @@
 <span class="sd">            Whether to store the average of the LOCPOT along the crystal axes.</span>
 <span class="sd">        run_bader</span>
 <span class="sd">            Whether to run bader on the charge density.</span>
+<span class="sd">        strip_dos_projections : bool</span>
+<span class="sd">            Whether to strip the element and site projections from the density of states.</span>
+<span class="sd">            This can help reduce the size of DOS objects in systems with many atoms.</span>
+<span class="sd">        strip_bandstructure_projections : bool</span>
+<span class="sd">            Whether to strip the element and site projections from the band structure.</span>
+<span class="sd">            This can help reduce the size of DOS objects in systems with many atoms.</span>
 <span class="sd">        store_volumetric_data</span>
 <span class="sd">            Which volumetric files to store.</span>
 <span class="sd">        vasprun_kwargs</span>
@@ -627,6 +735,7 @@
         <span class="n">outcar_file</span> <span class="o">=</span> <span class="n">dir_name</span> <span class="o">/</span> <span class="n">outcar_file</span>
 
         <span class="n">vasprun_kwargs</span> <span class="o">=</span> <span class="n">vasprun_kwargs</span> <span class="k">if</span> <span class="n">vasprun_kwargs</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">volumetric_files</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">volumetric_files</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">volumetric_files</span>
         <span class="n">vasprun</span> <span class="o">=</span> <span class="n">Vasprun</span><span class="p">(</span><span class="n">vasprun_file</span><span class="p">,</span> <span class="o">**</span><span class="n">vasprun_kwargs</span><span class="p">)</span>
         <span class="n">outcar</span> <span class="o">=</span> <span class="n">Outcar</span><span class="p">(</span><span class="n">outcar_file</span><span class="p">)</span>
         <span class="n">completed_at</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">vasprun_file</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">))</span>
@@ -638,10 +747,14 @@
 
         <span class="n">dos</span> <span class="o">=</span> <span class="n">_parse_dos</span><span class="p">(</span><span class="n">parse_dos</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">dos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">strip_dos_projections</span><span class="p">:</span>
+                <span class="n">dos</span> <span class="o">=</span> <span class="n">Dos</span><span class="p">(</span><span class="n">dos</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span> <span class="n">dos</span><span class="o">.</span><span class="n">energies</span><span class="p">,</span> <span class="n">dos</span><span class="o">.</span><span class="n">densities</span><span class="p">)</span>
             <span class="n">vasp_objects</span><span class="p">[</span><span class="n">VaspObject</span><span class="o">.</span><span class="n">DOS</span><span class="p">]</span> <span class="o">=</span> <span class="n">dos</span>  <span class="c1"># type: ignore</span>
 
         <span class="n">bandstructure</span> <span class="o">=</span> <span class="n">_parse_bandstructure</span><span class="p">(</span><span class="n">parse_bandstructure</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">bandstructure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">strip_bandstructure_projections</span><span class="p">:</span>
+                <span class="n">bandstructure</span><span class="o">.</span><span class="n">projections</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">vasp_objects</span><span class="p">[</span><span class="n">VaspObject</span><span class="o">.</span><span class="n">BANDSTRUCTURE</span><span class="p">]</span> <span class="o">=</span> <span class="n">bandstructure</span>  <span class="c1"># type: ignore</span>
 
         <span class="n">bader</span> <span class="o">=</span> <span class="kc">None</span>
@@ -658,7 +771,9 @@
                 <span class="n">locpot</span> <span class="o">=</span> <span class="n">Locpot</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">dir_name</span> <span class="o">/</span> <span class="n">locpot_file</span><span class="p">)</span>
 
         <span class="n">input_doc</span> <span class="o">=</span> <span class="n">CalculationInput</span><span class="o">.</span><span class="n">from_vasprun</span><span class="p">(</span><span class="n">vasprun</span><span class="p">)</span>
-        <span class="n">output_doc</span> <span class="o">=</span> <span class="n">CalculationOutput</span><span class="o">.</span><span class="n">from_vasp_outputs</span><span class="p">(</span><span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">,</span> <span class="n">locpot</span><span class="o">=</span><span class="n">locpot</span><span class="p">)</span>
+        <span class="n">output_doc</span> <span class="o">=</span> <span class="n">CalculationOutput</span><span class="o">.</span><span class="n">from_vasp_outputs</span><span class="p">(</span>
+            <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">,</span> <span class="n">locpot</span><span class="o">=</span><span class="n">locpot</span><span class="p">,</span> <span class="n">elph_poscars</span><span class="o">=</span><span class="n">elph_poscars</span>
+        <span class="p">)</span>
 
         <span class="n">has_vasp_completed</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">SUCCESS</span> <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">converged</span> <span class="k">else</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
         <span class="k">return</span> <span class="p">(</span>
@@ -745,7 +860,7 @@
     <span class="k">return</span> <span class="n">volumetric_data</span>
 
 
-<span class="k">def</span> <span class="nf">_parse_dos</span><span class="p">(</span><span class="n">parse_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span> <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">_parse_dos</span><span class="p">(</span><span class="n">parse_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span> <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dos</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Parse DOS. See Calculation.from_vasp_files for supported arguments.&quot;&quot;&quot;</span>
     <span class="n">nsw</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">dos</span> <span class="o">=</span> <span class="kc">None</span>
@@ -756,7 +871,7 @@
 
 <span class="k">def</span> <span class="nf">_parse_bandstructure</span><span class="p">(</span>
     <span class="n">parse_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span> <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BandStructure</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Parse band structure. See Calculation.from_vasp_files for supported arguments.&quot;&quot;&quot;</span>
     <span class="n">vasprun_file</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">filename</span>
 
@@ -765,13 +880,15 @@
             <span class="c1"># NSCF calculation</span>
             <span class="n">bs_vrun</span> <span class="o">=</span> <span class="n">BSVasprun</span><span class="p">(</span><span class="n">vasprun_file</span><span class="p">,</span> <span class="n">parse_projected_eigen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">line_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># try parsing line mode</span>
+                <span class="c1"># try parsing line mode</span>
+                <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">line_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">()</span>  <span class="c1"># treat as a regular calculation</span>
+                <span class="c1"># treat as a regular calculation</span>
+                <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Not a NSCF calculation</span>
             <span class="n">bs_vrun</span> <span class="o">=</span> <span class="n">BSVasprun</span><span class="p">(</span><span class="n">vasprun_file</span><span class="p">,</span> <span class="n">parse_projected_eigen</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">()</span>
+            <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
 
         <span class="c1"># only save the bandstructure if not moving ions</span>
         <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
@@ -780,7 +897,7 @@
     <span class="k">elif</span> <span class="n">parse_mode</span><span class="p">:</span>
         <span class="c1"># legacy line/True behavior for bandstructure_mode</span>
         <span class="n">bs_vrun</span> <span class="o">=</span> <span class="n">BSVasprun</span><span class="p">(</span><span class="n">vasprun_file</span><span class="p">,</span> <span class="n">parse_projected_eigen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">line_mode</span><span class="o">=</span><span class="p">(</span><span class="n">parse_mode</span> <span class="o">==</span> <span class="s2">&quot;line&quot;</span><span class="p">))</span>
+        <span class="n">bs</span> <span class="o">=</span> <span class="n">bs_vrun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">line_mode</span><span class="o">=</span><span class="n">parse_mode</span> <span class="o">==</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">bs</span>
 
     <span class="k">return</span> <span class="kc">None</span>
@@ -811,7 +928,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

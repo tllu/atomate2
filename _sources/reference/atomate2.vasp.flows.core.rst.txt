@@ -28,6 +28,24 @@ atomate2.vasp.flows.core
       
    
    
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
    
    
    
@@ -45,7 +63,13 @@ atomate2.vasp.flows.core
       BandStructureMaker
       DoubleRelaxMaker
       HSEBandStructureMaker
+      HSELineModeBandStructureMaker
+      HSEOpticsMaker
+      HSEUniformBandStructureMaker
+      LineModeBandStructureMaker
+      OpticsMaker
       RelaxBandStructureMaker
+      UniformBandStructureMaker
 
 
 

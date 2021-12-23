@@ -209,6 +209,11 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-4">
+   v0.0.4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#v0-0-3">
    v0.0.3
   </a>
@@ -246,6 +251,41 @@
                 
   <section id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
+<section id="v0-0-4">
+<h2>v0.0.4<a class="headerlink" href="#v0-0-4" title="Permalink to this headline">¶</a></h2>
+<p>Lots of improvements and bug fixes this release.</p>
+<p>New features:</p>
+<ul class="simple">
+<li><p>AMSET workflow.</p></li>
+<li><p>Electron phonon band gap renormalisation workflow.</p></li>
+<li><p>Specific uniform and line mode band structure makers.</p></li>
+<li><p>Optics maker.</p></li>
+<li><p>Transmuter maker.</p></li>
+</ul>
+<p>Enhancements:</p>
+<ul class="simple">
+<li><p>Support for automatic handling of ISPIN.</p></li>
+<li><p>Add MP base sets (&#64;arosen93) [#27]</p></li>
+<li><p>Docs updates (&#64;arosen93) [#13, #17]</p></li>
+<li><p>Options to strip band structure and DOS projects to reduce object sizes.</p></li>
+<li><p>Input sets now use generators to avoid serialization issues.</p></li>
+<li><p>Use smart efermi finding to remove errors with tetrahedron integration in VASP 6.</p></li>
+<li><p>Powerups can now work on <code class="docutils literal notranslate"><span class="pre">Maker</span></code> objects directly.</p></li>
+</ul>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Use PBEsol by default.</p></li>
+<li><p>Increase number of signficant figures when writing POSCAR files.</p></li>
+<li><p>Remove unused INCAR settings (&#64;arosen93)</p></li>
+<li><p>Add missing LASPH flags on vdW functionals (&#64;arosen93) [#31]</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">NSW=0</span></code> in static calculations (&#64;arosen93) [#10]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LREAL</span> <span class="pre">=</span> <span class="pre">False</span></code> in static jobs by default (&#64;arosen93) [#23]</p></li>
+<li><p>Add missing functionals in output schema (&#64;arosen93) [#12]</p></li>
+<li><p>Many output schema fixes.</p></li>
+<li><p>Better support for FireWorks.</p></li>
+<li><p>Support writing additional files in VASP jobs.</p></li>
+</ul>
+</section>
 <section id="v0-0-3">
 <h2>v0.0.3<a class="headerlink" href="#v0-0-3" title="Permalink to this headline">¶</a></h2>
 <p>Many updates to use the latest jobflow store features.</p>
@@ -300,7 +340,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

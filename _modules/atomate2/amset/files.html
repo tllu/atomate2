@@ -159,7 +159,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">monty.serialization</span> <span class="kn">import</span> <span class="n">dumpfn</span><span class="p">,</span> <span class="n">loadfn</span>
+<span class="kn">from</span> <span class="nn">monty.serialization</span> <span class="kn">import</span> <span class="n">loadfn</span>
 
 <span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.files</span> <span class="kn">import</span> <span class="n">copy_files</span><span class="p">,</span> <span class="n">get_zfile</span><span class="p">,</span> <span class="n">gunzip_files</span><span class="p">,</span> <span class="n">rename_files</span>
@@ -200,13 +200,10 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Copying AMSET inputs from </span><span class="si">{</span><span class="n">src_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">directory_listing</span> <span class="o">=</span> <span class="n">file_client</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">src_dir</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">src_host</span><span class="p">)</span>
 
-    <span class="c1"># find required files</span>
-    <span class="n">required_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_zfile</span><span class="p">(</span><span class="n">directory_listing</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;settings.yaml&quot;</span><span class="p">,)]</span>
-
     <span class="c1"># find optional files</span>
-    <span class="n">optional_files</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">found_vasprun</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="p">(</span>
+        <span class="s2">&quot;settings.yaml&quot;</span><span class="p">,</span>
         <span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span>
         <span class="s2">&quot;band_structure_data.json&quot;</span><span class="p">,</span>
         <span class="s2">&quot;wavefunction.h5&quot;</span><span class="p">,</span>
@@ -215,26 +212,17 @@
     <span class="p">):</span>
         <span class="n">found_file</span> <span class="o">=</span> <span class="n">get_zfile</span><span class="p">(</span><span class="n">directory_listing</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">allow_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">found_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">optional_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">found_file</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="s2">&quot;vasprun&quot;</span> <span class="ow">in</span> <span class="n">file</span> <span class="ow">or</span> <span class="s2">&quot;band_structure_data&quot;</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
-                <span class="n">found_vasprun</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="c1"># check at least one of vasprun or band_structure_data is found</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">found_vasprun</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
-            <span class="s2">&quot;Could not find vasprun.xml or band_structure_data.json file to copy.&quot;</span>
-        <span class="p">)</span>
+            <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">found_file</span><span class="p">)</span>
 
     <span class="n">copy_files</span><span class="p">(</span>
         <span class="n">src_dir</span><span class="p">,</span>
         <span class="n">src_host</span><span class="o">=</span><span class="n">src_host</span><span class="p">,</span>
-        <span class="n">include_files</span><span class="o">=</span><span class="n">required_files</span> <span class="o">+</span> <span class="n">optional_files</span><span class="p">,</span>
+        <span class="n">include_files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span>
         <span class="n">file_client</span><span class="o">=</span><span class="n">file_client</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">gunzip_files</span><span class="p">(</span>
-        <span class="n">include_files</span><span class="o">=</span><span class="n">required_files</span> <span class="o">+</span> <span class="n">optional_files</span><span class="p">,</span>
+        <span class="n">include_files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span>
         <span class="n">allow_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">file_client</span><span class="o">=</span><span class="n">file_client</span><span class="p">,</span>
     <span class="p">)</span>
@@ -258,15 +246,18 @@
 <span class="sd">        Whether apply the settings on top of an existing settings.yaml file in the</span>
 <span class="sd">        current directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">amset.io</span> <span class="kn">import</span> <span class="n">write_settings</span>
+
     <span class="k">if</span> <span class="n">from_prev</span><span class="p">:</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="n">loadfn</span><span class="p">(</span><span class="s2">&quot;settings.yaml&quot;</span><span class="p">)</span>
         <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">settings_updates</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">settings</span> <span class="o">=</span> <span class="n">settings_updates</span>
 
-    <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">SETTINGS</span><span class="o">.</span><span class="n">AMSET_SETTINGS_UPDATE</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">AMSET_SETTINGS_UPDATE</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">SETTINGS</span><span class="o">.</span><span class="n">AMSET_SETTINGS_UPDATE</span><span class="p">)</span>
 
-    <span class="n">dumpfn</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="s2">&quot;settings.yaml&quot;</span><span class="p">)</span></div>
+    <span class="n">write_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="s2">&quot;settings.yaml&quot;</span><span class="p">)</span></div>
 </pre></div>
 
               </div>
@@ -294,7 +285,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

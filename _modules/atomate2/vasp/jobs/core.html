@@ -160,6 +160,8 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
+<span class="kn">from</span> <span class="nn">pymatgen.alchemy.materials</span> <span class="kn">import</span> <span class="n">TransformedStructure</span>
+<span class="kn">from</span> <span class="nn">pymatgen.alchemy.transmuters</span> <span class="kn">import</span> <span class="n">StandardTransmuter</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Structure</span>
 
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">BaseVaspMaker</span><span class="p">,</span> <span class="n">vasp_job</span>
@@ -187,6 +189,7 @@
     <span class="s2">&quot;HSEStaticMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;TightRelaxMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSETightRelaxMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TransmuterMaker&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -213,7 +216,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;static&quot;</span>
@@ -245,7 +251,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;relax&quot;</span>
@@ -277,7 +286,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;tight relax&quot;</span>
@@ -309,7 +321,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;non-scf&quot;</span>
@@ -377,7 +392,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse relax&quot;</span>
@@ -405,9 +423,12 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
 <span class="sd">    stop_children_kwargs</span>
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
-<span class="sd">    write_additional_data</span>
+<span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse tight relax&quot;</span>
@@ -439,7 +460,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse static&quot;</span>
@@ -452,6 +476,13 @@
 <span class="k">class</span> <span class="nc">HSEBSMaker</span><span class="p">(</span><span class="n">BaseVaspMaker</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Maker to create HSE06 band structure jobs.</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        The number of bands will automatically be adjusted based on the number of bands</span>
+<span class="sd">        in the previous calculation. Therefore, if starting from a previous structure</span>
+<span class="sd">        ensure you are starting from a static/relaxation calculation that has the same</span>
+<span class="sd">        number of atoms (i.e., not a smaller/larger cell), as otherwise the number of</span>
+<span class="sd">        bands may be set incorrectly.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -471,7 +502,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse band structure&quot;</span>
@@ -538,6 +572,10 @@
 <span class="sd">        The input structure should be well relaxed to avoid imaginary modes. For</span>
 <span class="sd">        example, using :obj:`TightRelaxMaker`.</span>
 
+<span class="sd">    .. Note::</span>
+<span class="sd">        If starting from a previous calculation, magnetism will be disabled if all</span>
+<span class="sd">        MAGMOMs are less than 0.02.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    name : str</span>
@@ -556,13 +594,130 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;dielectric&quot;</span>
     <span class="n">input_set_generator</span><span class="p">:</span> <span class="n">StaticSetGenerator</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">StaticSetGenerator</span><span class="p">(</span><span class="n">lepsilon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">StaticSetGenerator</span><span class="p">(</span><span class="n">lepsilon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">auto_ispin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TransmuterMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.TransmuterMaker.html#atomate2.vasp.jobs.core.TransmuterMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TransmuterMaker</span><span class="p">(</span><span class="n">BaseVaspMaker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A maker to apply transformations to a structure before writing the input sets.</span>
+
+<span class="sd">    Note that if a transformation yields many structures, only the last structure in the</span>
+<span class="sd">    list is used.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        The job name.</span>
+<span class="sd">    transformations : tuple of str</span>
+<span class="sd">        The transformations to apply. Given as a list of names of transformation classes</span>
+<span class="sd">        as defined in the modules in pymatgen.transformations. For example,</span>
+<span class="sd">        ``[&#39;DeformStructureTransformation&#39;, &#39;SupercellTransformation&#39;]``.</span>
+<span class="sd">    transformation_params : tuple of dict or None</span>
+<span class="sd">        The parameters used to instantiate each transformation class. Given as a list of</span>
+<span class="sd">        dicts.</span>
+<span class="sd">    input_set_generator : StaticSetGenerator</span>
+<span class="sd">        A generator used to make the input set.</span>
+<span class="sd">    write_input_set_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.write_vasp_input_set`.</span>
+<span class="sd">    copy_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.copy_vasp_outputs`.</span>
+<span class="sd">    run_vasp_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.run_vasp`.</span>
+<span class="sd">    task_document_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.TaskDocument.from_directory`.</span>
+<span class="sd">    stop_children_kwargs : dict</span>
+<span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
+<span class="sd">    write_additional_data : dict</span>
+<span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;transmuter&quot;</span>
+    <span class="n">transformations</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">tuple</span><span class="p">)</span>
+    <span class="n">transformation_params</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">input_set_generator</span><span class="p">:</span> <span class="n">VaspInputSetGenerator</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">StaticSetGenerator</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="TransmuterMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.jobs.core.TransmuterMaker.html#atomate2.vasp.jobs.core.TransmuterMaker.make">[docs]</a>    <span class="nd">@vasp_job</span>
+    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
+        <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run a transmuter VASP job.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure : Structure</span>
+<span class="sd">            A pymatgen structure object.</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
+<span class="sd">            A previous VASP calculation directory to copy output files from.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transformations</span> <span class="o">=</span> <span class="n">_get_transformations</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transformations</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformation_params</span>
+        <span class="p">)</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">TransformedStructure</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+        <span class="n">transmuter</span> <span class="o">=</span> <span class="n">StandardTransmuter</span><span class="p">([</span><span class="n">ts</span><span class="p">],</span> <span class="n">transformations</span><span class="p">)</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">transmuter</span><span class="o">.</span><span class="n">transformed_structures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">final_structure</span>
+
+        <span class="c1"># to avoid mongoDB errors, &quot;:&quot; is automatically converted to &quot;.&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;transformations:json&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">write_additional_data</span><span class="p">:</span>
+            <span class="n">tjson</span> <span class="o">=</span> <span class="n">transmuter</span><span class="o">.</span><span class="n">transformed_structures</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write_additional_data</span><span class="p">[</span><span class="s2">&quot;transformations:json&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tjson</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">make</span><span class="o">.</span><span class="n">original</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_get_transformations</span><span class="p">(</span>
+    <span class="n">transformations</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">params</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get instantiated transformation objects from their names and parameters.&quot;&quot;&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">({},)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">transformations</span><span class="p">)</span> <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">params</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">transformations</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of transformations and parameters must be the same.&quot;</span><span class="p">)</span>
+
+    <span class="n">transformation_objects</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">transformation</span><span class="p">,</span> <span class="n">transformation_params</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">transformations</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">(</span>
+            <span class="s2">&quot;advanced_transformations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;defect_transformations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;site_transformations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;standard_transformations&quot;</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+
+            <span class="n">mod</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pymatgen.transformations.</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">t_cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">transformation</span><span class="p">)</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">continue</span>
+            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find transformation: </span><span class="si">{</span><span class="n">transformation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">t_obj</span> <span class="o">=</span> <span class="n">t_cls</span><span class="p">(</span><span class="o">**</span><span class="n">transformation_params</span><span class="p">)</span>
+        <span class="n">transformation_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t_obj</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">transformation_objects</span>
 </pre></div>
 
               </div>
@@ -590,7 +745,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

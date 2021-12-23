@@ -169,6 +169,7 @@
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.math</span> <span class="kn">import</span> <span class="n">Matrix3D</span><span class="p">,</span> <span class="n">Vector3D</span>
 <span class="kn">from</span> <span class="nn">atomate2.common.schemas.structure</span> <span class="kn">import</span> <span class="n">StructureMetadata</span>
 <span class="kn">from</span> <span class="nn">atomate2.utils.datetime</span> <span class="kn">import</span> <span class="n">datetime_str</span>
+<span class="kn">from</span> <span class="nn">atomate2.utils.path</span> <span class="kn">import</span> <span class="n">get_uri</span>
 
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">amset</span>
@@ -353,7 +354,7 @@
         <span class="n">doc</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_structure</span><span class="p">(</span>
             <span class="n">structure</span><span class="o">=</span><span class="n">_get_structure</span><span class="p">(),</span>
             <span class="n">include_structure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">dir_name</span><span class="o">=</span><span class="n">dir_name</span><span class="p">,</span>
+            <span class="n">dir_name</span><span class="o">=</span><span class="n">get_uri</span><span class="p">(</span><span class="n">dir_name</span><span class="p">),</span>
             <span class="n">completed_at</span><span class="o">=</span><span class="n">datetime_str</span><span class="p">(),</span>
             <span class="nb">input</span><span class="o">=</span><span class="n">settings</span><span class="p">,</span>
             <span class="n">transport</span><span class="o">=</span><span class="n">transport</span><span class="p">,</span>
@@ -407,7 +408,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

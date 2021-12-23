@@ -157,6 +157,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">groupby</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
@@ -255,7 +256,11 @@
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">overwrite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()):</span>
                 <span class="k">with</span> <span class="n">zopen</span><span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Poscar</span><span class="p">):</span>
+                        <span class="c1"># write POSCAR with more signifcant figures</span>
+                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">get_string</span><span class="p">(</span><span class="n">significant_figures</span><span class="o">=</span><span class="mi">16</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="fm">__str__</span><span class="p">())</span>
             <span class="k">elif</span> <span class="ow">not</span> <span class="n">overwrite</span> <span class="ow">and</span> <span class="p">(</span><span class="n">directory</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
                 <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">directory</span> <span class="o">/</span> <span class="n">k</span><span class="si">}</span><span class="s2"> already exists.&quot;</span><span class="p">)</span></div>
 
@@ -321,10 +326,34 @@
                 <span class="n">BadInputSetWarning</span><span class="p">,</span>
             <span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LHFCALC&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;ALGO&quot;</span><span class="p">,</span> <span class="s2">&quot;Normal&quot;</span>
+        <span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;Normal&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;All&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Damped&quot;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Hybrid functionals only support Algo = All, Damped, or Normal.&quot;</span><span class="p">,</span>
+                <span class="n">BadInputSetWarning</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LASPH&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;METAGGA&quot;</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LHFCALC&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LDAU&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LUSE_VDW&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;LASPH = True should be set for +U, meta-GGAs, hybrids, and vdW-DFT&quot;</span><span class="p">,</span>
+                <span class="n">BadInputSetWarning</span><span class="p">,</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="VaspInputSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">VaspInputSetGenerator</span><span class="p">(</span><span class="n">InputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="VaspInputSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">VaspInputSetGenerator</span><span class="p">(</span><span class="n">InputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to generate VASP input sets.</span>
 
@@ -357,7 +386,7 @@
 <span class="sd">        when generating the input set from a previous VASP directory.</span>
 <span class="sd">    constrain_total_magmom</span>
 <span class="sd">        Whether to constrain the total magmom (NUPDOWN in INCAR) to be the sum of the</span>
-<span class="sd">        expected MAGMOM for all species.</span>
+<span class="sd">        initial MAGMOM guess for all species.</span>
 <span class="sd">    validate_magmom</span>
 <span class="sd">        Ensure that missing magmom values are filled in with the default value of 1.0.</span>
 <span class="sd">    use_structure_charge</span>
@@ -378,42 +407,32 @@
 <span class="sd">        optB86b and rVV10.</span>
 <span class="sd">    symprec</span>
 <span class="sd">        Tolerance for symmetry finding, used for line mode band structure k-points.</span>
+<span class="sd">    auto_ispin</span>
+<span class="sd">        If generating input set from a previous calculation, this controls whether</span>
+<span class="sd">        to disable magnetisation (ISPIN = 1) if the absoluate valuue of all magnetic</span>
+<span class="sd">        moments are less than 0.02.</span>
 <span class="sd">    config_dict</span>
 <span class="sd">        The config dictionary to use containing the base input set settings.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">user_incar_settings</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">user_kpoints_settings</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Kpoints</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">user_potcar_settings</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">user_potcar_functional</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">auto_kspacing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">constrain_total_magmom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">validate_magmom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">use_structure_charge</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">sort_structure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">force_gamma</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">SYMPREC</span><span class="p">,</span>
-        <span class="n">vdw</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">config_dict</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">if</span> <span class="n">config_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">config_dict</span> <span class="o">=</span> <span class="n">_BASE_VASP_SET</span>
+    <span class="n">user_incar_settings</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">user_kpoints_settings</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Kpoints</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">user_potcar_settings</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+    <span class="n">user_potcar_functional</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">auto_kspacing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">constrain_total_magmom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">validate_magmom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">use_structure_charge</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">sort_structure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">force_gamma</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">SYMPREC</span>
+    <span class="n">vdw</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">auto_ispin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">config_dict</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">_BASE_VASP_SET</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">config_dict</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span> <span class="o">=</span> <span class="n">user_incar_settings</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">user_kpoints_settings</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">Kpoints</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_kpoints_settings</span> <span class="ow">or</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_settings</span> <span class="o">=</span> <span class="n">user_potcar_settings</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_functional</span> <span class="o">=</span> <span class="n">user_potcar_functional</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">auto_kspacing</span> <span class="o">=</span> <span class="n">auto_kspacing</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">constrain_total_magmom</span> <span class="o">=</span> <span class="n">constrain_total_magmom</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">validate_magmom</span> <span class="o">=</span> <span class="n">validate_magmom</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sort_structure</span> <span class="o">=</span> <span class="n">sort_structure</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">force_gamma</span> <span class="o">=</span> <span class="n">force_gamma</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">symprec</span> <span class="o">=</span> <span class="n">symprec</span>  <span class="c1"># used in k-point generation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vdw</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">vdw</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">vdw</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">use_structure_charge</span> <span class="o">=</span> <span class="n">use_structure_charge</span>
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Post init formatting of arguments.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vdw</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdw</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">vdw</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;KSPACING&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_kpoints_settings</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
@@ -434,13 +453,16 @@
                     <span class="s2">&quot;Invalid or unsupported van-der-Waals functional. Supported &quot;</span>
                     <span class="sa">f</span><span class="s2">&quot;functionals are </span><span class="si">{</span><span class="n">vdw_par</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">vdw_par</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vdw</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">vdw_par</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">vdw</span><span class="p">])</span>
 
         <span class="c1"># read the POTCAR_FUNCTIONAL from the .yaml</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">potcar_functional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;POTCAR_FUNCTIONAL&quot;</span><span class="p">,</span> <span class="s2">&quot;PS&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">potcar_functional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;POTCAR_FUNCTIONAL&quot;</span><span class="p">,</span> <span class="s2">&quot;PS&quot;</span><span class="p">)</span>
 
         <span class="c1"># warn if a user is overriding POTCAR_FUNCTIONAL</span>
-        <span class="k">if</span> <span class="n">user_potcar_functional</span> <span class="ow">and</span> <span class="n">user_potcar_functional</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potcar_functional</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_functional</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_functional</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">potcar_functional</span>
+        <span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
                 <span class="s2">&quot;Overriding the POTCAR functional is generally not recommended &quot;</span>
                 <span class="s2">&quot;as it can significantly affect the results of calculations and &quot;</span>
@@ -449,7 +471,7 @@
                 <span class="s2">&quot;not be available in the selected functional.&quot;</span><span class="p">,</span>
                 <span class="n">BadInputSetWarning</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">potcar_functional</span> <span class="o">=</span> <span class="n">user_potcar_functional</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">potcar_functional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_functional</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_settings</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
@@ -462,7 +484,7 @@
                 <span class="n">BadInputSetWarning</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_potcar_settings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="p">[</span><span class="s2">&quot;POTCAR&quot;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;POTCAR&quot;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
 <div class="viewcode-block" id="VaspInputSetGenerator.get_input_set"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator.get_input_set">[docs]</a>    <span class="k">def</span> <span class="nf">get_input_set</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -494,7 +516,7 @@
 <span class="sd">        VaspInputSet</span>
 <span class="sd">            A VASP input set.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">structure</span><span class="p">,</span> <span class="n">prev_incar</span><span class="p">,</span> <span class="n">bandgap</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_previous</span><span class="p">(</span>
+        <span class="n">structure</span><span class="p">,</span> <span class="n">prev_incar</span><span class="p">,</span> <span class="n">bandgap</span><span class="p">,</span> <span class="n">ispin</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_previous</span><span class="p">(</span>
             <span class="n">structure</span><span class="p">,</span> <span class="n">prev_dir</span>
         <span class="p">)</span>
         <span class="n">incar_updates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_incar_updates</span><span class="p">(</span>
@@ -514,7 +536,12 @@
         <span class="n">kspacing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kspacing</span><span class="p">(</span><span class="n">incar_updates</span><span class="p">)</span>
         <span class="n">kpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_kpoints</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">kpoints_updates</span><span class="p">,</span> <span class="n">kspacing</span><span class="p">)</span>
         <span class="n">incar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_incar</span><span class="p">(</span>
-            <span class="n">structure</span><span class="p">,</span> <span class="n">kpoints</span><span class="p">,</span> <span class="n">prev_incar</span><span class="p">,</span> <span class="n">incar_updates</span><span class="p">,</span> <span class="n">bandgap</span><span class="o">=</span><span class="n">bandgap</span>
+            <span class="n">structure</span><span class="p">,</span>
+            <span class="n">kpoints</span><span class="p">,</span>
+            <span class="n">prev_incar</span><span class="p">,</span>
+            <span class="n">incar_updates</span><span class="p">,</span>
+            <span class="n">bandgap</span><span class="o">=</span><span class="n">bandgap</span><span class="p">,</span>
+            <span class="n">ispin</span><span class="o">=</span><span class="n">ispin</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">VaspInputSet</span><span class="p">(</span>
             <span class="n">incar</span><span class="o">=</span><span class="n">incar</span><span class="p">,</span>
@@ -607,7 +634,7 @@
         <span class="n">nelect</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">num_atoms</span> <span class="o">*</span> <span class="n">nelec</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">el</span><span class="p">)]</span> <span class="k">for</span> <span class="n">el</span><span class="p">,</span> <span class="n">num_atoms</span> <span class="ow">in</span> <span class="n">comp</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_structure_charge</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">nelect</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="o">.</span><span class="n">charge</span>
+            <span class="k">return</span> <span class="n">nelect</span> <span class="o">-</span> <span class="n">structure</span><span class="o">.</span><span class="n">charge</span>
 
         <span class="k">return</span> <span class="n">nelect</span></div>
 
@@ -623,16 +650,22 @@
         <span class="n">vasprun</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">outcar</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">bandgap</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ispin</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">prev_dir</span><span class="p">:</span>
             <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span> <span class="o">=</span> <span class="n">get_vasprun_outcar</span><span class="p">(</span><span class="n">prev_dir</span><span class="p">)</span>
-            <span class="n">bs</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">()</span>
+            <span class="n">bs</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
             <span class="n">prev_incar</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">incar</span>
             <span class="n">prev_structure</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">final_structure</span>
             <span class="n">bandgap</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">bs</span><span class="o">.</span><span class="n">is_metal</span><span class="p">()</span> <span class="k">else</span> <span class="n">bs</span><span class="o">.</span><span class="n">get_band_gap</span><span class="p">()[</span><span class="s2">&quot;energy&quot;</span><span class="p">]</span>
 
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_ispin</span><span class="p">:</span>
+                <span class="c1"># turn off spin when magmom for every site is smaller than 0.02.</span>
+                <span class="n">ispin</span> <span class="o">=</span> <span class="n">_get_ispin</span><span class="p">(</span><span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">)</span>
+
         <span class="n">structure</span> <span class="o">=</span> <span class="n">structure</span> <span class="k">if</span> <span class="n">structure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">prev_structure</span>
         <span class="n">structure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_structure</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">structure</span><span class="p">,</span> <span class="n">prev_incar</span><span class="p">,</span> <span class="n">bandgap</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span>
+
+        <span class="k">return</span> <span class="n">structure</span><span class="p">,</span> <span class="n">prev_incar</span><span class="p">,</span> <span class="n">bandgap</span><span class="p">,</span> <span class="n">ispin</span><span class="p">,</span> <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span>
 
     <span class="k">def</span> <span class="nf">_get_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the standardized structure.&quot;&quot;&quot;</span>
@@ -646,7 +679,7 @@
     <span class="k">def</span> <span class="nf">_get_potcar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">,</span> <span class="n">potcar_spec</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the POTCAR.&quot;&quot;&quot;</span>
         <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">])]</span>
-        <span class="n">potcar_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="p">[</span><span class="s2">&quot;POTCAR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
+        <span class="n">potcar_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;POTCAR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">el</span><span class="p">,</span> <span class="n">el</span><span class="p">)</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">potcar_spec</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">potcar_symbols</span>
@@ -673,11 +706,12 @@
         <span class="n">previous_incar</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">incar_updates</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">bandgap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">ispin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the INCAR.&quot;&quot;&quot;</span>
         <span class="n">previous_incar</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">previous_incar</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">previous_incar</span>
         <span class="n">incar_updates</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">incar_updates</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">incar_updates</span>
-        <span class="n">incar_settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">])</span>
+        <span class="n">incar_settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">])</span>
 
         <span class="c1"># apply user incar settings to SETTINGS not to INCAR</span>
         <span class="n">_apply_incar_updates</span><span class="p">(</span><span class="n">incar_settings</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span><span class="p">)</span>
@@ -703,6 +737,15 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">constrain_total_magmom</span><span class="p">:</span>
             <span class="n">nupdown</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">mag</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.6</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">mag</span> <span class="ow">in</span> <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;MAGMOM&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nupdown</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="n">nupdown</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">1e-5</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="s2">&quot;constrain_total_magmom was set to True, but the sum of MAGMOM &quot;</span>
+                    <span class="s2">&quot;values is not an integer. NUPDOWN is meant to set the spin &quot;</span>
+                    <span class="s2">&quot;multiplet and should typically be an integer. You are likely &quot;</span>
+                    <span class="s2">&quot;better off changing the values of MAGMOM or simply setting &quot;</span>
+                    <span class="s2">&quot;NUPDOWN directly in your INCAR settings.&quot;</span><span class="p">,</span>
+                    <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="p">)</span>
             <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;NUPDOWN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nupdown</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_structure_charge</span><span class="p">:</span>
@@ -718,8 +761,15 @@
             <span class="n">kpoints</span><span class="p">,</span>
         <span class="p">)</span>
 
+        <span class="c1"># handle auto ISPIN</span>
+        <span class="k">if</span> <span class="n">ispin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s2">&quot;ISPIN&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span><span class="p">:</span>
+            <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;ISPIN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ispin</span>
+
         <span class="c1"># apply specified updates, be careful not to override user_incar_settings</span>
         <span class="n">_apply_incar_updates</span><span class="p">(</span><span class="n">incar</span><span class="p">,</span> <span class="n">incar_updates</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># Remove unused INCAR parameters</span>
+        <span class="n">_remove_unused_incar_params</span><span class="p">(</span><span class="n">incar</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
         <span class="k">return</span> <span class="n">incar</span>
 
@@ -737,7 +787,7 @@
             <span class="n">kconfig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_kpoints_settings</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># apply updates to k-points config</span>
-            <span class="n">kconfig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;KPOINTS&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+            <span class="n">kconfig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;KPOINTS&quot;</span><span class="p">,</span> <span class="p">{}))</span>
             <span class="n">kconfig</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kpoints_updates</span><span class="p">)</span>
 
         <span class="c1"># Return None if KSPACING is set and no other user k-points settings have been</span>
@@ -767,7 +817,7 @@
         <span class="n">base_kpoints</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line_density&quot;</span><span class="p">):</span>
             <span class="c1"># handle line density generation</span>
-            <span class="n">kpath</span> <span class="o">=</span> <span class="n">HighSymmKpath</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+            <span class="n">kpath</span> <span class="o">=</span> <span class="n">HighSymmKpath</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="o">**</span><span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kpath_kwargs&quot;</span><span class="p">,</span> <span class="p">{}))</span>
             <span class="n">frac_k_points</span><span class="p">,</span> <span class="n">k_points_labels</span> <span class="o">=</span> <span class="n">kpath</span><span class="o">.</span><span class="n">get_kpoints</span><span class="p">(</span>
                 <span class="n">line_density</span><span class="o">=</span><span class="n">kconfig</span><span class="p">[</span><span class="s2">&quot;line_density&quot;</span><span class="p">],</span> <span class="n">coords_are_cartesian</span><span class="o">=</span><span class="kc">False</span>
             <span class="p">)</span>
@@ -831,7 +881,7 @@
                 <span class="n">style</span><span class="o">=</span><span class="n">Kpoints</span><span class="o">.</span><span class="n">supported_modes</span><span class="o">.</span><span class="n">Reciprocal</span><span class="p">,</span>
                 <span class="n">num_kpts</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">mesh</span><span class="p">),</span>
                 <span class="n">kpts</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mesh</span><span class="p">],</span>
-                <span class="n">kpts_weights</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mesh</span><span class="p">],</span>
+                <span class="n">kpts_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">mesh</span><span class="p">],</span>
             <span class="p">)</span>
 
         <span class="n">added_kpoints</span> <span class="o">=</span> <span class="kc">None</span>
@@ -842,7 +892,7 @@
                 <span class="n">num_kpts</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;added_kpoints&quot;</span><span class="p">)),</span>
                 <span class="n">kpts</span><span class="o">=</span><span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;added_kpoints&quot;</span><span class="p">),</span>
                 <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user-defined&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;added_kpoints&quot;</span><span class="p">)),</span>
-                <span class="n">kpts_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;added_kpoints&quot;</span><span class="p">)),</span>
+                <span class="n">kpts_weights</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">kconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;added_kpoints&quot;</span><span class="p">)),</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">base_kpoints</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">added_kpoints</span> <span class="ow">or</span> <span class="n">zero_weighted_kpoints</span><span class="p">):</span>
@@ -879,8 +929,8 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_incar_settings</span><span class="p">[</span><span class="s2">&quot;KSPACING&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s2">&quot;KSPACING&quot;</span> <span class="ow">in</span> <span class="n">incar_updates</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">incar_updates</span><span class="p">[</span><span class="s2">&quot;KSPACING&quot;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s2">&quot;KSPACING&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">][</span><span class="s2">&quot;KSPACING&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s2">&quot;KSPACING&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span><span class="p">[</span><span class="s2">&quot;INCAR&quot;</span><span class="p">][</span><span class="s2">&quot;KSPACING&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 
 
@@ -905,18 +955,18 @@
         <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="p">,</span> <span class="s2">&quot;spin&quot;</span><span class="p">):</span>
             <span class="n">mag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">spin</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="p">)</span> <span class="ow">in</span> <span class="n">magmoms</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span> <span class="o">==</span> <span class="s2">&quot;Co&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span> <span class="o">==</span> <span class="s2">&quot;Co&quot;</span> <span class="ow">and</span> <span class="n">magmoms</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="p">)]</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                    <span class="s2">&quot;Co without oxidation state is initialized low spin by default. If &quot;</span>
-                    <span class="s2">&quot;this is not desired, please set the spin on the magmom on the &quot;</span>
+                    <span class="s2">&quot;Co without an oxidation state is initialized as low spin by default in Atomate2. &quot;</span>
+                    <span class="s2">&quot;If this default behavior is not desired, please set the spin on the magmom on the &quot;</span>
                     <span class="s2">&quot;site directly to ensure correct initialization.&quot;</span>
                 <span class="p">)</span>
             <span class="n">mag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">magmoms</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span> <span class="o">==</span> <span class="s2">&quot;Co&quot;</span><span class="p">:</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                    <span class="s2">&quot;Co without oxidation state is initialized low spin by default. If &quot;</span>
-                    <span class="s2">&quot;this is not desired, please set the spin on the magmom on the &quot;</span>
+                    <span class="s2">&quot;Co without an oxidation state is initialized as low spin by default in Atomate2. &quot;</span>
+                    <span class="s2">&quot;If this default behavior is not desired, please set the spin on the magmom on the &quot;</span>
                     <span class="s2">&quot;site directly to ensure correct initialization.&quot;</span>
                 <span class="p">)</span>
             <span class="n">mag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">magmoms</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">site</span><span class="o">.</span><span class="n">specie</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">))</span>
@@ -957,22 +1007,24 @@
     <span class="sd">&quot;&quot;&quot;Modify INCAR for use with U parameters.&quot;&quot;&quot;</span>
     <span class="n">has_u</span> <span class="o">=</span> <span class="n">incar_settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LDAU&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">sum</span><span class="p">(</span><span class="n">incar</span><span class="p">[</span><span class="s2">&quot;LDAUU&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
-    <span class="k">if</span> <span class="n">has_u</span><span class="p">:</span>
-        <span class="c1"># modify LMAXMIX if LSDA+U and you have d or f electrons</span>
-        <span class="c1"># note that if the user explicitly sets LMAXMIX in settings it will</span>
-        <span class="c1"># override this logic.</span>
-        <span class="k">if</span> <span class="s2">&quot;LMAXMIX&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">incar_settings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="c1"># contains f-electrons</span>
-            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">Z</span> <span class="o">&gt;</span> <span class="mi">56</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="p">):</span>
-                <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;LMAXMIX&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
-            <span class="c1"># contains d-electrons</span>
-            <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">Z</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="p">):</span>
-                <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;LMAXMIX&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
-
-    <span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">has_u</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">incar</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
             <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;LDAU&quot;</span><span class="p">):</span>
                 <span class="k">del</span> <span class="n">incar</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="c1"># Modify LMAXMIX if you have d or f electrons present. Note that if the user</span>
+    <span class="c1"># explicitly sets LMAXMIX in settings it will override this logic. Previously, this</span>
+    <span class="c1"># was only set if Hubbard U was enabled as per the VASP manual but following an</span>
+    <span class="c1"># investigation it was determined that this would lead to a significant difference</span>
+    <span class="c1"># between SCF -&gt; NonSCF even without Hubbard U enabled. Thanks to Andrew Rosen for</span>
+    <span class="c1"># investigating and reporting.</span>
+    <span class="k">if</span> <span class="s2">&quot;LMAXMIX&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">incar_settings</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="c1"># contains f-electrons</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">Z</span> <span class="o">&gt;</span> <span class="mi">56</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="p">):</span>
+            <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;LMAXMIX&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="c1"># contains d-electrons</span>
+        <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">el</span><span class="o">.</span><span class="n">Z</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="p">):</span>
+            <span class="n">incar</span><span class="p">[</span><span class="s2">&quot;LMAXMIX&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
 
 
 <span class="k">def</span> <span class="nf">_apply_incar_updates</span><span class="p">(</span><span class="n">incar</span><span class="p">,</span> <span class="n">updates</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -997,6 +1049,38 @@
             <span class="n">incar</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">incar</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+
+<span class="k">def</span> <span class="nf">_remove_unused_incar_params</span><span class="p">(</span><span class="n">incar</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove INCAR parameters that are not actively used by VASP.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    incar</span>
+<span class="sd">        An incar.</span>
+<span class="sd">    skip</span>
+<span class="sd">        Keys to skip.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">skip</span> <span class="o">=</span> <span class="p">()</span> <span class="k">if</span> <span class="n">skip</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">skip</span>
+
+    <span class="c1"># Turn off IBRION/ISIF/POTIM if NSW = 0</span>
+    <span class="n">opt_flags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EDIFFG&quot;</span><span class="p">,</span> <span class="s2">&quot;IBRION&quot;</span><span class="p">,</span> <span class="s2">&quot;ISIF&quot;</span><span class="p">,</span> <span class="s2">&quot;POTIM&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">opt_flag</span> <span class="ow">in</span> <span class="n">opt_flags</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">opt_flag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skip</span><span class="p">:</span>
+                <span class="n">incar</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">opt_flag</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Remove MAGMOMs if they aren&#39;t used</span>
+    <span class="k">if</span> <span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ISPIN&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="s2">&quot;MAGMOM&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skip</span><span class="p">:</span>
+        <span class="n">incar</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;MAGMOM&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Turn off +U flags if +U is not even used</span>
+    <span class="n">ldau_flags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LDAUU&quot;</span><span class="p">,</span> <span class="s2">&quot;LDAUJ&quot;</span><span class="p">,</span> <span class="s2">&quot;LDAUL&quot;</span><span class="p">,</span> <span class="s2">&quot;LDAUTYPE&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">incar</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;LDAU&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">ldau_flag</span> <span class="ow">in</span> <span class="n">ldau_flags</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ldau_flag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skip</span><span class="p">:</span>
+                <span class="n">incar</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">ldau_flag</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_set_kspacing</span><span class="p">(</span>
@@ -1070,6 +1154,17 @@
         <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
         <span class="n">kpts_weights</span><span class="o">=</span><span class="n">weights</span><span class="p">,</span>
     <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_ispin</span><span class="p">(</span><span class="n">vasprun</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Vasprun</span><span class="p">],</span> <span class="n">outcar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Outcar</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Get value of ISPIN depending on the magnetisation in the OUTCAR and vasprun.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">outcar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Turn off spin when magmom for every site is smaller than 0.02.</span>
+        <span class="n">site_magmom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;tot&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span><span class="p">])</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">site_magmom</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.02</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">vasprun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">is_spin</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="mi">2</span>
 </pre></div>
 
               </div>
@@ -1097,7 +1192,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

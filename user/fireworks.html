@@ -248,7 +248,7 @@ submit an MgO band structure workflow using FireWorks:</p>
 <span class="p">)</span>
 
 <span class="c1"># make a band structure flow to optimise the structure and obtain the band structure</span>
-<span class="n">bandstructure_flow</span> <span class="o">=</span> <span class="n">RelaxBandStructureMaker</span><span class="p">()</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">si_structure</span><span class="p">)</span>
+<span class="n">bandstructure_flow</span> <span class="o">=</span> <span class="n">RelaxBandStructureMaker</span><span class="p">()</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">mgo_structure</span><span class="p">)</span>
 
 <span class="c1"># convert the flow to a fireworks WorkFlow object</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">flow_to_workflow</span><span class="p">(</span><span class="n">bandstructure_flow</span><span class="p">)</span>
@@ -300,7 +300,7 @@ submit an MgO band structure workflow using FireWorks:</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

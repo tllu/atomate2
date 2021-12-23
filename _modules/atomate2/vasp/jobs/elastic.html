@@ -216,7 +216,10 @@
 <span class="sd">        Keyword arguments that will get passed to :obj:`.should_stop_children`.</span>
 <span class="sd">    write_additional_data : dict</span>
 <span class="sd">        Additional data to write to the current directory. Given as a dict of</span>
-<span class="sd">        {filename: data}.</span>
+<span class="sd">        {filename: data}. Note that if using FireWorks, dictionary keys cannot contain</span>
+<span class="sd">        the &quot;.&quot; character which is typically used to denote file extensions. To avoid</span>
+<span class="sd">        this, use the &quot;:&quot; character, which will automatically be converted to &quot;.&quot;. E.g.</span>
+<span class="sd">        ``{&quot;my_file:txt&quot;: &quot;contents of the file&quot;}``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;elastic relax&quot;</span>
@@ -351,14 +354,15 @@
 
         <span class="c1"># write details of the transformation to the transformations.json file</span>
         <span class="c1"># this file will automatically get added to the task document and allow</span>
-        <span class="c1"># the elastic builder to reconstruct the elastic document</span>
-        <span class="n">elastic_relax_maker</span><span class="o">.</span><span class="n">write_additional_data</span><span class="p">[</span><span class="s2">&quot;transformations.json&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span>
+        <span class="c1"># the elastic builder to reconstruct the elastic document; note the &quot;:&quot; is</span>
+        <span class="c1"># automatically converted to a &quot;.&quot; in the filename.</span>
+        <span class="n">elastic_relax_maker</span><span class="o">.</span><span class="n">write_additional_data</span><span class="p">[</span><span class="s2">&quot;transformations:json&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span>
 
         <span class="c1"># create the job</span>
         <span class="n">relax_job</span> <span class="o">=</span> <span class="n">elastic_relax_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
             <span class="n">deformed_structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span>
         <span class="p">)</span>
-        <span class="n">relax_job</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">deformations</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">relax_job</span><span class="o">.</span><span class="n">append_name</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">deformations</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">relaxations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">relax_job</span><span class="p">)</span>
 
         <span class="c1"># extract the outputs we want</span>
@@ -464,7 +468,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

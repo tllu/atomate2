@@ -496,6 +496,11 @@ example, the full elastic workflow test is reproduced below.</p>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">mock_vasp</span></code> and <code class="docutils literal notranslate"><span class="pre">clean_dir</span></code> arguments to the test function are
 <a class="reference external" href="https://docs.pytest.org/en/6.2.x/fixture.html">pytest fixtures</a> and are essential
 for the test to run successfully.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">mock_vasp</span></code> to work correctly, all imports needed for the test must be
+imported in the test function itself (rather than at the top of the file).</p>
+</div>
 </section>
 </section>
 
@@ -532,7 +537,7 @@ for the test to run successfully.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

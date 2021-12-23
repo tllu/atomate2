@@ -171,12 +171,19 @@
     <span class="n">StaticMaker</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.schemas.calculation</span> <span class="kn">import</span> <span class="n">VaspObject</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.sets.core</span> <span class="kn">import</span> <span class="n">HSEBSSetGenerator</span><span class="p">,</span> <span class="n">NonSCFSetGenerator</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;DoubleRelaxMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;BandStructureMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;UniformBandStructureMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;LineModeBandStructureMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSEBandStructureMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HSEUniformBandStructureMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HSELineModeBandStructureMaker&quot;</span><span class="p">,</span>
     <span class="s2">&quot;RelaxBandStructureMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OpticsMaker&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;HSEOpticsMaker&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -270,7 +277,9 @@
         <span class="n">outputs</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bandstructure_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="s2">&quot;uniform&quot;</span><span class="p">):</span>
             <span class="n">uniform_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
-                <span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span>
+                <span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">uniform_job</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot; uniform&quot;</span>
             <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uniform_job</span><span class="p">)</span>
@@ -282,7 +291,9 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bandstructure_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="s2">&quot;line&quot;</span><span class="p">):</span>
             <span class="n">line_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
-                <span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;line&quot;</span>
+                <span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">line_job</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot; line&quot;</span>
             <span class="n">jobs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line_job</span><span class="p">)</span>
@@ -298,6 +309,104 @@
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">Flow</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="UniformBandStructureMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.UniformBandStructureMaker.html#atomate2.vasp.flows.core.UniformBandStructureMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">UniformBandStructureMaker</span><span class="p">(</span><span class="n">Maker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to generate uniform VASP band structure.</span>
+
+<span class="sd">    This is a static calculation followed by a uniform non-self-consistent field</span>
+<span class="sd">    calculations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    static_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the static calculation.</span>
+<span class="sd">    bs_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the non-self-consistent field calculations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;uniform band structure&quot;</span>
+    <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StaticMaker</span><span class="p">)</span>
+    <span class="n">bs_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">NonSCFMaker</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UniformBandStructureMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.UniformBandStructureMaker.html#atomate2.vasp.flows.core.UniformBandStructureMaker.make">[docs]</a>    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a uniform band structure flow.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure : Structure</span>
+<span class="sd">            A pymatgen structure object.</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
+<span class="sd">            A previous VASP calculation directory to copy output files from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Flow</span>
+<span class="sd">            A uniform band structure flow.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">static_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span><span class="p">)</span>
+        <span class="n">uniform_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
+            <span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+            <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">uniform_job</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot; uniform&quot;</span>
+        <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">static_job</span><span class="p">,</span> <span class="n">uniform_job</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Flow</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">uniform_job</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="LineModeBandStructureMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.LineModeBandStructureMaker.html#atomate2.vasp.flows.core.LineModeBandStructureMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">LineModeBandStructureMaker</span><span class="p">(</span><span class="n">Maker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to generate line mode VASP band structure.</span>
+
+<span class="sd">    This is a static calculation followed by a line mode non-self-consistent field</span>
+<span class="sd">    calculations.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    static_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the static calculation.</span>
+<span class="sd">    bs_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the non-self-consistent field calculations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;line band structure&quot;</span>
+    <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StaticMaker</span><span class="p">)</span>
+    <span class="n">bs_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">NonSCFMaker</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LineModeBandStructureMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.LineModeBandStructureMaker.html#atomate2.vasp.flows.core.LineModeBandStructureMaker.make">[docs]</a>    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a line mode band structure flow.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure : Structure</span>
+<span class="sd">            A pymatgen structure object.</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
+<span class="sd">            A previous VASP calculation directory to copy output files from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Flow</span>
+<span class="sd">            A line mode band structure flow.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">static_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span><span class="p">)</span>
+        <span class="n">line_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bs_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
+            <span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+            <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">line_job</span><span class="o">.</span><span class="n">name</span> <span class="o">+=</span> <span class="s2">&quot; line&quot;</span>
+        <span class="n">jobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">static_job</span><span class="p">,</span> <span class="n">line_job</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Flow</span><span class="p">(</span><span class="n">jobs</span><span class="p">,</span> <span class="n">line_job</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="HSEBandStructureMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.HSEBandStructureMaker.html#atomate2.vasp.flows.core.HSEBandStructureMaker">[docs]</a><span class="nd">@dataclass</span>
@@ -322,6 +431,50 @@
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse band structure&quot;</span>
     <span class="n">bandstructure_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;both&quot;</span>
+    <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEStaticMaker</span><span class="p">)</span>
+    <span class="n">bs_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEBSMaker</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HSEUniformBandStructureMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.HSEUniformBandStructureMaker.html#atomate2.vasp.flows.core.HSEUniformBandStructureMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSEUniformBandStructureMaker</span><span class="p">(</span><span class="n">UniformBandStructureMaker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to generate VASP HSE uniform band structures.</span>
+
+<span class="sd">    This is a HSE06 static calculation followed by a HSE06 uniform calculation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    static_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the static calculation.</span>
+<span class="sd">    bs_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the uniform band structure calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse band structure&quot;</span>
+    <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEStaticMaker</span><span class="p">)</span>
+    <span class="n">bs_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEBSMaker</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="HSELineModeBandStructureMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.HSELineModeBandStructureMaker.html#atomate2.vasp.flows.core.HSELineModeBandStructureMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSELineModeBandStructureMaker</span><span class="p">(</span><span class="n">LineModeBandStructureMaker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to generate VASP HSE line mode band structures.</span>
+
+<span class="sd">    This is a HSE06 static calculation followed by a HSE06 line mode calculation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    static_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the static calculation.</span>
+<span class="sd">    bs_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the line-mode band structure calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse band structure&quot;</span>
     <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEStaticMaker</span><span class="p">)</span>
     <span class="n">bs_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEBSMaker</span><span class="p">)</span></div>
 
@@ -369,6 +522,120 @@
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">Flow</span><span class="p">([</span><span class="n">relax_job</span><span class="p">,</span> <span class="n">bs_flow</span><span class="p">],</span> <span class="n">bs_flow</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="OpticsMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.OpticsMaker.html#atomate2.vasp.flows.core.OpticsMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">OpticsMaker</span><span class="p">(</span><span class="n">Maker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to create optical absorption calculation VASP jobs.</span>
+
+<span class="sd">    This workflow contains an initial static calculation, and then a non-self-consistent</span>
+<span class="sd">    field calculation with LOPTICS set. The purpose of the static calculation is</span>
+<span class="sd">    i) to determine if the material needs magnetism set, and ii) to determine the total</span>
+<span class="sd">    number of bands (the second calculation contains 1.3 * number of bands as the</span>
+<span class="sd">    initial static) as often the highest bands are not properly converged in VASP.</span>
+
+<span class="sd">    .. Note::</span>
+<span class="sd">        The magnetism will be disabled in the non-self-consistent field calculation if</span>
+<span class="sd">        all MAGMOMs are less than 0.02.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    static_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the static calculation.</span>
+<span class="sd">    band_structure_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the uniform optics calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;static and optics&quot;</span>
+    <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StaticMaker</span><span class="p">)</span>
+    <span class="n">band_structure_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">NonSCFMaker</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;optics&quot;</span><span class="p">,</span>
+            <span class="n">input_set_generator</span><span class="o">=</span><span class="n">NonSCFSetGenerator</span><span class="p">(</span><span class="n">optics</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="OpticsMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.OpticsMaker.html#atomate2.vasp.flows.core.OpticsMaker.make">[docs]</a>    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run a static and then a non-scf optics calculation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure: .Structure</span>
+<span class="sd">            A pymatgen structure object.</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
+<span class="sd">            A previous VASP calculation directory to copy output files from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Flow</span>
+<span class="sd">            A static and nscf with optics flow.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">static_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span><span class="p">)</span>
+        <span class="n">nscf_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">band_structure_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
+            <span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Flow</span><span class="p">([</span><span class="n">static_job</span><span class="p">,</span> <span class="n">nscf_job</span><span class="p">],</span> <span class="n">nscf_job</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="HSEOpticsMaker"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.HSEOpticsMaker.html#atomate2.vasp.flows.core.HSEOpticsMaker">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSEOpticsMaker</span><span class="p">(</span><span class="n">Maker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maker to create HSE optical absorption calculation VASP jobs.</span>
+
+<span class="sd">    This workflow contains an initial HSE static calculation, and then a uniform band</span>
+<span class="sd">    structure calculation with LOPTICS set. The purpose of the static calculation is</span>
+<span class="sd">    i) to determine if the material needs magnetism set and ii) to determine the total</span>
+<span class="sd">    number of bands (the second calculation contains 1.3 * number of bands as the</span>
+<span class="sd">    initial static) as often the highest bands are not properly converged in VASP.</span>
+
+<span class="sd">    .. Note::</span>
+<span class="sd">        The magnetism will be disabled in the uniform optics calculation if all MAGMOMs</span>
+<span class="sd">        are less than 0.02.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name of the flows produced by this maker.</span>
+<span class="sd">    static_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the static calculation.</span>
+<span class="sd">    band_structure_maker : .BaseVaspMaker</span>
+<span class="sd">        The maker to use for the uniform optics calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;hse static and optics&quot;</span>
+    <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HSEStaticMaker</span><span class="p">)</span>
+    <span class="n">band_structure_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">HSEBSMaker</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;hse optics&quot;</span><span class="p">,</span>
+            <span class="n">input_set_generator</span><span class="o">=</span><span class="n">HSEBSSetGenerator</span><span class="p">(</span><span class="n">optics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="HSEOpticsMaker.make"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.flows.core.HSEOpticsMaker.html#atomate2.vasp.flows.core.HSEOpticsMaker.make">[docs]</a>    <span class="k">def</span> <span class="nf">make</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run a static and then a non-scf optics calculation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure: .Structure</span>
+<span class="sd">            A pymatgen structure object.</span>
+<span class="sd">        prev_vasp_dir : str or Path or None</span>
+<span class="sd">            A previous VASP calculation directory to copy output files from.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Flow</span>
+<span class="sd">            A static and nscf with optics flow.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">static_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">static_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">prev_vasp_dir</span><span class="p">)</span>
+        <span class="n">bs_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">band_structure_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
+            <span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> <span class="n">prev_vasp_dir</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">dir_name</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Flow</span><span class="p">([</span><span class="n">static_job</span><span class="p">,</span> <span class="n">bs_job</span><span class="p">],</span> <span class="n">bs_job</span><span class="o">.</span><span class="n">output</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div></div>
 </pre></div>
 
               </div>
@@ -396,7 +663,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     

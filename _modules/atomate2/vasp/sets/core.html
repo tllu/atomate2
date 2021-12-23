@@ -155,7 +155,8 @@
 <span></span><span class="sd">&quot;&quot;&quot;Module defining core VASP input set generators.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
@@ -173,10 +174,12 @@
     <span class="s2">&quot;HSEStaticSetGenerator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSEBSSetGenerator&quot;</span><span class="p">,</span>
     <span class="s2">&quot;HSETightRelaxSetGenerator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ElectronPhononSetGenerator&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="RelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.RelaxSetGenerator.html#atomate2.vasp.sets.core.RelaxSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">RelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="RelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.RelaxSetGenerator.html#atomate2.vasp.sets.core.RelaxSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">RelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to generate VASP relaxation input sets.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="RelaxSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.RelaxSetGenerator.html#atomate2.vasp.sets.core.RelaxSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
@@ -211,7 +214,8 @@
         <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span> <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;ISIF&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="TightRelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.TightRelaxSetGenerator.html#atomate2.vasp.sets.core.TightRelaxSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">TightRelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="TightRelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.TightRelaxSetGenerator.html#atomate2.vasp.sets.core.TightRelaxSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TightRelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to generate tight VASP relaxation input sets.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TightRelaxSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.TightRelaxSetGenerator.html#atomate2.vasp.sets.core.TightRelaxSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
@@ -251,13 +255,13 @@
             <span class="s2">&quot;LAECHG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">&quot;EDIFFG&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span>
             <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Normal&quot;</span><span class="p">,</span>
             <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
             <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="StaticSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.StaticSetGenerator.html#atomate2.vasp.sets.core.StaticSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">StaticSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="StaticSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.StaticSetGenerator.html#atomate2.vasp.sets.core.StaticSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">StaticSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to generate VASP static input sets.</span>
 
@@ -273,10 +277,8 @@
 <span class="sd">        Other keyword arguments that will be passed to :obj:`VaspInputSetGenerator`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lepsilon</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">lcalcpol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lepsilon</span> <span class="o">=</span> <span class="n">lepsilon</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lcalcpol</span> <span class="o">=</span> <span class="n">lcalcpol</span>
+    <span class="n">lepsilon</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">lcalcpol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="StaticSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.StaticSetGenerator.html#atomate2.vasp.sets.core.StaticSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -308,24 +310,25 @@
 <span class="sd">            A dictionary of updates to apply.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">updates</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">&quot;ISMEAR&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
             <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
             <span class="s2">&quot;LORBIT&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-            <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;Normal&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lepsilon</span><span class="p">:</span>
             <span class="c1"># LPEAD=T: numerical evaluation of overlap integral prevents LRF_COMMUTATOR</span>
             <span class="c1"># errors and can lead to better expt. agreement but produces slightly</span>
             <span class="c1"># different results</span>
-            <span class="n">updates</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;LEPSILON&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;LPEAD&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+            <span class="n">updates</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;LEPSILON&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;LPEAD&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcalcpol</span><span class="p">:</span>
             <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;LCALCPOL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="n">updates</span></div></div>
 
 
-<div class="viewcode-block" id="NonSCFSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.NonSCFSetGenerator.html#atomate2.vasp.sets.core.NonSCFSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">NonSCFSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="NonSCFSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.NonSCFSetGenerator.html#atomate2.vasp.sets.core.NonSCFSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">NonSCFSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to generate VASP non-self-consistent field input sets.</span>
 
@@ -348,23 +351,18 @@
 <span class="sd">        Other keyword arguments that will be passed to :obj:`VaspInputSetGenerator`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;line&quot;</span><span class="p">,</span>
-        <span class="n">dedos</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.005</span><span class="p">,</span>
-        <span class="n">reciprocal_density</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-        <span class="n">line_density</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-        <span class="n">optics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">nbands_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dedos</span> <span class="o">=</span> <span class="n">dedos</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">line_density</span> <span class="o">=</span> <span class="n">line_density</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reciprocal_density</span> <span class="o">=</span> <span class="n">reciprocal_density</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">optics</span> <span class="o">=</span> <span class="n">optics</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nbands_factor</span> <span class="o">=</span> <span class="n">nbands_factor</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;line&quot;</span>
+    <span class="n">dedos</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.02</span>
+    <span class="n">reciprocal_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">line_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">optics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">nbands_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.2</span>
+    <span class="n">auto_ispin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ensure mode is set correctly.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
         <span class="n">supported_modes</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="s2">&quot;boltztrap&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_modes</span><span class="p">:</span>
@@ -439,7 +437,6 @@
 <span class="sd">            A dictionary of updates to apply.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">updates</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
             <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
             <span class="s2">&quot;LORBIT&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
             <span class="s2">&quot;LWAVE&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
@@ -448,9 +445,6 @@
             <span class="s2">&quot;ICHARG&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
             <span class="s2">&quot;KSPACING&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">}</span>
-
-        <span class="c1"># turn off spin when magmom for every site is smaller than 0.02.</span>
-        <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;ISPIN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_ispin</span><span class="p">(</span><span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">vasprun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># set nbands</span>
@@ -470,14 +464,16 @@
             <span class="n">updates</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;ISMEAR&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;SIGMA&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">})</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">optics</span><span class="p">:</span>
-            <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;LOPTICS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1"># LREAL not supported with LOPTICS = True</span>
+            <span class="n">updates</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;LOPTICS&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;CSHIFT&quot;</span><span class="p">:</span> <span class="mf">1e-5</span><span class="p">})</span>
 
         <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;MAGMOM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">return</span> <span class="n">updates</span></div></div>
 
 
-<div class="viewcode-block" id="HSERelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSERelaxSetGenerator.html#atomate2.vasp.sets.core.HSERelaxSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">HSERelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="HSERelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSERelaxSetGenerator.html#atomate2.vasp.sets.core.HSERelaxSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSERelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to generate VASP HSE06 relaxation input sets.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HSERelaxSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSERelaxSetGenerator.html#atomate2.vasp.sets.core.HSERelaxSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
@@ -518,10 +514,12 @@
             <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
             <span class="s2">&quot;PRECFOCK&quot;</span><span class="p">:</span> <span class="s2">&quot;Fast&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ISIF&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">&quot;LASPH&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="HSETightRelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSETightRelaxSetGenerator.html#atomate2.vasp.sets.core.HSETightRelaxSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">HSETightRelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="HSETightRelaxSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSETightRelaxSetGenerator.html#atomate2.vasp.sets.core.HSETightRelaxSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSETightRelaxSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to generate tight VASP HSE relaxation input sets.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HSETightRelaxSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSETightRelaxSetGenerator.html#atomate2.vasp.sets.core.HSETightRelaxSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
@@ -568,10 +566,12 @@
             <span class="s2">&quot;HFSCREEN&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
             <span class="s2">&quot;LHFCALC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
             <span class="s2">&quot;PRECFOCK&quot;</span><span class="p">:</span> <span class="s2">&quot;Fast&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;LASPH&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="HSEStaticSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSEStaticSetGenerator.html#atomate2.vasp.sets.core.HSEStaticSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">HSEStaticSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="HSEStaticSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSEStaticSetGenerator.html#atomate2.vasp.sets.core.HSEStaticSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSEStaticSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Class to generate VASP HSE06 static input sets.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HSEStaticSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSEStaticSetGenerator.html#atomate2.vasp.sets.core.HSEStaticSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
@@ -604,20 +604,22 @@
 <span class="sd">            A dictionary of updates to apply.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="s2">&quot;ALGO&quot;</span><span class="p">:</span> <span class="s2">&quot;All&quot;</span><span class="p">,</span>
             <span class="s2">&quot;GGA&quot;</span><span class="p">:</span> <span class="s2">&quot;PE&quot;</span><span class="p">,</span>
             <span class="s2">&quot;HFSCREEN&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
             <span class="s2">&quot;LHFCALC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
             <span class="s2">&quot;PRECFOCK&quot;</span><span class="p">:</span> <span class="s2">&quot;Fast&quot;</span><span class="p">,</span>
             <span class="s2">&quot;ISMEAR&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
             <span class="s2">&quot;LORBIT&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
             <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;LASPH&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">}</span></div></div>
 
 
-<div class="viewcode-block" id="HSEBSSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSEBSSetGenerator.html#atomate2.vasp.sets.core.HSEBSSetGenerator">[docs]</a><span class="k">class</span> <span class="nc">HSEBSSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+<div class="viewcode-block" id="HSEBSSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.HSEBSSetGenerator.html#atomate2.vasp.sets.core.HSEBSSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HSEBSSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to generate VASP HSE06 band structure input sets.</span>
 
@@ -663,28 +665,21 @@
 <span class="sd">        Other keyword arguments that will be passed to :obj:`VaspInputSetGenerator`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gap&quot;</span><span class="p">,</span>
-        <span class="n">dedos</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.005</span><span class="p">,</span>
-        <span class="n">reciprocal_density</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-        <span class="n">line_density</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-        <span class="n">zero_weighted_reciprocal_density</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-        <span class="n">optics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">nbands_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">,</span>
-        <span class="n">added_kpoints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Vector3D</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dedos</span> <span class="o">=</span> <span class="n">dedos</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">line_density</span> <span class="o">=</span> <span class="n">line_density</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">reciprocal_density</span> <span class="o">=</span> <span class="n">reciprocal_density</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">optics</span> <span class="o">=</span> <span class="n">optics</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">nbands_factor</span> <span class="o">=</span> <span class="n">nbands_factor</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">added_kpoints</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">added_kpoints</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">added_kpoints</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">zero_weighted_reciprocal_density</span> <span class="o">=</span> <span class="n">zero_weighted_reciprocal_density</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;gap&quot;</span>
+    <span class="n">dedos</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.02</span>
+    <span class="n">reciprocal_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">line_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">zero_weighted_reciprocal_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">optics</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">nbands_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.2</span>
+    <span class="n">added_kpoints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Vector3D</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">auto_ispin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Ensure mode is set correctly.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">supported_modes</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;uniform&quot;</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">,</span> <span class="s2">&quot;uniform_dense&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_modes</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Supported modes are: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">supported_modes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -782,9 +777,6 @@
             <span class="s2">&quot;KSPACING&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
         <span class="p">}</span>
 
-        <span class="c1"># turn off spin when magmom for every site is smaller than 0.02.</span>
-        <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;ISPIN&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_get_ispin</span><span class="p">(</span><span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">)</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;uniform&quot;</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">added_kpoints</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># automatic setting of nedos using the energy range and the energy step</span>
             <span class="n">nedos</span> <span class="o">=</span> <span class="n">_get_nedos</span><span class="p">(</span><span class="n">vasprun</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dedos</span><span class="p">)</span>
@@ -803,11 +795,128 @@
             <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;NBANDS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nbands</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">optics</span><span class="p">:</span>
-            <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;LOPTICS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="c1"># LREAL not supported with LOPTICS</span>
+            <span class="n">updates</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;LOPTICS&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;CSHIFT&quot;</span><span class="p">:</span> <span class="mf">1e-5</span><span class="p">})</span>
 
         <span class="n">updates</span><span class="p">[</span><span class="s2">&quot;MAGMOM&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">return</span> <span class="n">updates</span></div></div>
+
+
+<div class="viewcode-block" id="ElectronPhononSetGenerator"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.ElectronPhononSetGenerator.html#atomate2.vasp.sets.core.ElectronPhononSetGenerator">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">ElectronPhononSetGenerator</span><span class="p">(</span><span class="n">VaspInputSetGenerator</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to generate VASP electron phonon input sets.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Requires VASP 6.0 and higher. See https://www.vasp.at/wiki/index.php/Electron-</span>
+<span class="sd">        phonon_interactions_from_Monte-Carlo_sampling for more details.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    temperatures : list of float</span>
+<span class="sd">        The temperatures for which the electron-phonon interactions are evaluated.</span>
+<span class="sd">    reciprocal_density</span>
+<span class="sd">        Density of k-mesh by reciprocal volume.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">temperatures</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">100</span><span class="p">,</span>
+        <span class="mi">200</span><span class="p">,</span>
+        <span class="mi">300</span><span class="p">,</span>
+        <span class="mi">400</span><span class="p">,</span>
+        <span class="mi">500</span><span class="p">,</span>
+        <span class="mi">600</span><span class="p">,</span>
+        <span class="mi">700</span><span class="p">,</span>
+        <span class="mi">800</span><span class="p">,</span>
+        <span class="mi">900</span><span class="p">,</span>
+        <span class="mi">1000</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">reciprocal_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">auto_ispin</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="ElectronPhononSetGenerator.get_incar_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.ElectronPhononSetGenerator.html#atomate2.vasp.sets.core.ElectronPhononSetGenerator.get_incar_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_incar_updates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
+        <span class="n">prev_incar</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bandgap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">outcar</span><span class="p">:</span> <span class="n">Outcar</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get updates to the INCAR for a static VASP job.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure</span>
+<span class="sd">            A structure.</span>
+<span class="sd">        prev_incar</span>
+<span class="sd">            An incar from a previous calculation.</span>
+<span class="sd">        bandgap</span>
+<span class="sd">            The band gap.</span>
+<span class="sd">        vasprun</span>
+<span class="sd">            A vasprun from a previous calculation.</span>
+<span class="sd">        outcar</span>
+<span class="sd">            An outcar from a previous calculation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of updates to apply.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;ISMEAR&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;IBRION&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;ISIF&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;ENCUT&quot;</span><span class="p">:</span> <span class="mi">700</span><span class="p">,</span>
+            <span class="s2">&quot;EDIFF&quot;</span><span class="p">:</span> <span class="mf">1e-7</span><span class="p">,</span>
+            <span class="s2">&quot;LAECHG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;LREAL&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;LCHARG&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;LVTOT&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;LVHAR&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;PREC&quot;</span><span class="p">:</span> <span class="s2">&quot;Accurate&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;KSPACING&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;PHON_NTLIST&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperatures</span><span class="p">),</span>
+            <span class="s2">&quot;PHON_TLIST&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperatures</span><span class="p">),</span>  <span class="c1"># has to be a list otherwise error</span>
+            <span class="s2">&quot;PHON_NSTRUCT&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;PHON_LMC&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="ElectronPhononSetGenerator.get_kpoints_updates"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.sets.core.ElectronPhononSetGenerator.html#atomate2.vasp.sets.core.ElectronPhononSetGenerator.get_kpoints_updates">[docs]</a>    <span class="k">def</span> <span class="nf">get_kpoints_updates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
+        <span class="n">prev_incar</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bandgap</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">outcar</span><span class="p">:</span> <span class="n">Outcar</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get updates to the kpoints configuration for a non-self consistent VASP job.</span>
+
+<span class="sd">        Note, these updates will be ignored if the user has set user_kpoint_settings.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure</span>
+<span class="sd">            A structure.</span>
+<span class="sd">        prev_incar</span>
+<span class="sd">            An incar from a previous calculation.</span>
+<span class="sd">        bandgap</span>
+<span class="sd">            The band gap.</span>
+<span class="sd">        vasprun</span>
+<span class="sd">            A vasprun from a previous calculation.</span>
+<span class="sd">        outcar</span>
+<span class="sd">            An outcar from a previous calculation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            A dictionary of updates to apply to the KPOINTS config.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;reciprocal_density&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reciprocal_density</span><span class="p">}</span></div></div>
 
 
 <span class="k">def</span> <span class="nf">_get_nedos</span><span class="p">(</span><span class="n">vasprun</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Vasprun</span><span class="p">],</span> <span class="n">dedos</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -818,17 +927,6 @@
     <span class="n">emax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">eigs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="k">for</span> <span class="n">eigs</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="n">emin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">eigs</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="k">for</span> <span class="n">eigs</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">eigenvalues</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
     <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">emax</span> <span class="o">-</span> <span class="n">emin</span><span class="p">)</span> <span class="o">/</span> <span class="n">dedos</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">_get_ispin</span><span class="p">(</span><span class="n">vasprun</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Vasprun</span><span class="p">],</span> <span class="n">outcar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Outcar</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Get value of ISPIN depending on the magnetisation in the OUTCAR and vasprun.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">outcar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># Turn off spin when magmom for every site is smaller than 0.02.</span>
-        <span class="n">site_magmom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s2">&quot;tot&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span><span class="p">])</span>
-        <span class="k">return</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">site_magmom</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.02</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">vasprun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">is_spin</span> <span class="k">else</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="mi">2</span>
 </pre></div>
 
               </div>
@@ -856,7 +954,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
 </p>
     </div>
     
