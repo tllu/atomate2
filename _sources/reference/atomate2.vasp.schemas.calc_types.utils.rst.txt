@@ -35,7 +35,6 @@ atomate2.vasp.schemas.calc\_types.utils
    
    
    
-   
 
 
 

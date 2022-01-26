@@ -8,30 +8,30 @@
 
     <title>Installation &#8212; atomate2</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
-
+    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  
     
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
+    <link rel="stylesheet"
+      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
     
       
-
+  
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
+    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -109,10 +109,8 @@
       <div class="navbar-end-item">
         <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub">
-            <span><i class="fab fa-github-square"></i></span>
-            <label class="sr-only">GitHub</label>
-          </a>
+          <a class="nav-link" href="https://github.com/materialsproject/atomate2" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
         </li>
       </ul>
       </div>
@@ -128,7 +126,8 @@
           
             
             <!-- Only show if we have sidebars configured, else just a small margin  -->
-            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
@@ -192,6 +191,9 @@
 
   </div>
 </nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
             </div>
             
           
@@ -555,24 +557,24 @@ calculation outputs. The <code class="docutils literal notranslate"><span class=
 information as well as what to call the main collection that results are kept in (e.g.
 <code class="docutils literal notranslate"><span class="pre">ouputs</span></code>). Note that you should replace the whole <code class="docutils literal notranslate"><span class="pre">&lt;&lt;PROPERTY&gt;&gt;</span></code> definition with
 your own settings.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">JOB_STORE</span><span class="p">:</span>
-    <span class="nt">docs_store</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MongoStore</span>
-      <span class="nt">database</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span>
-      <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span>
-      <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span>
-      <span class="nt">username</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span>
-      <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span>
-      <span class="nt">collection_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">outputs</span>
-    <span class="nt">additional_stores</span><span class="p">:</span>
-      <span class="nt">data</span><span class="p">:</span>
-        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GridFSStore</span>
-        <span class="nt">database</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span>
-        <span class="nt">host</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span>
-        <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span>
-        <span class="nt">username</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span>
-        <span class="nt">password</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span>
-        <span class="nt">collection_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">JOB_STORE</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">docs_store</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MongoStore</span><span class="w"></span>
+<span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">additional_stores</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GridFSStore</span><span class="w"></span>
+<span class="w">        </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -580,16 +582,16 @@ your own settings.</p>
 <p>If you’re using a mongoDB hosted on Atlas (using the free plan linked above) the
 connection format is slightly different. Instead your <code class="docutils literal notranslate"><span class="pre">jobflow.yaml</span></code> file should
 contain the following.</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">JOB_STORE</span><span class="p">:</span>
-    <span class="nt">docs_store</span><span class="p">:</span>
-      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">MongoURIStore</span>
-      <span class="nt">uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span>
-      <span class="nt">collection_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">outputs</span>
-    <span class="nt">additional_stores</span><span class="p">:</span>
-      <span class="nt">data</span><span class="p">:</span>
-        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GridFSURIStore</span>
-        <span class="nt">uri</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span>
-        <span class="nt">collection_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">JOB_STORE</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">docs_store</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MongoURIStore</span><span class="w"></span>
+<span class="w">      </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span><span class="w"></span>
+<span class="w">      </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">additional_stores</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GridFSURIStore</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span><span class="w"></span>
+<span class="w">        </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The URI key may be different based on the Atlas database you deployed. You can
@@ -620,7 +622,7 @@ storage types are available (such as Amazon S3). For more information please rea
 of available settings in the <a class="reference internal" href="../reference/atomate2.settings.Atomate2Settings.html#atomate2.settings.Atomate2Settings" title="atomate2.settings.Atomate2Settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atomate2Settings</span></code></a>. docs. For now, we will just
 configure the commands used to run VASP.</p>
 <p>Write the <code class="docutils literal notranslate"><span class="pre">atomate2.yaml</span></code> file with the following content,</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">VASP_CMD</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;VASP_CMD&gt;&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">VASP_CMD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;VASP_CMD&gt;&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The is the command that you would use to run VASP with parallelization
@@ -659,8 +661,8 @@ and then return to this tutorial.</p>
 <h3>Materials Project API key<a class="headerlink" href="#materials-project-api-key" title="Permalink to this headline">¶</a></h3>
 <p>You can get an API key from the <a class="reference external" href="https://materialsproject.org/dashboard">Materials Project</a> by logging in and going to your
 <a class="reference external" href="https://materialsproject.org/dashboard">Dashboard</a>. Add this also to your <code class="docutils literal notranslate"><span class="pre">~/.pmgrc.yaml</span></code> so that it looks like the following</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PMG_VASP_PSP_DIR</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;INSTALL_DIR&gt;&gt;/pps</span>
-<span class="nt">PMG_MAPI_KEY</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;&lt;YOUR_API_KEY&gt;&gt;</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PMG_VASP_PSP_DIR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;INSTALL_DIR&gt;&gt;/pps</span><span class="w"></span>
+<span class="nt">PMG_MAPI_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;YOUR_API_KEY&gt;&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -789,7 +791,7 @@ traceback.</p>
               
               
               <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -812,8 +814,8 @@ traceback.</p>
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
-<footer class="footer mt-5 mt-md-0">
+    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -824,7 +826,7 @@ traceback.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
 </p>
     </div>
     
