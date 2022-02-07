@@ -248,7 +248,7 @@
     <span class="n">temperatures</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">DEFAULT_ELPH_TEMPERATURES</span>
     <span class="n">min_supercell_length</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">DEFAULT_MIN_SUPERCELL_LENGTH</span>
     <span class="n">relax_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
-        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">DoubleRelaxMaker</span><span class="p">(</span><span class="n">relax_maker</span><span class="o">=</span><span class="n">TightRelaxMaker</span><span class="p">())</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">DoubleRelaxMaker</span><span class="o">.</span><span class="n">from_relax_maker</span><span class="p">(</span><span class="n">TightRelaxMaker</span><span class="p">())</span>
     <span class="p">)</span>
     <span class="n">static_maker</span><span class="p">:</span> <span class="n">BaseVaspMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">StaticMaker</span><span class="p">)</span>
     <span class="n">elph_displacement_maker</span><span class="p">:</span> <span class="n">SupercellElectronPhononDisplacedStructureMaker</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span>
@@ -266,6 +266,7 @@
             <span class="n">bs_maker</span><span class="o">=</span><span class="n">NonSCFMaker</span><span class="p">(</span>
                 <span class="n">input_set_generator</span><span class="o">=</span><span class="n">NonSCFSetGenerator</span><span class="p">(</span>
                     <span class="n">reciprocal_density</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>  <span class="c1"># dense BS mesh</span>
+                    <span class="n">user_incar_settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;LORBIT&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>  <span class="c1"># disable site projections</span>
                 <span class="p">),</span>
                 <span class="n">task_document_kwargs</span><span class="o">=</span><span class="p">{</span>
                     <span class="s2">&quot;strip_bandstructure_projections&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -418,6 +419,7 @@
             <span class="p">),</span>
             <span class="n">bs_maker</span><span class="o">=</span><span class="n">HSEBSMaker</span><span class="p">(</span>
                 <span class="n">input_set_generator</span><span class="o">=</span><span class="n">HSEBSSetGenerator</span><span class="p">(</span>
+                    <span class="n">user_incar_settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;LORBIT&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>  <span class="c1"># disable site projections</span>
                     <span class="n">user_kpoints_settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;reciprocal_density&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">},</span>  <span class="c1"># dense BS mesh</span>
                 <span class="p">),</span>
                 <span class="n">task_document_kwargs</span><span class="o">=</span><span class="p">{</span>

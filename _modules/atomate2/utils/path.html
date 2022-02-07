@@ -158,8 +158,10 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">socket</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;get_uri&quot;</span><span class="p">,</span> <span class="s2">&quot;strip_hostname&quot;</span><span class="p">]</span>
 
@@ -210,6 +212,38 @@
     <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">in</span> <span class="n">dir_name</span><span class="p">:</span>
         <span class="n">dir_name</span> <span class="o">=</span> <span class="n">dir_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">dir_name</span></div>
+
+
+<div class="viewcode-block" id="find_recent_logfile"><a class="viewcode-back" href="../../../reference/atomate2.utils.path.find_recent_logfile.html#atomate2.utils.path.find_recent_logfile">[docs]</a><span class="k">def</span> <span class="nf">find_recent_logfile</span><span class="p">(</span>
+    <span class="n">dir_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">logfile_extensions</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the most recent logfile in a given directory.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dir_name</span>
+<span class="sd">        The path to the directory to search</span>
+<span class="sd">    logfile_extensions</span>
+<span class="sd">        The extension (or list of possible extensions) of the logfile to search for.</span>
+<span class="sd">        For an exact match only, put in the full file name.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    logfile</span>
+<span class="sd">        The path to the most recent logfile with the desired extension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mod_time</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">logfile</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">logfile_extensions</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">logfile_extensions</span> <span class="o">=</span> <span class="p">[</span><span class="n">logfile_extensions</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
+        <span class="n">f_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">logfile_extensions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">f</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">f_path</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">mod_time</span><span class="p">:</span>
+                <span class="n">mod_time</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getmtime</span><span class="p">(</span><span class="n">f_path</span><span class="p">)</span>
+                <span class="n">logfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">f_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logfile</span></div>
 </pre></div>
 
               </div>

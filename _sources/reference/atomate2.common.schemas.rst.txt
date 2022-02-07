@@ -38,6 +38,7 @@ atomate2.common.schemas
    :toctree:
    :recursive:
 
+   atomate2.common.schemas.cclib
    atomate2.common.schemas.elastic
    atomate2.common.schemas.math
    atomate2.common.schemas.molecule

@@ -504,7 +504,7 @@ dielectric constants are obtained using density functional perturbation theory.<
 <section id="transmuter">
 <h3>Transmuter<a class="headerlink" href="#transmuter" title="Permalink to this headline">¶</a></h3>
 <p>A generic calculation that transforms the structure (using one of the
-<a class="reference external" href="https://pymatgen.org/pymatgen.transformations.html#module-pymatgen.transformations" title="(in pymatgen v2022.1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymatgen.transformations</span></code></a>) before writing the input sets. This can be used to
+<a class="reference external" href="https://pymatgen.org/pymatgen.transformations.html#module-pymatgen.transformations" title="(in pymatgen v2022.2.1)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymatgen.transformations</span></code></a>) before writing the input sets. This can be used to
 perform many structure operations such as making a supercell or symmetrising the
 structure.</p>
 </section>
@@ -723,22 +723,21 @@ modification of several additional VASP settings, such as the k-points
 (<code class="docutils literal notranslate"><span class="pre">user_kpoints_settings</span></code>) and choice of pseudopotentials (<code class="docutils literal notranslate"><span class="pre">user_potcar_settings</span></code>).</p>
 <p>If a greater degree of flexibility is needed, the user can define a default set of input
 arguments (<code class="docutils literal notranslate"><span class="pre">config_dict</span></code>) that can be provided to the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a>.
-By default, the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a> uses a base setwof VASP input parameters
-from [BaseVaspSet.yaml](/src/atomate2/vasp/sets/BaseVaspSet.yaml), which each <code class="docutils literal notranslate"><span class="pre">Maker</span></code> is
+By default, the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a> uses a base set of VASP input parameters
+from <code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseVaspSet.yaml</span></code>, which each <code class="docutils literal notranslate"><span class="pre">Maker</span></code> is
 built upon. If desired, the user can define a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file that contains a
-different base set of VASP settings to use (e.g. <code class="docutils literal notranslate"><span class="pre">MPRelaxSet</span></code>). An example of how this
+different base set of VASP settings to use. An example of how this
 can be done is shown below for a representative static calculation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">atomate2.vasp.sets.core</span> <span class="kn">import</span> <span class="n">StaticSetGenerator</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.core</span> <span class="kn">import</span> <span class="n">StaticMaker</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">VaspInputSetGenerator</span>
 <span class="kn">from</span> <span class="nn">monty.serialization</span> <span class="kn">import</span> <span class="n">loadfn</span>
 
-<span class="c1"># read in a custom config dictionary</span>
+<span class="c1"># read in a custom config file</span>
 <span class="n">user_config_dict</span> <span class="o">=</span> <span class="n">loadfn</span><span class="p">(</span><span class="s2">&quot;/path/to/my/CustomVaspSet.yaml&quot;</span><span class="p">)</span>
 
-<span class="c1"># create a custom static set generator with user-defined defaults also change the</span>
-<span class="c1"># NELMIN parmaeter to 6 if it wasn&#39;t already this value in the config_dict (for</span>
-<span class="c1"># demonstration purposes)</span>
+<span class="c1"># create a custom static set generator with user-defined defaults. Also change the</span>
+<span class="c1"># NELMIN parameter to 6 (for demonstration purposes)</span>
 <span class="n">my_custom_set</span> <span class="o">=</span> <span class="n">StaticSetGenerator</span><span class="p">(</span>
     <span class="n">user_incar_settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;NELMIN&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
     <span class="n">config_dict</span><span class="o">=</span><span class="n">user_config_dict</span><span class="p">,</span>

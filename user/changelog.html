@@ -211,6 +211,11 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-6">
+   v0.0.6
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#v0-0-5">
    v0.0.5
   </a>
@@ -258,6 +263,26 @@
                 
   <section id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
+<section id="v0-0-6">
+<h2>v0.0.6<a class="headerlink" href="#v0-0-6" title="Permalink to this headline">¶</a></h2>
+<p>New features:</p>
+<ul class="simple">
+<li><p>cclib task document supporting virtually all popular molecular DFT codes out-of-the-box
+(&#64;arosen93) [#64]</p></li>
+</ul>
+<p>Enhancements:</p>
+<ul class="simple">
+<li><p>Add mag_density to VASP output doc (&#64;arosen93) [#65]</p></li>
+<li><p>Double relax maker now supports two different Makers (&#64;arosen93) [#32]</p></li>
+</ul>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Store band structure efermi in CalculationOutput (&#64;arosen93) [#66]</p></li>
+<li><p>Support for VASP6 and latest pymatgen (&#64;arosen) [#75]</p></li>
+<li><p>Fixed atomate2 version string.</p></li>
+<li><p>Disabled orbital projections in the electron-phonon workflow.</p></li>
+</ul>
+</section>
 <section id="v0-0-5">
 <h2>v0.0.5<a class="headerlink" href="#v0-0-5" title="Permalink to this headline">¶</a></h2>
 <p>This version removed Python 3.7 support following numpy and pymatgen.</p>

@@ -463,6 +463,10 @@
     <span class="n">transition</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Band gap transition given by CBM and VBM k-points&quot;</span>
     <span class="p">)</span>
+    <span class="n">mag_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The magnetization density, defined as total_mag/volume (units of A^-3)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">epsilon_static</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The high-frequency dielectric constant&quot;</span>
     <span class="p">)</span>
@@ -538,6 +542,7 @@
             <span class="n">bandstructure</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">get_band_structure</span><span class="p">(</span><span class="n">efermi</span><span class="o">=</span><span class="s2">&quot;smart&quot;</span><span class="p">)</span>
             <span class="n">bandgap_info</span> <span class="o">=</span> <span class="n">bandstructure</span><span class="o">.</span><span class="n">get_band_gap</span><span class="p">()</span>
             <span class="n">electronic_output</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">efermi</span><span class="o">=</span><span class="n">bandstructure</span><span class="o">.</span><span class="n">efermi</span><span class="p">,</span>
                 <span class="n">vbm</span><span class="o">=</span><span class="n">bandstructure</span><span class="o">.</span><span class="n">get_vbm</span><span class="p">()[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span>
                 <span class="n">cbm</span><span class="o">=</span><span class="n">bandstructure</span><span class="o">.</span><span class="n">get_cbm</span><span class="p">()[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span>
                 <span class="n">bandgap</span><span class="o">=</span><span class="n">bandgap_info</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span>
@@ -587,6 +592,8 @@
         <span class="n">outcar_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;run_stats&quot;</span><span class="p">)</span>
 
         <span class="n">structure</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">final_structure</span>
+        <span class="n">mag_density</span> <span class="o">=</span> <span class="n">outcar</span><span class="o">.</span><span class="n">total_mag</span> <span class="o">/</span> <span class="n">structure</span><span class="o">.</span><span class="n">volume</span> <span class="k">if</span> <span class="n">outcar</span><span class="o">.</span><span class="n">total_mag</span> <span class="k">else</span> <span class="kc">None</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># patch calculated magnetic moments into final structure</span>
             <span class="n">magmoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">[</span><span class="s2">&quot;tot&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span><span class="p">]</span>
@@ -604,6 +611,7 @@
             <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span>
             <span class="n">energy</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">final_energy</span><span class="p">,</span>
             <span class="n">energy_per_atom</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">final_energy</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure</span><span class="p">),</span>
+            <span class="n">mag_density</span><span class="o">=</span><span class="n">mag_density</span><span class="p">,</span>
             <span class="n">epsilon_static</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">epsilon_static</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">epsilon_static_wolfe</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">epsilon_static_wolfe</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">epsilon_ionic</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">epsilon_ionic</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
@@ -801,7 +809,7 @@
 
 <span class="k">def</span> <span class="nf">_get_output_file_paths</span><span class="p">(</span><span class="n">volumetric_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="n">VaspObject</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the output file paths.for VASP output files from the list of volumetric files.</span>
+<span class="sd">    Get the output file paths for VASP output files from the list of volumetric files.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
