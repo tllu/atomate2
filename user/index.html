@@ -8,30 +8,27 @@
 
     <title>User Guide &#8212; atomate2</title>
     
-    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
+
     
-    <link rel="stylesheet"
-      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     
-    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -47,7 +44,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -204,7 +201,7 @@
               
               <div class="toc-item">
                 
-<div class="tocsection onthispage pt-5 pb-3">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
     <i class="fas fa-list"></i> On this page
 </div>
 
@@ -284,7 +281,7 @@
               <div>
                 
   <section id="user-guide">
-<span id="user"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<span id="user"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">#</a></h1>
 <p>Atomate2 is a free, open-source software for performing complex materials science
 workflows using simple Python functions. Features of atomate2 include</p>
 <ul class="simple">
@@ -302,7 +299,7 @@ parameters, and more.</p></li>
 <p><strong>Note</strong>: Atomate2 is primarily built to work with the <a class="reference external" href="https://www.vasp.at">VASP</a> electronic structure
 software, but we are actively working on adding more codes.</p>
 <section id="workflows">
-<h2>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">¶</a></h2>
+<h2>Workflows<a class="headerlink" href="#workflows" title="Permalink to this headline">#</a></h2>
 <p>Some of the workflows available in atomate2 are:</p>
 <ul class="simple">
 <li><p>electronic band structures</p></li>
@@ -313,7 +310,7 @@ software, but we are actively working on adding more codes.</p>
 <p>It is easy to customise and compose any of the above workflows.</p>
 </section>
 <section id="quick-start">
-<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<h2>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline">#</a></h2>
 <p>Workflows in atomate2 written using the <a class="reference external" href="https://materialsproject.github.io/jobflow/">jobflow</a> library. Workflows are generated using
 <code class="docutils literal notranslate"><span class="pre">Maker</span></code> objects, that have a consistent API for modifying input settings and chaining
 workflows together.  Below, we demonstrate how to run a band structure workflow
@@ -327,7 +324,9 @@ states).</p></li>
 <li><p>A non-self-consistent calculation on a high symmetry k-point path (for the line mode
 band structure).</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">atomate2.vasp.flows.core</span> <span class="kn">import</span> <span class="n">RelaxBandStructureMaker</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># MgO_bandstructure.py</span>
+
+<span class="kn">from</span> <span class="nn">atomate2.vasp.flows.core</span> <span class="kn">import</span> <span class="n">RelaxBandStructureMaker</span>
 <span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">run_locally</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
 
@@ -345,18 +344,25 @@ band structure).</p></li>
 <span class="n">run_locally</span><span class="p">(</span><span class="n">bandstructure_flow</span><span class="p">,</span> <span class="n">create_folders</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Before the above code can run successfully, you’ll need to</p>
+<ul class="simple">
+<li><p>set <code class="docutils literal notranslate"><span class="pre">PMG_VASP_PSP_DIR</span></code> in <code class="docutils literal notranslate"><span class="pre">~/.pmgrc.yaml</span></code> to a directory with VASP POTCAR files,</p></li>
+<li><p>tell atomate2 where to find your VASP binary,</p></li>
+<li><p>have a MongoDB instance ready to accept job output.</p></li>
+</ul>
+<p>See the <a class="reference external" href="https://materialsproject.github.io/atomate2/user/install.html">installation</a> steps for details how to set all of this up.</p>
 <p>In this example, we run execute the workflow immediately. In many cases, you might want
-to perform calculations on several materials simulatenously. To achieve this, all
+to perform calculations on several materials simultaneously. To achieve this, all
 atomate2 workflows can be run using the <a class="reference external" href="https://materialsproject.github.io/fireworks/">FireWorks</a> software. See the
 <a class="reference external" href="https://materialsproject.github.io/atomate2/user/fireworks.html">documentation</a> for more details.</p>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h2>
 <p>Atomate2 is a Python 3.8+ library and can be installed using pip. Full installation
 and configuration instructions are provided in the <a class="reference external" href="https://materialsproject.github.io/atomate2/user/install.html">installation tutorial</a>.</p>
 </section>
 <section id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">#</a></h2>
 <p>The documentation includes comprehensive tutorials and reference information to get you
 started:</p>
 <ul class="simple">
@@ -366,31 +372,31 @@ started:</p>
 </ul>
 </section>
 <section id="need-help">
-<h2>Need help?<a class="headerlink" href="#need-help" title="Permalink to this headline">¶</a></h2>
+<h2>Need help?<a class="headerlink" href="#need-help" title="Permalink to this headline">#</a></h2>
 <p>Ask questions about atomate2 on the <a class="reference external" href="https://matsci.org/c/atomate">atomate2 support forum</a>.
 If you’ve found an issue with atomate2, please submit a bug report on <a class="reference external" href="https://github.com/materialsproject/atomate2/issues">GitHub Issues</a>.</p>
 </section>
 <section id="whats-new">
-<h2>What’s new?<a class="headerlink" href="#whats-new" title="Permalink to this headline">¶</a></h2>
+<h2>What’s new?<a class="headerlink" href="#whats-new" title="Permalink to this headline">#</a></h2>
 <p>Track changes to atomate2 through the <a class="reference external" href="https://materialsproject.github.io/atomate2/user/changelog.html">changelog</a>.</p>
 </section>
 <section id="contributing">
-<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">#</a></h2>
 <p>We greatly appreciate any contributions in the form of a pull request.
 Additional information on contributing to atomate2 can be found <a class="reference external" href="https://materialsproject.github.io/atomate2/user/contributing.html">here</a>.
 We maintain a list of all contributors <a class="reference external" href="https://materialsproject.github.io/atomate2/user/contributors.html">here</a>.</p>
 </section>
 <section id="license">
-<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">#</a></h2>
 <p>Atomate2 is released under a modified BSD license; the full text can be found <a class="reference external" href="https://raw.githubusercontent.com/materialsproject/atomate2/main/LICENSE">here</a>.</p>
 </section>
 <section id="acknowledgements">
-<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">#</a></h2>
 <p>Atomate2 was designed and developed by Alex Ganose.</p>
 <p>A full list of all contributors can be found <a class="reference external" href="https://materialsproject.github.io/atomate2/user/contributors.html">here</a>.</p>
 </section>
 <section id="table-of-contents">
-<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
@@ -453,8 +459,9 @@ We maintain a list of all contributors <a class="reference external" href="https
       </div>
     </div>
   
-    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -465,7 +472,7 @@ We maintain a list of all contributors <a class="reference external" href="https
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
 </p>
     </div>
     

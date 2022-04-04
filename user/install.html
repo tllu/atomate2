@@ -8,30 +8,27 @@
 
     <title>Installation &#8212; atomate2</title>
     
-    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
+
     
-    <link rel="stylesheet"
-      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     
-    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -47,7 +44,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -204,7 +201,7 @@
               
               <div class="toc-item">
                 
-<div class="tocsection onthispage pt-5 pb-3">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
     <i class="fas fa-list"></i> On this page
 </div>
 
@@ -364,9 +361,9 @@
               <div>
                 
   <section id="installation">
-<span id="installation-tutorial"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>This guide will get you up and running in an environment for running high-throughput
 workflows with atomate2. atomate2 is built on the pymatgen, custodian, jobflow, and
 FireWorks libraries. Briefly:</p>
@@ -383,29 +380,29 @@ troubleshoot if you’re having problems.</p>
 <p>Note that this installation tutorial is VASP-centric since almost all functionality
 currently in atomate2 pertains to VASP.</p>
 <section id="objectives">
-<h3>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h3>
+<h3>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Install and configure atomate2 on your computing cluster.</p></li>
 <li><p>Validate the installation with a test workflow.</p></li>
 </ul>
 </section>
 <section id="installation-checklist">
-<h3>Installation checklist<a class="headerlink" href="#installation-checklist" title="Permalink to this headline">¶</a></h3>
+<h3>Installation checklist<a class="headerlink" href="#installation-checklist" title="Permalink to this headline">#</a></h3>
 <p>Completing everything on this checklist should result in a fully functioning
 environment.</p>
 <ol class="arabic simple">
-<li><p><a class="reference internal" href="#prerequisites">Prerequisites</a></p></li>
-<li><p><a class="reference internal" href="#create-a-directory-scaffold-for-atomate2">Create a directory scaffold for atomate2</a></p></li>
-<li><p><a class="reference internal" href="#create-a-conda-environment">Create a conda environment</a></p></li>
-<li><p><a class="reference internal" href="#install-python-packages">Install Python packages</a></p></li>
-<li><p><a class="reference internal" href="#configure-jobflow">Configure jobflow</a></p></li>
-<li><p><a class="reference internal" href="#configure-pymatgen">Configure pymatgen</a></p></li>
-<li><p><a class="reference internal" href="#run-a-test-workflow">Run a test workflow</a></p></li>
+<li><p><a class="reference internal" href="#prerequisites"><span class="std std-doc">Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#create-a-directory-scaffold-for-atomate2"><span class="std std-doc">Create a directory scaffold for atomate2</span></a></p></li>
+<li><p><a class="reference internal" href="#create-a-conda-environment"><span class="std std-doc">Create a conda environment</span></a></p></li>
+<li><p><a class="reference internal" href="#install-python-packages"><span class="std std-doc">Install Python packages</span></a></p></li>
+<li><p><a class="reference internal" href="#configure-calculation-output-database"><span class="std std-doc">Configure calculation output database</span></a></p></li>
+<li><p><a class="reference internal" href="#configure-pymatgen"><span class="std std-doc">Configure pymatgen</span></a></p></li>
+<li><p><a class="reference internal" href="#run-a-test-workflow"><span class="std std-doc">Run a test workflow</span></a></p></li>
 </ol>
 </section>
 </section>
 <section id="prerequisites">
-<span id="id1"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <p>Before you install, you need to make sure that your “worker” computer (where the
 simulations will be run, often a computing cluster) that will execute workflows can
 (i) run the base simulation packages (e.g., VASP, LAMMPs, FEFF, etc) and (ii) connect
@@ -415,17 +412,17 @@ computing center doesn’t have firewalls that prevent database access. Typicall
 academic computing clusters as well as systems with a MOM-node style architecture
 (e.g., NERSC) are OK.</p>
 <section id="vasp">
-<h3>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">¶</a></h3>
+<h3>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">#</a></h3>
 <p>To get access to VASP on supercomputing resources typically requires that you’re added
 to a user group on the system you work on after your license is verified. Ensure that
 you have access to the VASP executable and that it is functional before starting this
 tutorial.</p>
 </section>
 <section id="mongodb">
-<h3>MongoDB<a class="headerlink" href="#mongodb" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://docs.mongodb.com/manual/">MongoDB</a> is a NoSQL database that stores each database entry as a document, which is
-represented in the JSON format (the formatting is similar to a dictionary in Python).
-Atomate2 uses MongoDB to:</p>
+<h3>MongoDB<a class="headerlink" href="#mongodb" title="Permalink to this headline">#</a></h3>
+<p><a class="reference external" href="https://docs.mongodb.com/manual/">MongoDB</a> is a NoSQL database that stores each database
+entry as a document, which is represented in the JSON format (the formatting is similar to
+a dictionary in Python). Atomate2 uses MongoDB to:</p>
 <ul class="simple">
 <li><p>Create a database of calculation results.</p></li>
 <li><p>Store the workflows that you want to run as well as their state details (through
@@ -464,7 +461,7 @@ from your MongoDB server (best resolution).</p></li>
 <li><p>Host your Mongo database on a machine that you’re able to securely connect to,
 e.g. on the supercomputing network itself (ask a system administrator for help).</p></li>
 <li><p>Use a proxy service to forward connections from the MongoDB –&gt; login node –&gt;
-compute node (you might try, for example, <a class="reference external" href="https://github.com/bakks/mongo-proxy">the mongo-proxy tool</a>).</p></li>
+compute node (you might try, for example, <a class="reference external" href="https://github.com/bakks/mongo-proxy">the mongo-proxy tool</a>.</p></li>
 <li><p>Set up an ssh tunnel to forward connections from allowed machines (the tunnel must
 be kept alive at all times you’re running workflows).</p></li>
 </ul>
@@ -472,7 +469,7 @@ be kept alive at all times you’re running workflows).</p></li>
 </section>
 </section>
 <section id="create-a-directory-scaffold-for-atomate2">
-<span id="id3"></span><h2>Create a directory scaffold for atomate2<a class="headerlink" href="#create-a-directory-scaffold-for-atomate2" title="Permalink to this headline">¶</a></h2>
+<h2>Create a directory scaffold for atomate2<a class="headerlink" href="#create-a-directory-scaffold-for-atomate2" title="Permalink to this headline">#</a></h2>
 <p>Installing atomate2 includes installation of codes, configuration files, and various
 binaries and libraries. Thus, it is useful to create a directory structure that
 organizes all these items.</p>
@@ -482,10 +479,10 @@ relatively fast access from compute nodes <em>and</em> that is only accessible b
 or your collaborators. Your environment and configuration files will go here,
 including database credentials. We will call this place <code class="docutils literal notranslate"><span class="pre">&lt;&lt;INSTALL_DIR&gt;&gt;</span></code>. A good
 name might simply be <code class="docutils literal notranslate"><span class="pre">atomate2</span></code>.</p></li>
-<li><p>Now you should scaffold the rest of your <code class="docutils literal notranslate"><span class="pre">&lt;&lt;INSTALL_DIR&gt;&gt;</span></code> for the things we are
-going to do next. Create a directories named <code class="docutils literal notranslate"><span class="pre">logs</span></code>, and <code class="docutils literal notranslate"><span class="pre">config</span></code> so your
-directory structure looks like:</p></li>
 </ol>
+<p>#. Now you should scaffold the rest of your <code class="docutils literal notranslate"><span class="pre">&lt;&lt;INSTALL_DIR&gt;&gt;</span></code> for the things we are
+going to do next. Run <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">atomate2/{config,logs}</span></code> to create a directories named
+<code class="docutils literal notranslate"><span class="pre">logs</span></code>, and <code class="docutils literal notranslate"><span class="pre">config</span></code> so your directory structure looks like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>atomate2
 ├── config
 └── logs
@@ -493,11 +490,11 @@ directory structure looks like:</p></li>
 </div>
 </section>
 <section id="create-a-conda-environment">
-<span id="id4"></span><h2>Create a conda environment<a class="headerlink" href="#create-a-conda-environment" title="Permalink to this headline">¶</a></h2>
+<h2>Create a conda environment<a class="headerlink" href="#create-a-conda-environment" title="Permalink to this headline">#</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Make sure to create a Python 3.7+ environment as recent versions of atomate2 only
-support Python 3.7 and higher.</p>
+<p>Make sure to create a Python 3.8+ environment as recent versions of atomate2 only
+support Python 3.8 and higher.</p>
 </div>
 <p>We highly recommended that you organize your installation of the atomate2 and the other
 Python codes using a conda virtual environment. Some of the main benefits are:</p>
@@ -510,10 +507,10 @@ machine.</p></li>
 this solves permissions issues with installing and modifying packages.</p></li>
 </ul>
 <p>The easiest way to get a Python virtual environment is to use the <code class="docutils literal notranslate"><span class="pre">conda</span></code> tool.
-Most clusters (e.g., NESRC) have <a class="reference external" href="https://www.continuum.io">Anaconda</a> installed already which provides access to
-the <code class="docutils literal notranslate"><span class="pre">conda</span></code> binary. If the <code class="docutils literal notranslate"><span class="pre">conda</span></code> tool is not available, you can install it by
-following the installation instructions for <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>. To set up your conda
-environment:</p>
+Most clusters (e.g., NESRC) have <a class="reference external" href="https://www.continuum.io">Anaconda</a> installed already
+which provides access to the <code class="docutils literal notranslate"><span class="pre">conda</span></code> binary. If the <code class="docutils literal notranslate"><span class="pre">conda</span></code> tool is not available, you can
+install it by following the installation instructions for
+<a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>. To set up your conda environment:</p>
 <ol class="arabic simple">
 <li><p>Create a new conda environment called atomate2 with Python 3.9 using
 <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">create</span> <span class="pre">-n</span> <span class="pre">atomate2</span> <span class="pre">python=3.9</span></code>.</p></li>
@@ -526,15 +523,15 @@ after every log in before you can do work on your atomate project.</p></li>
 </ol>
 </section>
 <section id="install-python-packages">
-<span id="id5"></span><h2>Install Python packages<a class="headerlink" href="#install-python-packages" title="Permalink to this headline">¶</a></h2>
+<h2>Install Python packages<a class="headerlink" href="#install-python-packages" title="Permalink to this headline">#</a></h2>
 <p>Next, we will download and install all of the atomate2-related Python packages.</p>
 <p>To install the packages run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">atomate2</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install atomate2
 </pre></div>
 </div>
 </section>
 <section id="configure-calculation-output-database">
-<span id="configure-jobflow"></span><h2>Configure calculation output database<a class="headerlink" href="#configure-calculation-output-database" title="Permalink to this headline">¶</a></h2>
+<h2>Configure calculation output database<a class="headerlink" href="#configure-calculation-output-database" title="Permalink to this headline">#</a></h2>
 <p>The next step is to configure your mongoDB database that will be used to store
 calculation outputs.</p>
 <div class="admonition note">
@@ -551,30 +548,30 @@ that are unique only to these databases.</p>
 </div>
 <p>Create the following files in <code class="docutils literal notranslate"><span class="pre">&lt;&lt;INSTALL_DIR&gt;&gt;/config</span></code>.</p>
 <section id="jobflow-yaml">
-<h3>jobflow.yaml<a class="headerlink" href="#jobflow-yaml" title="Permalink to this headline">¶</a></h3>
+<h3>jobflow.yaml<a class="headerlink" href="#jobflow-yaml" title="Permalink to this headline">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">jobflow.yaml</span></code> file contains the credentials of the MongoDB server that will store
 calculation outputs. The <code class="docutils literal notranslate"><span class="pre">jobflow.yaml</span></code> file requires you to enter the basic database
 information as well as what to call the main collection that results are kept in (e.g.
 <code class="docutils literal notranslate"><span class="pre">ouputs</span></code>). Note that you should replace the whole <code class="docutils literal notranslate"><span class="pre">&lt;&lt;PROPERTY&gt;&gt;</span></code> definition with
 your own settings.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">JOB_STORE</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">docs_store</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MongoStore</span><span class="w"></span>
+<span class="w">  </span><span class="nt">docs_store</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MongoStore</span><span class="w"></span>
+<span class="w">    </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">additional_stores</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GridFSStore</span><span class="w"></span>
 <span class="w">      </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span><span class="w"></span>
 <span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span><span class="w"></span>
 <span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span><span class="w"></span>
 <span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span><span class="w"></span>
 <span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span><span class="w"></span>
-<span class="w">      </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="w"></span>
-<span class="w">    </span><span class="nt">additional_stores</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GridFSStore</span><span class="w"></span>
-<span class="w">        </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;DB_NAME&gt;&gt;</span><span class="w"></span>
-<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;HOSTNAME&gt;&gt;</span><span class="w"></span>
-<span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PORT&gt;&gt;</span><span class="w"></span>
-<span class="w">        </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;USERNAME&gt;&gt;</span><span class="w"></span>
-<span class="w">        </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;PASSWORD&gt;&gt;</span><span class="w"></span>
-<span class="w">        </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span><span class="w"></span>
+<span class="w">      </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -583,15 +580,15 @@ your own settings.</p>
 connection format is slightly different. Instead your <code class="docutils literal notranslate"><span class="pre">jobflow.yaml</span></code> file should
 contain the following.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">JOB_STORE</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">docs_store</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MongoURIStore</span><span class="w"></span>
+<span class="w">  </span><span class="nt">docs_store</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MongoURIStore</span><span class="w"></span>
+<span class="w">    </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span><span class="w"></span>
+<span class="w">    </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="w"></span>
+<span class="w">  </span><span class="nt">additional_stores</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GridFSURIStore</span><span class="w"></span>
 <span class="w">      </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span><span class="w"></span>
-<span class="w">      </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs</span><span class="w"></span>
-<span class="w">    </span><span class="nt">additional_stores</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">data</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GridFSURIStore</span><span class="w"></span>
-<span class="w">        </span><span class="nt">uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb+srv://&lt;&lt;USERNAME&gt;&gt;:&lt;&lt;PASSWORD&gt;&gt;@&lt;&lt;HOST&gt;&gt;/&lt;&lt;DB_NAME&gt;&gt;?retryWrites=true&amp;w=majority</span><span class="w"></span>
-<span class="w">        </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span><span class="w"></span>
+<span class="w">      </span><span class="nt">collection_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputs_blobs</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The URI key may be different based on the Atlas database you deployed. You can
@@ -614,10 +611,10 @@ documents such as band structures and density of states called the <code class="
 Mb), we use GridFS to store large data. GridFS sits on top of MongoDB and
 therefore doesn’t require any further configuration on your part. However, other
 storage types are available (such as Amazon S3). For more information please read
-<span class="xref std std-ref">advanced_storage</span>.</p>
+<span class="xref myst"></span>.</p>
 </section>
 <section id="atomate2-yaml">
-<h3>atomate2.yaml<a class="headerlink" href="#atomate2-yaml" title="Permalink to this headline">¶</a></h3>
+<h3>atomate2.yaml<a class="headerlink" href="#atomate2-yaml" title="Permalink to this headline">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">atomate2.yaml</span></code> file controls all atomate2 settings. You can see the full list
 of available settings in the <a class="reference internal" href="../reference/atomate2.settings.Atomate2Settings.html#atomate2.settings.Atomate2Settings" title="atomate2.settings.Atomate2Settings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atomate2Settings</span></code></a>. docs. For now, we will just
 configure the commands used to run VASP.</p>
@@ -629,7 +626,7 @@ configure the commands used to run VASP.</p>
 (<code class="docutils literal notranslate"><span class="pre">srun</span> <span class="pre">-n</span> <span class="pre">16</span> <span class="pre">vasp</span></code>, <code class="docutils literal notranslate"><span class="pre">ibrun</span> <span class="pre">-n</span> <span class="pre">16</span> <span class="pre">vasp</span></code>, <code class="docutils literal notranslate"><span class="pre">mpirun</span> <span class="pre">-n</span> <span class="pre">16</span> <span class="pre">vasp</span></code>, …).</p>
 </section>
 <section id="finishing-up">
-<h3>Finishing up<a class="headerlink" href="#finishing-up" title="Permalink to this headline">¶</a></h3>
+<h3>Finishing up<a class="headerlink" href="#finishing-up" title="Permalink to this headline">#</a></h3>
 <p>The directory structure of <code class="docutils literal notranslate"><span class="pre">&lt;&lt;INSTALL_DIR&gt;&gt;/config</span></code> should now look like</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>config
 ├── jobflow.yaml
@@ -647,20 +644,21 @@ where to find the config files.</p>
 </section>
 </section>
 <section id="configure-pymatgen">
-<span id="id6"></span><h2>Configure pymatgen<a class="headerlink" href="#configure-pymatgen" title="Permalink to this headline">¶</a></h2>
+<h2>Configure pymatgen<a class="headerlink" href="#configure-pymatgen" title="Permalink to this headline">#</a></h2>
 <p>If you’re planning to run VASP, the last configuration step is to configure pymatgen to
 (required) find the pseudopotentials for VASP and (optional) set up your API key from
 the <a class="reference external" href="https://materialsproject.org/dashboard">Materials Project</a>.</p>
 <section id="pseudopotentials">
-<h3>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this headline">¶</a></h3>
+<h3>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this headline">#</a></h3>
 <p>The psuedopotentials should be available on the compute machine. Follow the
 <a class="reference external" href="https://pymatgen.org/installation.html#potcar-setup">pseudopotential installation instructions in the pymatgen documentation</a>
 and then return to this tutorial.</p>
 </section>
 <section id="materials-project-api-key">
-<h3>Materials Project API key<a class="headerlink" href="#materials-project-api-key" title="Permalink to this headline">¶</a></h3>
+<h3>Materials Project API key<a class="headerlink" href="#materials-project-api-key" title="Permalink to this headline">#</a></h3>
 <p>You can get an API key from the <a class="reference external" href="https://materialsproject.org/dashboard">Materials Project</a> by logging in and going to your
-<a class="reference external" href="https://materialsproject.org/dashboard">Dashboard</a>. Add this also to your <code class="docutils literal notranslate"><span class="pre">~/.pmgrc.yaml</span></code> so that it looks like the following</p>
+<a class="reference external" href="https://materialsproject.org/dashboard">Dashboard</a>. Add this also to
+your <code class="docutils literal notranslate"><span class="pre">~/.pmgrc.yaml</span></code> so that it looks like the following</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">PMG_VASP_PSP_DIR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;INSTALL_DIR&gt;&gt;/pps</span><span class="w"></span>
 <span class="nt">PMG_MAPI_KEY</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;&lt;YOUR_API_KEY&gt;&gt;</span><span class="w"></span>
 </pre></div>
@@ -668,7 +666,7 @@ and then return to this tutorial.</p>
 </section>
 </section>
 <section id="run-a-test-workflow">
-<span id="id7"></span><h2>Run a test workflow<a class="headerlink" href="#run-a-test-workflow" title="Permalink to this headline">¶</a></h2>
+<h2>Run a test workflow<a class="headerlink" href="#run-a-test-workflow" title="Permalink to this headline">#</a></h2>
 <p>To make sure that everything is set up correctly and in place, we’ll finally run a
 simple (but real) test workflow. We will first define a python script to run the
 workflow. Next, we’ll submit a job to run the script. Finally, we’ll examine the
@@ -680,7 +678,7 @@ this can be achieved using the FireWorks package and is covered in
 structure (not very exciting). In the subsequent tutorials, we’ll run more complex
 workflows.</p>
 <section id="define-the-workflow">
-<h3>Define the workflow<a class="headerlink" href="#define-the-workflow" title="Permalink to this headline">¶</a></h3>
+<h3>Define the workflow<a class="headerlink" href="#define-the-workflow" title="Permalink to this headline">#</a></h3>
 <p>Workflows are written using the jobflow software. Essentially, individual stages of
 a workflow are simple python functions. Jobflow provides a way to connect jobs together
 in a natural way. For more details on connecting jobs together see:
@@ -709,7 +707,7 @@ or work directory) and create a file called <code class="docutils literal notran
 the current computing resource.</p>
 </section>
 <section id="submit-the-workflow">
-<h3>Submit the workflow<a class="headerlink" href="#submit-the-workflow" title="Permalink to this headline">¶</a></h3>
+<h3>Submit the workflow<a class="headerlink" href="#submit-the-workflow" title="Permalink to this headline">#</a></h3>
 <p>Next, make a job submission script called <code class="docutils literal notranslate"><span class="pre">job.sh</span></code> containing:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate atomate2
 python relax.py
@@ -736,7 +734,7 @@ python relax.py
 on the Grid Engine scheduler, this would be using <code class="docutils literal notranslate"><span class="pre">qsub</span> <span class="pre">job.sh</span></code>.</p>
 </section>
 <section id="analyzing-the-results">
-<h3>Analyzing the results<a class="headerlink" href="#analyzing-the-results" title="Permalink to this headline">¶</a></h3>
+<h3>Analyzing the results<a class="headerlink" href="#analyzing-the-results" title="Permalink to this headline">#</a></h3>
 <p>Once the job is finished, you can connect to the output database and check the job
 output.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
@@ -754,13 +752,14 @@ output.</p>
 </pre></div>
 </div>
 <p>We query the database using the mongoDB query language. You can also connect to the
-database using graphical tools, such as <a class="reference external" href="https://robomongo.org">Robo3T</a> to explore your results.</p>
+database using graphical tools, such as <a class="reference external" href="https://robomongo.org">Robo3T</a> to explore your
+results.</p>
 <p>The outputs of VASP calculations always have the same set of keys. This structure is
-called a schema. You can see the VASP calculation scheme in the <a class="reference internal" href="../reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument" title="atomate2.common.schemas.cclib.TaskDocument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TaskDocument</span></code></a>
+called a schema. You can see the VASP calculation scheme in the <a class="reference internal" href="../reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument" title="atomate2.vasp.schemas.task.TaskDocument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TaskDocument</span></code></a>
 section of the documentation.</p>
 </section>
 <section id="next-steps">
-<h3>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h3>
+<h3>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h3>
 <p>That’s it! You’ve completed the installation tutorial!</p>
 <p>See the following pages for more information on the topics we covered here:</p>
 <ul class="simple">
@@ -772,16 +771,16 @@ section of the documentation.</p>
 </section>
 </section>
 <section id="troubleshooting-and-faq">
-<h2>Troubleshooting and FAQ<a class="headerlink" href="#troubleshooting-and-faq" title="Permalink to this headline">¶</a></h2>
+<h2>Troubleshooting and FAQ<a class="headerlink" href="#troubleshooting-and-faq" title="Permalink to this headline">#</a></h2>
 <section id="my-job-failed">
-<h3>My job failed!<a class="headerlink" href="#my-job-failed" title="Permalink to this headline">¶</a></h3>
-<p>Check the job error files in the launch directroy for any errors. Also check the job
-standard output for a full log of the workflow executation and to check for a Python
+<h3>My job failed!<a class="headerlink" href="#my-job-failed" title="Permalink to this headline">#</a></h3>
+<p>Check the job error files in the launch directory for any errors. Also check the job
+standard output for a full log of the workflow execution and to check for a Python
 traceback.</p>
 </section>
 <section id="i-honestly-tried-everything-i-can-to-solve-my-problem-i-still-need-help">
-<h3>I honestly tried everything I can to solve my problem. I still need help!<a class="headerlink" href="#i-honestly-tried-everything-i-can-to-solve-my-problem-i-still-need-help" title="Permalink to this headline">¶</a></h3>
-<p>There is a support forum for atomate2: <a class="reference external" href="https://discuss.matsci.org/c/atomate">https://discuss.matsci.org/c/atomate</a></p>
+<h3>I honestly tried everything I can to solve my problem. I still need help!<a class="headerlink" href="#i-honestly-tried-everything-i-can-to-solve-my-problem-i-still-need-help" title="Permalink to this headline">#</a></h3>
+<p>There is a <a class="reference external" href="https://discuss.matsci.org/c/atomate">support forum for atomate2</a>.</p>
 </section>
 </section>
 </section>
@@ -814,8 +813,9 @@ traceback.</p>
       </div>
     </div>
   
-    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -826,7 +826,7 @@ traceback.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
 </p>
     </div>
     

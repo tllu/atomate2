@@ -8,30 +8,27 @@
 
     <title>Writing VASP Tests &#8212; atomate2</title>
     
-    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
+
     
-    <link rel="stylesheet"
-      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     
-    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -46,7 +43,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -159,7 +156,7 @@
               
               <div class="toc-item">
                 
-<div class="tocsection onthispage pt-5 pb-3">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
     <i class="fas fa-list"></i> On this page
 </div>
 
@@ -234,19 +231,19 @@
               <div>
                 
   <section id="writing-vasp-tests">
-<h1>Writing VASP Tests<a class="headerlink" href="#writing-vasp-tests" title="Permalink to this headline">¶</a></h1>
+<h1>Writing VASP Tests<a class="headerlink" href="#writing-vasp-tests" title="Permalink to this headline">#</a></h1>
 <section id="considerations">
-<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">¶</a></h2>
+<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">#</a></h2>
 <p>Atomate2 includes tools to help write tests for VASP workflows. The primary
 considerations with the atomate2 testing environment are listed below.</p>
 <section id="pseudopotentials">
-<h3>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this headline">¶</a></h3>
+<h3>Pseudopotentials<a class="headerlink" href="#pseudopotentials" title="Permalink to this headline">#</a></h3>
 <p>We cannot include any POTCAR files with atomate2 as they are copyrighted material.</p>
 <p>To overcome this, the reference test data includes POTCAR.spec files that only
 contain the pseudopotential name and not the data.</p>
 </section>
 <section id="file-sizes">
-<h3>File sizes<a class="headerlink" href="#file-sizes" title="Permalink to this headline">¶</a></h3>
+<h3>File sizes<a class="headerlink" href="#file-sizes" title="Permalink to this headline">#</a></h3>
 <p>The files produced by VASP are generally large and would overwhelm the size of the
 atomate2 repository if not managed carefully. For example, CHGCAR files can easily be
 ten’s of megabytes which can quickly add up.</p>
@@ -257,7 +254,7 @@ must be copied from a static calculation. Any other example is in the amset work
 where the WAVECAR is needed to extract the wavefunction coefficients.</p>
 </section>
 <section id="vasp-execution">
-<h3>VASP execution<a class="headerlink" href="#vasp-execution" title="Permalink to this headline">¶</a></h3>
+<h3>VASP execution<a class="headerlink" href="#vasp-execution" title="Permalink to this headline">#</a></h3>
 <p>We cannot run VASP on the testing server due to the computational expense. Furthermore,
 different versions/compilations of VASP may yield slightly different total energies
 which are not important for our tests – we only test that (i) inputs are written
@@ -268,7 +265,7 @@ output files into the current directory and then proceed with running the workfl
 </section>
 </section>
 <section id="the-atomate2-dev-command">
-<h2>The atomate2 dev command<a class="headerlink" href="#the-atomate2-dev-command" title="Permalink to this headline">¶</a></h2>
+<h2>The atomate2 dev command<a class="headerlink" href="#the-atomate2-dev-command" title="Permalink to this headline">#</a></h2>
 <p>Atomate2 provides the <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> command that automatically prepares
 VASP data for use in atomate2 tests. It does this by:</p>
 <ul class="simple">
@@ -280,7 +277,7 @@ VASP data for use in atomate2 tests. It does this by:</p>
 <p>There are four stages to generating the test data:</p>
 </section>
 <section id="run-the-vasp-workflow-to-generate-reference-outputs">
-<h2>1. Run the VASP workflow to generate reference outputs<a class="headerlink" href="#run-the-vasp-workflow-to-generate-reference-outputs" title="Permalink to this headline">¶</a></h2>
+<h2>1. Run the VASP workflow to generate reference outputs<a class="headerlink" href="#run-the-vasp-workflow-to-generate-reference-outputs" title="Permalink to this headline">#</a></h2>
 <p>Ensure that you are on a machine that can run VASP. Create a python file that contains
 the code to run your workflow. We recommend adjusting the VASP settings so that the
 files generated are not too large and can be run quickly. E.g., by reducing the k-point
@@ -288,8 +285,7 @@ mesh density or energy cutoff.</p>
 <p>The script should also contain some additional code that will allow
 <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> to process the reference data. Below we give an example
 used to generate the elastic constant workflow test data.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># coding: utf-8</span>
-<span class="kn">from</span> <span class="nn">atomate2.vasp.flows.elastic</span> <span class="kn">import</span> <span class="n">ElasticMaker</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">atomate2.vasp.flows.elastic</span> <span class="kn">import</span> <span class="n">ElasticMaker</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.powerups</span> <span class="kn">import</span> <span class="n">update_user_kpoints_settings</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
 <span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">run_locally</span><span class="p">,</span> <span class="n">JobStore</span>
@@ -320,7 +316,7 @@ used to generate the elastic constant workflow test data.</p>
 the same. You should now run the script in a folder and generate the outputs.json file.</p>
 </section>
 <section id="compile-the-test-data">
-<h2>2. Compile the test data<a class="headerlink" href="#compile-the-test-data" title="Permalink to this headline">¶</a></h2>
+<h2>2. Compile the test data<a class="headerlink" href="#compile-the-test-data" title="Permalink to this headline">#</a></h2>
 <p>The next stage is to compile the calculation data into the correct format. For each
 VASP job in the workflow, there should be a folder with the name of the job that
 contains:</p>
@@ -369,18 +365,19 @@ should ensure they are named something like “relax 1” and “relax 2”.</p>
 </div>
 </section>
 <section id="copy-the-test-data-folder-into-atomate2">
-<h2>3. Copy the test data folder into atomate2<a class="headerlink" href="#copy-the-test-data-folder-into-atomate2" title="Permalink to this headline">¶</a></h2>
+<h2>3. Copy the test data folder into atomate2<a class="headerlink" href="#copy-the-test-data-folder-into-atomate2" title="Permalink to this headline">#</a></h2>
 <p>You can now copy the WF_NAME folder into the atomate2 test files. VASP test files live
 in <code class="docutils literal notranslate"><span class="pre">atomate2/tests/test_data/vasp</span></code>. Ensure that a workflow with that name doesn’t
 already exist in the folder.</p>
 </section>
 <section id="write-the-test">
-<h2>4. Write the test<a class="headerlink" href="#write-the-test" title="Permalink to this headline">¶</a></h2>
+<h2>4. Write the test<a class="headerlink" href="#write-the-test" title="Permalink to this headline">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">atm</span> <span class="pre">dev</span> <span class="pre">vasp-test-data</span></code> also generates an example test that is configured to
 use the test data we just generated.</p>
 <p>The most important part is the section that mocks VASP and configures which checks
-to perform on the input files. For the elastic constant workflow, it looks something like this:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># mapping from job name to directory containing test files</span>
+to perform on the input files. For the elastic constant workflow, it looks something like
+this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># mapping from job name to directory containing test files</span>
 <span class="n">ref_paths</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;elastic relax 1/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_1_6&quot;</span><span class="p">,</span>
     <span class="s2">&quot;elastic relax 2/6&quot;</span><span class="p">:</span> <span class="s2">&quot;Si_elastic/elastic_relax_2_6&quot;</span><span class="p">,</span>
@@ -527,8 +524,9 @@ imported in the test function itself (rather than at the top of the file).</p>
       </div>
     </div>
   
-    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -539,7 +537,7 @@ imported in the test function itself (rather than at the top of the file).</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
 </p>
     </div>
     

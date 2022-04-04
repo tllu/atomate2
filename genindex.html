@@ -7,30 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index &#8212; atomate2</title>
     
-    <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
+
     
-    <link rel="stylesheet"
-      href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
     
-    <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -44,7 +41,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -200,13 +197,6 @@
 </li>
       <li><a href="reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone.assimilate">assimilate() (atomate2.vasp.drones.VaspDrone method)</a>
 </li>
-      <li>
-    atomate2
-
-      <ul>
-        <li><a href="index.html#module-atomate2">module</a>
-</li>
-      </ul></li>
       <li>
     atomate2.amset
 
@@ -763,6 +753,8 @@
 </li>
       <li><a href="reference/atomate2.amset.schemas.UsageStats.html#atomate2.amset.schemas.UsageStats.dos">dos (atomate2.amset.schemas.UsageStats attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.dos_properties">dos_properties (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.flows.core.DoubleRelaxMaker.html#atomate2.vasp.flows.core.DoubleRelaxMaker">DoubleRelaxMaker (class in atomate2.vasp.flows.core)</a>
 </li>
   </ul></td>
@@ -1255,8 +1247,6 @@
     module
 
       <ul>
-        <li><a href="index.html#module-atomate2">atomate2</a>
-</li>
         <li><a href="reference/atomate2.amset.html#module-atomate2.amset">atomate2.amset</a>
 </li>
         <li><a href="reference/atomate2.amset.files.html#module-atomate2.amset.files">atomate2.amset.files</a>
@@ -1796,8 +1786,9 @@
       </div>
     </div>
   
-    <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -1808,7 +1799,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
 </p>
     </div>
     

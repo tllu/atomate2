@@ -8,30 +8,27 @@
 
     <title>Running Workflows &#8212; atomate2</title>
     
-    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
+
     
-    <link rel="stylesheet"
-      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
     <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
     
-    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -47,7 +44,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -204,7 +201,7 @@
               
               <div class="toc-item">
                 
-<div class="tocsection onthispage pt-5 pb-3">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
     <i class="fas fa-list"></i> On this page
 </div>
 
@@ -286,22 +283,22 @@
               <div>
                 
   <section id="running-workflows">
-<span id="id1"></span><h1>Running Workflows<a class="headerlink" href="#running-workflows" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Running Workflows<a class="headerlink" href="#running-workflows" title="Permalink to this headline">#</a></h1>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h2>
 <p>Once you have a working installation of atomate2, you’ll want to jump in and start
 running workflows. Atomate2 includes many workflows with reasonable settings that can
 get you started. This tutorial will quickly guide you through customizing and running a
 workflow to calculate the bandstructure of MgO.</p>
 <section id="objectives">
-<h3>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">¶</a></h3>
+<h3>Objectives<a class="headerlink" href="#objectives" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Run an atomate2 workflow using Python</p></li>
 <li><p>Analyze the results using pymatgen</p></li>
 </ul>
 </section>
 <section id="prerequisites">
-<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h3>
 <p>In order for you to complete this tutorial you need</p>
 <ul class="simple">
 <li><p>A working installation of atomate2.</p></li>
@@ -309,7 +306,7 @@ workflow to calculate the bandstructure of MgO.</p>
 </section>
 </section>
 <section id="bandstructure-workflows">
-<h2>Bandstructure Workflows<a class="headerlink" href="#bandstructure-workflows" title="Permalink to this headline">¶</a></h2>
+<h2>Bandstructure Workflows<a class="headerlink" href="#bandstructure-workflows" title="Permalink to this headline">#</a></h2>
 <p>A fundamental and common use of DFT is to calculate band structures and electronic
 densities of states. Here we will use an atomate2 workflow to calculate the
 bandstructure of MgO. The workflow consists of 4 parts:</p>
@@ -323,15 +320,15 @@ band structure).</p></li>
 </ol>
 </section>
 <section id="running-a-bandstructure-workflow">
-<h2>Running a Bandstructure Workflow<a class="headerlink" href="#running-a-bandstructure-workflow" title="Permalink to this headline">¶</a></h2>
+<h2>Running a Bandstructure Workflow<a class="headerlink" href="#running-a-bandstructure-workflow" title="Permalink to this headline">#</a></h2>
 <section id="setup">
-<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">#</a></h3>
 <p>Make sure you have completed the installation tutorial. Next, create a folder on your
 HPC resource for this tutorial. It can be located anywhere that you can submit and run
 jobs. You’ll keep all of the files for this tutorial there.</p>
 </section>
 <section id="create-the-workflow-in-python">
-<h3>Create the workflow in Python<a class="headerlink" href="#create-the-workflow-in-python" title="Permalink to this headline">¶</a></h3>
+<h3>Create the workflow in Python<a class="headerlink" href="#create-the-workflow-in-python" title="Permalink to this headline">#</a></h3>
 <p>Workflows in atomate2 are composed of two objects:</p>
 <ul class="simple">
 <li><p>Jobs: A single unit of computation. Roughly speaking, each <code class="docutils literal notranslate"><span class="pre">job</span></code> corresponds to one
@@ -341,7 +338,7 @@ running is an example of a <code class="docutils literal notranslate"><span clas
 have multiple band structure <code class="docutils literal notranslate"><span class="pre">flows</span></code> in a single workflow.</p></li>
 </ul>
 <p>A list of all VASP workflows (which covers both jobs and flows) is given in the
-<span class="xref std std-ref">List of VASP workflows</span> section of the documentation. Workflows are created
+<a class="reference internal" href="codes/vasp.html#vasp-workflows"><span class="std std-ref">List of VASP workflows</span></a> section of the documentation. Workflows are created
 using <code class="docutils literal notranslate"><span class="pre">Maker</span></code> objects. These return the workflows that can be executed later.</p>
 <p>In this example, we will use the <code class="xref py py-obj docutils literal notranslate"><span class="pre">RelaxBandStructureMaker</span></code> to construct our
 workflow.</p>
@@ -366,7 +363,7 @@ workflow.</p>
 </div>
 </section>
 <section id="running-the-workflow">
-<span id="id2"></span><h3>Running the workflow<a class="headerlink" href="#running-the-workflow" title="Permalink to this headline">¶</a></h3>
+<span id="id2"></span><h3>Running the workflow<a class="headerlink" href="#running-the-workflow" title="Permalink to this headline">#</a></h3>
 <p>Similar, to the installation tutorial, now create a job script to execute the workflow.
 Write your job script to the <code class="docutils literal notranslate"><span class="pre">job.sh</span></code> file. For example, on the Grid Engine queue
 system, your job script would look something like:</p>
@@ -393,7 +390,7 @@ results will be in your database.</p>
 </section>
 </section>
 <section id="analyzing-a-bandstructure-workflow">
-<h2>Analyzing a Bandstructure Workflow<a class="headerlink" href="#analyzing-a-bandstructure-workflow" title="Permalink to this headline">¶</a></h2>
+<h2>Analyzing a Bandstructure Workflow<a class="headerlink" href="#analyzing-a-bandstructure-workflow" title="Permalink to this headline">#</a></h2>
 <p>Finally, we’ll plot the results that we calculated. Simply run the following Python
 code, either as a script or on the Python prompt.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">jobflow</span> <span class="kn">import</span> <span class="n">SETTINGS</span>
@@ -433,22 +430,18 @@ code, either as a script or on the Python prompt.</p>
 </pre></div>
 </div>
 <p>If you open the saved figures, you should see a plot of your DOS and bandstructure!</p>
-<figure class="align-default">
-<img alt="MgO density of states" src="../_images/MgO-dos.png" />
-</figure>
-<figure class="align-default">
-<img alt="MgO bandstructure" src="../_images/MgO-bandstructure.png" />
-</figure>
+<p><img alt="MgO density of states" src="../_images/MgO-dos.png" /></p>
+<p><img alt="MgO band structure" src="../_images/MgO-bandstructure.png" /></p>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial you learned how run a band structure workflow and plot the outputs.</p>
-<p>To see what workflows can be run, see the <a class="reference internal" href="codes/vasp.html#vasp-workflows"><span class="std std-ref">List of VASP workflows</span></a>. They can be set up and
-run in the same way as in this tutorial.</p>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>In this tutorial you learned how to run a band structure workflow and plot the outputs.</p>
+<p>To see what workflows can be run, see the <a class="reference internal" href="codes/vasp.html#vasp-workflows"><span class="std std-ref">List of VASP workflows</span></a>. They
+can be set up and  run in the same way as in this tutorial.</p>
 <p>At this point, you might:</p>
 <ul class="simple">
-<li><p>Learn how to chain workflows together: <a class="reference internal" href="codes/vasp.html#connecting-vasp-jobs"><span class="std std-ref">Chaining workflows</span></a></p></li>
-<li><p>Learn how to customise VASP input settings: <a class="reference internal" href="codes/vasp.html#modifying-input-sets"><span class="std std-ref">Optics</span></a></p></li>
+<li><p>Learn how to chain workflows together: <a class="reference internal" href="codes/vasp.html#connecting-vasp-jobs"><span class="std std-ref">Chaining workflows</span></a>.</p></li>
+<li><p>Learn how to customise VASP input settings: <a class="reference internal" href="codes/vasp.html#modifying-input-sets"><span class="std std-ref">Modifying input sets</span></a>.</p></li>
 <li><p>Configure atomate2 with FireWorks to manage and execute many workflows at once:
 <a class="reference internal" href="fireworks.html#atomate2-fireworks"><span class="std std-ref">Using atomate2 with FireWorks</span></a>.</p></li>
 </ul>
@@ -483,8 +476,9 @@ run in the same way as in this tutorial.</p>
       </div>
     </div>
   
-    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -495,7 +489,7 @@ run in the same way as in this tutorial.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
 </p>
     </div>
     
