@@ -1,0 +1,1351 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>atomate2.common.schemas.cclib &#8212; atomate2</title>
+    
+  <link href="../../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://materialsproject.github.io/atomate2/_modules/atomate2/common/schemas/cclib.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">atomate2</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/index.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/install.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/fireworks.html">
+   Using atomate2 with FireWorks
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../user/codes/index.html">
+   Codes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../user/codes/vasp.html">
+     VASP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../reference/index.html">
+   API reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.amset.html">
+     atomate2.amset
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.files.html">
+       atomate2.amset.files
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+      <label for="toctree-checkbox-4">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.files.copy_amset_files.html">
+         copy_amset_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.files.write_amset_settings.html">
+         write_amset_settings
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.jobs.html">
+       atomate2.amset.jobs
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+      <label for="toctree-checkbox-5">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.jobs.AmsetMaker.html">
+         AmsetMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.run.html">
+       atomate2.amset.run
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+      <label for="toctree-checkbox-6">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.run.check_converged.html">
+         check_converged
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.run.run_amset.html">
+         run_amset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.run.tensor_average.html">
+         tensor_average
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.html">
+       atomate2.amset.schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+      <label for="toctree-checkbox-7">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.AmsetTaskDocument.html">
+         AmsetTaskDocument
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.MeshData.html">
+         MeshData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.TransportData.html">
+         TransportData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.UsageStats.html">
+         UsageStats
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.amset.html">
+         amset
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.common.html">
+     atomate2.common
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.analysis.html">
+       atomate2.common.analysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.analysis.elastic.html">
+         atomate2.common.analysis.elastic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.files.html">
+       atomate2.common.files
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.copy_files.html">
+         copy_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.delete_files.html">
+         delete_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.find_and_filter_files.html">
+         find_and_filter_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.get_zfile.html">
+         get_zfile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.gunzip_files.html">
+         gunzip_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.gzip_files.html">
+         gzip_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.rename_files.html">
+         rename_files
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.jobs.html">
+       atomate2.common.jobs
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.jobs.symmetrize_structure.html">
+         symmetrize_structure
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.schemas.html">
+       atomate2.common.schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.cclib.html">
+         atomate2.common.schemas.cclib
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.elastic.html">
+         atomate2.common.schemas.elastic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.math.html">
+         atomate2.common.schemas.math
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.molecule.html">
+         atomate2.common.schemas.molecule
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.structure.html">
+         atomate2.common.schemas.structure
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.symmetry.html">
+         atomate2.common.schemas.symmetry
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.sets.html">
+       atomate2.common.sets
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+      <label for="toctree-checkbox-13">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.sets.InputSet.html">
+         InputSet
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.sets.InputSetGenerator.html">
+         InputSetGenerator
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.settings.html">
+     atomate2.settings
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../reference/atomate2.settings.Atomate2Settings.html">
+       Atomate2Settings
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.utils.html">
+     atomate2.utils
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+    <label for="toctree-checkbox-15">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.datetime.html">
+       atomate2.utils.datetime
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.datetime.datetime_str.html">
+         datetime_str
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.html">
+       atomate2.utils.file_client
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.auto_fileclient.html">
+         auto_fileclient
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.get_ssh_connection.html">
+         get_ssh_connection
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.FileClient.html">
+         FileClient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.log.html">
+       atomate2.utils.log
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.log.initialize_logger.html">
+         initialize_logger
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.path.html">
+       atomate2.utils.path
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+      <label for="toctree-checkbox-19">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.path.find_recent_logfile.html">
+         find_recent_logfile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.path.get_uri.html">
+         get_uri
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.path.strip_hostname.html">
+         strip_hostname
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.vasp.html">
+     atomate2.vasp
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+    <label for="toctree-checkbox-20">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.builders.html">
+       atomate2.vasp.builders
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.builders.elastic.html">
+         atomate2.vasp.builders.elastic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.drones.html">
+       atomate2.vasp.drones
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.drones.VaspDrone.html">
+         VaspDrone
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.files.html">
+       atomate2.vasp.files
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.files.copy_vasp_outputs.html">
+         copy_vasp_outputs
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.files.get_largest_relax_extension.html">
+         get_largest_relax_extension
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.files.write_vasp_input_set.html">
+         write_vasp_input_set
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.html">
+       atomate2.vasp.flows
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.amset.html">
+         atomate2.vasp.flows.amset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.core.html">
+         atomate2.vasp.flows.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.elastic.html">
+         atomate2.vasp.flows.elastic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.elph.html">
+         atomate2.vasp.flows.elph
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.html">
+       atomate2.vasp.jobs
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.amset.html">
+         atomate2.vasp.jobs.amset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.base.html">
+         atomate2.vasp.jobs.base
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.core.html">
+         atomate2.vasp.jobs.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.elastic.html">
+         atomate2.vasp.jobs.elastic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.elph.html">
+         atomate2.vasp.jobs.elph
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.html">
+       atomate2.vasp.powerups
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_incar_settings.html">
+         update_user_incar_settings
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_kpoints_settings.html">
+         update_user_kpoints_settings
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_potcar_functional.html">
+         update_user_potcar_functional
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_potcar_settings.html">
+         update_user_potcar_settings
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.use_auto_ispin.html">
+         use_auto_ispin
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.run.html">
+       atomate2.vasp.run
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.run.run_vasp.html">
+         run_vasp
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.run.should_stop_children.html">
+         should_stop_children
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.run.JobType.html">
+         JobType
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.html">
+       atomate2.vasp.schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+      <label for="toctree-checkbox-28">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.calc_types.html">
+         atomate2.vasp.schemas.calc_types
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.calculation.html">
+         atomate2.vasp.schemas.calculation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.elph.html">
+         atomate2.vasp.schemas.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.task.html">
+         atomate2.vasp.schemas.task
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.html">
+       atomate2.vasp.sets
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+      <label for="toctree-checkbox-29">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.base.html">
+         atomate2.vasp.sets.base
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.core.html">
+         atomate2.vasp.sets.core
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Developer Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../dev/dev_install.html">
+   Developer Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../dev/vasp_tests.html">
+   Writing VASP Tests
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/changelog.html">
+   Change log
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/contributors.html">
+   Contributors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/contributing.html">
+   Contributing to atomate2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/license.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/materialsproject/atomate2"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2F_modules/atomate2/common/schemas/cclib.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <h1>Source code for atomate2.common.schemas.cclib</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Core definition of a cclib-generated task document.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">monty.dev</span> <span class="kn">import</span> <span class="n">requires</span>
+<span class="kn">from</span> <span class="nn">monty.json</span> <span class="kn">import</span> <span class="n">jsanitize</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Molecule</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.periodic_table</span> <span class="kn">import</span> <span class="n">Element</span>
+
+<span class="kn">from</span> <span class="nn">atomate2</span> <span class="kn">import</span> <span class="n">__version__</span>
+<span class="kn">from</span> <span class="nn">atomate2.common.schemas.molecule</span> <span class="kn">import</span> <span class="n">MoleculeMetadata</span>
+<span class="kn">from</span> <span class="nn">atomate2.utils.datetime</span> <span class="kn">import</span> <span class="n">datetime_str</span>
+<span class="kn">from</span> <span class="nn">atomate2.utils.path</span> <span class="kn">import</span> <span class="n">find_recent_logfile</span><span class="p">,</span> <span class="n">get_uri</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">cclib</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">cclib</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TaskDocument&quot;</span><span class="p">]</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_T&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;TaskDocument&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TaskDocument"><a class="viewcode-back" href="../../../../reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument">[docs]</a><span class="k">class</span> <span class="nc">TaskDocument</span><span class="p">(</span><span class="n">MoleculeMetadata</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Definition of a cclib-generated task document.</span>
+
+<span class="sd">    This can be used as a general task document for molecular DFT codes.</span>
+<span class="sd">    For the list of supported packages, see https://cclib.github.io</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">molecule</span><span class="p">:</span> <span class="n">Molecule</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Final output molecule from the task&quot;</span><span class="p">)</span>
+    <span class="n">energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Final total energy&quot;</span><span class="p">)</span>
+    <span class="n">dir_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory where the output is parsed&quot;</span><span class="p">)</span>
+    <span class="n">logfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Path to the log file used in the post-processing analysis&quot;</span>
+    <span class="p">)</span>
+    <span class="n">attributes</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Computed properties and calculation outputs&quot;</span>
+    <span class="p">)</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Calculation metadata, including input parameters and runtime statistics&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">task_label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A description of the task&quot;</span><span class="p">)</span>
+    <span class="n">tags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Optional tags for this task document&quot;</span><span class="p">)</span>
+    <span class="n">last_updated</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">default_factory</span><span class="o">=</span><span class="n">datetime_str</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp for this task document was last updated&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_schema</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="n">__version__</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Version of atomate2 used to create the document&quot;</span><span class="p">,</span>
+        <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;schema&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="TaskDocument.from_logfile"><a class="viewcode-back" href="../../../../reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument.from_logfile">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@requires</span><span class="p">(</span><span class="n">cclib</span><span class="p">,</span> <span class="s2">&quot;The cclib TaskDocument requires cclib to be installed.&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">from_logfile</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span>
+        <span class="n">dir_name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">logfile_extensions</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">store_trajectory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">store_input_orientation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">additional_fields</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">analysis</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proatom_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_T</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a TaskDocument from a log file.</span>
+
+<span class="sd">        For a full description of each field, see https://cclib.github.io/data.html.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        dir_name</span>
+<span class="sd">            The path to the folder containing the calculation outputs.</span>
+<span class="sd">        logfile_extensions</span>
+<span class="sd">            Possible extensions of the log file (e.g. &quot;.log&quot;, &quot;.out&quot;, &quot;.txt&quot;, &quot;.chk&quot;).</span>
+<span class="sd">            Note that only a partial match is needed. For instance, `.log` will match</span>
+<span class="sd">            `.log.gz` and `.log.1.gz`. If multiple files with this extension are found,</span>
+<span class="sd">            the one with the most recent change time will be used. For an exact match</span>
+<span class="sd">            only, put in the full file name.</span>
+<span class="sd">        store_trajectory</span>
+<span class="sd">            Whether to store the molecule objects along the course of the relaxation</span>
+<span class="sd">            trajectory.</span>
+<span class="sd">        store_input_orientation</span>
+<span class="sd">            Whether to store the molecule object as specified in the input file. Note that</span>
+<span class="sd">            the initial molecule object is already stored, but it may be re-oriented</span>
+<span class="sd">            compared to the input file if the code reorients the input geometry.</span>
+<span class="sd">        additional_fields</span>
+<span class="sd">            Dictionary of additional fields to add to TaskDocument.</span>
+<span class="sd">        analysis</span>
+<span class="sd">            The name(s) of any cclib post-processing analysis to run. Note that for bader,</span>
+<span class="sd">            ddec6, and hirshfeld, a cube file (.cube, .cub) must be in dir_name.</span>
+<span class="sd">            Supports: cpsa, mpa, lpa, bickelhaupt, density, mbo, bader, ddec6, hirshfeld.</span>
+<span class="sd">        proatom_dir</span>
+<span class="sd">            The path to the proatom directory if ddec6 or hirshfeld analysis are</span>
+<span class="sd">            requested. See https://cclib.github.io/methods.html for details. If None, the</span>
+<span class="sd">            PROATOM_DIR environment variable must point to the proatom directory.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TaskDocument</span>
+<span class="sd">            A TaskDocument object summarizing the inputs/outputs of the log file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">cclib.io</span> <span class="kn">import</span> <span class="n">ccread</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Searching for the most recent log file with extensions </span><span class="si">{</span><span class="n">logfile_extensions</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Find the most recent log file with the given extension in the</span>
+        <span class="c1"># specified directory.</span>
+        <span class="n">logfile</span> <span class="o">=</span> <span class="n">find_recent_logfile</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">logfile_extensions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">logfile</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Could not find file with extension </span><span class="si">{</span><span class="n">logfile_extensions</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">dir_name</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Getting task doc from </span><span class="si">{</span><span class="n">logfile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">additional_fields</span> <span class="o">=</span> <span class="p">{}</span> <span class="k">if</span> <span class="n">additional_fields</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">additional_fields</span>
+
+        <span class="c1"># Let&#39;s parse the log file with cclib</span>
+        <span class="c1"># str conversion due to cclib bug: https://github.com/cclib/cclib/issues/1096</span>
+        <span class="n">cclib_obj</span> <span class="o">=</span> <span class="n">ccread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">logfile</span><span class="p">),</span> <span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cclib_obj</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not parse </span><span class="si">{</span><span class="n">logfile</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Fetch all the attributes (i.e. all input/outputs from cclib)</span>
+        <span class="n">attributes</span> <span class="o">=</span> <span class="n">jsanitize</span><span class="p">(</span><span class="n">cclib_obj</span><span class="o">.</span><span class="n">getattributes</span><span class="p">())</span>
+
+        <span class="c1"># Store charge and multiplicity since we use it frequently</span>
+        <span class="n">charge</span> <span class="o">=</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">charge</span>
+        <span class="n">mult</span> <span class="o">=</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">mult</span>
+
+        <span class="c1"># Let&#39;s move the metadata out of attributes for convenience and</span>
+        <span class="c1"># store it separately</span>
+        <span class="n">attributes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">)</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="n">jsanitize</span><span class="p">(</span><span class="n">cclib_obj</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
+
+        <span class="c1"># monty datetime bug workaround: https://github.com/materialsvirtuallab/monty/issues/275</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wall_time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;wall_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;wall_time&quot;</span><span class="p">]]</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cpu_time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;cpu_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;cpu_time&quot;</span><span class="p">]]</span>
+
+        <span class="c1"># Get the final energy to store as its own key/value pair</span>
+        <span class="k">if</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">scfenergies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">scfenergies</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Now we construct the input molecule. Note that this is not necessarily</span>
+        <span class="c1"># the same as the initial molecule from the relaxation because the</span>
+        <span class="c1"># DFT package may have re-oriented the system. We only try to store</span>
+        <span class="c1"># the input if it is XYZ-formatted though since the Molecule object</span>
+        <span class="c1"># does not support internal coordinates or Gaussian Z-matrix.</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">store_input_orientation</span>
+            <span class="ow">and</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;coord_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;xyz&quot;</span>
+            <span class="ow">and</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">geet</span><span class="p">(</span><span class="s2">&quot;coords&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="p">):</span>
+            <span class="n">input_species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Element</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]]</span>
+            <span class="n">input_coords</span> <span class="o">=</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">:]</span>
+            <span class="n">input_molecule</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span>
+                <span class="n">input_species</span><span class="p">,</span>
+                <span class="n">input_coords</span><span class="p">,</span>
+                <span class="n">charge</span><span class="o">=</span><span class="n">charge</span><span class="p">,</span>
+                <span class="n">spin_multiplicity</span><span class="o">=</span><span class="n">mult</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;molecule_unoriented&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_molecule</span>
+
+        <span class="c1"># These are duplicates of things made with MoleculeMetadata, so we</span>
+        <span class="c1"># can just remove them here</span>
+        <span class="n">duplicates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;atomnos&quot;</span><span class="p">,</span> <span class="s2">&quot;atomcoords&quot;</span><span class="p">,</span> <span class="s2">&quot;charge&quot;</span><span class="p">,</span> <span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="s2">&quot;natom&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">duplicate</span> <span class="ow">in</span> <span class="n">duplicates</span><span class="p">:</span>
+            <span class="n">attributes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">duplicate</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># We will remove duplicates in the metadata too</span>
+        <span class="n">metadata_duplicates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coords&quot;</span><span class="p">,</span> <span class="s2">&quot;coord_type&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">metadata_duplicate</span> <span class="ow">in</span> <span class="n">metadata_duplicates</span><span class="p">:</span>
+            <span class="n">metadata</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">metadata_duplicate</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Construct the Molecule object(s) from the trajectory</span>
+        <span class="n">species</span> <span class="o">=</span> <span class="p">[</span><span class="n">Element</span><span class="o">.</span><span class="n">from_Z</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">atomnos</span><span class="p">]</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">atomcoords</span>
+        <span class="n">molecules</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Molecule</span><span class="p">(</span>
+                <span class="n">species</span><span class="p">,</span>
+                <span class="n">coord</span><span class="p">,</span>
+                <span class="n">charge</span><span class="o">=</span><span class="n">charge</span><span class="p">,</span>
+                <span class="n">spin_multiplicity</span><span class="o">=</span><span class="n">mult</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span>
+        <span class="p">]</span>
+        <span class="n">initial_molecule</span> <span class="o">=</span> <span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">final_molecule</span> <span class="o">=</span> <span class="n">molecules</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;molecule_initial&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_molecule</span>
+        <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;molecule_final&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">final_molecule</span>
+        <span class="k">if</span> <span class="n">store_trajectory</span><span class="p">:</span>
+            <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;trajectory&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">molecules</span>
+
+        <span class="c1"># Store the HOMO/LUMO energies for convenience</span>
+        <span class="k">if</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">moenergies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">homos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">homo_energies</span><span class="p">,</span> <span class="n">lumo_energies</span><span class="p">,</span> <span class="n">homo_lumo_gaps</span> <span class="o">=</span> <span class="n">_get_homos_lumos</span><span class="p">(</span>
+                <span class="n">cclib_obj</span><span class="o">.</span><span class="n">moenergies</span><span class="p">,</span> <span class="n">cclib_obj</span><span class="o">.</span><span class="n">homos</span>
+            <span class="p">)</span>
+            <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;homo_energies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">homo_energies</span>
+            <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;lumo_energies&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lumo_energies</span>
+            <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;homo_lumo_gaps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">homo_lumo_gaps</span>
+
+            <span class="c1"># The HOMO-LUMO gap for a spin-polarized system is ill-defined.</span>
+            <span class="c1"># This is why we report both the alpha and beta channel gaps</span>
+            <span class="c1"># above. Here, we report min(LUMO_alpha-HOMO_alpha,LUMO_beta-HOMO_beta)</span>
+            <span class="c1"># in case the user wants to easily query by this too. For restricted</span>
+            <span class="c1"># systems, this will always be the same as above.</span>
+            <span class="n">attributes</span><span class="p">[</span><span class="s2">&quot;min_homo_lumo_gap&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">homo_lumo_gaps</span><span class="p">)</span>
+
+        <span class="c1"># Calculate any properties</span>
+        <span class="k">if</span> <span class="n">analysis</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">analysis</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">analysis</span> <span class="o">=</span> <span class="p">[</span><span class="n">analysis</span><span class="p">]</span>
+            <span class="n">analysis</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">]</span>
+
+            <span class="c1"># Look for .cube or .cub files</span>
+            <span class="n">cubefile_path</span> <span class="o">=</span> <span class="n">find_recent_logfile</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;.cube&quot;</span><span class="p">,</span> <span class="s2">&quot;.cub&quot;</span><span class="p">])</span>
+
+            <span class="k">for</span> <span class="n">analysis_name</span> <span class="ow">in</span> <span class="n">analysis</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running </span><span class="si">{</span><span class="n">analysis_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">calc_attributes</span> <span class="o">=</span> <span class="n">cclib_calculate</span><span class="p">(</span>
+                    <span class="n">cclib_obj</span><span class="p">,</span> <span class="n">analysis_name</span><span class="p">,</span> <span class="n">cubefile_path</span><span class="p">,</span> <span class="n">proatom_dir</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">calc_attributes</span><span class="p">:</span>
+                    <span class="n">attributes</span><span class="p">[</span><span class="n">analysis_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">calc_attributes</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">attributes</span><span class="p">[</span><span class="n">analysis_name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">doc</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_molecule</span><span class="p">(</span>
+            <span class="n">molecule</span><span class="o">=</span><span class="n">final_molecule</span><span class="p">,</span>
+            <span class="n">include_molecule</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">energy</span><span class="o">=</span><span class="n">energy</span><span class="p">,</span>
+            <span class="n">dir_name</span><span class="o">=</span><span class="n">get_uri</span><span class="p">(</span><span class="n">dir_name</span><span class="p">),</span>
+            <span class="n">logfile</span><span class="o">=</span><span class="n">get_uri</span><span class="p">(</span><span class="n">logfile</span><span class="p">),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="n">attributes</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">update</span><span class="o">=</span><span class="n">additional_fields</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">doc</span></div></div>
+
+
+<div class="viewcode-block" id="cclib_calculate"><a class="viewcode-back" href="../../../../reference/atomate2.common.schemas.cclib.cclib_calculate.html#atomate2.common.schemas.cclib.cclib_calculate">[docs]</a><span class="nd">@requires</span><span class="p">(</span><span class="n">cclib</span><span class="p">,</span> <span class="s2">&quot;cclib_calculate requires cclib to be installed.&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">cclib_calculate</span><span class="p">(</span>
+    <span class="n">cclib_obj</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">cube_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="n">proatom_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a cclib population analysis.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    cclib_obj</span>
+<span class="sd">        The cclib object to run the population analysis on.</span>
+<span class="sd">    method</span>
+<span class="sd">        The population analysis method to use.</span>
+<span class="sd">    cube_file</span>
+<span class="sd">        The path to the cube file to use for the population analysis.</span>
+<span class="sd">        Needed only for Bader, DDEC6, and Hirshfeld</span>
+<span class="sd">    proatom_dir</span>
+<span class="sd">        The path to the proatom directory to use for the population analysis.</span>
+<span class="sd">        Needed only for DDEC6 and Hirshfeld.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">cclib.method</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">CSPA</span><span class="p">,</span>
+        <span class="n">DDEC6</span><span class="p">,</span>
+        <span class="n">LPA</span><span class="p">,</span>
+        <span class="n">MBO</span><span class="p">,</span>
+        <span class="n">MPA</span><span class="p">,</span>
+        <span class="n">Bader</span><span class="p">,</span>
+        <span class="n">Bickelhaupt</span><span class="p">,</span>
+        <span class="n">Density</span><span class="p">,</span>
+        <span class="n">Hirshfeld</span><span class="p">,</span>
+        <span class="n">volume</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">cube_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bader&quot;</span><span class="p">,</span> <span class="s2">&quot;ddec6&quot;</span><span class="p">,</span> <span class="s2">&quot;hirshfeld&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">cube_methods</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cube_file</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;A cube file must be provided for </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">. Returning None.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ddec6&quot;</span><span class="p">,</span> <span class="s2">&quot;hirshfeld&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">proatom_dir</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;PROATOM_DIR&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+                <span class="s2">&quot;PROATOM_DIR environment variable not set. Returning None.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">proatom_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PROATOM_DIR&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">proatom_dir</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">proatom_dir</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Protatom directory </span><span class="si">{</span><span class="n">proatom_dir</span><span class="si">}</span><span class="s2"> does not exist. Returning None.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cube_file</span> <span class="ow">and</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">cube_methods</span><span class="p">:</span>
+        <span class="n">vol</span> <span class="o">=</span> <span class="n">volume</span><span class="o">.</span><span class="n">read_from_cube</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cube_file</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;bader&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Bader</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">,</span> <span class="n">vol</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;bickelhaupt&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Bickelhaupt</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;cpsa&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">CSPA</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;ddec6&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">DDEC6</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">,</span> <span class="n">vol</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">proatom_dir</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;density&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Density</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;hirshfeld&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">Hirshfeld</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">,</span> <span class="n">vol</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">proatom_dir</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;lpa&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">LPA</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;mbo&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">MBO</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;mpa&quot;</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">MPA</span><span class="p">(</span><span class="n">cclib_obj</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> is not supported.&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># The list of available attributes after a calculation. This is hardcoded for now</span>
+    <span class="c1"># until https://github.com/cclib/cclib/issues/1097 is resolved. Once it is, we can</span>
+    <span class="c1"># delete this and just do `return calc_attributes.getattributes()`.</span>
+    <span class="n">avail_attributes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;aoresults&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fragresults&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;fragcharges&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;density&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;donations&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bdonations&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;repulsions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;matches&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;refcharges&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">calc_attributes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">avail_attributes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
+            <span class="n">calc_attributes</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">calc_attributes</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_homos_lumos</span><span class="p">(</span>
+    <span class="n">moenergies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">homo_indices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the HOMO, LUMO, and HOMO-LUMO gap energies in eV.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    moenergies</span>
+<span class="sd">        List of MO energies. For restricted calculations, List[List[float]] is</span>
+<span class="sd">        length one. For unrestricted, it is length two.</span>
+<span class="sd">    homo_indices</span>
+<span class="sd">        Indices of the HOMOs.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    homo_energies</span>
+<span class="sd">        The HOMO energies (eV), split by alpha and beta</span>
+<span class="sd">    lumo_energies</span>
+<span class="sd">        The LUMO energies (eV), split by alpha and beta</span>
+<span class="sd">    homo_lumo_gaps</span>
+<span class="sd">        The HOMO-LUMO gaps (eV), calculated as LUMO_alpha-HOMO_alpha and</span>
+<span class="sd">        LUMO_beta-HOMO_beta</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">homo_energies</span> <span class="o">=</span> <span class="p">[</span><span class="n">moenergies</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">h</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">homo_indices</span><span class="p">)]</span>
+    <span class="c1"># Make sure that the HOMO+1 (i.e. LUMO) is in moenergies (sometimes virtual</span>
+    <span class="c1"># orbitals aren&#39;t printed in the output)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">homo_indices</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">moenergies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">homo_energies</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="n">lumo_energies</span> <span class="o">=</span> <span class="p">[</span><span class="n">moenergies</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">h</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">homo_indices</span><span class="p">)]</span>
+    <span class="n">homo_lumo_gaps</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">lumo_energies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">homo_energies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">homo_energies</span><span class="p">))</span>
+    <span class="p">]</span>
+    <span class="k">return</span> <span class="n">homo_energies</span><span class="p">,</span> <span class="n">lumo_energies</span><span class="p">,</span> <span class="n">homo_lumo_gaps</span>
+</pre></div>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Alex Ganose<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
