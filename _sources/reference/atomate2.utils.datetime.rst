@@ -1,0 +1,43 @@
+atomate2.utils.datetime
+=======================
+
+.. automodule:: atomate2.utils.datetime
+
+   
+
+
+
+   
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      datetime_str
+
+
+
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
+
+
+

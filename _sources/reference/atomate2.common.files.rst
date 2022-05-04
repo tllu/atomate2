@@ -1,0 +1,55 @@
+atomate2.common.files
+=====================
+
+.. automodule:: atomate2.common.files
+
+   
+
+
+
+   
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      copy_files
+      delete_files
+      find_and_filter_files
+      get_zfile
+      gunzip_files
+      gzip_files
+      rename_files
+
+
+
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
+
+
+

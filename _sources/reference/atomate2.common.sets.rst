@@ -1,0 +1,49 @@
+atomate2.common.sets
+====================
+
+.. automodule:: atomate2.common.sets
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      InputSet
+      InputSetGenerator
+
+
+
+
+   
+   
+   
+
+
+

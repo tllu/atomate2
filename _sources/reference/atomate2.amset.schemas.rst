@@ -1,0 +1,64 @@
+atomate2.amset.schemas
+======================
+
+.. automodule:: atomate2.amset.schemas
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+      
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      AmsetTaskDocument
+      MeshData
+      TransportData
+      UsageStats
+      amset
+
+
+
+
+   
+   
+   
+
+
+

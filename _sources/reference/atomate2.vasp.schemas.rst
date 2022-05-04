@@ -1,0 +1,45 @@
+atomate2.vasp.schemas
+=====================
+
+.. automodule:: atomate2.vasp.schemas
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   atomate2.vasp.schemas.calc_types
+   atomate2.vasp.schemas.calculation
+   atomate2.vasp.schemas.elph
+   atomate2.vasp.schemas.task
+

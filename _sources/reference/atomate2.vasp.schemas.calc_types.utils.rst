@@ -1,0 +1,47 @@
+atomate2.vasp.schemas.calc\_types.utils
+=======================================
+
+.. automodule:: atomate2.vasp.schemas.calc_types.utils
+
+   
+
+
+
+   
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      calc_type
+      run_type
+      task_type
+
+
+
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
+
+
+

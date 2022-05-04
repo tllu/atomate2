@@ -1,0 +1,46 @@
+atomate2.amset.jobs
+===================
+
+.. automodule:: atomate2.amset.jobs
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      AmsetMaker
+
+
+
+
+   
+   
+   
+
+
+

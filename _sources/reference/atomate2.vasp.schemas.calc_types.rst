@@ -1,0 +1,43 @@
+atomate2.vasp.schemas.calc\_types
+=================================
+
+.. automodule:: atomate2.vasp.schemas.calc_types
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   atomate2.vasp.schemas.calc_types.enums
+   atomate2.vasp.schemas.calc_types.utils
+

@@ -1,0 +1,50 @@
+atomate2.vasp.powerups
+======================
+
+.. automodule:: atomate2.vasp.powerups
+
+   
+
+
+
+   
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      update_user_incar_settings
+      update_user_kpoints_settings
+      update_user_potcar_functional
+      update_user_potcar_settings
+      use_auto_ispin
+
+
+
+   
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+
+
+   
+   
+   
+
+
+

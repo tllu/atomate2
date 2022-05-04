@@ -1,0 +1,46 @@
+atomate2.vasp.flows.elastic
+===========================
+
+.. automodule:: atomate2.vasp.flows.elastic
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      ElasticMaker
+
+
+
+
+   
+   
+   
+
+
+
