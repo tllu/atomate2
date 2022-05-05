@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/github.css" />
     
   <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -1017,19 +1018,21 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="sd">            Whether to store the molecule objects along the course of the relaxation</span>
 <span class="sd">            trajectory.</span>
 <span class="sd">        store_input_orientation</span>
-<span class="sd">            Whether to store the molecule object as specified in the input file. Note that</span>
-<span class="sd">            the initial molecule object is already stored, but it may be re-oriented</span>
-<span class="sd">            compared to the input file if the code reorients the input geometry.</span>
+<span class="sd">            Whether to store the molecule object as specified in the input file. Note</span>
+<span class="sd">            that the initial molecule object is already stored, but it may be</span>
+<span class="sd">            re-oriented compared to the input file if the code reorients the input</span>
+<span class="sd">            geometry.</span>
 <span class="sd">        additional_fields</span>
 <span class="sd">            Dictionary of additional fields to add to TaskDocument.</span>
 <span class="sd">        analysis</span>
-<span class="sd">            The name(s) of any cclib post-processing analysis to run. Note that for bader,</span>
-<span class="sd">            ddec6, and hirshfeld, a cube file (.cube, .cub) must be in dir_name.</span>
-<span class="sd">            Supports: cpsa, mpa, lpa, bickelhaupt, density, mbo, bader, ddec6, hirshfeld.</span>
+<span class="sd">            The name(s) of any cclib post-processing analysis to run. Note that for</span>
+<span class="sd">            bader, ddec6, and hirshfeld, a cube file (.cube, .cub) must be in dir_name.</span>
+<span class="sd">            Supports: cpsa, mpa, lpa, bickelhaupt, density, mbo, bader, ddec6,</span>
+<span class="sd">            hirshfeld.</span>
 <span class="sd">        proatom_dir</span>
 <span class="sd">            The path to the proatom directory if ddec6 or hirshfeld analysis are</span>
-<span class="sd">            requested. See https://cclib.github.io/methods.html for details. If None, the</span>
-<span class="sd">            PROATOM_DIR environment variable must point to the proatom directory.</span>
+<span class="sd">            requested. See https://cclib.github.io/methods.html for details. If None,</span>
+<span class="sd">            the PROATOM_DIR environment variable must point to the proatom directory.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1072,7 +1075,7 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">attributes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">)</span>
         <span class="n">metadata</span> <span class="o">=</span> <span class="n">jsanitize</span><span class="p">(</span><span class="n">cclib_obj</span><span class="o">.</span><span class="n">metadata</span><span class="p">)</span>
 
-        <span class="c1"># monty datetime bug workaround: https://github.com/materialsvirtuallab/monty/issues/275</span>
+        <span class="c1"># monty datetime bug workaround: github.com/materialsvirtuallab/monty/issues/275</span>
         <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;wall_time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
             <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;wall_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;wall_time&quot;</span><span class="p">]]</span>
         <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cpu_time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>

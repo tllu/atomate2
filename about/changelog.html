@@ -34,6 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/github.css" />
     
   <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -932,6 +933,11 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-7">
+   v0.0.7
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#v0-0-6">
    v0.0.6
   </a>
@@ -982,6 +988,11 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-7">
+   v0.0.7
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#v0-0-6">
    v0.0.6
   </a>
@@ -1022,6 +1033,31 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="change-log">
 <h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-0-7">
+<h2>v0.0.7<a class="headerlink" href="#v0-0-7" title="Permalink to this headline">¶</a></h2>
+<p>New features:</p>
+<ul class="simple">
+<li><p>Include band-related features (e.g. band center, bandwidth, skewness, kurtosis) in
+VASP schema (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/92">#92</a>)</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">use_auto_ispin</span></code> and <code class="docutils literal notranslate"><span class="pre">update_user_potcar_functional</span></code> powerups</p></li>
+</ul>
+<p>Enhancements:</p>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">is_hubbard</span></code> and <code class="docutils literal notranslate"><span class="pre">hubbards</span></code> to VASP task doc.</p></li>
+<li><p>Migrate build system to pyproject.toml.</p></li>
+<li><p>Migrate docs to jupyter-book.</p></li>
+<li><p>Docs improvements (<a class="reference external" href="https://github.com/janosh">&#64;janosh</a>, <a class="reference external" href="https://github.com/mjwen">&#64;mjwen</a>)</p></li>
+</ul>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Fix HSE tags.</p></li>
+<li><p>Fix running bader.</p></li>
+<li><p>Make potcar_spec argument usable (<a class="reference external" href="https://github.com/jmmshn">&#64;jmmshn</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/83">#83</a>)</p></li>
+<li><p>Replace monty which with shutil which (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/92">#92</a>)</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">calculate_deformation_potentials()</span></code> (<a class="reference external" href="https://github.com/janosh">&#64;janosh</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/94">#94</a>)</p></li>
+<li><p>Fix gzipping of files with numerical suffixes (<a class="reference external" href="https://github.com/jmmshn">&#64;jmmshn</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/116">#116</a>)</p></li>
+</ul>
+</div>
 <div class="section" id="v0-0-6">
 <h2>v0.0.6<a class="headerlink" href="#v0-0-6" title="Permalink to this headline">¶</a></h2>
 <p>New features:</p>

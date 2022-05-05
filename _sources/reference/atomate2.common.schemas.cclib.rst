@@ -37,9 +37,6 @@ atomate2.common.schemas.cclib
    
    
    
-      
-   
-   
 
 
    .. rubric:: Classes
@@ -49,7 +46,6 @@ atomate2.common.schemas.cclib
       :nosignatures:
    
       TaskDocument
-      cclib
 
 
 
