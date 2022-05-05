@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contributing to atomate2 &#8212; atomate2</title>
+    <title>Change log &#8212; atomate2</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -55,11 +55,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://materialsproject.github.io/atomate2/user/contributing.html" />
+    <link rel="canonical" href="https://materialsproject.github.io/atomate2/about/changelog.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="License" href="license.html" />
-    <link rel="prev" title="Contributors" href="contributors.html" />
+    <link rel="next" title="Contributors" href="contributors.html" />
+    <link rel="prev" title="Writing VASP Tests" href="../dev/vasp_tests.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -98,22 +98,27 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="index.html">
+  <a class="reference internal" href="../user/index.html">
    Introduction
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="install.html">
+  <a class="reference internal" href="../user/install.html">
    Installation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="fireworks.html">
+  <a class="reference internal" href="../user/running-workflows.html">
+   Running Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../user/fireworks.html">
    Using atomate2 with FireWorks
   </a>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="codes/index.html">
+  <a class="reference internal" href="../user/codes/index.html">
    Codes
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -123,7 +128,7 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="codes/vasp.html">
+    <a class="reference internal" href="../user/codes/vasp.html">
      VASP
     </a>
    </li>
@@ -821,8 +826,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="changelog.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Change log
   </a>
  </li>
@@ -831,8 +836,8 @@ const thebe_selector_output = ".output, .cell_output"
    Contributors
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributing.html">
    Contributing to atomate2
   </a>
  </li>
@@ -878,7 +883,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/user/contributing.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/about/changelog.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -898,10 +903,10 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2Fuser/contributing.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2Fabout/changelog.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/materialsproject/atomate2/edit/main/docs/user/contributing.md"><button
+        <a class="edit-button" href="https://github.com/materialsproject/atomate2/edit/main/docs/about/changelog.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -927,22 +932,33 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reporting-bugs-getting-help-and-discussion">
-   Reporting bugs, getting help, and discussion
+  <a class="reference internal nav-link" href="#v0-0-6">
+   v0.0.6
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#contributing-code-modifications-or-additions-through-github">
-   Contributing code modifications or additions through Github
+  <a class="reference internal nav-link" href="#v0-0-5">
+   v0.0.5
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-make-a-great-pull-request">
-   How to Make a
-   <strong>
-    Great
-   </strong>
-   Pull Request
+  <a class="reference internal nav-link" href="#v0-0-4">
+   v0.0.4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-3">
+   v0.0.3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-2">
+   v0.0.2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-1">
+   v0.0.1
   </a>
  </li>
 </ul>
@@ -955,7 +971,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Contributing to atomate2</h1>
+                <h1>Change log</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -966,22 +982,33 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#reporting-bugs-getting-help-and-discussion">
-   Reporting bugs, getting help, and discussion
+  <a class="reference internal nav-link" href="#v0-0-6">
+   v0.0.6
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#contributing-code-modifications-or-additions-through-github">
-   Contributing code modifications or additions through Github
+  <a class="reference internal nav-link" href="#v0-0-5">
+   v0.0.5
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-make-a-great-pull-request">
-   How to Make a
-   <strong>
-    Great
-   </strong>
-   Pull Request
+  <a class="reference internal nav-link" href="#v0-0-4">
+   v0.0.4
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-3">
+   v0.0.3
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-2">
+   v0.0.2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#v0-0-1">
+   v0.0.1
   </a>
  </li>
 </ul>
@@ -993,72 +1020,92 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="contributing-to-atomate2">
-<h1>Contributing to atomate2<a class="headerlink" href="#contributing-to-atomate2" title="Permalink to this headline">¶</a></h1>
-<p>We love your input! We want to make contributing to as easy and
-transparent as possible, whether it’s:</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="change-log">
+<h1>Change log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-0-6">
+<h2>v0.0.6<a class="headerlink" href="#v0-0-6" title="Permalink to this headline">¶</a></h2>
+<p>New features:</p>
 <ul class="simple">
-<li><p>Reporting a bug</p></li>
-<li><p>Discussing the current state of the code</p></li>
-<li><p>Submitting a fix</p></li>
-<li><p>Proposing or implementing new features</p></li>
-<li><p>Becoming a maintainer</p></li>
+<li><p>cclib task document supporting virtually all popular molecular DFT codes out-of-the-box
+(<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/64">#64</a>)</p></li>
 </ul>
-<div class="section" id="reporting-bugs-getting-help-and-discussion">
-<h2>Reporting bugs, getting help, and discussion<a class="headerlink" href="#reporting-bugs-getting-help-and-discussion" title="Permalink to this headline">¶</a></h2>
-<p>atomate2 is still in development, so at the moment we
-do not have a dedicated help forum. For the time being, please
-submit questions and bugs to the
-<a class="reference external" href="https://github.com/materialsproject/atomate2/issues">GitHub issues page</a>.</p>
-<p>If you are making a bug report, incorporate as many elements of the
-following as possible to ensure a timely response and avoid the
-need for followups:</p>
+<p>Enhancements:</p>
 <ul class="simple">
-<li><p>A quick summary and/or background.</p></li>
-<li><p>Steps to reproduce - be specific! <strong>Provide sample code.</strong></p></li>
-<li><p>What you expected would happen, compared to what actually happens.</p></li>
-<li><p>The full stack trace of any errors you encounter.</p></li>
-<li><p>Notes (possibly including why you think this might be happening,
-or steps you tried that didn’t work).</p></li>
+<li><p>Add mag_density to VASP output doc (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/66">#65</a>)</p></li>
+<li><p>Double relax maker now supports two different Makers (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/32">#32</a>)</p></li>
 </ul>
-<p>We love thorough bug reports as this means the development team can
-make quick and meaningful fixes. When we confirm your bug report,
-we’ll move it to the GitHub issues where its progress can be
-further tracked.</p>
-</div>
-<div class="section" id="contributing-code-modifications-or-additions-through-github">
-<h2>Contributing code modifications or additions through Github<a class="headerlink" href="#contributing-code-modifications-or-additions-through-github" title="Permalink to this headline">¶</a></h2>
-<p>We use github to host code, to track issues and feature requests,
-as well as accept pull requests. We maintain a list of all
-contributors <a class="reference external" href="https://materialsproject.github.io/atomate2/contributors.html">here</a>.</p>
-<p>Pull requests are the best way to propose changes to the codebase.
-Follow the <a class="reference external" href="https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow">Github flow</a>
-for more information on this procedure.</p>
-<p>The basic procedure for making a PR is:</p>
+<p>Bug fixes:</p>
 <ul class="simple">
-<li><p>Fork the repo and create your branch from master.</p></li>
-<li><p>Commit your improvements to your branch and push to your Github fork (repo).</p></li>
-<li><p>When you’re finished, go to your fork and make a Pull Request. It will
-automatically update if you need to make further changes.</p></li>
+<li><p>Store band structure efermi in CalculationOutput (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/66">#66</a>)</p></li>
+<li><p>Support for VASP6 and latest pymatgen (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/75">#75</a>)</p></li>
+<li><p>Fixed atomate2 version string.</p></li>
+<li><p>Disabled orbital projections in the electron-phonon workflow.</p></li>
 </ul>
 </div>
-<div class="section" id="how-to-make-a-great-pull-request">
-<h2>How to Make a <strong>Great</strong> Pull Request<a class="headerlink" href="#how-to-make-a-great-pull-request" title="Permalink to this headline">¶</a></h2>
-<p>We have a few tips for writing good PRs that are accepted into the main repo:</p>
+<div class="section" id="v0-0-5">
+<h2>v0.0.5<a class="headerlink" href="#v0-0-5" title="Permalink to this headline">¶</a></h2>
+<p>This version removed Python 3.7 support following numpy and pymatgen.</p>
+<p>New features:</p>
 <ul class="simple">
-<li><p>Use the Google Code style for all of your code. Find an example <a class="reference external" href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">here</a>.</p></li>
-<li><p>Your code should have (4) spaces instead of tabs.</p></li>
-<li><p>If needed, update the documentation.</p></li>
-<li><p><strong>Write tests</strong> for new features! Good tests are 100%, absolutely necessary
-for good code. We use the python <code class="docutils literal notranslate"><span class="pre">unittest</span></code> framework – see some of the
-other tests in this repo for examples, or review the <a class="reference external" href="https://docs.python-guide.org/writing/tests">Hitchhiker’s guide
-to python</a> for some good
-resources on writing good tests.</p></li>
-<li><p>Understand your contributions will fall under the same license as this repo.</p></li>
+<li><p>Base schema for molecule task documents (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/54">#54</a>)</p></li>
 </ul>
-<p>When you submit your PR, our CI service will automatically run your tests.
-We welcome good discussion on the best ways to write your code, and the comments
-on your PR are an excellent area for discussion.</p>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Fix VASP relaxation using custodian “FULL_OPT” (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/42">#42</a>)</p></li>
+<li><p>Fix supercell generation and input sets in electron-phonon workflow.</p></li>
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">HSEBSSetGenerator</span></code> INCAR settings.</p></li>
+<li><p>Fix issue with magnetism in SOC structures.</p></li>
+<li><p>Fix bug with Fermi level and IBRION=1</p></li>
+<li><p>Better handling of URI generation.</p></li>
+<li><p>Tweak k-spacing formula to stop large band gaps giving negative values</p></li>
+</ul>
+</div>
+<div class="section" id="v0-0-4">
+<h2>v0.0.4<a class="headerlink" href="#v0-0-4" title="Permalink to this headline">¶</a></h2>
+<p>Lots of improvements and bug fixes this release.</p>
+<p>New features:</p>
+<ul class="simple">
+<li><p>AMSET workflow.</p></li>
+<li><p>Electron phonon band gap renormalisation workflow.</p></li>
+<li><p>Specific uniform and line mode band structure makers.</p></li>
+<li><p>Optics maker.</p></li>
+<li><p>Transmuter maker.</p></li>
+</ul>
+<p>Enhancements:</p>
+<ul class="simple">
+<li><p>Support for automatic handling of ISPIN.</p></li>
+<li><p>Add MP base sets (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/27">#27</a>)</p></li>
+<li><p>Docs updates (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/13">#13</a> <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/17">#17</a>)</p></li>
+<li><p>Options to strip band structure and DOS projects to reduce object sizes.</p></li>
+<li><p>Input sets now use generators to avoid serialization issues.</p></li>
+<li><p>Use smart efermi finding to remove errors with tetrahedron integration in VASP 6.</p></li>
+<li><p>Powerups can now work on <code class="docutils literal notranslate"><span class="pre">Maker</span></code> objects directly.</p></li>
+</ul>
+<p>Bug fixes:</p>
+<ul class="simple">
+<li><p>Use PBEsol by default.</p></li>
+<li><p>Increase number of significant figures when writing POSCAR files.</p></li>
+<li><p>Remove unused INCAR settings (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>)</p></li>
+<li><p>Add missing LASPH flags on vdW functionals (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/31">#31</a>)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">NSW=0</span></code> in static calculations (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/10">#10</a>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LREAL</span> <span class="pre">=</span> <span class="pre">False</span></code> in static jobs by default (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/23">#23</a>)</p></li>
+<li><p>Add missing functionals in output schema (<a class="reference external" href="https://github.com/arosen93">&#64;arosen93</a>, <a class="reference external" href="https://github.com/materialsproject/atomate2/pull/12">#12</a>)</p></li>
+<li><p>Many output schema fixes.</p></li>
+<li><p>Better support for FireWorks.</p></li>
+<li><p>Support writing additional files in VASP jobs.</p></li>
+</ul>
+</div>
+<div class="section" id="v0-0-3">
+<h2>v0.0.3<a class="headerlink" href="#v0-0-3" title="Permalink to this headline">¶</a></h2>
+<p>Many updates to use the latest jobflow store features.</p>
+</div>
+<div class="section" id="v0-0-2">
+<h2>v0.0.2<a class="headerlink" href="#v0-0-2" title="Permalink to this headline">¶</a></h2>
+<p>Automated releases.</p>
+</div>
+<div class="section" id="v0-0-1">
+<h2>v0.0.1<a class="headerlink" href="#v0-0-1" title="Permalink to this headline">¶</a></h2>
+<p>Initial release.</p>
 </div>
 </div>
 
@@ -1075,7 +1122,7 @@ on your PR are an excellent area for discussion.</p>
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./user"
+            path: "./about"
         },
         predefinedOutput: true
     }
@@ -1087,17 +1134,17 @@ on your PR are an excellent area for discussion.</p>
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="contributors.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../dev/vasp_tests.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Contributors</p>
+            <p class="prev-next-title">Writing VASP Tests</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="license.html" title="next page">
+    <a class='right-next' id="next-link" href="contributors.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">License</p>
+        <p class="prev-next-title">Contributors</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
