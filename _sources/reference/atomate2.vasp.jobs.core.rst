@@ -46,6 +46,9 @@ atomate2.vasp.jobs.core
       
    
    
+      
+   
+   
    
    
    
@@ -66,6 +69,7 @@ atomate2.vasp.jobs.core
       HSERelaxMaker
       HSEStaticMaker
       HSETightRelaxMaker
+      MDMaker
       NonSCFMaker
       RelaxMaker
       StaticMaker

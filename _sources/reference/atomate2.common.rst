@@ -42,5 +42,4 @@
    atomate2.common.files
    atomate2.common.jobs
    atomate2.common.schemas
-   atomate2.common.sets
 

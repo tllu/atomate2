@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>atomate2.vasp.schemas.calculation &#8212; atomate2</title>
     
-  <link href="../../../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,25 +19,21 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/github.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
@@ -44,12 +41,13 @@
     <script src="../../../../_static/doctools.js"></script>
     <script src="../../../../_static/clipboard.min.js"></script>
     <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -66,7 +64,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -75,9 +87,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../../../index.html">
       
       
@@ -350,8 +363,13 @@ const thebe_selector_output = ".output, .cell_output"
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../../../reference/atomate2.common.jobs.symmetrize_structure.html">
-         symmetrize_structure
+        <a class="reference internal" href="../../../../reference/atomate2.common.jobs.structure_to_conventional.html">
+         structure_to_conventional
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.jobs.structure_to_primitive.html">
+         structure_to_primitive
         </a>
        </li>
       </ul>
@@ -398,36 +416,14 @@ const thebe_selector_output = ".output, .cell_output"
        </li>
       </ul>
      </li>
-     <li class="toctree-l3 has-children">
-      <a class="reference internal" href="../../../../reference/atomate2.common.sets.html">
-       atomate2.common.sets
-      </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
-      <label for="toctree-checkbox-13">
-       <i class="fas fa-chevron-down">
-       </i>
-      </label>
-      <ul>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../reference/atomate2.common.sets.InputSet.html">
-         InputSet
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../../../reference/atomate2.common.sets.InputSetGenerator.html">
-         InputSetGenerator
-        </a>
-       </li>
-      </ul>
-     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="../../../../reference/atomate2.settings.html">
      atomate2.settings
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
-    <label for="toctree-checkbox-14">
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -443,8 +439,8 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal" href="../../../../reference/atomate2.utils.html">
      atomate2.utils
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
-    <label for="toctree-checkbox-15">
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -453,8 +449,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.utils.datetime.html">
        atomate2.utils.datetime
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
-      <label for="toctree-checkbox-16">
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -470,8 +466,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.html">
        atomate2.utils.file_client
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
-      <label for="toctree-checkbox-17">
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -497,8 +493,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.utils.log.html">
        atomate2.utils.log
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
-      <label for="toctree-checkbox-18">
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -514,8 +510,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.utils.path.html">
        atomate2.utils.path
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
-      <label for="toctree-checkbox-19">
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -543,8 +539,8 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal" href="../../../../reference/atomate2.vasp.html">
      atomate2.vasp
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
-    <label for="toctree-checkbox-20">
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -553,8 +549,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.builders.html">
        atomate2.vasp.builders
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
-      <label for="toctree-checkbox-21">
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -570,8 +566,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.drones.html">
        atomate2.vasp.drones
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
-      <label for="toctree-checkbox-22">
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -587,8 +583,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.files.html">
        atomate2.vasp.files
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
-      <label for="toctree-checkbox-23">
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -614,8 +610,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.html">
        atomate2.vasp.flows
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
-      <label for="toctree-checkbox-24">
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -631,6 +627,11 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.defect.html">
+         atomate2.vasp.flows.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.elastic.html">
          atomate2.vasp.flows.elastic
         </a>
@@ -640,14 +641,19 @@ const thebe_selector_output = ".output, .cell_output"
          atomate2.vasp.flows.elph
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.phonons.html">
+         atomate2.vasp.flows.phonons
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.html">
        atomate2.vasp.jobs
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
-      <label for="toctree-checkbox-25">
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -668,6 +674,11 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.defect.html">
+         atomate2.vasp.jobs.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.elastic.html">
          atomate2.vasp.jobs.elastic
         </a>
@@ -677,14 +688,19 @@ const thebe_selector_output = ".output, .cell_output"
          atomate2.vasp.jobs.elph
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.phonons.html">
+         atomate2.vasp.jobs.phonons
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.html">
        atomate2.vasp.powerups
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
-      <label for="toctree-checkbox-26">
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -720,8 +736,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.run.html">
        atomate2.vasp.run
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
-      <label for="toctree-checkbox-27">
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -747,8 +763,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.html">
        atomate2.vasp.schemas
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
-      <label for="toctree-checkbox-28">
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -764,8 +780,18 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.defect.html">
+         atomate2.vasp.schemas.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.elph.html">
          atomate2.vasp.schemas.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.phonons.html">
+         atomate2.vasp.schemas.phonons
         </a>
        </li>
        <li class="toctree-l4">
@@ -779,8 +805,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.html">
        atomate2.vasp.sets
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
-      <label for="toctree-checkbox-29">
+      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+      <label for="toctree-checkbox-28">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -793,6 +819,11 @@ const thebe_selector_output = ".output, .cell_output"
        <li class="toctree-l4">
         <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.core.html">
          atomate2.vasp.sets.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.defect.html">
+         atomate2.vasp.sets.defect
         </a>
        </li>
       </ul>
@@ -848,8 +879,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -857,60 +893,104 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
+    <div class="header-article row sticky-top noprint">
+        
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/materialsproject/atomate2"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2F_modules/atomate2/vasp/schemas/calculation.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
         
     </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/materialsproject/atomate2"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2F_modules/atomate2/vasp/schemas/calculation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1></h1>
@@ -921,7 +1001,8 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   <h1>Source code for atomate2.vasp.schemas.calculation</h1><div class="highlight"><pre>
@@ -934,11 +1015,12 @@ const thebe_selector_output = ".output, .cell_output"
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">jobflow.utils</span> <span class="kn">import</span> <span class="n">ValueEnum</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Extra</span><span class="p">,</span> <span class="n">Field</span>
 <span class="kn">from</span> <span class="nn">pydantic.datetime_parse</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pymatgen.command_line.bader_caller</span> <span class="kn">import</span> <span class="n">bader_analysis_from_path</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.lattice</span> <span class="kn">import</span> <span class="n">Lattice</span>
 <span class="kn">from</span> <span class="nn">pymatgen.core.structure</span> <span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core.trajectory</span> <span class="kn">import</span> <span class="n">Trajectory</span>
 <span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.bandstructure</span> <span class="kn">import</span> <span class="n">BandStructure</span>
 <span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.core</span> <span class="kn">import</span> <span class="n">OrbitalType</span>
 <span class="kn">from</span> <span class="nn">pymatgen.electronic_structure.dos</span> <span class="kn">import</span> <span class="n">CompleteDos</span><span class="p">,</span> <span class="n">Dos</span>
@@ -946,6 +1028,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">BSVasprun</span><span class="p">,</span>
     <span class="n">Locpot</span><span class="p">,</span>
     <span class="n">Outcar</span><span class="p">,</span>
+    <span class="n">Poscar</span><span class="p">,</span>
     <span class="n">Potcar</span><span class="p">,</span>
     <span class="n">PotcarSingle</span><span class="p">,</span>
     <span class="n">Vasprun</span><span class="p">,</span>
@@ -974,6 +1057,9 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="s2">&quot;CalculationOutput&quot;</span><span class="p">,</span>
     <span class="s2">&quot;RunStatistics&quot;</span><span class="p">,</span>
     <span class="s2">&quot;Calculation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;IonicStep&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ElectronicStep&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ElectronPhononDisplacedStructures&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -1094,9 +1180,9 @@ const thebe_selector_output = ".output, .cell_output"
             <span class="n">incar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">vasprun</span><span class="o">.</span><span class="n">incar</span><span class="p">),</span>
             <span class="n">kpoints</span><span class="o">=</span><span class="n">kpoints_dict</span><span class="p">,</span>
             <span class="n">nkpoints</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">kpoints_dict</span><span class="p">[</span><span class="s2">&quot;actual_kpoints&quot;</span><span class="p">]),</span>
-            <span class="n">potcar</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">potcar_symbols</span><span class="p">],</span>
+            <span class="n">potcar</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">potcar_symbols</span><span class="p">],</span>
             <span class="n">potcar_spec</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">potcar_spec</span><span class="p">,</span>
-            <span class="n">potcar_type</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">potcar_symbols</span><span class="p">],</span>
+            <span class="n">potcar_type</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">potcar_symbols</span><span class="p">],</span>
             <span class="n">parameters</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">vasprun</span><span class="o">.</span><span class="n">parameters</span><span class="p">),</span>
             <span class="n">lattice_rec</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">initial_structure</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">reciprocal_lattice</span><span class="p">,</span>
             <span class="n">is_hubbard</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">is_hubbard</span><span class="p">,</span>
@@ -1208,6 +1294,42 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="ElectronicStep"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep">[docs]</a><span class="k">class</span> <span class="nc">ElectronicStep</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="n">Extra</span><span class="o">.</span><span class="n">allow</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+    <span class="sd">&quot;&quot;&quot;Document defining the information at each electronic step.</span>
+
+<span class="sd">    Note, not all the information will be available at every step.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">alphaZ</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The alpha Z term.&quot;</span><span class="p">)</span>
+    <span class="n">ewald</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The ewald energy.&quot;</span><span class="p">)</span>
+    <span class="n">hartreedc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Negative Hartree energy.&quot;</span><span class="p">)</span>
+    <span class="n">XCdc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Negative exchange energy.&quot;</span><span class="p">)</span>
+    <span class="n">pawpsdc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Negative potential energy with exchange-correlation energy.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">pawaedc</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The PAW double counting term.&quot;</span><span class="p">)</span>
+    <span class="n">eentropy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The entropy (T * S).&quot;</span><span class="p">)</span>
+    <span class="n">bandstr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The band energy (from eigenvalues).&quot;</span><span class="p">)</span>
+    <span class="n">atom</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The atomic energy.&quot;</span><span class="p">)</span>
+    <span class="n">e_fr_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The free energy.&quot;</span><span class="p">)</span>
+    <span class="n">e_wo_entrp</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The energy without entropy.&quot;</span><span class="p">)</span>
+    <span class="n">e_0_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The internal energy.&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="IonicStep"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep">[docs]</a><span class="k">class</span> <span class="nc">IonicStep</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="n">Extra</span><span class="o">.</span><span class="n">allow</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+    <span class="sd">&quot;&quot;&quot;Document defining the information at each ionic step.&quot;&quot;&quot;</span>
+
+    <span class="n">e_fr_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The free energy.&quot;</span><span class="p">)</span>
+    <span class="n">e_wo_entrp</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The energy without entropy.&quot;</span><span class="p">)</span>
+    <span class="n">e_0_energy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The internal energy.&quot;</span><span class="p">)</span>
+    <span class="n">forces</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Vector3D</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The forces on each atom.&quot;</span><span class="p">)</span>
+    <span class="n">stress</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The stress on the lattice.&quot;</span><span class="p">)</span>
+    <span class="n">electronic_steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ElectronicStep</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The electronic convergence steps.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The structure at this step.&quot;</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="CalculationOutput"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput">[docs]</a><span class="k">class</span> <span class="nc">CalculationOutput</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Document defining VASP calculation outputs.&quot;&quot;&quot;</span>
 
@@ -1241,7 +1363,8 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="p">)</span>
     <span class="n">mag_density</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The magnetization density, defined as total_mag/volume (units of A^-3)&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The magnetization density, defined as total_mag/volume &quot;</span>
+        <span class="s2">&quot;(units of A^-3)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">epsilon_static</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The high-frequency dielectric constant&quot;</span>
@@ -1258,8 +1381,8 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Frequency-dependent dielectric information from an LOPTICS &quot;</span>
         <span class="s2">&quot;calculation&quot;</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">ionic_steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Energy, forces, and structure for each ionic step&quot;</span>
+    <span class="n">ionic_steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">IonicStep</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Energy, forces, structure, etc. for each ionic step&quot;</span>
     <span class="p">)</span>
     <span class="n">locpot</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Average of the local potential along the crystal axes&quot;</span>
@@ -1288,8 +1411,8 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="p">)</span>
     <span class="n">dos_properties</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Element- and orbital-projected band properties (in eV) for the DOS. &quot;</span>
-        <span class="s2">&quot;All properties are with respect to the Fermi level.&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Element- and orbital-projected band properties (in eV) for the &quot;</span>
+        <span class="s2">&quot;DOS. All properties are with respect to the Fermi level.&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">run_stats</span><span class="p">:</span> <span class="n">RunStatistics</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
         <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Summary of runtime statistics for this calculation&quot;</span>
@@ -1300,8 +1423,10 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">vasprun</span><span class="p">:</span> <span class="n">Vasprun</span><span class="p">,</span>
         <span class="n">outcar</span><span class="p">:</span> <span class="n">Outcar</span><span class="p">,</span>
+        <span class="n">contcar</span><span class="p">:</span> <span class="n">Poscar</span><span class="p">,</span>
         <span class="n">locpot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Locpot</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">elph_poscars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">store_trajectory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CalculationOutput&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a VASP output document from VASP outputs.</span>
@@ -1312,8 +1437,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="sd">            A Vasprun object.</span>
 <span class="sd">        outcar</span>
 <span class="sd">            An Outcar object.</span>
+<span class="sd">        contcar</span>
+<span class="sd">            A Poscar object.</span>
 <span class="sd">        locpot</span>
 <span class="sd">            A Locpot object.</span>
+<span class="sd">        elph_poscars</span>
+<span class="sd">            Path to displaced electron-phonon coupling POSCAR files generated using</span>
+<span class="sd">            ``PHON_LMC = True``.</span>
+<span class="sd">        store_trajectory</span>
+<span class="sd">            Whether to store ionic steps as a pymatgen Trajectory object. If `True`,</span>
+<span class="sd">            the `ionic_steps` field is left as None.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1372,7 +1505,9 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">outcar_dict</span> <span class="o">=</span> <span class="n">outcar</span><span class="o">.</span><span class="n">as_dict</span><span class="p">()</span>
         <span class="n">outcar_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;run_stats&quot;</span><span class="p">)</span>
 
-        <span class="n">structure</span> <span class="o">=</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">final_structure</span>
+        <span class="c1"># use structure from CONTCAR as it is written to</span>
+        <span class="c1"># greater precision than in the vasprun</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">contcar</span><span class="o">.</span><span class="n">structure</span>
         <span class="n">mag_density</span> <span class="o">=</span> <span class="n">outcar</span><span class="o">.</span><span class="n">total_mag</span> <span class="o">/</span> <span class="n">structure</span><span class="o">.</span><span class="n">volume</span> <span class="k">if</span> <span class="n">outcar</span><span class="o">.</span><span class="n">total_mag</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outcar</span><span class="o">.</span><span class="n">magnetization</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -1406,7 +1541,7 @@ const thebe_selector_output = ".output, .cell_output"
             <span class="n">frequency_dependent_dielectric</span><span class="o">=</span><span class="n">freq_dependent_diel</span><span class="p">,</span>
             <span class="n">elph_displaced_structures</span><span class="o">=</span><span class="n">elph_structures</span><span class="p">,</span>
             <span class="n">dos_properties</span><span class="o">=</span><span class="n">dosprop_dict</span><span class="p">,</span>
-            <span class="n">ionic_steps</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">,</span>
+            <span class="n">ionic_steps</span><span class="o">=</span><span class="n">vasprun</span><span class="o">.</span><span class="n">ionic_steps</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">store_trajectory</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">locpot</span><span class="o">=</span><span class="n">locpot_avg</span><span class="p">,</span>
             <span class="n">outcar</span><span class="o">=</span><span class="n">outcar_dict</span><span class="p">,</span>
             <span class="n">run_stats</span><span class="o">=</span><span class="n">RunStatistics</span><span class="o">.</span><span class="n">from_outcar</span><span class="p">(</span><span class="n">outcar</span><span class="p">),</span>
@@ -1458,6 +1593,7 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">task_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">vasprun_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">outcar_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">contcar_file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">volumetric_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">elph_poscars</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">parse_dos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1469,6 +1605,7 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">store_volumetric_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span>
             <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
         <span class="p">]</span> <span class="o">=</span> <span class="n">SETTINGS</span><span class="o">.</span><span class="n">VASP_STORE_VOLUMETRIC_DATA</span><span class="p">,</span>
+        <span class="n">store_trajectory</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">vasprun_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">&quot;Calculation&quot;</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="n">VaspObject</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1484,6 +1621,8 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="sd">            Path to the vasprun.xml file, relative to dir_name.</span>
 <span class="sd">        outcar_file</span>
 <span class="sd">            Path to the OUTCAR file, relative to dir_name.</span>
+<span class="sd">        contcar_file</span>
+<span class="sd">            Path to the CONTCAR file, relative to dir_name</span>
 <span class="sd">        volumetric_files</span>
 <span class="sd">            Path to volumetric files, relative to dir_name.</span>
 <span class="sd">        elph_poscars</span>
@@ -1513,17 +1652,21 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="sd">            Whether to store the average of the LOCPOT along the crystal axes.</span>
 <span class="sd">        run_bader</span>
 <span class="sd">            Whether to run bader on the charge density.</span>
-<span class="sd">        strip_dos_projections : bool</span>
+<span class="sd">        strip_dos_projections</span>
 <span class="sd">            Whether to strip the element and site projections from the density of</span>
 <span class="sd">            states. This can help reduce the size of DOS objects in systems with many</span>
 <span class="sd">            atoms.</span>
-<span class="sd">        strip_bandstructure_projections : bool</span>
+<span class="sd">        strip_bandstructure_projections</span>
 <span class="sd">            Whether to strip the element and site projections from the band structure.</span>
 <span class="sd">            This can help reduce the size of DOS objects in systems with many atoms.</span>
 <span class="sd">        store_volumetric_data</span>
 <span class="sd">            Which volumetric files to store.</span>
+<span class="sd">        store_trajectory</span>
+<span class="sd">            Whether to store the ionic steps in a pymatgen Trajectory object. if `True`,</span>
+<span class="sd">            :obj:&#39;.CalculationOutput.ionic_steps&#39; is set to None to reduce duplicating</span>
+<span class="sd">            information.</span>
 <span class="sd">        vasprun_kwargs</span>
-<span class="sd">            Additional keyword arguments that will be passed to to the Vasprun init.</span>
+<span class="sd">            Additional keyword arguments that will be passed to the Vasprun init.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1533,11 +1676,13 @@ const thebe_selector_output = ".output, .cell_output"
         <span class="n">dir_name</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
         <span class="n">vasprun_file</span> <span class="o">=</span> <span class="n">dir_name</span> <span class="o">/</span> <span class="n">vasprun_file</span>
         <span class="n">outcar_file</span> <span class="o">=</span> <span class="n">dir_name</span> <span class="o">/</span> <span class="n">outcar_file</span>
+        <span class="n">contcar_file</span> <span class="o">=</span> <span class="n">dir_name</span> <span class="o">/</span> <span class="n">contcar_file</span>
 
         <span class="n">vasprun_kwargs</span> <span class="o">=</span> <span class="n">vasprun_kwargs</span> <span class="k">if</span> <span class="n">vasprun_kwargs</span> <span class="k">else</span> <span class="p">{}</span>
         <span class="n">volumetric_files</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">if</span> <span class="n">volumetric_files</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">volumetric_files</span>
         <span class="n">vasprun</span> <span class="o">=</span> <span class="n">Vasprun</span><span class="p">(</span><span class="n">vasprun_file</span><span class="p">,</span> <span class="o">**</span><span class="n">vasprun_kwargs</span><span class="p">)</span>
         <span class="n">outcar</span> <span class="o">=</span> <span class="n">Outcar</span><span class="p">(</span><span class="n">outcar_file</span><span class="p">)</span>
+        <span class="n">contcar</span> <span class="o">=</span> <span class="n">Poscar</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">contcar_file</span><span class="p">)</span>
         <span class="n">completed_at</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">vasprun_file</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">))</span>
 
         <span class="n">output_file_paths</span> <span class="o">=</span> <span class="n">_get_output_file_paths</span><span class="p">(</span><span class="n">volumetric_files</span><span class="p">)</span>
@@ -1571,11 +1716,33 @@ const thebe_selector_output = ".output, .cell_output"
                 <span class="n">locpot</span> <span class="o">=</span> <span class="n">Locpot</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">dir_name</span> <span class="o">/</span> <span class="n">locpot_file</span><span class="p">)</span>
 
         <span class="n">input_doc</span> <span class="o">=</span> <span class="n">CalculationInput</span><span class="o">.</span><span class="n">from_vasprun</span><span class="p">(</span><span class="n">vasprun</span><span class="p">)</span>
-        <span class="n">output_doc</span> <span class="o">=</span> <span class="n">CalculationOutput</span><span class="o">.</span><span class="n">from_vasp_outputs</span><span class="p">(</span>
-            <span class="n">vasprun</span><span class="p">,</span> <span class="n">outcar</span><span class="p">,</span> <span class="n">locpot</span><span class="o">=</span><span class="n">locpot</span><span class="p">,</span> <span class="n">elph_poscars</span><span class="o">=</span><span class="n">elph_poscars</span>
-        <span class="p">)</span>
 
-        <span class="n">has_vasp_completed</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">SUCCESS</span> <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">converged</span> <span class="k">else</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
+        <span class="n">output_doc</span> <span class="o">=</span> <span class="n">CalculationOutput</span><span class="o">.</span><span class="n">from_vasp_outputs</span><span class="p">(</span>
+            <span class="n">vasprun</span><span class="p">,</span>
+            <span class="n">outcar</span><span class="p">,</span>
+            <span class="n">contcar</span><span class="p">,</span>
+            <span class="n">locpot</span><span class="o">=</span><span class="n">locpot</span><span class="p">,</span>
+            <span class="n">elph_poscars</span><span class="o">=</span><span class="n">elph_poscars</span><span class="p">,</span>
+            <span class="n">store_trajectory</span><span class="o">=</span><span class="n">store_trajectory</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">store_trajectory</span><span class="p">:</span>
+            <span class="n">traj</span> <span class="o">=</span> <span class="n">Trajectory</span><span class="o">.</span><span class="n">from_structures</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">],</span>
+                <span class="n">frame_properties</span><span class="o">=</span><span class="p">[</span><span class="n">IonicStep</span><span class="p">(</span><span class="o">**</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">ionic_steps</span><span class="p">],</span>
+                <span class="n">constant_lattice</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">vasp_objects</span><span class="p">[</span><span class="n">VaspObject</span><span class="o">.</span><span class="n">TRAJECTORY</span><span class="p">]</span> <span class="o">=</span> <span class="n">traj</span>  <span class="c1"># type: ignore</span>
+
+        <span class="c1"># MD run</span>
+        <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;IBRION&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;NSW&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">nionic_steps</span><span class="p">:</span>
+                <span class="n">has_vasp_completed</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">SUCCESS</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">has_vasp_completed</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
+        <span class="c1"># others</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">has_vasp_completed</span> <span class="o">=</span> <span class="n">Status</span><span class="o">.</span><span class="n">SUCCESS</span> <span class="k">if</span> <span class="n">vasprun</span><span class="o">.</span><span class="n">converged</span> <span class="k">else</span> <span class="n">Status</span><span class="o">.</span><span class="n">FAILED</span>
+
         <span class="k">return</span> <span class="p">(</span>
             <span class="bp">cls</span><span class="p">(</span>
                 <span class="n">dir_name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">dir_name</span><span class="p">),</span>
@@ -1729,7 +1896,6 @@ const thebe_selector_output = ".output, .cell_output"
             <span class="n">OrbitalType</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
             <span class="n">OrbitalType</span><span class="o">.</span><span class="n">p</span><span class="p">,</span>
             <span class="n">OrbitalType</span><span class="o">.</span><span class="n">d</span><span class="p">,</span>
-            <span class="n">OrbitalType</span><span class="o">.</span><span class="n">f</span><span class="p">,</span>
         <span class="p">]:</span>
             <span class="n">orb_name</span> <span class="o">=</span> <span class="n">orb_type</span><span class="o">.</span><span class="n">name</span>
             <span class="k">if</span> <span class="p">(</span>
@@ -1759,28 +1925,34 @@ const thebe_selector_output = ".output, .cell_output"
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
 <div class='prev-next-area'>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the Materials Project<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the Materials Project<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

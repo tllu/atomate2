@@ -40,6 +40,8 @@ atomate2.vasp.schemas
 
    atomate2.vasp.schemas.calc_types
    atomate2.vasp.schemas.calculation
+   atomate2.vasp.schemas.defect
    atomate2.vasp.schemas.elph
+   atomate2.vasp.schemas.phonons
    atomate2.vasp.schemas.task
 

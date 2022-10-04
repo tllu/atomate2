@@ -1,0 +1,1554 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>atomate2.vasp.schemas.phonons &#8212; atomate2</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/github.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://materialsproject.github.io/atomate2/_modules/atomate2/vasp/schemas/phonons.html" />
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">atomate2</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/index.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/install.html">
+   Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/running-workflows.html">
+   Running Workflows
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../user/fireworks.html">
+   Using atomate2 with FireWorks
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../user/codes/index.html">
+   Codes
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../../user/codes/vasp.html">
+     VASP
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../../reference/index.html">
+   API reference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.amset.html">
+     atomate2.amset
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.files.html">
+       atomate2.amset.files
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+      <label for="toctree-checkbox-4">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.files.copy_amset_files.html">
+         copy_amset_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.files.write_amset_settings.html">
+         write_amset_settings
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.jobs.html">
+       atomate2.amset.jobs
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+      <label for="toctree-checkbox-5">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.jobs.AmsetMaker.html">
+         AmsetMaker
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.run.html">
+       atomate2.amset.run
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+      <label for="toctree-checkbox-6">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.run.check_converged.html">
+         check_converged
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.run.run_amset.html">
+         run_amset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.run.tensor_average.html">
+         tensor_average
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.html">
+       atomate2.amset.schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+      <label for="toctree-checkbox-7">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.AmsetTaskDocument.html">
+         AmsetTaskDocument
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.MeshData.html">
+         MeshData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.TransportData.html">
+         TransportData
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.UsageStats.html">
+         UsageStats
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.amset.schemas.amset.html">
+         amset
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.common.html">
+     atomate2.common
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.analysis.html">
+       atomate2.common.analysis
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.analysis.elastic.html">
+         atomate2.common.analysis.elastic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.files.html">
+       atomate2.common.files
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.copy_files.html">
+         copy_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.delete_files.html">
+         delete_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.find_and_filter_files.html">
+         find_and_filter_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.get_zfile.html">
+         get_zfile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.gunzip_files.html">
+         gunzip_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.gzip_files.html">
+         gzip_files
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.files.rename_files.html">
+         rename_files
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.jobs.html">
+       atomate2.common.jobs
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.jobs.structure_to_conventional.html">
+         structure_to_conventional
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.jobs.structure_to_primitive.html">
+         structure_to_primitive
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.common.schemas.html">
+       atomate2.common.schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.cclib.html">
+         atomate2.common.schemas.cclib
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.elastic.html">
+         atomate2.common.schemas.elastic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.math.html">
+         atomate2.common.schemas.math
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.molecule.html">
+         atomate2.common.schemas.molecule
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.structure.html">
+         atomate2.common.schemas.structure
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.common.schemas.symmetry.html">
+         atomate2.common.schemas.symmetry
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.settings.html">
+     atomate2.settings
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../../../../reference/atomate2.settings.Atomate2Settings.html">
+       Atomate2Settings
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.utils.html">
+     atomate2.utils
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.datetime.html">
+       atomate2.utils.datetime
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.datetime.datetime_str.html">
+         datetime_str
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.html">
+       atomate2.utils.file_client
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.auto_fileclient.html">
+         auto_fileclient
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.get_ssh_connection.html">
+         get_ssh_connection
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.file_client.FileClient.html">
+         FileClient
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.log.html">
+       atomate2.utils.log
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.log.initialize_logger.html">
+         initialize_logger
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.utils.path.html">
+       atomate2.utils.path
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.path.find_recent_logfile.html">
+         find_recent_logfile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.path.get_uri.html">
+         get_uri
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.utils.path.strip_hostname.html">
+         strip_hostname
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../../../../reference/atomate2.vasp.html">
+     atomate2.vasp
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.builders.html">
+       atomate2.vasp.builders
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.builders.elastic.html">
+         atomate2.vasp.builders.elastic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.drones.html">
+       atomate2.vasp.drones
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.drones.VaspDrone.html">
+         VaspDrone
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.files.html">
+       atomate2.vasp.files
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.files.copy_vasp_outputs.html">
+         copy_vasp_outputs
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.files.get_largest_relax_extension.html">
+         get_largest_relax_extension
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.files.write_vasp_input_set.html">
+         write_vasp_input_set
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.html">
+       atomate2.vasp.flows
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.amset.html">
+         atomate2.vasp.flows.amset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.core.html">
+         atomate2.vasp.flows.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.defect.html">
+         atomate2.vasp.flows.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.elastic.html">
+         atomate2.vasp.flows.elastic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.elph.html">
+         atomate2.vasp.flows.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.flows.phonons.html">
+         atomate2.vasp.flows.phonons
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.html">
+       atomate2.vasp.jobs
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.amset.html">
+         atomate2.vasp.jobs.amset
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.base.html">
+         atomate2.vasp.jobs.base
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.core.html">
+         atomate2.vasp.jobs.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.defect.html">
+         atomate2.vasp.jobs.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.elastic.html">
+         atomate2.vasp.jobs.elastic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.elph.html">
+         atomate2.vasp.jobs.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.jobs.phonons.html">
+         atomate2.vasp.jobs.phonons
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.html">
+       atomate2.vasp.powerups
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_incar_settings.html">
+         update_user_incar_settings
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_kpoints_settings.html">
+         update_user_kpoints_settings
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_potcar_functional.html">
+         update_user_potcar_functional
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.update_user_potcar_settings.html">
+         update_user_potcar_settings
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.powerups.use_auto_ispin.html">
+         use_auto_ispin
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.run.html">
+       atomate2.vasp.run
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.run.run_vasp.html">
+         run_vasp
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.run.should_stop_children.html">
+         should_stop_children
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.run.JobType.html">
+         JobType
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.html">
+       atomate2.vasp.schemas
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.calc_types.html">
+         atomate2.vasp.schemas.calc_types
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.calculation.html">
+         atomate2.vasp.schemas.calculation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.defect.html">
+         atomate2.vasp.schemas.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.elph.html">
+         atomate2.vasp.schemas.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.phonons.html">
+         atomate2.vasp.schemas.phonons
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.schemas.task.html">
+         atomate2.vasp.schemas.task
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.html">
+       atomate2.vasp.sets
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+      <label for="toctree-checkbox-28">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.base.html">
+         atomate2.vasp.sets.base
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.core.html">
+         atomate2.vasp.sets.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../../../reference/atomate2.vasp.sets.defect.html">
+         atomate2.vasp.sets.defect
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Developer Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../dev/dev_install.html">
+   Developer Installation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../dev/vasp_tests.html">
+   Writing VASP Tests
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  About
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../about/changelog.html">
+   Change log
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../about/contributors.html">
+   Contributors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../about/contributing.html">
+   Contributing to atomate2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../../../about/license.html">
+   License
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/materialsproject/atomate2"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2F_modules/atomate2/vasp/schemas/phonons.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <h1>Source code for atomate2.vasp.schemas.phonons</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">phonopy</span> <span class="kn">import</span> <span class="n">Phonopy</span>
+<span class="kn">from</span> <span class="nn">phonopy.phonon.band_structure</span> <span class="kn">import</span> <span class="n">get_band_qpoints_and_path_connections</span>
+<span class="kn">from</span> <span class="nn">phonopy.structure.symmetry</span> <span class="kn">import</span> <span class="n">symmetrize_borns_and_epsilon</span>
+<span class="kn">from</span> <span class="nn">phonopy.units</span> <span class="kn">import</span> <span class="n">VaspToTHz</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span> <span class="nn">pymatgen.io.phonopy</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_ph_bs_symm_line</span><span class="p">,</span>
+    <span class="n">get_ph_dos</span><span class="p">,</span>
+    <span class="n">get_phonopy_structure</span><span class="p">,</span>
+    <span class="n">get_pmg_structure</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pymatgen.io.vasp</span> <span class="kn">import</span> <span class="n">Kpoints</span>
+<span class="kn">from</span> <span class="nn">pymatgen.phonon.bandstructure</span> <span class="kn">import</span> <span class="n">PhononBandStructureSymmLine</span>
+<span class="kn">from</span> <span class="nn">pymatgen.phonon.dos</span> <span class="kn">import</span> <span class="n">PhononDos</span>
+<span class="kn">from</span> <span class="nn">pymatgen.phonon.plotter</span> <span class="kn">import</span> <span class="n">PhononBSPlotter</span><span class="p">,</span> <span class="n">PhononDosPlotter</span>
+<span class="kn">from</span> <span class="nn">pymatgen.symmetry.bandstructure</span> <span class="kn">import</span> <span class="n">HighSymmKpath</span>
+<span class="kn">from</span> <span class="nn">pymatgen.symmetry.kpath</span> <span class="kn">import</span> <span class="n">KPathSeek</span>
+
+<span class="kn">from</span> <span class="nn">atomate2.common.schemas.math</span> <span class="kn">import</span> <span class="n">Matrix3D</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;PhononBSDOSDoc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PhononComputationalSettings&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PhononUUIDs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;PhononJobDirs&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ThermalDisplacementData&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="PhononComputationalSettings"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.PhononComputationalSettings.html#atomate2.vasp.schemas.phonons.PhononComputationalSettings">[docs]</a><span class="k">class</span> <span class="nc">PhononComputationalSettings</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collection to store computational settings for the phonon computation.&quot;&quot;&quot;</span>
+
+    <span class="c1"># could be optional and implemented at a later stage?</span>
+    <span class="n">npoints_band</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;number of points for band structure computation&quot;</span><span class="p">)</span>
+    <span class="n">kpath_scheme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;indicates the kpath scheme&quot;</span><span class="p">)</span>
+    <span class="n">kpoint_density_dos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;number of points for computation of free energies and densities of states&quot;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ThermalDisplacementData"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.ThermalDisplacementData.html#atomate2.vasp.schemas.phonons.ThermalDisplacementData">[docs]</a><span class="k">class</span> <span class="nc">ThermalDisplacementData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collection to store information on the thermal displacement matrices.&quot;&quot;&quot;</span>
+
+    <span class="n">freq_min_thermal_displacements</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;cutoff frequency in THz to avoid numerical issues in the &quot;</span>
+        <span class="s2">&quot;computation of the thermal displacement parameters&quot;</span>
+    <span class="p">)</span>
+    <span class="n">thermal_displacement_matrix_cif</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Matrix3D</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;field including thermal displacement matrices in CIF format&quot;</span>
+    <span class="p">)</span>
+    <span class="n">thermal_displacement_matrix</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Matrix3D</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;field including thermal displacement matrices in Cartesian coordinate system&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">temperatures_thermal_displacements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;temperatures at which the thermal displacement matrices&quot;</span>
+        <span class="s2">&quot;have been computed&quot;</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PhononUUIDs"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.PhononUUIDs.html#atomate2.vasp.schemas.phonons.PhononUUIDs">[docs]</a><span class="k">class</span> <span class="nc">PhononUUIDs</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collection to save all uuids connected to the phonon run.&quot;&quot;&quot;</span>
+
+    <span class="n">optimization_run_uuid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;optimization run uuid&quot;</span><span class="p">)</span>
+    <span class="n">displacements_uuids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The uuids of the displacement jobs.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">static_run_uuid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;static run uuid&quot;</span><span class="p">)</span>
+    <span class="n">born_run_uuid</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;born run uuid&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PhononJobDirs"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.PhononJobDirs.html#atomate2.vasp.schemas.phonons.PhononJobDirs">[docs]</a><span class="k">class</span> <span class="nc">PhononJobDirs</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collection to save all job directories relevant for the phonon run.&quot;&quot;&quot;</span>
+
+    <span class="n">displacements_job_dirs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The directories where the displacement jobs were run.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">static_run_job_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory where static run was performed.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">born_run_job_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory where born run was performed.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">optimization_run_job_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Directory where optimization run was performed.&quot;</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PhononBSDOSDoc"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc">[docs]</a><span class="k">class</span> <span class="nc">PhononBSDOSDoc</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collection of all data produced by the phonon workflow.&quot;&quot;&quot;</span>
+
+    <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Structure of Materials Project.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">phonon_bandstructure</span><span class="p">:</span> <span class="n">PhononBandStructureSymmLine</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Phonon band structure object.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">phonon_dos</span><span class="p">:</span> <span class="n">PhononDos</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Phonon density of states object.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">free_energies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;vibrational part of the free energies in J/mol per &quot;</span>
+        <span class="s2">&quot;formula unit for temperatures in temperature_list&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">heat_capacities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;heat capacities in J/K/mol per &quot;</span>
+        <span class="s2">&quot;formula unit for temperatures in temperature_list&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">internal_energies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;internal energies in  J/mol per &quot;</span>
+        <span class="s2">&quot;formula unit for temperatures in temperature_list&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">entropies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;entropies in J/(K*mol) per formula unit&quot;</span>
+        <span class="s2">&quot;for temperatures in temperature_list &quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">temperatures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;temperatures at which the vibrational&quot;</span>
+        <span class="s2">&quot; part of the free energies&quot;</span>
+        <span class="s2">&quot; and other properties have been computed&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">total_dft_energy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;total DFT energy per formula unit in eV&quot;</span><span class="p">)</span>
+
+    <span class="n">has_imaginary_modes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;if true, structure has imaginary modes&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># needed, e.g. to compute Grueneisen parameter etc</span>
+    <span class="n">force_constants</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Matrix3D</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Force constants between every pair of atoms in the structure&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">born</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Matrix3D</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;born charges as computed from phonopy. Only for symmetrically different atoms&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">epsilon_static</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The high-frequency dielectric constant&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">supercell_matrix</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;matrix describing the supercell&quot;</span><span class="p">)</span>
+    <span class="n">primitive_matrix</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;matrix describing relationship to primitive cell&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;String describing the code for the computation&quot;</span><span class="p">)</span>
+
+    <span class="n">phonopy_settings</span><span class="p">:</span> <span class="n">PhononComputationalSettings</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;Field including settings for Phonopy&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">thermal_displacement_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ThermalDisplacementData</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+        <span class="s2">&quot;Includes all data of the computation of the thermal displacements&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">jobdirs</span><span class="p">:</span> <span class="n">PhononJobDirs</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Field including all relevant job directories&quot;</span><span class="p">)</span>
+
+    <span class="n">uuids</span><span class="p">:</span> <span class="n">PhononUUIDs</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="s2">&quot;Field including all relevant uuids&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PhononBSDOSDoc.from_forces_born"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.from_forces_born">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_forces_born</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span>
+        <span class="n">supercell_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+        <span class="n">displacement</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">sym_reduce</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">use_symmetrized_structure</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">kpath_scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">displacement_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
+        <span class="n">total_dft_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">epsilon_static</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">born</span><span class="p">:</span> <span class="n">Matrix3D</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate collection of phonon data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure: Structure object</span>
+<span class="sd">        supercell_matrix: numpy array describing the supercell</span>
+<span class="sd">        displacement: float</span>
+<span class="sd">            size of displacement in angstrom</span>
+<span class="sd">        sym_reduce: bool</span>
+<span class="sd">            if True, phonopy will use symmetry</span>
+<span class="sd">        symprec: float</span>
+<span class="sd">            precision to determine kpaths,</span>
+<span class="sd">            primitive cells and symmetry in phonopy and pymatgen</span>
+<span class="sd">        use_symmetrized_structure: str</span>
+<span class="sd">            primitive, conventional or None</span>
+<span class="sd">        kpath_scheme: str</span>
+<span class="sd">            kpath scheme to generate phonon band structure</span>
+<span class="sd">        code: str</span>
+<span class="sd">            which code was used for computation</span>
+<span class="sd">        displacement_data:</span>
+<span class="sd">            output of the VASP displacement data</span>
+<span class="sd">        total_dft_energy: float</span>
+<span class="sd">            total energy in eV per cell</span>
+<span class="sd">        epsilon_static: Matrix3D</span>
+<span class="sd">            The high-frequency dielectric constant</span>
+<span class="sd">        born: Matrix3D</span>
+<span class="sd">            born charges</span>
+<span class="sd">        **kwargs:</span>
+<span class="sd">            additional arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="o">==</span> <span class="s2">&quot;vasp&quot;</span><span class="p">:</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="n">VaspToTHz</span>
+        <span class="c1"># This opens the opportunity to add support for other codes</span>
+        <span class="c1"># that are supported by phonopy</span>
+
+        <span class="n">cell</span> <span class="o">=</span> <span class="n">get_phonopy_structure</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">use_symmetrized_structure</span> <span class="o">==</span> <span class="s2">&quot;primitive&quot;</span> <span class="ow">and</span> <span class="n">kpath_scheme</span> <span class="o">!=</span> <span class="s2">&quot;seekpath&quot;</span><span class="p">:</span>
+            <span class="n">primitive_matrix</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">primitive_matrix</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
+        <span class="n">phonon</span> <span class="o">=</span> <span class="n">Phonopy</span><span class="p">(</span>
+            <span class="n">cell</span><span class="p">,</span>
+            <span class="n">supercell_matrix</span><span class="p">,</span>
+            <span class="n">primitive_matrix</span><span class="o">=</span><span class="n">primitive_matrix</span><span class="p">,</span>
+            <span class="n">factor</span><span class="o">=</span><span class="n">factor</span><span class="p">,</span>
+            <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">,</span>
+            <span class="n">is_symmetry</span><span class="o">=</span><span class="n">sym_reduce</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">generate_displacements</span><span class="p">(</span><span class="n">distance</span><span class="o">=</span><span class="n">displacement</span><span class="p">)</span>
+        <span class="n">set_of_forces</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">forces</span><span class="p">)</span> <span class="k">for</span> <span class="n">forces</span> <span class="ow">in</span> <span class="n">displacement_data</span><span class="p">[</span><span class="s2">&quot;forces&quot;</span><span class="p">]]</span>
+
+        <span class="k">if</span> <span class="n">born</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">epsilon_static</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">born</span><span class="p">):</span>
+                <span class="n">borns</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="n">symmetrize_borns_and_epsilon</span><span class="p">(</span>
+                    <span class="n">ucell</span><span class="o">=</span><span class="n">phonon</span><span class="o">.</span><span class="n">unitcell</span><span class="p">,</span>
+                    <span class="n">borns</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">born</span><span class="p">),</span>
+                    <span class="n">epsilon</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">epsilon_static</span><span class="p">),</span>
+                    <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">,</span>
+                    <span class="n">primitive_matrix</span><span class="o">=</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive_matrix</span><span class="p">,</span>
+                    <span class="n">supercell_matrix</span><span class="o">=</span><span class="n">phonon</span><span class="o">.</span><span class="n">supercell_matrix</span><span class="p">,</span>
+                    <span class="n">is_symmetry</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;symmetrize_born&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Number of born charges does not agree with number of atoms&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">code</span> <span class="o">==</span> <span class="s2">&quot;vasp&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">borns</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)):</span>
+                    <span class="n">phonon</span><span class="o">.</span><span class="n">nac_params</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;born&quot;</span><span class="p">:</span> <span class="n">borns</span><span class="p">,</span>
+                        <span class="s2">&quot;dielectric&quot;</span><span class="p">:</span> <span class="n">epsilon</span><span class="p">,</span>
+                        <span class="s2">&quot;factor&quot;</span><span class="p">:</span> <span class="mf">14.399652</span><span class="p">,</span>
+                    <span class="p">}</span>
+            <span class="c1"># Other codes could be added here</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">borns</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">epsilon</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Produces all force constants</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">produce_force_constants</span><span class="p">(</span><span class="n">forces</span><span class="o">=</span><span class="n">set_of_forces</span><span class="p">)</span>
+
+        <span class="c1"># with phonon.load(&quot;phonopy.yaml&quot;) the phonopy API can be used</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;phonopy.yaml&quot;</span><span class="p">)</span>
+
+        <span class="c1"># get phonon band structure</span>
+        <span class="n">kpath_dict</span><span class="p">,</span> <span class="n">kpath_concrete</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_kpath</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="n">get_pmg_structure</span><span class="p">(</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive</span><span class="p">),</span>
+            <span class="n">kpath_scheme</span><span class="o">=</span><span class="n">kpath_scheme</span><span class="p">,</span>
+            <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">npoints_band</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;npoints_band&quot;</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+        <span class="n">qpoints</span><span class="p">,</span> <span class="n">connections</span> <span class="o">=</span> <span class="n">get_band_qpoints_and_path_connections</span><span class="p">(</span>
+            <span class="n">kpath_concrete</span><span class="p">,</span> <span class="n">npoints</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;npoints_band&quot;</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># phonon band structures will always be cmouted</span>
+        <span class="n">filename_band_yaml</span> <span class="o">=</span> <span class="s2">&quot;phonon_band_structure.yaml&quot;</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">run_band_structure</span><span class="p">(</span>
+            <span class="n">qpoints</span><span class="p">,</span> <span class="n">path_connections</span><span class="o">=</span><span class="n">connections</span><span class="p">,</span> <span class="n">with_eigenvectors</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">write_yaml_band_structure</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename_band_yaml</span><span class="p">)</span>
+        <span class="n">bs_symm_line</span> <span class="o">=</span> <span class="n">get_ph_bs_symm_line</span><span class="p">(</span>
+            <span class="n">filename_band_yaml</span><span class="p">,</span> <span class="n">labels_dict</span><span class="o">=</span><span class="n">kpath_dict</span><span class="p">,</span> <span class="n">has_nac</span><span class="o">=</span><span class="n">born</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="n">new_plotter</span> <span class="o">=</span> <span class="n">PhononBSPlotter</span><span class="p">(</span><span class="n">bs</span><span class="o">=</span><span class="n">bs_symm_line</span><span class="p">)</span>
+
+        <span class="n">new_plotter</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span>
+            <span class="s2">&quot;phonon_band_structure.eps&quot;</span><span class="p">,</span>
+            <span class="n">img_format</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;img_format&quot;</span><span class="p">,</span> <span class="s2">&quot;eps&quot;</span><span class="p">),</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="s2">&quot;THz&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># will determine if imaginary modes are present in the structure</span>
+        <span class="n">imaginary_modes</span> <span class="o">=</span> <span class="n">bs_symm_line</span><span class="o">.</span><span class="n">has_imaginary_freq</span><span class="p">(</span>
+            <span class="n">tol</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tol_imaginary_modes&quot;</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># gets data for visualization on website - yaml is also enough</span>
+        <span class="n">bs_symm_line</span><span class="o">.</span><span class="n">write_phononwebsite</span><span class="p">(</span><span class="s2">&quot;phonon_website.json&quot;</span><span class="p">)</span>
+
+        <span class="c1"># get phonon density of states</span>
+        <span class="n">filename_dos_yaml</span> <span class="o">=</span> <span class="s2">&quot;phonon_dos.yaml&quot;</span>
+
+        <span class="n">kpoint_density_dos</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kpoint_density_dos&quot;</span><span class="p">,</span> <span class="mi">7000</span><span class="p">)</span>
+        <span class="n">kpoint</span> <span class="o">=</span> <span class="n">Kpoints</span><span class="o">.</span><span class="n">automatic_density</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span>
+            <span class="n">kppa</span><span class="o">=</span><span class="n">kpoint_density_dos</span><span class="p">,</span>
+            <span class="n">force_gamma</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">run_mesh</span><span class="p">(</span><span class="n">kpoint</span><span class="o">.</span><span class="n">kpts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">run_total_dos</span><span class="p">()</span>
+        <span class="n">phonon</span><span class="o">.</span><span class="n">write_total_dos</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename_dos_yaml</span><span class="p">)</span>
+        <span class="n">dos</span> <span class="o">=</span> <span class="n">get_ph_dos</span><span class="p">(</span><span class="n">filename_dos_yaml</span><span class="p">)</span>
+        <span class="n">new_plotter_dos</span> <span class="o">=</span> <span class="n">PhononDosPlotter</span><span class="p">()</span>
+        <span class="n">new_plotter_dos</span><span class="o">.</span><span class="n">add_dos</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;total&quot;</span><span class="p">,</span> <span class="n">dos</span><span class="o">=</span><span class="n">dos</span><span class="p">)</span>
+        <span class="n">new_plotter_dos</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span>
+            <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;phonon_dos.eps&quot;</span><span class="p">,</span>
+            <span class="n">img_format</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;img_format&quot;</span><span class="p">,</span> <span class="s2">&quot;eps&quot;</span><span class="p">),</span>
+            <span class="n">units</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="s2">&quot;THz&quot;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># compute vibrational part of free energies per formula unit</span>
+        <span class="n">temperature_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+            <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tmin&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tmax&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tstep&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="n">free_energies</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">dos</span><span class="o">.</span><span class="n">helmholtz_free_energy</span><span class="p">(</span>
+                <span class="n">structure</span><span class="o">=</span><span class="n">get_pmg_structure</span><span class="p">(</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive</span><span class="p">),</span> <span class="n">t</span><span class="o">=</span><span class="n">temperature</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">temperature</span> <span class="ow">in</span> <span class="n">temperature_range</span>
+        <span class="p">]</span>
+
+        <span class="n">entropies</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">dos</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">get_pmg_structure</span><span class="p">(</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive</span><span class="p">),</span> <span class="n">t</span><span class="o">=</span><span class="n">temperature</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temperature</span> <span class="ow">in</span> <span class="n">temperature_range</span>
+        <span class="p">]</span>
+
+        <span class="n">internal_energies</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">dos</span><span class="o">.</span><span class="n">internal_energy</span><span class="p">(</span>
+                <span class="n">structure</span><span class="o">=</span><span class="n">get_pmg_structure</span><span class="p">(</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive</span><span class="p">),</span> <span class="n">t</span><span class="o">=</span><span class="n">temperature</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">temperature</span> <span class="ow">in</span> <span class="n">temperature_range</span>
+        <span class="p">]</span>
+
+        <span class="n">heat_capacities</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">dos</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">get_pmg_structure</span><span class="p">(</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive</span><span class="p">),</span> <span class="n">t</span><span class="o">=</span><span class="n">temperature</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">temperature</span> <span class="ow">in</span> <span class="n">temperature_range</span>
+        <span class="p">]</span>
+
+        <span class="c1"># will compute thermal displacement matrices</span>
+        <span class="c1"># for the primitive cell (phonon.primitive!)</span>
+        <span class="c1"># only this is available in phonopy</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;create_thermal_displacements&quot;</span><span class="p">]:</span>
+
+            <span class="n">phonon</span><span class="o">.</span><span class="n">run_mesh</span><span class="p">(</span>
+                <span class="n">kpoint</span><span class="o">.</span><span class="n">kpts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">with_eigenvectors</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_mesh_symmetry</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">)</span>
+            <span class="n">freq_min_thermal_displacements</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s2">&quot;freq_min_thermal_displacements&quot;</span><span class="p">,</span> <span class="mf">0.0</span>
+            <span class="p">)</span>
+            <span class="n">phonon</span><span class="o">.</span><span class="n">run_thermal_displacement_matrices</span><span class="p">(</span>
+                <span class="n">t_min</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tmin_thermal_displacements&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="n">t_max</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tmax_thermal_displacements&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>
+                <span class="n">t_step</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tstep_thermal_displacements&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+                <span class="n">freq_min</span><span class="o">=</span><span class="n">freq_min_thermal_displacements</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">temperature_range_thermal_displacements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tmin_thermal_displacements&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tmax_thermal_displacements&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tstep_thermal_displacements&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">temp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temperature_range_thermal_displacements</span><span class="p">):</span>
+                <span class="n">phonon</span><span class="o">.</span><span class="n">thermal_displacement_matrices</span><span class="o">.</span><span class="n">write_cif</span><span class="p">(</span>
+                    <span class="n">phonon</span><span class="o">.</span><span class="n">primitive</span><span class="p">,</span>
+                    <span class="n">i</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;tdispmat_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;K.cif&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">tdisp_mat</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">phonon</span><span class="o">.</span><span class="n">_thermal_displacement_matrices</span><span class="o">.</span><span class="n">thermal_displacement_matrices</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="p">)</span>
+
+            <span class="n">tdisp_mat_cif</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">phonon</span><span class="o">.</span><span class="n">_thermal_displacement_matrices</span><span class="o">.</span><span class="n">thermal_displacement_matrices_cif</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tdisp_mat</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">tdisp_mat_cif</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">formula_units</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">num_atoms</span>
+            <span class="o">/</span> <span class="n">structure</span><span class="o">.</span><span class="n">composition</span><span class="o">.</span><span class="n">reduced_composition</span><span class="o">.</span><span class="n">num_atoms</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">total_dft_energy</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">total_dft_energy_per_formula_unit</span> <span class="o">=</span> <span class="n">total_dft_energy</span> <span class="o">/</span> <span class="n">formula_units</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">total_dft_energy_per_formula_unit</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span>
+            <span class="n">phonon_bandstructure</span><span class="o">=</span><span class="n">bs_symm_line</span><span class="p">,</span>
+            <span class="n">phonon_dos</span><span class="o">=</span><span class="n">dos</span><span class="p">,</span>
+            <span class="n">free_energies</span><span class="o">=</span><span class="n">free_energies</span><span class="p">,</span>
+            <span class="n">internal_energies</span><span class="o">=</span><span class="n">internal_energies</span><span class="p">,</span>
+            <span class="n">heat_capacities</span><span class="o">=</span><span class="n">heat_capacities</span><span class="p">,</span>
+            <span class="n">entropies</span><span class="o">=</span><span class="n">entropies</span><span class="p">,</span>
+            <span class="n">temperatures</span><span class="o">=</span><span class="n">temperature_range</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">total_dft_energy</span><span class="o">=</span><span class="n">total_dft_energy_per_formula_unit</span><span class="p">,</span>
+            <span class="n">has_imaginary_modes</span><span class="o">=</span><span class="n">imaginary_modes</span><span class="p">,</span>
+            <span class="n">force_constants</span><span class="o">=</span><span class="n">phonon</span><span class="o">.</span><span class="n">force_constants</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;store_force_constants&quot;</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">born</span><span class="o">=</span><span class="n">borns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">borns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">epsilon_static</span><span class="o">=</span><span class="n">epsilon</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">epsilon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">supercell_matrix</span><span class="o">=</span><span class="n">phonon</span><span class="o">.</span><span class="n">supercell_matrix</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">primitive_matrix</span><span class="o">=</span><span class="n">phonon</span><span class="o">.</span><span class="n">primitive_matrix</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">code</span><span class="o">=</span><span class="s2">&quot;vasp&quot;</span><span class="p">,</span>
+            <span class="n">thermal_displacement_data</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;temperatures_thermal_displacements&quot;</span><span class="p">:</span> <span class="n">temperature_range_thermal_displacements</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                <span class="s2">&quot;thermal_displacement_matrix_cif&quot;</span><span class="p">:</span> <span class="n">tdisp_mat_cif</span><span class="p">,</span>
+                <span class="s2">&quot;thermal_displacement_matrix&quot;</span><span class="p">:</span> <span class="n">tdisp_mat</span><span class="p">,</span>
+                <span class="s2">&quot;freq_min_thermal_displacements&quot;</span><span class="p">:</span> <span class="n">freq_min_thermal_displacements</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;create_thermal_displacements&quot;</span><span class="p">]</span>
+            <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">jobdirs</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;displacements_job_dirs&quot;</span><span class="p">:</span> <span class="n">displacement_data</span><span class="p">[</span><span class="s2">&quot;dirs&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;static_run_job_dir&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;static_run_job_dir&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;born_run_job_dir&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;born_run_job_dir&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;optimization_run_job_dir&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;optimization_run_job_dir&quot;</span><span class="p">],</span>
+            <span class="p">},</span>
+            <span class="n">uuids</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;displacements_uuids&quot;</span><span class="p">:</span> <span class="n">displacement_data</span><span class="p">[</span><span class="s2">&quot;uuids&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;born_run_uuid&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;born_run_uuid&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;optimization_run_uuid&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;optimization_run_uuid&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;static_run_uuid&quot;</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;static_run_uuid&quot;</span><span class="p">],</span>
+            <span class="p">},</span>
+            <span class="n">phonopy_settings</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;npoints_band&quot;</span><span class="p">:</span> <span class="n">npoints_band</span><span class="p">,</span>
+                <span class="s2">&quot;kpath_scheme&quot;</span><span class="p">:</span> <span class="n">kpath_scheme</span><span class="p">,</span>
+                <span class="s2">&quot;kpoint_density_dos&quot;</span><span class="p">:</span> <span class="n">kpoint_density_dos</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PhononBSDOSDoc.get_kpath"><a class="viewcode-back" href="../../../../reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.get_kpath">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_kpath</span><span class="p">(</span>
+        <span class="n">structure</span><span class="p">:</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">kpath_scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">symprec</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">kpath_kwargs</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get high-symmetry points in k-space in phonopy format.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        structure: Structure Object</span>
+<span class="sd">        kpath_scheme: str</span>
+<span class="sd">            string describing kpath</span>
+<span class="sd">        symprec: float</span>
+<span class="sd">            precision for symmetry determination</span>
+<span class="sd">        **kpath_kwargs:</span>
+<span class="sd">            additional parameters that can be passed to this method as a dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kpath_scheme</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;setyawan_curtarolo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;latimer_munro&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hinuma&quot;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">highsymmkpath</span> <span class="o">=</span> <span class="n">HighSymmKpath</span><span class="p">(</span>
+                <span class="n">structure</span><span class="p">,</span> <span class="n">path_type</span><span class="o">=</span><span class="n">kpath_scheme</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">,</span> <span class="o">**</span><span class="n">kpath_kwargs</span>
+            <span class="p">)</span>
+            <span class="n">kpath</span> <span class="o">=</span> <span class="n">highsymmkpath</span><span class="o">.</span><span class="n">kpath</span>
+        <span class="k">elif</span> <span class="n">kpath_scheme</span> <span class="o">==</span> <span class="s2">&quot;seekpath&quot;</span><span class="p">:</span>
+            <span class="n">highsymmkpath</span> <span class="o">=</span> <span class="n">KPathSeek</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">symprec</span><span class="o">=</span><span class="n">symprec</span><span class="p">,</span> <span class="o">**</span><span class="n">kpath_kwargs</span><span class="p">)</span>
+            <span class="n">kpath</span> <span class="o">=</span> <span class="n">highsymmkpath</span><span class="o">.</span><span class="n">_kpath</span>
+
+        <span class="n">path</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kpath</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">ilabelset</span><span class="p">,</span> <span class="n">labelset</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kpath</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">ilabel</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labelset</span><span class="p">):</span>
+                <span class="n">path</span><span class="p">[</span><span class="n">ilabelset</span><span class="p">][</span><span class="n">ilabel</span><span class="p">]</span> <span class="o">=</span> <span class="n">kpath</span><span class="p">[</span><span class="s2">&quot;kpoints&quot;</span><span class="p">][</span><span class="n">label</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">kpath</span><span class="p">[</span><span class="s2">&quot;kpoints&quot;</span><span class="p">],</span> <span class="n">path</span></div></div>
+</pre></div>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the Materials Project<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

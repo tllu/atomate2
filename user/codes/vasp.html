@@ -4,11 +4,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>VASP &#8212; atomate2</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,25 +20,21 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/github.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -44,12 +42,13 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/clipboard.min.js"></script>
     <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -68,7 +67,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -77,9 +90,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
       
@@ -352,8 +366,13 @@ const thebe_selector_output = ".output, .cell_output"
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="../../reference/atomate2.common.jobs.symmetrize_structure.html">
-         symmetrize_structure
+        <a class="reference internal" href="../../reference/atomate2.common.jobs.structure_to_conventional.html">
+         structure_to_conventional
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.common.jobs.structure_to_primitive.html">
+         structure_to_primitive
         </a>
        </li>
       </ul>
@@ -400,36 +419,14 @@ const thebe_selector_output = ".output, .cell_output"
        </li>
       </ul>
      </li>
-     <li class="toctree-l3 has-children">
-      <a class="reference internal" href="../../reference/atomate2.common.sets.html">
-       atomate2.common.sets
-      </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
-      <label for="toctree-checkbox-13">
-       <i class="fas fa-chevron-down">
-       </i>
-      </label>
-      <ul>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../reference/atomate2.common.sets.InputSet.html">
-         InputSet
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="../../reference/atomate2.common.sets.InputSetGenerator.html">
-         InputSetGenerator
-        </a>
-       </li>
-      </ul>
-     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="../../reference/atomate2.settings.html">
      atomate2.settings
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
-    <label for="toctree-checkbox-14">
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -445,8 +442,8 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal" href="../../reference/atomate2.utils.html">
      atomate2.utils
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
-    <label for="toctree-checkbox-15">
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -455,8 +452,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.utils.datetime.html">
        atomate2.utils.datetime
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
-      <label for="toctree-checkbox-16">
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -472,8 +469,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.utils.file_client.html">
        atomate2.utils.file_client
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
-      <label for="toctree-checkbox-17">
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -499,8 +496,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.utils.log.html">
        atomate2.utils.log
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
-      <label for="toctree-checkbox-18">
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -516,8 +513,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.utils.path.html">
        atomate2.utils.path
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
-      <label for="toctree-checkbox-19">
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -545,8 +542,8 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal" href="../../reference/atomate2.vasp.html">
      atomate2.vasp
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
-    <label for="toctree-checkbox-20">
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -555,8 +552,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.builders.html">
        atomate2.vasp.builders
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
-      <label for="toctree-checkbox-21">
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -572,8 +569,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.drones.html">
        atomate2.vasp.drones
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
-      <label for="toctree-checkbox-22">
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -589,8 +586,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.files.html">
        atomate2.vasp.files
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
-      <label for="toctree-checkbox-23">
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -616,8 +613,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.flows.html">
        atomate2.vasp.flows
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
-      <label for="toctree-checkbox-24">
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -633,6 +630,11 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.flows.defect.html">
+         atomate2.vasp.flows.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../reference/atomate2.vasp.flows.elastic.html">
          atomate2.vasp.flows.elastic
         </a>
@@ -642,14 +644,19 @@ const thebe_selector_output = ".output, .cell_output"
          atomate2.vasp.flows.elph
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.flows.phonons.html">
+         atomate2.vasp.flows.phonons
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="../../reference/atomate2.vasp.jobs.html">
        atomate2.vasp.jobs
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
-      <label for="toctree-checkbox-25">
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -670,6 +677,11 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.jobs.defect.html">
+         atomate2.vasp.jobs.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../reference/atomate2.vasp.jobs.elastic.html">
          atomate2.vasp.jobs.elastic
         </a>
@@ -679,14 +691,19 @@ const thebe_selector_output = ".output, .cell_output"
          atomate2.vasp.jobs.elph
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.jobs.phonons.html">
+         atomate2.vasp.jobs.phonons
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="../../reference/atomate2.vasp.powerups.html">
        atomate2.vasp.powerups
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
-      <label for="toctree-checkbox-26">
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -722,8 +739,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.run.html">
        atomate2.vasp.run
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
-      <label for="toctree-checkbox-27">
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -749,8 +766,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.schemas.html">
        atomate2.vasp.schemas
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
-      <label for="toctree-checkbox-28">
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -766,8 +783,18 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.schemas.defect.html">
+         atomate2.vasp.schemas.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="../../reference/atomate2.vasp.schemas.elph.html">
          atomate2.vasp.schemas.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.schemas.phonons.html">
+         atomate2.vasp.schemas.phonons
         </a>
        </li>
        <li class="toctree-l4">
@@ -781,8 +808,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="../../reference/atomate2.vasp.sets.html">
        atomate2.vasp.sets
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
-      <label for="toctree-checkbox-29">
+      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+      <label for="toctree-checkbox-28">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -795,6 +822,11 @@ const thebe_selector_output = ".output, .cell_output"
        <li class="toctree-l4">
         <a class="reference internal" href="../../reference/atomate2.vasp.sets.core.html">
          atomate2.vasp.sets.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="../../reference/atomate2.vasp.sets.defect.html">
+         atomate2.vasp.sets.defect
         </a>
        </li>
       </ul>
@@ -850,88 +882,193 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/user/codes/vasp.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/materialsproject/atomate2"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2Fuser/codes/vasp.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/materialsproject/atomate2/edit/main/docs/user/codes/vasp.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/materialsproject/atomate2"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2Fuser/codes/vasp.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/materialsproject/atomate2/edit/main/docs/user/codes/vasp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/user/codes/vasp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#configuration">
    Configuration
@@ -1051,12 +1188,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>VASP</h1>
@@ -1192,11 +1328,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="vasp">
-<span id="codes-vasp"></span><h1>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="vasp">
+<span id="codes-vasp"></span><h1>VASP<a class="headerlink" href="#vasp" title="Permalink to this headline">#</a></h1>
 <p>At present, most workflows in atomate2 use the Vienna <em>ab initio</em> simulation package
 (VASP) as the density functional theory code.</p>
 <p>By default, the input sets used in atomate2 differ from the input sets used in atomate1
@@ -1213,8 +1350,8 @@ differences are:</p>
 against energies taken from the Materials Project unless the default settings are
 modified accordingly.</p>
 </div>
-<div class="section" id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">#</a></h2>
 <p>These workflows require VASP to be installed and on the path. Furthermore, the pymatgen
 package is used to write VASP input files such as POTCARs. Accordingly, pymatgen
 must be aware of where the pseudopotentials are installed. Please see the <a class="reference external" href="https://pymatgen.org/installation.html#potcar-setup">pymatgen
@@ -1228,16 +1365,16 @@ atomate2, see the <a class="reference internal" href="../install.html#installati
 <li><p><code class="docutils literal notranslate"><span class="pre">VASP_CMD</span></code>: The command used to run the standard version of VASP. I.e., something like
 <code class="docutils literal notranslate"><span class="pre">mpi_run</span> <span class="pre">-n</span> <span class="pre">16</span> <span class="pre">vasp_std</span> <span class="pre">&gt;</span> <span class="pre">vasp.out</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VASP_GAMMA_CMD</span></code>: The command used to run the gamma-only version of VASP.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VASP_NCL_CMD</span></code>: The command used to run the the non-collinear version of VASP.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VASP_NCL_CMD</span></code>: The command used to run the non-collinear version of VASP.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VASP_INCAR_UPDATES</span></code>: Updates to apply to VASP INCAR files. This allows you to
 customise input sets on different machines, without having to change the submitted
 workflows. For example, you can set certain parallelization parameters, such as
 NCORE, KPAR etc.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VASP_VDW_KERNEL_DIR</span></code>: The path to the VASP Van der Waals kernel.</p></li>
 </ul>
-</div>
-<div class="section" id="list-of-vasp-workflows">
-<span id="vasp-workflows"></span><h2>List of VASP workflows<a class="headerlink" href="#list-of-vasp-workflows" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="list-of-vasp-workflows">
+<span id="vasp-workflows"></span><h2>List of VASP workflows<a class="headerlink" href="#list-of-vasp-workflows" title="Permalink to this headline">#</a></h2>
 <table class="colwidths-given table">
 <colgroup>
 <col style="width: 40%" />
@@ -1329,54 +1466,54 @@ NCORE, KPAR etc.</p></li>
 </tr>
 </tbody>
 </table>
-<div class="section" id="static">
-<h3>Static<a class="headerlink" href="#static" title="Permalink to this headline">¶</a></h3>
+<section id="static">
+<h3>Static<a class="headerlink" href="#static" title="Permalink to this headline">#</a></h3>
 <p>A static VASP calculation (i.e., no relaxation).</p>
-</div>
-<div class="section" id="relax">
-<h3>Relax<a class="headerlink" href="#relax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="relax">
+<h3>Relax<a class="headerlink" href="#relax" title="Permalink to this headline">#</a></h3>
 <p>A VASP relaxation calculation. Full structural relaxation is performed.</p>
-</div>
-<div class="section" id="tight-relax">
-<h3>Tight Relax<a class="headerlink" href="#tight-relax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tight-relax">
+<h3>Tight Relax<a class="headerlink" href="#tight-relax" title="Permalink to this headline">#</a></h3>
 <p>A VASP relaxation calculation using tight convergence parameters. Full structural
 relaxation is performed. This workflow is useful when small forces are required, such
 as before calculating phonon properties.</p>
-</div>
-<div class="section" id="dielectric">
-<h3>Dielectric<a class="headerlink" href="#dielectric" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="dielectric">
+<h3>Dielectric<a class="headerlink" href="#dielectric" title="Permalink to this headline">#</a></h3>
 <p>A VASP calculation to obtain dielectric properties. The static and high-frequency
 dielectric constants are obtained using density functional perturbation theory.</p>
-</div>
-<div class="section" id="transmuter">
-<h3>Transmuter<a class="headerlink" href="#transmuter" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="transmuter">
+<h3>Transmuter<a class="headerlink" href="#transmuter" title="Permalink to this headline">#</a></h3>
 <p>A generic calculation that transforms the structure (using one of the
-<a class="reference external" href="https://pymatgen.org/pymatgen.transformations.html#module-pymatgen.transformations" title="(in pymatgen v2022.4.26)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymatgen.transformations</span></code></a>) before writing the input sets. This can be used to
+<a class="reference external" href="https://pymatgen.org/pymatgen.transformations.html#module-pymatgen.transformations" title="(in pymatgen v2022.9.21)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pymatgen.transformations</span></code></a>) before writing the input sets. This can be used to
 perform many structure operations such as making a supercell or symmetrising the
 structure.</p>
-</div>
-<div class="section" id="hse06-static">
-<h3>HSE06 Static<a class="headerlink" href="#hse06-static" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-static">
+<h3>HSE06 Static<a class="headerlink" href="#hse06-static" title="Permalink to this headline">#</a></h3>
 <p>A static VASP calculation (i.e., no relaxation) using the HSE06 exchange correlation
 functional.</p>
-</div>
-<div class="section" id="hse06-relax">
-<h3>HSE06 Relax<a class="headerlink" href="#hse06-relax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-relax">
+<h3>HSE06 Relax<a class="headerlink" href="#hse06-relax" title="Permalink to this headline">#</a></h3>
 <p>A VASP relaxation calculation using the HSE06 functional. Full structural relaxation
 is performed.</p>
-</div>
-<div class="section" id="hse06-tight-relax">
-<h3>HSE06 Tight Relax<a class="headerlink" href="#hse06-tight-relax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-tight-relax">
+<h3>HSE06 Tight Relax<a class="headerlink" href="#hse06-tight-relax" title="Permalink to this headline">#</a></h3>
 <p>A VASP relaxation calculation using tight convergence parameters with the HSE06
 functional. Full structural relaxation is performed.</p>
-</div>
-<div class="section" id="double-relax">
-<h3>Double Relax<a class="headerlink" href="#double-relax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="double-relax">
+<h3>Double Relax<a class="headerlink" href="#double-relax" title="Permalink to this headline">#</a></h3>
 <p>Perform two back-to-back relaxations. This can often help avoid errors arising from
 Pulay stress.</p>
-</div>
-<div class="section" id="band-structure">
-<h3>Band Structure<a class="headerlink" href="#band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="band-structure">
+<h3>Band Structure<a class="headerlink" href="#band-structure" title="Permalink to this headline">#</a></h3>
 <p>Calculate the electronic band structure. This flow consists of three calculations:</p>
 <ol class="simple">
 <li><p>A static calculation to generate the charge density.</p></li>
@@ -1389,9 +1526,9 @@ the line mode band structure.</p></li>
 <p>Band structure objects are automatically stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> store due to
 limitations on mongoDB collection sizes.</p>
 </div>
-</div>
-<div class="section" id="uniform-band-structure">
-<h3>Uniform Band Structure<a class="headerlink" href="#uniform-band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="uniform-band-structure">
+<h3>Uniform Band Structure<a class="headerlink" href="#uniform-band-structure" title="Permalink to this headline">#</a></h3>
 <p>Calculate a uniform electronic band structure. This flow consists of two calculations:</p>
 <ol class="simple">
 <li><p>A static calculation to generate the charge density.</p></li>
@@ -1402,9 +1539,9 @@ limitations on mongoDB collection sizes.</p>
 <p>Band structure objects are automatically stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> store due to
 limitations on mongoDB collection sizes.</p>
 </div>
-</div>
-<div class="section" id="line-mode-band-structure">
-<h3>Line-Mode Band Structure<a class="headerlink" href="#line-mode-band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="line-mode-band-structure">
+<h3>Line-Mode Band Structure<a class="headerlink" href="#line-mode-band-structure" title="Permalink to this headline">#</a></h3>
 <p>Calculate a line-mode electronic band structure. This flow consists of two calculations:</p>
 <ol class="simple">
 <li><p>A static calculation to generate the charge density.</p></li>
@@ -1416,9 +1553,9 @@ the line mode band structure.</p></li>
 <p>Band structure objects are automatically stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> store due to
 limitations on mongoDB collection sizes.</p>
 </div>
-</div>
-<div class="section" id="hse06-band-structure">
-<h3>HSE06 Band Structure<a class="headerlink" href="#hse06-band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-band-structure">
+<h3>HSE06 Band Structure<a class="headerlink" href="#hse06-band-structure" title="Permalink to this headline">#</a></h3>
 <p>Calculate the electronic band structure using HSE06. This flow consists of three
 calculations:</p>
 <ol class="simple">
@@ -1431,9 +1568,9 @@ calculations:</p>
 <p>Band structure objects are automatically stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> store due to
 limitations on mongoDB collection sizes.</p>
 </div>
-</div>
-<div class="section" id="hse06-uniform-band-structure">
-<h3>HSE06 Uniform Band Structure<a class="headerlink" href="#hse06-uniform-band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-uniform-band-structure">
+<h3>HSE06 Uniform Band Structure<a class="headerlink" href="#hse06-uniform-band-structure" title="Permalink to this headline">#</a></h3>
 <p>Calculate a uniform electronic band structure using HSE06. This flow consists of two
 calculations:</p>
 <ol class="simple">
@@ -1445,9 +1582,9 @@ calculations:</p>
 <p>Band structure objects are automatically stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> store due to
 limitations on mongoDB collection sizes.</p>
 </div>
-</div>
-<div class="section" id="hse06-line-mode-band-structure">
-<h3>HSE06 Line-Mode Band Structure<a class="headerlink" href="#hse06-line-mode-band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-line-mode-band-structure">
+<h3>HSE06 Line-Mode Band Structure<a class="headerlink" href="#hse06-line-mode-band-structure" title="Permalink to this headline">#</a></h3>
 <p>Calculate a line-mode electronic band structure using HSE06. This flow consists of two
 calculations:</p>
 <ol class="simple">
@@ -1460,14 +1597,14 @@ generate the line mode band structure.</p></li>
 <p>Band structure objects are automatically stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> store due to
 limitations on mongoDB collection sizes.</p>
 </div>
-</div>
-<div class="section" id="relax-and-band-structure">
-<h3>Relax and Band Structure<a class="headerlink" href="#relax-and-band-structure" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="relax-and-band-structure">
+<h3>Relax and Band Structure<a class="headerlink" href="#relax-and-band-structure" title="Permalink to this headline">#</a></h3>
 <p>Perform a relaxation and then run the Band Structure workflow. By default, a
 Double Relax relaxation is performed.</p>
-</div>
-<div class="section" id="elastic-constant">
-<h3>Elastic Constant<a class="headerlink" href="#elastic-constant" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="elastic-constant">
+<h3>Elastic Constant<a class="headerlink" href="#elastic-constant" title="Permalink to this headline">#</a></h3>
 <p>Calculate the elastic constant of a material. Initially, a tight structural relaxation
 is performed to obtain the structure in a state of approximately zero stress.
 Subsequently, perturbations are applied to the lattice vectors and the resulting
@@ -1482,30 +1619,30 @@ such as Voigt and Reuss bounds on the bulk and shear moduli are derived.</p>
 Otherwise, the symmetry reduction routines will not be as effective at reducing the
 number of deformations needed.</p>
 </div>
-</div>
-<div class="section" id="optics">
-<h3>Optics<a class="headerlink" href="#optics" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="optics">
+<h3>Optics<a class="headerlink" href="#optics" title="Permalink to this headline">#</a></h3>
 <p>Calculate the frequency dependent dielectric response of a material.</p>
 <p>This workflow contains an initial static calculation, and then a non-self-consistent
 field calculation with LOPTICS set. The purpose of the static calculation is to
 determine i) if the material needs magnetism set, and ii) the total number of bands (the
 non-scf calculation contains 1.3 * number of bands in the static calculation) as often
 the highest bands are not properly converged in VASP.</p>
-</div>
-<div class="section" id="hse06-optics">
-<h3>HSE06 Optics<a class="headerlink" href="#hse06-optics" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hse06-optics">
+<h3>HSE06 Optics<a class="headerlink" href="#hse06-optics" title="Permalink to this headline">#</a></h3>
 <p>Calculate the frequency dependent dielectric response of a material using HSE06.</p>
 <p>This workflow contains an initial static calculation, and then a uniform band structure
 calculation with LOPTICS set. The purpose of the static calculation is to determine i)
 if the material needs magnetism set, and ii) the total number of bands (the uniform
 contains 1.3 * number of bands in the static calculation) as often the highest bands are
 not properly converged in VASP.</p>
-</div>
-</div>
-<div class="section" id="modifying-input-sets">
-<span id="id1"></span><h2>Modifying input sets<a class="headerlink" href="#modifying-input-sets" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="modifying-input-sets">
+<span id="id1"></span><h2>Modifying input sets<a class="headerlink" href="#modifying-input-sets" title="Permalink to this headline">#</a></h2>
 <p>The inputs for a calculation can be modified in several ways. Every VASP job
-takes a <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a> as an argument (<code class="docutils literal notranslate"><span class="pre">input_set_generator</span></code>). One
+takes a <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator" title="atomate2.vasp.sets.base.VaspInputGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputGenerator</span></code></a> as an argument (<code class="docutils literal notranslate"><span class="pre">input_set_generator</span></code>). One
 option is to specify an alternative input set generator:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">atomate2.vasp.sets.core</span> <span class="kn">import</span> <span class="n">StaticSetGenerator</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.core</span> <span class="kn">import</span> <span class="n">StaticMaker</span>
@@ -1565,19 +1702,19 @@ generate them.</p>
 <p>Powerups return a copy of the original flow or Maker and do not modify it in place.</p>
 </div>
 <p>In addition to the ability to change INCAR parameters on-the-fly, the
-<a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a>, <code class="docutils literal notranslate"><span class="pre">Maker</span></code> object, and “powerups” allow for the manual
+<a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator" title="atomate2.vasp.sets.base.VaspInputGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputGenerator</span></code></a>, <code class="docutils literal notranslate"><span class="pre">Maker</span></code> object, and “powerups” allow for the manual
 modification of several additional VASP settings, such as the k-points
 (<code class="docutils literal notranslate"><span class="pre">user_kpoints_settings</span></code>) and choice of pseudopotentials (<code class="docutils literal notranslate"><span class="pre">user_potcar_settings</span></code>).</p>
 <p>If a greater degree of flexibility is needed, the user can define a default set of input
-arguments (<code class="docutils literal notranslate"><span class="pre">config_dict</span></code>) that can be provided to the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a>.
-By default, the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator" title="atomate2.vasp.sets.base.VaspInputSetGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputSetGenerator</span></code></a> uses a base set of VASP input parameters
+arguments (<code class="docutils literal notranslate"><span class="pre">config_dict</span></code>) that can be provided to the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator" title="atomate2.vasp.sets.base.VaspInputGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputGenerator</span></code></a>.
+By default, the <a class="reference internal" href="../../reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator" title="atomate2.vasp.sets.base.VaspInputGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VaspInputGenerator</span></code></a> uses a base set of VASP input parameters
 from <code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseVaspSet.yaml</span></code>, which each <code class="docutils literal notranslate"><span class="pre">Maker</span></code> is built upon. If desired, the user can
 define a custom <code class="docutils literal notranslate"><span class="pre">.yaml</span></code> file that contains a different base set of VASP settings to use.
 An example of how this can be done is shown below for a representative static
 calculation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">atomate2.vasp.sets.core</span> <span class="kn">import</span> <span class="n">StaticSetGenerator</span>
 <span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.core</span> <span class="kn">import</span> <span class="n">StaticMaker</span>
-<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">VaspInputSetGenerator</span>
+<span class="kn">from</span> <span class="nn">atomate2.vasp.jobs.base</span> <span class="kn">import</span> <span class="n">VaspInputGenerator</span>
 <span class="kn">from</span> <span class="nn">monty.serialization</span> <span class="kn">import</span> <span class="n">loadfn</span>
 
 <span class="c1"># read in a custom config file</span>
@@ -1597,9 +1734,9 @@ calculation.</p>
 <span class="n">static_job</span> <span class="o">=</span> <span class="n">static_maker</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="chaining-workflows">
-<span id="connecting-vasp-jobs"></span><h2>Chaining workflows<a class="headerlink" href="#chaining-workflows" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="chaining-workflows">
+<span id="connecting-vasp-jobs"></span><h2>Chaining workflows<a class="headerlink" href="#chaining-workflows" title="Permalink to this headline">#</a></h2>
 <p>All VASP workflows are constructed using the <code class="docutils literal notranslate"><span class="pre">Maker.make()</span></code> function. The arguments
 for this function always include:</p>
 <ul class="simple">
@@ -1640,8 +1777,8 @@ calculation and a static calculation.</p>
 <span class="n">my_flow</span> <span class="o">=</span> <span class="n">Flow</span><span class="p">([</span><span class="n">relax_job</span><span class="p">,</span> <span class="n">static_job</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="n">static_job</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1665,9 +1802,11 @@ calculation and a static calculation.</p>
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1683,24 +1822,28 @@ calculation and a static calculation.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the Materials Project<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the Materials Project<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

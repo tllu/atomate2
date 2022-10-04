@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index &#8212; atomate2</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,25 +19,21 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
     <link rel="stylesheet" type="text/css" href="_static/github.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -44,12 +41,13 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -66,7 +64,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -75,9 +87,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
       
@@ -350,8 +363,13 @@ const thebe_selector_output = ".output, .cell_output"
       </label>
       <ul>
        <li class="toctree-l4">
-        <a class="reference internal" href="reference/atomate2.common.jobs.symmetrize_structure.html">
-         symmetrize_structure
+        <a class="reference internal" href="reference/atomate2.common.jobs.structure_to_conventional.html">
+         structure_to_conventional
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.common.jobs.structure_to_primitive.html">
+         structure_to_primitive
         </a>
        </li>
       </ul>
@@ -398,36 +416,14 @@ const thebe_selector_output = ".output, .cell_output"
        </li>
       </ul>
      </li>
-     <li class="toctree-l3 has-children">
-      <a class="reference internal" href="reference/atomate2.common.sets.html">
-       atomate2.common.sets
-      </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
-      <label for="toctree-checkbox-13">
-       <i class="fas fa-chevron-down">
-       </i>
-      </label>
-      <ul>
-       <li class="toctree-l4">
-        <a class="reference internal" href="reference/atomate2.common.sets.InputSet.html">
-         InputSet
-        </a>
-       </li>
-       <li class="toctree-l4">
-        <a class="reference internal" href="reference/atomate2.common.sets.InputSetGenerator.html">
-         InputSetGenerator
-        </a>
-       </li>
-      </ul>
-     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="reference/atomate2.settings.html">
      atomate2.settings
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
-    <label for="toctree-checkbox-14">
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -443,8 +439,8 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal" href="reference/atomate2.utils.html">
      atomate2.utils
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
-    <label for="toctree-checkbox-15">
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -453,8 +449,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.utils.datetime.html">
        atomate2.utils.datetime
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
-      <label for="toctree-checkbox-16">
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -470,8 +466,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.utils.file_client.html">
        atomate2.utils.file_client
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
-      <label for="toctree-checkbox-17">
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -497,8 +493,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.utils.log.html">
        atomate2.utils.log
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
-      <label for="toctree-checkbox-18">
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -514,8 +510,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.utils.path.html">
        atomate2.utils.path
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
-      <label for="toctree-checkbox-19">
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -543,8 +539,8 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal" href="reference/atomate2.vasp.html">
      atomate2.vasp
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
-    <label for="toctree-checkbox-20">
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
      <i class="fas fa-chevron-down">
      </i>
     </label>
@@ -553,8 +549,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.builders.html">
        atomate2.vasp.builders
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
-      <label for="toctree-checkbox-21">
+      <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+      <label for="toctree-checkbox-20">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -570,8 +566,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.drones.html">
        atomate2.vasp.drones
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
-      <label for="toctree-checkbox-22">
+      <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+      <label for="toctree-checkbox-21">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -587,8 +583,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.files.html">
        atomate2.vasp.files
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
-      <label for="toctree-checkbox-23">
+      <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+      <label for="toctree-checkbox-22">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -614,8 +610,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.flows.html">
        atomate2.vasp.flows
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
-      <label for="toctree-checkbox-24">
+      <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+      <label for="toctree-checkbox-23">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -631,6 +627,11 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.flows.defect.html">
+         atomate2.vasp.flows.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="reference/atomate2.vasp.flows.elastic.html">
          atomate2.vasp.flows.elastic
         </a>
@@ -640,14 +641,19 @@ const thebe_selector_output = ".output, .cell_output"
          atomate2.vasp.flows.elph
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.flows.phonons.html">
+         atomate2.vasp.flows.phonons
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="reference/atomate2.vasp.jobs.html">
        atomate2.vasp.jobs
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
-      <label for="toctree-checkbox-25">
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -668,6 +674,11 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.jobs.defect.html">
+         atomate2.vasp.jobs.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="reference/atomate2.vasp.jobs.elastic.html">
          atomate2.vasp.jobs.elastic
         </a>
@@ -677,14 +688,19 @@ const thebe_selector_output = ".output, .cell_output"
          atomate2.vasp.jobs.elph
         </a>
        </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.jobs.phonons.html">
+         atomate2.vasp.jobs.phonons
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="reference/atomate2.vasp.powerups.html">
        atomate2.vasp.powerups
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
-      <label for="toctree-checkbox-26">
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -720,8 +736,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.run.html">
        atomate2.vasp.run
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
-      <label for="toctree-checkbox-27">
+      <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+      <label for="toctree-checkbox-26">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -747,8 +763,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.schemas.html">
        atomate2.vasp.schemas
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
-      <label for="toctree-checkbox-28">
+      <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+      <label for="toctree-checkbox-27">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -764,8 +780,18 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
        </li>
        <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.schemas.defect.html">
+         atomate2.vasp.schemas.defect
+        </a>
+       </li>
+       <li class="toctree-l4">
         <a class="reference internal" href="reference/atomate2.vasp.schemas.elph.html">
          atomate2.vasp.schemas.elph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.schemas.phonons.html">
+         atomate2.vasp.schemas.phonons
         </a>
        </li>
        <li class="toctree-l4">
@@ -779,8 +805,8 @@ const thebe_selector_output = ".output, .cell_output"
       <a class="reference internal" href="reference/atomate2.vasp.sets.html">
        atomate2.vasp.sets
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
-      <label for="toctree-checkbox-29">
+      <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+      <label for="toctree-checkbox-28">
        <i class="fas fa-chevron-down">
        </i>
       </label>
@@ -793,6 +819,11 @@ const thebe_selector_output = ".output, .cell_output"
        <li class="toctree-l4">
         <a class="reference internal" href="reference/atomate2.vasp.sets.core.html">
          atomate2.vasp.sets.core
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="reference/atomate2.vasp.sets.defect.html">
+         atomate2.vasp.sets.defect
         </a>
        </li>
       </ul>
@@ -848,8 +879,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -857,60 +893,104 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-            <!-- Source interaction buttons -->
+    <div class="header-article row sticky-top noprint">
+        
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/materialsproject/atomate2"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
         
     </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/materialsproject/atomate2"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/materialsproject/atomate2/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-        </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1></h1>
@@ -921,7 +1001,8 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
 
@@ -944,6 +1025,7 @@ const thebe_selector_output = ".output, .cell_output"
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -961,6 +1043,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.additional_json">additional_json (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.alphaZ">alphaZ (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+</li>
       <li><a href="reference/atomate2.amset.schemas.amset.html#atomate2.amset.schemas.amset">amset (in module atomate2.amset.schemas)</a>
 </li>
       <li><a href="reference/atomate2.settings.Atomate2Settings.html#atomate2.settings.Atomate2Settings.AMSET_SETTINGS_UPDATE">AMSET_SETTINGS_UPDATE (atomate2.settings.Atomate2Settings attribute)</a>
@@ -970,6 +1054,8 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.analysis">analysis (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone.assimilate">assimilate() (atomate2.vasp.drones.VaspDrone method)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.atom">atom (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
 </li>
       <li>
     atomate2.amset
@@ -1091,13 +1177,6 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       </ul></li>
       <li>
-    atomate2.common.sets
-
-      <ul>
-        <li><a href="reference/atomate2.common.sets.html#module-atomate2.common.sets">module</a>
-</li>
-      </ul></li>
-      <li>
     atomate2.settings
 
       <ul>
@@ -1146,8 +1225,6 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.html#module-atomate2.vasp">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     atomate2.vasp.builders
 
@@ -1176,6 +1253,8 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.files.html#module-atomate2.vasp.files">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     atomate2.vasp.flows
 
@@ -1198,6 +1277,13 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       </ul></li>
       <li>
+    atomate2.vasp.flows.defect
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.flows.defect.html#module-atomate2.vasp.flows.defect">module</a>
+</li>
+      </ul></li>
+      <li>
     atomate2.vasp.flows.elastic
 
       <ul>
@@ -1209,6 +1295,13 @@ const thebe_selector_output = ".output, .cell_output"
 
       <ul>
         <li><a href="reference/atomate2.vasp.flows.elph.html#module-atomate2.vasp.flows.elph">module</a>
+</li>
+      </ul></li>
+      <li>
+    atomate2.vasp.flows.phonons
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.flows.phonons.html#module-atomate2.vasp.flows.phonons">module</a>
 </li>
       </ul></li>
       <li>
@@ -1240,6 +1333,13 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       </ul></li>
       <li>
+    atomate2.vasp.jobs.defect
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.jobs.defect.html#module-atomate2.vasp.jobs.defect">module</a>
+</li>
+      </ul></li>
+      <li>
     atomate2.vasp.jobs.elastic
 
       <ul>
@@ -1251,6 +1351,13 @@ const thebe_selector_output = ".output, .cell_output"
 
       <ul>
         <li><a href="reference/atomate2.vasp.jobs.elph.html#module-atomate2.vasp.jobs.elph">module</a>
+</li>
+      </ul></li>
+      <li>
+    atomate2.vasp.jobs.phonons
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.jobs.phonons.html#module-atomate2.vasp.jobs.phonons">module</a>
 </li>
       </ul></li>
       <li>
@@ -1303,10 +1410,24 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       </ul></li>
       <li>
+    atomate2.vasp.schemas.defect
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.defect.html#module-atomate2.vasp.schemas.defect">module</a>
+</li>
+      </ul></li>
+      <li>
     atomate2.vasp.schemas.elph
 
       <ul>
         <li><a href="reference/atomate2.vasp.schemas.elph.html#module-atomate2.vasp.schemas.elph">module</a>
+</li>
+      </ul></li>
+      <li>
+    atomate2.vasp.schemas.phonons
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.html#module-atomate2.vasp.schemas.phonons">module</a>
 </li>
       </ul></li>
       <li>
@@ -1337,6 +1458,15 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.sets.core.html#module-atomate2.vasp.sets.core">module</a>
 </li>
       </ul></li>
+      <li>
+    atomate2.vasp.sets.defect
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.sets.defect.html#module-atomate2.vasp.sets.defect">module</a>
+</li>
+      </ul></li>
+      <li><a href="reference/atomate2.vasp.sets.defect.AtomicRelaxSetGenerator.html#atomate2.vasp.sets.defect.AtomicRelaxSetGenerator">AtomicRelaxSetGenerator (class in atomate2.vasp.sets.defect)</a>
+</li>
       <li><a href="reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument.attributes">attributes (atomate2.common.schemas.cclib.TaskDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.author">author (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
@@ -1361,14 +1491,22 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary.bandgap">(atomate2.vasp.schemas.task.OutputSummary attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.bandstr">bandstr (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.flows.core.BandStructureMaker.html#atomate2.vasp.flows.core.BandStructureMaker">BandStructureMaker (class in atomate2.vasp.flows.core)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.base.BaseVaspMaker.html#atomate2.vasp.jobs.base.BaseVaspMaker">BaseVaspMaker (class in atomate2.vasp.jobs.base)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.html#atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.bulk_band_gap">bulk_band_gap (atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc attribute)</a>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.born">born (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononJobDirs.html#atomate2.vasp.schemas.phonons.PhononJobDirs.born_run_job_dir">born_run_job_dir (atomate2.vasp.schemas.phonons.PhononJobDirs attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononUUIDs.html#atomate2.vasp.schemas.phonons.PhononUUIDs.born_run_uuid">born_run_uuid (atomate2.vasp.schemas.phonons.PhononUUIDs attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.html#atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.bulk_band_gap">bulk_band_gap (atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.elph.RawElectronicData.html#atomate2.vasp.schemas.elph.RawElectronicData.bulk_cbm">bulk_cbm (atomate2.vasp.schemas.elph.RawElectronicData attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.elph.RawElectronicData.html#atomate2.vasp.schemas.elph.RawElectronicData.bulk_cbm_band_indices">bulk_cbm_band_indices (atomate2.vasp.schemas.elph.RawElectronicData attribute)</a>
@@ -1403,6 +1541,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.jobs.elph.calculate_electron_phonon_renormalisation.html#atomate2.vasp.jobs.elph.calculate_electron_phonon_renormalisation">calculate_electron_phonon_renormalisation() (in module atomate2.vasp.jobs.elph)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.jobs.defect.calculate_finite_diff.html#atomate2.vasp.jobs.defect.calculate_finite_diff">calculate_finite_diff() (in module atomate2.vasp.jobs.defect)</a>
+</li>
       <li><a href="reference/atomate2.vasp.jobs.amset.calculate_polar_phonon_frequency.html#atomate2.vasp.jobs.amset.calculate_polar_phonon_frequency">calculate_polar_phonon_frequency() (in module atomate2.vasp.jobs.amset)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.FittingData.html#atomate2.common.schemas.elastic.FittingData.cauchy_stresses">cauchy_stresses (atomate2.common.schemas.elastic.FittingData attribute)</a>
@@ -1427,6 +1567,10 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.close">close() (atomate2.utils.file_client.FileClient method)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.code">code (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.completed_at">completed_at (atomate2.amset.schemas.AmsetTaskDocument attribute)</a>
 
       <ul>
@@ -1435,8 +1579,6 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.completed_at">(atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.common.schemas.molecule.MoleculeMetadata.html#atomate2.common.schemas.molecule.MoleculeMetadata.composition">composition (atomate2.common.schemas.molecule.MoleculeMetadata attribute)</a>
 
       <ul>
@@ -1452,6 +1594,8 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.amset.schemas.TransportData.html#atomate2.amset.schemas.TransportData.conductivity">conductivity (atomate2.amset.schemas.TransportData attribute)</a>
 </li>
       <li><a href="reference/atomate2.settings.Atomate2Settings.html#atomate2.settings.Atomate2Settings.CONFIG_FILE">CONFIG_FILE (atomate2.settings.Atomate2Settings attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.flows.defect.ConfigurationCoordinateMaker.html#atomate2.vasp.flows.defect.ConfigurationCoordinateMaker">ConfigurationCoordinateMaker (class in atomate2.vasp.flows.defect)</a>
 </li>
       <li><a href="reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.connect">connect() (atomate2.utils.file_client.FileClient method)</a>
 </li>
@@ -1485,6 +1629,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.DerivedProperties.html#atomate2.common.schemas.elastic.DerivedProperties.debye_temperature">debye_temperature (atomate2.common.schemas.elastic.DerivedProperties attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.flows.defect.DEFAULT_DISTORTIONS.html#atomate2.vasp.flows.defect.DEFAULT_DISTORTIONS">DEFAULT_DISTORTIONS (in module atomate2.vasp.flows.defect)</a>
+</li>
       <li><a href="reference/atomate2.vasp.flows.elph.DEFAULT_ELPH_TEMPERATURES.html#atomate2.vasp.flows.elph.DEFAULT_ELPH_TEMPERATURES">DEFAULT_ELPH_TEMPERATURES (in module atomate2.vasp.flows.elph)</a>
 
       <ul>
@@ -1497,6 +1643,10 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.jobs.elph.DEFAULT_MIN_SUPERCELL_LENGTH.html#atomate2.vasp.jobs.elph.DEFAULT_MIN_SUPERCELL_LENGTH">(in module atomate2.vasp.jobs.elph)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.flows.defect.DEFECT_INCAR_SETTINGS.html#atomate2.vasp.flows.defect.DEFECT_INCAR_SETTINGS">DEFECT_INCAR_SETTINGS (in module atomate2.vasp.flows.defect)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.flows.defect.DEFECT_KPOINT_SETTINGS.html#atomate2.vasp.flows.defect.DEFECT_KPOINT_SETTINGS">DEFECT_KPOINT_SETTINGS (in module atomate2.vasp.flows.defect)</a>
+</li>
       <li><a href="reference/atomate2.vasp.flows.amset.DeformationPotentialMaker.html#atomate2.vasp.flows.amset.DeformationPotentialMaker">DeformationPotentialMaker (class in atomate2.vasp.flows.amset)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.FittingData.html#atomate2.common.schemas.elastic.FittingData.deformations">deformations (atomate2.common.schemas.elastic.FittingData attribute)</a>
@@ -1515,18 +1665,22 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.common.schemas.structure.StructureMetadata.html#atomate2.common.schemas.structure.StructureMetadata.density_atomic">density_atomic (atomate2.common.schemas.structure.StructureMetadata attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.common.schemas.elastic.ElasticDocument.html#atomate2.common.schemas.elastic.ElasticDocument.derived_properties">derived_properties (atomate2.common.schemas.elastic.ElasticDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.core.DielectricMaker.html#atomate2.vasp.jobs.core.DielectricMaker">DielectricMaker (class in atomate2.vasp.jobs.core)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.dir_name">dir_name (atomate2.amset.schemas.AmsetTaskDocument attribute)</a>
 
       <ul>
         <li><a href="reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument.dir_name">(atomate2.common.schemas.cclib.TaskDocument attribute)</a>
 </li>
+        <li><a href="reference/atomate2.vasp.jobs.defect.CCDInput.html#atomate2.vasp.jobs.defect.CCDInput.dir_name">(atomate2.vasp.jobs.defect.CCDInput attribute)</a>
+</li>
         <li><a href="reference/atomate2.vasp.schemas.calculation.Calculation.html#atomate2.vasp.schemas.calculation.Calculation.dir_name">(atomate2.vasp.schemas.calculation.Calculation attribute)</a>
+</li>
+        <li><a href="reference/atomate2.vasp.schemas.defect.FiniteDifferenceDocument.html#atomate2.vasp.schemas.defect.FiniteDifferenceDocument.dir_name">(atomate2.vasp.schemas.defect.FiniteDifferenceDocument attribute)</a>
 </li>
         <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.dir_name">(atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
@@ -1543,6 +1697,16 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.schemas.elph.RawElectronicData.html#atomate2.vasp.schemas.elph.RawElectronicData.displacement_vbms">displacement_vbms (atomate2.vasp.schemas.elph.RawElectronicData attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononJobDirs.html#atomate2.vasp.schemas.phonons.PhononJobDirs.displacements_job_dirs">displacements_job_dirs (atomate2.vasp.schemas.phonons.PhononJobDirs attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononUUIDs.html#atomate2.vasp.schemas.phonons.PhononUUIDs.displacements_uuids">displacements_uuids (atomate2.vasp.schemas.phonons.PhononUUIDs attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.FiniteDifferenceDocument.html#atomate2.vasp.schemas.defect.FiniteDifferenceDocument.distorted_dirs">distorted_dirs (atomate2.vasp.schemas.defect.FiniteDifferenceDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.distortions1">distortions1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.distortions2">distortions2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
       <li><a href="reference/atomate2.amset.schemas.TransportData.html#atomate2.amset.schemas.TransportData.doping">doping (atomate2.amset.schemas.TransportData attribute)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.UsageStats.html#atomate2.amset.schemas.UsageStats.dos">dos (atomate2.amset.schemas.UsageStats attribute)</a>
@@ -1557,6 +1721,26 @@ const thebe_selector_output = ".output, .cell_output"
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.e_0_energy">e_0_energy (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.e_0_energy">(atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.e_fr_energy">e_fr_energy (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.e_fr_energy">(atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.e_wo_entrp">e_wo_entrp (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.e_wo_entrp">(atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.eentropy">eentropy (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+</li>
       <li><a href="reference/atomate2.amset.schemas.MeshData.html#atomate2.amset.schemas.MeshData.efermi">efermi (atomate2.amset.schemas.MeshData attribute)</a>
 
       <ul>
@@ -1575,6 +1759,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.jobs.elastic.ElasticRelaxMaker.html#atomate2.vasp.jobs.elastic.ElasticRelaxMaker">ElasticRelaxMaker (class in atomate2.vasp.jobs.elastic)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.electronic_steps">electronic_steps (atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+</li>
       <li><a href="reference/atomate2.amset.schemas.TransportData.html#atomate2.amset.schemas.TransportData.electronic_thermal_conductivity">electronic_thermal_conductivity (atomate2.amset.schemas.TransportData attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.flows.elph.ElectronPhononMaker.html#atomate2.vasp.flows.elph.ElectronPhononMaker">ElectronPhononMaker (class in atomate2.vasp.flows.elph)</a>
@@ -1589,17 +1775,23 @@ const thebe_selector_output = ".output, .cell_output"
       </ul></li>
       <li><a href="reference/atomate2.vasp.schemas.elph.RawElectronicData.html#atomate2.vasp.schemas.elph.RawElectronicData.elph_dir">elph_dir (atomate2.vasp.schemas.elph.RawElectronicData attribute)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.elph_displaced_structures">elph_displaced_structures (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.elph_displaced_structures">elph_displaced_structures (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.elph.RawElectronicData.html#atomate2.vasp.schemas.elph.RawElectronicData.elph_uuid">elph_uuid (atomate2.vasp.schemas.elph.RawElectronicData attribute)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.MeshData.html#atomate2.amset.schemas.MeshData.energies">energies (atomate2.amset.schemas.MeshData attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.energies1">energies1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.energies2">energies2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
       <li><a href="reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument.energy">energy (atomate2.common.schemas.cclib.TaskDocument attribute)</a>
 
       <ul>
+        <li><a href="reference/atomate2.vasp.jobs.defect.CCDInput.html#atomate2.vasp.jobs.defect.CCDInput.energy">(atomate2.vasp.jobs.defect.CCDInput attribute)</a>
+</li>
         <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.energy">(atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
         <li><a href="reference/atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.html#atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.energy">(atomate2.vasp.schemas.calculation.FrequencyDependentDielectric attribute)</a>
@@ -1615,17 +1807,25 @@ const thebe_selector_output = ".output, .cell_output"
       </ul></li>
       <li><a href="reference/atomate2.vasp.builders.elastic.ElasticBuilder.html#atomate2.vasp.builders.elastic.ElasticBuilder.ensure_indexes">ensure_indexes() (atomate2.vasp.builders.elastic.ElasticBuilder method)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.entropies">entropies (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.entry">entry (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.epsilon_ionic">epsilon_ionic (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.epsilon_static">epsilon_static (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.epsilon_static">(atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
+      </ul></li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.epsilon_static_wolfe">epsilon_static_wolfe (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.ElasticDocument.html#atomate2.common.schemas.elastic.ElasticDocument.eq_stress">eq_stress (atomate2.common.schemas.elastic.ElasticDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.task.AnalysisSummary.html#atomate2.vasp.schemas.task.AnalysisSummary.errors">errors (atomate2.vasp.schemas.task.AnalysisSummary attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.ewald">ewald (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
 </li>
       <li><a href="reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.exists">exists() (atomate2.utils.file_client.FileClient method)</a>
 </li>
@@ -1643,6 +1843,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.common.files.find_and_filter_files.html#atomate2.common.files.find_and_filter_files">find_and_filter_files() (in module atomate2.common.files)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.find_entry_with_dir_name.html#atomate2.vasp.schemas.defect.find_entry_with_dir_name">find_entry_with_dir_name() (in module atomate2.vasp.schemas.defect)</a>
+</li>
       <li><a href="reference/atomate2.utils.path.find_recent_logfile.html#atomate2.utils.path.find_recent_logfile">find_recent_logfile() (in module atomate2.utils.path)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.elastic.fit_elastic_tensor.html#atomate2.vasp.jobs.elastic.fit_elastic_tensor">fit_elastic_tensor() (in module atomate2.vasp.jobs.elastic)</a>
@@ -1652,9 +1854,17 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.common.schemas.elastic.ElasticDocument.html#atomate2.common.schemas.elastic.ElasticDocument.fitting_method">fitting_method (atomate2.common.schemas.elastic.ElasticDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.force_constants">force_constants (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.force_constants">(atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary.forces">forces (atomate2.vasp.schemas.task.OutputSummary attribute)</a>
+      </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.forces">forces (atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary.forces">(atomate2.vasp.schemas.task.OutputSummary attribute)</a>
 </li>
+      </ul></li>
       <li><a href="reference/atomate2.common.schemas.molecule.MoleculeMetadata.html#atomate2.common.schemas.molecule.MoleculeMetadata.formula_anonymous">formula_anonymous (atomate2.common.schemas.molecule.MoleculeMetadata attribute)</a>
 
       <ul>
@@ -1671,6 +1881,10 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.html#atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.formula_pretty">(atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.free_energies">free_energies (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.ThermalDisplacementData.html#atomate2.vasp.schemas.phonons.ThermalDisplacementData.freq_min_thermal_displacements">freq_min_thermal_displacements (atomate2.vasp.schemas.phonons.ThermalDisplacementData attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.frequency_dependent_dielectric">frequency_dependent_dielectric (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.html#atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.from_band_structures">from_band_structures() (atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc class method)</a>
@@ -1686,13 +1900,17 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.from_directory">from_directory() (atomate2.amset.schemas.AmsetTaskDocument class method)</a>
 
       <ul>
-        <li><a href="reference/atomate2.common.sets.InputSet.html#atomate2.common.sets.InputSet.from_directory">(atomate2.common.sets.InputSet class method)</a>
+        <li><a href="reference/atomate2.vasp.schemas.defect.FiniteDifferenceDocument.html#atomate2.vasp.schemas.defect.FiniteDifferenceDocument.from_directory">(atomate2.vasp.schemas.defect.FiniteDifferenceDocument class method)</a>
 </li>
         <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.from_directory">(atomate2.vasp.schemas.task.TaskDocument class method)</a>
 </li>
         <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet.from_directory">(atomate2.vasp.sets.base.VaspInputSet static method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.from_entries">from_entries() (atomate2.vasp.schemas.defect.CCDDocument class method)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.from_forces_born">from_forces_born() (atomate2.vasp.schemas.phonons.PhononBSDOSDoc class method)</a>
+</li>
       <li><a href="reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument.from_logfile">from_logfile() (atomate2.common.schemas.cclib.TaskDocument class method)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.molecule.MoleculeMetadata.html#atomate2.common.schemas.molecule.MoleculeMetadata.from_molecule">from_molecule() (atomate2.common.schemas.molecule.MoleculeMetadata class method)</a>
@@ -1713,6 +1931,8 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.common.schemas.symmetry.SymmetryData.html#atomate2.common.schemas.symmetry.SymmetryData.from_structure">(atomate2.common.schemas.symmetry.SymmetryData class method)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.from_task_outputs">from_task_outputs() (atomate2.vasp.schemas.defect.CCDDocument class method)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary.from_vasp_calc_doc">from_vasp_calc_doc() (atomate2.vasp.schemas.task.InputSummary class method)</a>
 
       <ul>
@@ -1747,13 +1967,23 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.jobs.elastic.generate_elastic_deformations.html#atomate2.vasp.jobs.elastic.generate_elastic_deformations">generate_elastic_deformations() (in module atomate2.vasp.jobs.elastic)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.generate_frequencies_eigenvectors.html#atomate2.vasp.jobs.phonons.generate_frequencies_eigenvectors">generate_frequencies_eigenvectors() (in module atomate2.vasp.jobs.phonons)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.generate_phonon_displacements.html#atomate2.vasp.jobs.phonons.generate_phonon_displacements">generate_phonon_displacements() (in module atomate2.vasp.jobs.phonons)</a>
+</li>
       <li><a href="reference/atomate2.vasp.jobs.amset.generate_wavefunction_coefficients.html#atomate2.vasp.jobs.amset.generate_wavefunction_coefficients">generate_wavefunction_coefficients() (in module atomate2.vasp.jobs.amset)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.defect.get_ccd_documents.html#atomate2.vasp.jobs.defect.get_ccd_documents">get_ccd_documents() (in module atomate2.vasp.jobs.defect)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.flows.defect.get_charged_structures.html#atomate2.vasp.flows.defect.get_charged_structures">get_charged_structures() (in module atomate2.vasp.flows.defect)</a>
 </li>
       <li><a href="reference/atomate2.common.analysis.elastic.get_default_strain_states.html#atomate2.common.analysis.elastic.get_default_strain_states">get_default_strain_states() (in module atomate2.common.analysis.elastic)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.get_dQ.html#atomate2.vasp.schemas.defect.get_dQ">get_dQ() (in module atomate2.vasp.schemas.defect)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.get_entry">get_entry() (atomate2.vasp.schemas.task.TaskDocument static method)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator.get_incar_updates">get_incar_updates() (atomate2.vasp.sets.base.VaspInputSetGenerator method)</a>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator.get_incar_updates">get_incar_updates() (atomate2.vasp.sets.base.VaspInputGenerator method)</a>
 
       <ul>
         <li><a href="reference/atomate2.vasp.sets.core.ElectronPhononSetGenerator.html#atomate2.vasp.sets.core.ElectronPhononSetGenerator.get_incar_updates">(atomate2.vasp.sets.core.ElectronPhononSetGenerator method)</a>
@@ -1766,6 +1996,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.sets.core.HSETightRelaxSetGenerator.html#atomate2.vasp.sets.core.HSETightRelaxSetGenerator.get_incar_updates">(atomate2.vasp.sets.core.HSETightRelaxSetGenerator method)</a>
 </li>
+        <li><a href="reference/atomate2.vasp.sets.core.MDSetGenerator.html#atomate2.vasp.sets.core.MDSetGenerator.get_incar_updates">(atomate2.vasp.sets.core.MDSetGenerator method)</a>
+</li>
         <li><a href="reference/atomate2.vasp.sets.core.NonSCFSetGenerator.html#atomate2.vasp.sets.core.NonSCFSetGenerator.get_incar_updates">(atomate2.vasp.sets.core.NonSCFSetGenerator method)</a>
 </li>
         <li><a href="reference/atomate2.vasp.sets.core.RelaxSetGenerator.html#atomate2.vasp.sets.core.RelaxSetGenerator.get_incar_updates">(atomate2.vasp.sets.core.RelaxSetGenerator method)</a>
@@ -1774,18 +2006,18 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.sets.core.TightRelaxSetGenerator.html#atomate2.vasp.sets.core.TightRelaxSetGenerator.get_incar_updates">(atomate2.vasp.sets.core.TightRelaxSetGenerator method)</a>
 </li>
-      </ul></li>
-      <li><a href="reference/atomate2.common.sets.InputSetGenerator.html#atomate2.common.sets.InputSetGenerator.get_input_set">get_input_set() (atomate2.common.sets.InputSetGenerator static method)</a>
-
-      <ul>
-        <li><a href="reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator.get_input_set">(atomate2.vasp.sets.base.VaspInputSetGenerator method)</a>
+        <li><a href="reference/atomate2.vasp.sets.defect.AtomicRelaxSetGenerator.html#atomate2.vasp.sets.defect.AtomicRelaxSetGenerator.get_incar_updates">(atomate2.vasp.sets.defect.AtomicRelaxSetGenerator method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator.get_input_set">get_input_set() (atomate2.vasp.sets.base.VaspInputGenerator method)</a>
+</li>
       <li><a href="reference/atomate2.vasp.builders.elastic.ElasticBuilder.html#atomate2.vasp.builders.elastic.ElasticBuilder.get_items">get_items() (atomate2.vasp.builders.elastic.ElasticBuilder method)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator.get_kpoints_updates">get_kpoints_updates() (atomate2.vasp.sets.base.VaspInputSetGenerator method)</a>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.get_kpath">get_kpath() (atomate2.vasp.schemas.phonons.PhononBSDOSDoc static method)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator.get_kpoints_updates">get_kpoints_updates() (atomate2.vasp.sets.base.VaspInputGenerator method)</a>
 
       <ul>
         <li><a href="reference/atomate2.vasp.sets.core.ElectronPhononSetGenerator.html#atomate2.vasp.sets.core.ElectronPhononSetGenerator.get_kpoints_updates">(atomate2.vasp.sets.core.ElectronPhononSetGenerator method)</a>
@@ -1797,13 +2029,19 @@ const thebe_selector_output = ".output, .cell_output"
       </ul></li>
       <li><a href="reference/atomate2.vasp.files.get_largest_relax_extension.html#atomate2.vasp.files.get_largest_relax_extension">get_largest_relax_extension() (in module atomate2.vasp.files)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator.get_nelect">get_nelect() (atomate2.vasp.sets.base.VaspInputSetGenerator method)</a>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator.get_nelect">get_nelect() (atomate2.vasp.sets.base.VaspInputGenerator method)</a>
 </li>
       <li><a href="reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.get_sftp">get_sftp() (atomate2.utils.file_client.FileClient method)</a>
 </li>
       <li><a href="reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.get_ssh">get_ssh() (atomate2.utils.file_client.FileClient method)</a>
 </li>
       <li><a href="reference/atomate2.utils.file_client.get_ssh_connection.html#atomate2.utils.file_client.get_ssh_connection">get_ssh_connection() (in module atomate2.utils.file_client)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.get_supercell_size.html#atomate2.vasp.jobs.phonons.get_supercell_size">get_supercell_size() (in module atomate2.vasp.jobs.phonons)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.get_taskdocs">get_taskdocs() (atomate2.vasp.schemas.defect.CCDDocument method)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.get_total_energy_per_cell.html#atomate2.vasp.jobs.phonons.get_total_energy_per_cell">get_total_energy_per_cell() (in module atomate2.vasp.jobs.phonons)</a>
 </li>
       <li><a href="reference/atomate2.utils.path.get_uri.html#atomate2.utils.path.get_uri">get_uri() (in module atomate2.utils.path)</a>
 </li>
@@ -1829,9 +2067,15 @@ const thebe_selector_output = ".output, .cell_output"
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.common.schemas.symmetry.SymmetryData.html#atomate2.common.schemas.symmetry.SymmetryData.hall">hall (atomate2.common.schemas.symmetry.SymmetryData attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.hartreedc">hartreedc (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.has_imaginary_modes">has_imaginary_modes (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.Calculation.html#atomate2.vasp.schemas.calculation.Calculation.has_vasp_completed">has_vasp_completed (atomate2.vasp.schemas.calculation.Calculation attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.PotcarSpec.html#atomate2.vasp.schemas.calculation.PotcarSpec.hash">hash (atomate2.vasp.schemas.calculation.PotcarSpec attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.heat_capacities">heat_capacities (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.DerivedProperties.html#atomate2.common.schemas.elastic.DerivedProperties.homogeneous_poisson">homogeneous_poisson (atomate2.common.schemas.elastic.DerivedProperties attribute)</a>
 </li>
@@ -1845,12 +2089,12 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.flows.elph.HSEElectronPhononMaker.html#atomate2.vasp.flows.elph.HSEElectronPhononMaker">HSEElectronPhononMaker (class in atomate2.vasp.flows.elph)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.flows.core.HSELineModeBandStructureMaker.html#atomate2.vasp.flows.core.HSELineModeBandStructureMaker">HSELineModeBandStructureMaker (class in atomate2.vasp.flows.core)</a>
 </li>
       <li><a href="reference/atomate2.vasp.flows.core.HSEOpticsMaker.html#atomate2.vasp.flows.core.HSEOpticsMaker">HSEOpticsMaker (class in atomate2.vasp.flows.core)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.jobs.core.HSERelaxMaker.html#atomate2.vasp.jobs.core.HSERelaxMaker">HSERelaxMaker (class in atomate2.vasp.jobs.core)</a>
 </li>
       <li><a href="reference/atomate2.vasp.sets.core.HSERelaxSetGenerator.html#atomate2.vasp.sets.core.HSERelaxSetGenerator">HSERelaxSetGenerator (class in atomate2.vasp.sets.core)</a>
@@ -1901,9 +2145,7 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.input">(atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/atomate2.common.sets.InputSet.html#atomate2.common.sets.InputSet">InputSet (class in atomate2.common.sets)</a>
-</li>
-      <li><a href="reference/atomate2.common.sets.InputSetGenerator.html#atomate2.common.sets.InputSetGenerator">InputSetGenerator (class in atomate2.common.sets)</a>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.internal_energies">internal_energies (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.UsageStats.html#atomate2.amset.schemas.UsageStats.interpolation">interpolation (atomate2.amset.schemas.UsageStats attribute)</a>
 </li>
@@ -1935,12 +2177,8 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.is_metal">(atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
       </ul></li>
-      <li><a href="reference/atomate2.common.sets.InputSet.html#atomate2.common.sets.InputSet.is_valid">is_valid (atomate2.common.sets.InputSet property)</a>
-
-      <ul>
-        <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet.is_valid">(atomate2.vasp.sets.base.VaspInputSet property)</a>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet.is_valid">is_valid (atomate2.vasp.sets.base.VaspInputSet property)</a>
 </li>
-      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1951,6 +2189,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.jobdirs">jobdirs (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.run.JobType.html#atomate2.vasp.run.JobType">JobType (class in atomate2.vasp.run)</a>
 </li>
   </ul></td>
@@ -1965,8 +2205,12 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.DerivedProperties.html#atomate2.common.schemas.elastic.DerivedProperties.k_vrh">k_vrh (atomate2.common.schemas.elastic.DerivedProperties attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononComputationalSettings.html#atomate2.vasp.schemas.phonons.PhononComputationalSettings.kpath_scheme">kpath_scheme (atomate2.vasp.schemas.phonons.PhononComputationalSettings attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononComputationalSettings.html#atomate2.vasp.schemas.phonons.PhononComputationalSettings.kpoint_density_dos">kpoint_density_dos (atomate2.vasp.schemas.phonons.PhononComputationalSettings attribute)</a>
+</li>
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.kpoint_mesh">kpoint_mesh (atomate2.amset.schemas.AmsetTaskDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.MeshData.html#atomate2.amset.schemas.MeshData.kpoints">kpoints (atomate2.amset.schemas.MeshData attribute)</a>
@@ -2038,9 +2282,15 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.flows.core.UniformBandStructureMaker.html#atomate2.vasp.flows.core.UniformBandStructureMaker.make">(atomate2.vasp.flows.core.UniformBandStructureMaker method)</a>
 </li>
+        <li><a href="reference/atomate2.vasp.flows.defect.ConfigurationCoordinateMaker.html#atomate2.vasp.flows.defect.ConfigurationCoordinateMaker.make">(atomate2.vasp.flows.defect.ConfigurationCoordinateMaker method)</a>
+</li>
+        <li><a href="reference/atomate2.vasp.flows.defect.NonRadiativeMaker.html#atomate2.vasp.flows.defect.NonRadiativeMaker.make">(atomate2.vasp.flows.defect.NonRadiativeMaker method)</a>
+</li>
         <li><a href="reference/atomate2.vasp.flows.elastic.ElasticMaker.html#atomate2.vasp.flows.elastic.ElasticMaker.make">(atomate2.vasp.flows.elastic.ElasticMaker method)</a>
 </li>
         <li><a href="reference/atomate2.vasp.flows.elph.ElectronPhononMaker.html#atomate2.vasp.flows.elph.ElectronPhononMaker.make">(atomate2.vasp.flows.elph.ElectronPhononMaker method)</a>
+</li>
+        <li><a href="reference/atomate2.vasp.flows.phonons.PhononMaker.html#atomate2.vasp.flows.phonons.PhononMaker.make">(atomate2.vasp.flows.phonons.PhononMaker method)</a>
 </li>
         <li><a href="reference/atomate2.vasp.jobs.base.BaseVaspMaker.html#atomate2.vasp.jobs.base.BaseVaspMaker.make">(atomate2.vasp.jobs.base.BaseVaspMaker method)</a>
 </li>
@@ -2061,6 +2311,10 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.calculation.RunStatistics.html#atomate2.vasp.schemas.calculation.RunStatistics.max_memory">(atomate2.vasp.schemas.calculation.RunStatistics attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.jobs.core.MDMaker.html#atomate2.vasp.jobs.core.MDMaker">MDMaker (class in atomate2.vasp.jobs.core)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.sets.core.MDSetGenerator.html#atomate2.vasp.sets.core.MDSetGenerator">MDSetGenerator (class in atomate2.vasp.sets.core)</a>
+</li>
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.mesh">mesh (atomate2.amset.schemas.AmsetTaskDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.cclib.TaskDocument.html#atomate2.common.schemas.cclib.TaskDocument.metadata">metadata (atomate2.common.schemas.cclib.TaskDocument attribute)</a>
@@ -2105,8 +2359,6 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.common.schemas.symmetry.html#module-atomate2.common.schemas.symmetry">atomate2.common.schemas.symmetry</a>
 </li>
-        <li><a href="reference/atomate2.common.sets.html#module-atomate2.common.sets">atomate2.common.sets</a>
-</li>
         <li><a href="reference/atomate2.settings.html#module-atomate2.settings">atomate2.settings</a>
 </li>
         <li><a href="reference/atomate2.utils.html#module-atomate2.utils">atomate2.utils</a>
@@ -2135,9 +2387,13 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.flows.core.html#module-atomate2.vasp.flows.core">atomate2.vasp.flows.core</a>
 </li>
+        <li><a href="reference/atomate2.vasp.flows.defect.html#module-atomate2.vasp.flows.defect">atomate2.vasp.flows.defect</a>
+</li>
         <li><a href="reference/atomate2.vasp.flows.elastic.html#module-atomate2.vasp.flows.elastic">atomate2.vasp.flows.elastic</a>
 </li>
         <li><a href="reference/atomate2.vasp.flows.elph.html#module-atomate2.vasp.flows.elph">atomate2.vasp.flows.elph</a>
+</li>
+        <li><a href="reference/atomate2.vasp.flows.phonons.html#module-atomate2.vasp.flows.phonons">atomate2.vasp.flows.phonons</a>
 </li>
         <li><a href="reference/atomate2.vasp.jobs.html#module-atomate2.vasp.jobs">atomate2.vasp.jobs</a>
 </li>
@@ -2147,9 +2403,13 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.jobs.core.html#module-atomate2.vasp.jobs.core">atomate2.vasp.jobs.core</a>
 </li>
+        <li><a href="reference/atomate2.vasp.jobs.defect.html#module-atomate2.vasp.jobs.defect">atomate2.vasp.jobs.defect</a>
+</li>
         <li><a href="reference/atomate2.vasp.jobs.elastic.html#module-atomate2.vasp.jobs.elastic">atomate2.vasp.jobs.elastic</a>
 </li>
         <li><a href="reference/atomate2.vasp.jobs.elph.html#module-atomate2.vasp.jobs.elph">atomate2.vasp.jobs.elph</a>
+</li>
+        <li><a href="reference/atomate2.vasp.jobs.phonons.html#module-atomate2.vasp.jobs.phonons">atomate2.vasp.jobs.phonons</a>
 </li>
         <li><a href="reference/atomate2.vasp.powerups.html#module-atomate2.vasp.powerups">atomate2.vasp.powerups</a>
 </li>
@@ -2165,7 +2425,11 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.schemas.calculation.html#module-atomate2.vasp.schemas.calculation">atomate2.vasp.schemas.calculation</a>
 </li>
+        <li><a href="reference/atomate2.vasp.schemas.defect.html#module-atomate2.vasp.schemas.defect">atomate2.vasp.schemas.defect</a>
+</li>
         <li><a href="reference/atomate2.vasp.schemas.elph.html#module-atomate2.vasp.schemas.elph">atomate2.vasp.schemas.elph</a>
+</li>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.html#module-atomate2.vasp.schemas.phonons">atomate2.vasp.schemas.phonons</a>
 </li>
         <li><a href="reference/atomate2.vasp.schemas.task.html#module-atomate2.vasp.schemas.task">atomate2.vasp.schemas.task</a>
 </li>
@@ -2174,6 +2438,8 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.sets.base.html#module-atomate2.vasp.sets.base">atomate2.vasp.sets.base</a>
 </li>
         <li><a href="reference/atomate2.vasp.sets.core.html#module-atomate2.vasp.sets.core">atomate2.vasp.sets.core</a>
+</li>
+        <li><a href="reference/atomate2.vasp.sets.defect.html#module-atomate2.vasp.sets.defect">atomate2.vasp.sets.defect</a>
 </li>
       </ul></li>
   </ul></td>
@@ -2200,6 +2466,8 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationInput.html#atomate2.vasp.schemas.calculation.CalculationInput.nkpoints">(atomate2.vasp.schemas.calculation.CalculationInput attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.flows.defect.NonRadiativeMaker.html#atomate2.vasp.flows.defect.NonRadiativeMaker">NonRadiativeMaker (class in atomate2.vasp.flows.defect)</a>
+</li>
       <li><a href="reference/atomate2.vasp.jobs.core.NonSCFMaker.html#atomate2.vasp.jobs.core.NonSCFMaker">NonSCFMaker (class in atomate2.vasp.jobs.core)</a>
 </li>
       <li><a href="reference/atomate2.vasp.sets.core.NonSCFSetGenerator.html#atomate2.vasp.sets.core.NonSCFSetGenerator">NonSCFSetGenerator (class in atomate2.vasp.sets.core)</a>
@@ -2211,6 +2479,8 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.normalmode_eigenvecs">normalmode_eigenvecs (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.normalmode_frequencies">normalmode_frequencies (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononComputationalSettings.html#atomate2.vasp.schemas.phonons.PhononComputationalSettings.npoints_band">npoints_band (atomate2.vasp.schemas.phonons.PhononComputationalSettings attribute)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.molecule.MoleculeMetadata.html#atomate2.common.schemas.molecule.MoleculeMetadata.nsites">nsites (atomate2.common.schemas.molecule.MoleculeMetadata attribute)</a>
 
@@ -2230,12 +2500,16 @@ const thebe_selector_output = ".output, .cell_output"
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.flows.core.OpticsMaker.html#atomate2.vasp.flows.core.OpticsMaker">OpticsMaker (class in atomate2.vasp.flows.core)</a>
 </li>
-      <li><a href="reference/atomate2.common.schemas.elastic.ElasticDocument.html#atomate2.common.schemas.elastic.ElasticDocument.order">order (atomate2.common.schemas.elastic.ElasticDocument attribute)</a>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononJobDirs.html#atomate2.vasp.schemas.phonons.PhononJobDirs.optimization_run_job_dir">optimization_run_job_dir (atomate2.vasp.schemas.phonons.PhononJobDirs attribute)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.orig_inputs">orig_inputs (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononUUIDs.html#atomate2.vasp.schemas.phonons.PhononUUIDs.optimization_run_uuid">optimization_run_uuid (atomate2.vasp.schemas.phonons.PhononUUIDs attribute)</a>
+</li>
+      <li><a href="reference/atomate2.common.schemas.elastic.ElasticDocument.html#atomate2.common.schemas.elastic.ElasticDocument.order">order (atomate2.common.schemas.elastic.ElasticDocument attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.orig_inputs">orig_inputs (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.outcar">outcar (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.Calculation.html#atomate2.vasp.schemas.calculation.Calculation.output">output (atomate2.vasp.schemas.calculation.Calculation attribute)</a>
@@ -2258,8 +2532,24 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary.parameters">(atomate2.vasp.schemas.task.InputSummary attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.pawaedc">pawaedc (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.pawpsdc">pawpsdc (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.phonon_bandstructure">phonon_bandstructure (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.phonon_dos">phonon_dos (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.PhononDisplacementMaker.html#atomate2.vasp.jobs.phonons.PhononDisplacementMaker">PhononDisplacementMaker (class in atomate2.vasp.jobs.phonons)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.flows.phonons.PhononMaker.html#atomate2.vasp.flows.phonons.PhononMaker">PhononMaker (class in atomate2.vasp.flows.phonons)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.phonopy_settings">phonopy_settings (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
       <li><a href="reference/atomate2.common.schemas.elastic.FittingData.html#atomate2.common.schemas.elastic.FittingData.pk_stresses">pk_stresses (atomate2.common.schemas.elastic.FittingData attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.common.schemas.molecule.MoleculeMetadata.html#atomate2.common.schemas.molecule.MoleculeMetadata.point_group">point_group (atomate2.common.schemas.molecule.MoleculeMetadata attribute)</a>
 
       <ul>
@@ -2268,8 +2558,6 @@ const thebe_selector_output = ".output, .cell_output"
       </ul></li>
       <li><a href="reference/atomate2.vasp.schemas.task.PseudoPotentialSummary.html#atomate2.vasp.schemas.task.PseudoPotentialSummary.pot_type">pot_type (atomate2.vasp.schemas.task.PseudoPotentialSummary attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationInput.html#atomate2.vasp.schemas.calculation.CalculationInput.potcar">potcar (atomate2.vasp.schemas.calculation.CalculationInput attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationInput.html#atomate2.vasp.schemas.calculation.CalculationInput.potcar_spec">potcar_spec (atomate2.vasp.schemas.calculation.CalculationInput attribute)</a>
@@ -2280,9 +2568,23 @@ const thebe_selector_output = ".output, .cell_output"
       </ul></li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationInput.html#atomate2.vasp.schemas.calculation.CalculationInput.potcar_type">potcar_type (atomate2.vasp.schemas.calculation.CalculationInput attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.primitive_matrix">primitive_matrix (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.builders.elastic.ElasticBuilder.html#atomate2.vasp.builders.elastic.ElasticBuilder.process_item">process_item() (atomate2.vasp.builders.elastic.ElasticBuilder method)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary.pseudo_potentials">pseudo_potentials (atomate2.vasp.schemas.task.InputSummary attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.q1">q1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.q2">q2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2296,7 +2598,13 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.html#atomate2.vasp.schemas.calculation.FrequencyDependentDielectric.real">real (atomate2.vasp.schemas.calculation.FrequencyDependentDielectric attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.FiniteDifferenceDocument.html#atomate2.vasp.schemas.defect.FiniteDifferenceDocument.ref_dir">ref_dir (atomate2.vasp.schemas.defect.FiniteDifferenceDocument attribute)</a>
+</li>
       <li><a href="reference/atomate2.vasp.flows.core.RelaxBandStructureMaker.html#atomate2.vasp.flows.core.RelaxBandStructureMaker">RelaxBandStructureMaker (class in atomate2.vasp.flows.core)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.relaxed_index1">relaxed_index1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.relaxed_index2">relaxed_index2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.core.RelaxMaker.html#atomate2.vasp.jobs.core.RelaxMaker">RelaxMaker (class in atomate2.vasp.jobs.core)</a>
 </li>
@@ -2306,10 +2614,10 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.utils.file_client.FileClient.html#atomate2.utils.file_client.FileClient.rename">rename() (atomate2.utils.file_client.FileClient method)</a>
 </li>
-      <li><a href="reference/atomate2.common.files.rename_files.html#atomate2.common.files.rename_files">rename_files() (in module atomate2.common.files)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.common.files.rename_files.html#atomate2.common.files.rename_files">rename_files() (in module atomate2.common.files)</a>
+</li>
       <li><a href="reference/atomate2.amset.run.run_amset.html#atomate2.amset.run.run_amset">run_amset() (in module atomate2.amset.run)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.amset.run_amset_deformations.html#atomate2.vasp.jobs.amset.run_amset_deformations">run_amset_deformations() (in module atomate2.vasp.jobs.amset)</a>
@@ -2317,6 +2625,8 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.vasp.jobs.elastic.run_elastic_deformations.html#atomate2.vasp.jobs.elastic.run_elastic_deformations">run_elastic_deformations() (in module atomate2.vasp.jobs.elastic)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.elph.run_elph_displacements.html#atomate2.vasp.jobs.elph.run_elph_displacements">run_elph_displacements() (in module atomate2.vasp.jobs.elph)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.run_phonon_displacements.html#atomate2.vasp.jobs.phonons.run_phonon_displacements">run_phonon_displacements() (in module atomate2.vasp.jobs.phonons)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.run_stats">run_stats (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 
@@ -2356,9 +2666,25 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.soc">soc (atomate2.amset.schemas.AmsetTaskDocument attribute)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.sort_pos_dist.html#atomate2.vasp.schemas.defect.sort_pos_dist">sort_pos_dist() (in module atomate2.vasp.schemas.defect)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.jobs.defect.spawn_energy_curve_calcs.html#atomate2.vasp.jobs.defect.spawn_energy_curve_calcs">spawn_energy_curve_calcs() (in module atomate2.vasp.jobs.defect)</a>
+</li>
       <li><a href="reference/atomate2.common.schemas.molecule.MoleculeMetadata.html#atomate2.common.schemas.molecule.MoleculeMetadata.spin_multiplicity">spin_multiplicity (atomate2.common.schemas.molecule.MoleculeMetadata attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.state">state (atomate2.vasp.schemas.task.TaskDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.static_dirs1">static_dirs1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.static_dirs2">static_dirs2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononJobDirs.html#atomate2.vasp.schemas.phonons.PhononJobDirs.static_run_job_dir">static_run_job_dir (atomate2.vasp.schemas.phonons.PhononJobDirs attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononUUIDs.html#atomate2.vasp.schemas.phonons.PhononUUIDs.static_run_uuid">static_run_uuid (atomate2.vasp.schemas.phonons.PhononUUIDs attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.static_uuids1">static_uuids1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.static_uuids2">static_uuids2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.amset.StaticDeformationMaker.html#atomate2.vasp.jobs.amset.StaticDeformationMaker">StaticDeformationMaker (class in atomate2.vasp.jobs.amset)</a>
 </li>
@@ -2370,8 +2696,12 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.common.schemas.elastic.FittingData.html#atomate2.common.schemas.elastic.FittingData.strains">strains (atomate2.common.schemas.elastic.FittingData attribute)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary.stress">stress (atomate2.vasp.schemas.task.OutputSummary attribute)</a>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.stress">stress (atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.task.OutputSummary.html#atomate2.vasp.schemas.task.OutputSummary.stress">(atomate2.vasp.schemas.task.OutputSummary attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.utils.path.strip_hostname.html#atomate2.utils.path.strip_hostname">strip_hostname() (in module atomate2.utils.path)</a>
@@ -2381,11 +2711,17 @@ const thebe_selector_output = ".output, .cell_output"
       <ul>
         <li><a href="reference/atomate2.common.schemas.elastic.ElasticDocument.html#atomate2.common.schemas.elastic.ElasticDocument.structure">(atomate2.common.schemas.elastic.ElasticDocument attribute)</a>
 </li>
+        <li><a href="reference/atomate2.vasp.jobs.defect.CCDInput.html#atomate2.vasp.jobs.defect.CCDInput.structure">(atomate2.vasp.jobs.defect.CCDInput attribute)</a>
+</li>
         <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationInput.html#atomate2.vasp.schemas.calculation.CalculationInput.structure">(atomate2.vasp.schemas.calculation.CalculationInput attribute)</a>
 </li>
         <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.structure">(atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
 </li>
+        <li><a href="reference/atomate2.vasp.schemas.calculation.IonicStep.html#atomate2.vasp.schemas.calculation.IonicStep.structure">(atomate2.vasp.schemas.calculation.IonicStep attribute)</a>
+</li>
         <li><a href="reference/atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.html#atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.structure">(atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc attribute)</a>
+</li>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.structure">(atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
         <li><a href="reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary.structure">(atomate2.vasp.schemas.task.InputSummary attribute)</a>
 </li>
@@ -2394,13 +2730,21 @@ const thebe_selector_output = ".output, .cell_output"
         <li><a href="reference/atomate2.vasp.schemas.task.TaskDocument.html#atomate2.vasp.schemas.task.TaskDocument.structure">(atomate2.vasp.schemas.task.TaskDocument attribute)</a>
 </li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.structure1">structure1 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.CCDDocument.html#atomate2.vasp.schemas.defect.CCDDocument.structure2">structure2 (atomate2.vasp.schemas.defect.CCDDocument attribute)</a>
+</li>
+      <li><a href="reference/atomate2.common.jobs.structure_to_conventional.html#atomate2.common.jobs.structure_to_conventional">structure_to_conventional() (in module atomate2.common.jobs)</a>
+</li>
+      <li><a href="reference/atomate2.common.jobs.structure_to_primitive.html#atomate2.common.jobs.structure_to_primitive">structure_to_primitive() (in module atomate2.common.jobs)</a>
+</li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronPhononDisplacedStructures.html#atomate2.vasp.schemas.calculation.ElectronPhononDisplacedStructures.structures">structures (atomate2.vasp.schemas.calculation.ElectronPhononDisplacedStructures attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.supercell_matrix">supercell_matrix (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.elph.SupercellElectronPhononDisplacedStructureMaker.html#atomate2.vasp.jobs.elph.SupercellElectronPhononDisplacedStructureMaker">SupercellElectronPhononDisplacedStructureMaker (class in atomate2.vasp.jobs.elph)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.symmetry.SymmetryData.html#atomate2.common.schemas.symmetry.SymmetryData.symbol">symbol (atomate2.common.schemas.symmetry.SymmetryData attribute)</a>
-</li>
-      <li><a href="reference/atomate2.common.jobs.symmetrize_structure.html#atomate2.common.jobs.symmetrize_structure">symmetrize_structure() (in module atomate2.common.jobs)</a>
 </li>
       <li><a href="reference/atomate2.common.schemas.structure.StructureMetadata.html#atomate2.common.schemas.structure.StructureMetadata.symmetry">symmetry (atomate2.common.schemas.structure.StructureMetadata attribute)</a>
 </li>
@@ -2449,10 +2793,20 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
         <li><a href="reference/atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.html#atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc.temperatures">(atomate2.vasp.schemas.elph.ElectronPhononRenormalisationDoc attribute)</a>
 </li>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.temperatures">(atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
       </ul></li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.ThermalDisplacementData.html#atomate2.vasp.schemas.phonons.ThermalDisplacementData.temperatures_thermal_displacements">temperatures_thermal_displacements (atomate2.vasp.schemas.phonons.ThermalDisplacementData attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.amset.run.tensor_average.html#atomate2.amset.run.tensor_average">tensor_average() (in module atomate2.amset.run)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.thermal_displacement_data">thermal_displacement_data (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.ThermalDisplacementData.html#atomate2.vasp.schemas.phonons.ThermalDisplacementData.thermal_displacement_matrix">thermal_displacement_matrix (atomate2.vasp.schemas.phonons.ThermalDisplacementData attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.ThermalDisplacementData.html#atomate2.vasp.schemas.phonons.ThermalDisplacementData.thermal_displacement_matrix_cif">thermal_displacement_matrix_cif (atomate2.vasp.schemas.phonons.ThermalDisplacementData attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.jobs.core.TightRelaxMaker.html#atomate2.vasp.jobs.core.TightRelaxMaker">TightRelaxMaker (class in atomate2.vasp.jobs.core)</a>
 </li>
@@ -2461,6 +2815,8 @@ const thebe_selector_output = ".output, .cell_output"
       <li><a href="reference/atomate2.vasp.schemas.calculation.PotcarSpec.html#atomate2.vasp.schemas.calculation.PotcarSpec.titel">titel (atomate2.vasp.schemas.calculation.PotcarSpec attribute)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.UsageStats.html#atomate2.amset.schemas.UsageStats.total">total (atomate2.amset.schemas.UsageStats attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.total_dft_energy">total_dft_energy (atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.RunStatistics.html#atomate2.vasp.schemas.calculation.RunStatistics.total_time">total_time (atomate2.vasp.schemas.calculation.RunStatistics attribute)</a>
 </li>
@@ -2494,10 +2850,10 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.powerups.update_user_kpoints_settings.html#atomate2.vasp.powerups.update_user_kpoints_settings">update_user_kpoints_settings() (in module atomate2.vasp.powerups)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.powerups.update_user_potcar_functional.html#atomate2.vasp.powerups.update_user_potcar_functional">update_user_potcar_functional() (in module atomate2.vasp.powerups)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.powerups.update_user_potcar_settings.html#atomate2.vasp.powerups.update_user_potcar_settings">update_user_potcar_settings() (in module atomate2.vasp.powerups)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.AmsetTaskDocument.html#atomate2.amset.schemas.AmsetTaskDocument.usage_stats">usage_stats (atomate2.amset.schemas.AmsetTaskDocument attribute)</a>
@@ -2506,8 +2862,14 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.RunStatistics.html#atomate2.vasp.schemas.calculation.RunStatistics.user_time">user_time (atomate2.vasp.schemas.calculation.RunStatistics attribute)</a>
 </li>
-      <li><a href="reference/atomate2.common.schemas.elastic.FittingData.html#atomate2.common.schemas.elastic.FittingData.uuids">uuids (atomate2.common.schemas.elastic.FittingData attribute)</a>
+      <li><a href="reference/atomate2.vasp.jobs.defect.CCDInput.html#atomate2.vasp.jobs.defect.CCDInput.uuid">uuid (atomate2.vasp.jobs.defect.CCDInput attribute)</a>
 </li>
+      <li><a href="reference/atomate2.common.schemas.elastic.FittingData.html#atomate2.common.schemas.elastic.FittingData.uuids">uuids (atomate2.common.schemas.elastic.FittingData attribute)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.PhononBSDOSDoc.html#atomate2.vasp.schemas.phonons.PhononBSDOSDoc.uuids">(atomate2.vasp.schemas.phonons.PhononBSDOSDoc attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -2540,22 +2902,28 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.settings.Atomate2Settings.html#atomate2.settings.Atomate2Settings.VASP_VDW_KERNEL_DIR">VASP_VDW_KERNEL_DIR (atomate2.settings.Atomate2Settings attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.schemas.calculation.Calculation.html#atomate2.vasp.schemas.calculation.Calculation.vasp_version">vasp_version (atomate2.vasp.schemas.calculation.Calculation attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.settings.Atomate2Settings.html#atomate2.settings.Atomate2Settings.VASP_VOLUME_CHANGE_WARNING_TOL">VASP_VOLUME_CHANGE_WARNING_TOL (atomate2.settings.Atomate2Settings attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.flows.amset.VaspAmsetMaker.html#atomate2.vasp.flows.amset.VaspAmsetMaker">VaspAmsetMaker (class in atomate2.vasp.flows.amset)</a>
 </li>
       <li><a href="reference/atomate2.vasp.drones.VaspDrone.html#atomate2.vasp.drones.VaspDrone">VaspDrone (class in atomate2.vasp.drones)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet">VaspInputSet (class in atomate2.vasp.sets.base)</a>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputGenerator.html#atomate2.vasp.sets.base.VaspInputGenerator">VaspInputGenerator (class in atomate2.vasp.sets.base)</a>
 </li>
-      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSetGenerator.html#atomate2.vasp.sets.base.VaspInputSetGenerator">VaspInputSetGenerator (class in atomate2.vasp.sets.base)</a>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet">VaspInputSet (class in atomate2.vasp.sets.base)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.VaspObject.html#atomate2.vasp.schemas.calculation.VaspObject">VaspObject (class in atomate2.vasp.schemas.calculation)</a>
 </li>
+      <li><a href="reference/atomate2.vasp.jobs.phonons.VaspToTHz.html#atomate2.vasp.jobs.phonons.VaspToTHz">VaspToTHz (in module atomate2.vasp.jobs.phonons)</a>
+
+      <ul>
+        <li><a href="reference/atomate2.vasp.schemas.phonons.VaspToTHz.html#atomate2.vasp.schemas.phonons.VaspToTHz">(in module atomate2.vasp.schemas.phonons)</a>
+</li>
+      </ul></li>
       <li><a href="reference/atomate2.amset.schemas.MeshData.html#atomate2.amset.schemas.MeshData.vb_idx">vb_idx (atomate2.amset.schemas.MeshData attribute)</a>
 </li>
       <li><a href="reference/atomate2.vasp.schemas.calculation.CalculationOutput.html#atomate2.vasp.schemas.calculation.CalculationOutput.vbm">vbm (atomate2.vasp.schemas.calculation.CalculationOutput attribute)</a>
@@ -2578,17 +2946,15 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
       <li><a href="reference/atomate2.amset.files.write_amset_settings.html#atomate2.amset.files.write_amset_settings">write_amset_settings() (in module atomate2.amset.files)</a>
 </li>
-      <li><a href="reference/atomate2.common.sets.InputSet.html#atomate2.common.sets.InputSet.write_input">write_input() (atomate2.common.sets.InputSet method)</a>
-
-      <ul>
-        <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet.write_input">(atomate2.vasp.sets.base.VaspInputSet method)</a>
+      <li><a href="reference/atomate2.vasp.sets.base.VaspInputSet.html#atomate2.vasp.sets.base.VaspInputSet.write_input">write_input() (atomate2.vasp.sets.base.VaspInputSet method)</a>
 </li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.files.write_vasp_input_set.html#atomate2.vasp.files.write_vasp_input_set">write_vasp_input_set() (in module atomate2.vasp.files)</a>
 </li>
       <li><a href="reference/atomate2.amset.schemas.UsageStats.html#atomate2.amset.schemas.UsageStats.writing">writing (atomate2.amset.schemas.UsageStats attribute)</a>
+</li>
+      <li><a href="reference/atomate2.vasp.schemas.defect.FiniteDifferenceDocument.html#atomate2.vasp.schemas.defect.FiniteDifferenceDocument.wswqs">wswqs (atomate2.vasp.schemas.defect.FiniteDifferenceDocument attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2597,6 +2963,10 @@ const thebe_selector_output = ".output, .cell_output"
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/atomate2.vasp.schemas.task.InputSummary.html#atomate2.vasp.schemas.task.InputSummary.xc_override">xc_override (atomate2.vasp.schemas.task.InputSummary attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/atomate2.vasp.schemas.calculation.ElectronicStep.html#atomate2.vasp.schemas.calculation.ElectronicStep.XCdc">XCdc (atomate2.vasp.schemas.calculation.ElectronicStep attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2613,28 +2983,34 @@ const thebe_selector_output = ".output, .cell_output"
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
 <div class='prev-next-area'>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the Materials Project<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the Materials Project<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

@@ -1,0 +1,67 @@
+atomate2.vasp.jobs.phonons
+==========================
+
+.. automodule:: atomate2.vasp.jobs.phonons
+
+   
+
+
+
+   
+
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      generate_frequencies_eigenvectors
+      generate_phonon_displacements
+      get_supercell_size
+      get_total_energy_per_cell
+      run_phonon_displacements
+
+
+
+   
+
+
+
+   
+      
+   
+   
+      
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      PhononDisplacementMaker
+      VaspToTHz
+
+
+
+
+   
+   
+   
+
+
+

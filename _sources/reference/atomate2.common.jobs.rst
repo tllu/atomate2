@@ -15,7 +15,8 @@ atomate2.common.jobs
       :toctree:
       :nosignatures:
    
-      symmetrize_structure
+      structure_to_conventional
+      structure_to_primitive
 
 
 
@@ -23,6 +24,8 @@ atomate2.common.jobs
 
 
 
+   
+   
    
    
    

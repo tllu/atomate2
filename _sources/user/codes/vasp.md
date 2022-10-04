@@ -35,7 +35,7 @@ The most important settings to consider are:
 - `VASP_CMD`: The command used to run the standard version of VASP. I.e., something like
   `mpi_run -n 16 vasp_std > vasp.out`.
 - `VASP_GAMMA_CMD`: The command used to run the gamma-only version of VASP.
-- `VASP_NCL_CMD`: The command used to run the the non-collinear version of VASP.
+- `VASP_NCL_CMD`: The command used to run the non-collinear version of VASP.
 - `VASP_INCAR_UPDATES`: Updates to apply to VASP INCAR files. This allows you to
   customise input sets on different machines, without having to change the submitted
   workflows. For example, you can set certain parallelization parameters, such as
@@ -229,7 +229,7 @@ Modifying input sets
 --------------------
 
 The inputs for a calculation can be modified in several ways. Every VASP job
-takes a {obj}`.VaspInputSetGenerator` as an argument (`input_set_generator`). One
+takes a {obj}`.VaspInputGenerator` as an argument (`input_set_generator`). One
 option is to specify an alternative input set generator:
 
 ```python
@@ -295,13 +295,13 @@ Powerups return a copy of the original flow or Maker and do not modify it in pla
 ```
 
 In addition to the ability to change INCAR parameters on-the-fly, the
-{obj}`.VaspInputSetGenerator`, `Maker` object, and "powerups" allow for the manual
+{obj}`.VaspInputGenerator`, `Maker` object, and "powerups" allow for the manual
 modification of several additional VASP settings, such as the k-points
 (`user_kpoints_settings`) and choice of pseudopotentials (`user_potcar_settings`).
 
 If a greater degree of flexibility is needed, the user can define a default set of input
-arguments (`config_dict`) that can be provided to the {obj}`.VaspInputSetGenerator`.
-By default, the {obj}`.VaspInputSetGenerator` uses a base set of VASP input parameters
+arguments (`config_dict`) that can be provided to the {obj}`.VaspInputGenerator`.
+By default, the {obj}`.VaspInputGenerator` uses a base set of VASP input parameters
 from {obj}`.BaseVaspSet.yaml`, which each `Maker` is built upon. If desired, the user can
 define a custom `.yaml` file that contains a different base set of VASP settings to use.
 An example of how this can be done is shown below for a representative static
@@ -310,7 +310,7 @@ calculation.
 ```
 from atomate2.vasp.sets.core import StaticSetGenerator
 from atomate2.vasp.jobs.core import StaticMaker
-from atomate2.vasp.jobs.base import VaspInputSetGenerator
+from atomate2.vasp.jobs.base import VaspInputGenerator
 from monty.serialization import loadfn
 
 # read in a custom config file

@@ -1,0 +1,45 @@
+atomate2.vasp.sets.defect
+=========================
+
+.. automodule:: atomate2.vasp.sets.defect
+
+   
+
+
+
+   
+
+
+
+   
+
+
+
+   
+      
+   
+   
+   
+   
+   
+   
+   
+
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :nosignatures:
+   
+      AtomicRelaxSetGenerator
+
+
+
+
+   
+   
+   
+
+
+

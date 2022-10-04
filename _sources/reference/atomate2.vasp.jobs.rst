@@ -41,6 +41,8 @@ atomate2.vasp.jobs
    atomate2.vasp.jobs.amset
    atomate2.vasp.jobs.base
    atomate2.vasp.jobs.core
+   atomate2.vasp.jobs.defect
    atomate2.vasp.jobs.elastic
    atomate2.vasp.jobs.elph
+   atomate2.vasp.jobs.phonons
 

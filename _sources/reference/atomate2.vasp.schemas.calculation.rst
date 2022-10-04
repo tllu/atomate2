@@ -43,6 +43,12 @@ atomate2.vasp.schemas.calculation
       
    
    
+      
+   
+   
+      
+   
+   
    
    
    
@@ -67,7 +73,9 @@ atomate2.vasp.schemas.calculation
       CalculationInput
       CalculationOutput
       ElectronPhononDisplacedStructures
+      ElectronicStep
       FrequencyDependentDielectric
+      IonicStep
       PotcarSpec
       RunStatistics
       Status
